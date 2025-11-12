@@ -3,528 +3,443 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HVSP AI Twin Engine • Edges</title>
+    <title>ScaleEdge AI Twin Engine</title>
+    <meta name="description" content="HVSP generation tool for India-first market">
+    <meta name="theme-color" content="#DC2626">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/styles.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#0ea5e9',
-                        dark: '#0f172a',
-                        'dark-light': '#1e293b',
-                    }
-                }
-            }
-        }
-    </script>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-bg text-slate-100">
 
     <!-- Header -->
-    <header class="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex items-center justify-between flex-wrap gap-4">
-                <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
-                        <span class="text-white font-bold text-sm">E</span>
-                    </div>
-                    <h1 class="text-xl font-bold text-gray-900">Edges <span class="text-gray-400">•</span> <span class="text-gray-600">AI Agents System</span></h1>
-                </div>
-                <div class="flex items-center gap-2 flex-wrap">
-                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium border border-blue-200">
-                        Not a course — 3-Month Consulting + 9 AI Agents System
-                    </span>
-                    <span class="px-3 py-1 bg-green-50 text-green-700 rounded-full text-xs font-medium border border-green-200">
-                        Doctor-frame: Accept/Reject
-                    </span>
-                    <span class="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-xs font-medium border border-purple-200">
-                        Up to 90% automation
-                    </span>
-                </div>
+    <header class="sticky top-0 z-50 bg-panel border-b border-slate-800 shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+            <h1 class="text-2xl font-bold text-brand">ScaleEdge AI Twin Engine</h1>
+            <div class="flex gap-3">
+                <button id="btn-knowledge-base" class="btn-secondary">Knowledge Base</button>
+                <button id="btn-shortcuts" class="btn-secondary">Keyboard Shortcuts</button>
             </div>
         </div>
     </header>
 
-    <!-- Main Container -->
-    <div class="container mx-auto px-4 py-8 max-w-7xl">
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
 
         <!-- Hero Section -->
-        <section id="hero" class="text-center mb-12">
-            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                HVSP + AI Twin Engine <span class="text-blue-600">(India-First)</span>
-            </h2>
-            <p class="text-lg text-gray-600 mb-6 max-w-3xl mx-auto">
-                Slide-based, camera-off, 80% value / 20% pitch. Trained on ₹53Cr+ sales data across 44+ niches.
-            </p>
-            <div class="flex items-center justify-center gap-4">
-                <button id="btnStartDemo" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold shadow-lg transition-all">
-                    Start Demo
-                </button>
-                <button id="btnDemoPreset" class="px-6 py-3 bg-gray-700 hover:bg-gray-800 text-white rounded-lg font-semibold shadow-lg transition-all">
-                    Use Demo Preset
-                </button>
+        <section id="hero" class="mb-12 text-center">
+            <h2 class="text-4xl font-bold mb-4">AI Twin Engine → HVSP (India-First)</h2>
+            <p class="text-xl text-slate-300 mb-6">Slide-based, camera-off. 80% value / 20% pitch. India market tuned.</p>
+            <div class="flex gap-4 justify-center">
+                <button id="btn-start" class="btn-primary">Start</button>
+                <button id="btn-preset" class="btn-secondary">Use Preset</button>
             </div>
-            <p class="text-xs text-gray-500 mt-4">Keyboard shortcuts: <kbd class="px-2 py-1 bg-gray-200 rounded">1</kbd> Prefill • <kbd class="px-2 py-1 bg-gray-200 rounded">2</kbd> Generate • <kbd class="px-2 py-1 bg-gray-200 rounded">3</kbd> Slides • <kbd class="px-2 py-1 bg-gray-200 rounded">4</kbd> Video • <kbd class="px-2 py-1 bg-gray-200 rounded">H</kbd> Notes</p>
         </section>
 
-        <!-- Stepper Form Card -->
-        <section id="stepperCard" class="bg-white rounded-xl shadow-lg p-8 mb-8">
-
-            <!-- Progress Indicator -->
-            <div class="flex items-center justify-between mb-8">
-                <div class="flex items-center gap-4 w-full">
-                    <div class="step-indicator active flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-semibold">1</div>
-                        <span class="text-sm font-medium hidden sm:inline">Business Model</span>
+        <!-- Stepper Form -->
+        <section id="stepper-section" class="card max-w-4xl mx-auto mb-12 hidden">
+            <div class="mb-6">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="step-indicator active" data-step="1">
+                        <span class="step-num">1</span>
+                        <span class="step-label">Business Model</span>
                     </div>
-                    <div class="flex-1 h-1 bg-gray-200">
-                        <div id="progress1" class="h-full bg-blue-600 transition-all" style="width: 0%"></div>
+                    <div class="step-indicator" data-step="2">
+                        <span class="step-num">2</span>
+                        <span class="step-label">Niche & Market</span>
                     </div>
-                    <div class="step-indicator flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-semibold">2</div>
-                        <span class="text-sm font-medium hidden sm:inline">Niche</span>
+                    <div class="step-indicator" data-step="3">
+                        <span class="step-num">3</span>
+                        <span class="step-label">Business Details</span>
                     </div>
-                    <div class="flex-1 h-1 bg-gray-200">
-                        <div id="progress2" class="h-full bg-blue-600 transition-all" style="width: 0%"></div>
-                    </div>
-                    <div class="step-indicator flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-semibold">3</div>
-                        <span class="text-sm font-medium hidden sm:inline">Business Specifics</span>
-                    </div>
+                </div>
+                <div class="h-1 bg-slate-700 rounded-full overflow-hidden">
+                    <div id="stepper-progress" class="h-full bg-brand transition-all duration-300" style="width: 33.33%"></div>
                 </div>
             </div>
 
             <!-- Step 1: Business Model -->
-            <div id="step1" class="step-content">
-                <h3 class="text-2xl font-bold mb-4">Step 1: Business Model</h3>
-                <p class="text-gray-600 mb-6">Apka current business model kya hai?</p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <label class="cursor-pointer">
-                        <input type="radio" name="businessModel" value="Agency" class="peer sr-only">
-                        <div class="p-6 border-2 border-gray-200 rounded-lg peer-checked:border-blue-600 peer-checked:bg-blue-50 transition-all hover:border-gray-300">
-                            <div class="text-3xl mb-2">🏢</div>
-                            <div class="font-semibold">Agency</div>
+            <div id="step-1" class="step-content">
+                <h3 class="text-2xl font-bold mb-4">Business Model</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <label class="radio-card">
+                        <input type="radio" name="business_model" value="agency" class="hidden">
+                        <div class="radio-card-inner">
+                            <div class="radio-indicator"></div>
+                            <span class="text-lg">Agency</span>
                         </div>
                     </label>
-                    <label class="cursor-pointer">
-                        <input type="radio" name="businessModel" value="Coaching" class="peer sr-only">
-                        <div class="p-6 border-2 border-gray-200 rounded-lg peer-checked:border-blue-600 peer-checked:bg-blue-50 transition-all hover:border-gray-300">
-                            <div class="text-3xl mb-2">🎓</div>
-                            <div class="font-semibold">Coaching</div>
+                    <label class="radio-card">
+                        <input type="radio" name="business_model" value="coaching" class="hidden">
+                        <div class="radio-card-inner">
+                            <div class="radio-indicator"></div>
+                            <span class="text-lg">Coaching</span>
                         </div>
                     </label>
-                    <label class="cursor-pointer">
-                        <input type="radio" name="businessModel" value="Consulting" class="peer sr-only">
-                        <div class="p-6 border-2 border-gray-200 rounded-lg peer-checked:border-blue-600 peer-checked:bg-blue-50 transition-all hover:border-gray-300">
-                            <div class="text-3xl mb-2">💼</div>
-                            <div class="font-semibold">Consulting</div>
+                    <label class="radio-card">
+                        <input type="radio" name="business_model" value="consulting" class="hidden">
+                        <div class="radio-card-inner">
+                            <div class="radio-indicator"></div>
+                            <span class="text-lg">Consulting</span>
                         </div>
                     </label>
-                    <label class="cursor-pointer">
-                        <input type="radio" name="businessModel" value="Freelancing" class="peer sr-only">
-                        <div class="p-6 border-2 border-gray-200 rounded-lg peer-checked:border-blue-600 peer-checked:bg-blue-50 transition-all hover:border-gray-300">
-                            <div class="text-3xl mb-2">💻</div>
-                            <div class="font-semibold">Freelancing</div>
+                    <label class="radio-card">
+                        <input type="radio" name="business_model" value="freelancing" class="hidden">
+                        <div class="radio-card-inner">
+                            <div class="radio-indicator"></div>
+                            <span class="text-lg">Freelancing</span>
                         </div>
                     </label>
                 </div>
-                <div class="mt-6 flex justify-end">
-                    <button id="btnNext1" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all">
-                        Next →
-                    </button>
-                </div>
+                <button id="btn-next-1" class="btn-primary mt-6">Next</button>
             </div>
 
-            <!-- Step 2: Niche -->
-            <div id="step2" class="step-content hidden">
-                <h3 class="text-2xl font-bold mb-4">Step 2: Niche & Target Market</h3>
-                <p class="text-gray-600 mb-6">Apki expertise aur target market define karein</p>
-
+            <!-- Step 2: Niche & Market -->
+            <div id="step-2" class="step-content hidden">
+                <h3 class="text-2xl font-bold mb-4">Niche & Market</h3>
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Select Niche (or enter custom)</label>
-                        <select id="nicheDropdown" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                            <option value="">Choose a niche...</option>
+                        <label class="block text-sm font-medium mb-2">Niche</label>
+                        <select id="niche-select" class="input-field">
+                            <option value="">Select a niche...</option>
                         </select>
                     </div>
-
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Or enter custom niche</label>
-                        <input type="text" id="customNiche" placeholder="e.g., SaaS Product Manager" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <label class="block text-sm font-medium mb-2">Custom Niche (optional override)</label>
+                        <input type="text" id="niche-custom" class="input-field" placeholder="e.g., SaaS Product Marketing">
                     </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Target Market Persona</label>
-                            <input type="text" id="targetPersona" placeholder="e.g., Founders 5-50 CR ARR" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Typical Ticket (₹)</label>
-                            <input type="text" id="ticketValue" placeholder="e.g., ₹1.2L" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                        </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Persona / ICP</label>
+                        <input type="text" id="persona" class="input-field" placeholder="e.g., Founders (5-50 Cr ARR)">
                     </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Language</label>
-                            <select id="language" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                <option value="Hinglish">Hinglish</option>
-                                <option value="Hindi">Hindi</option>
-                                <option value="English">English</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Tone</label>
-                            <select id="tone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                <option value="Doctor-frame">Doctor-frame</option>
-                                <option value="Authoritative">Authoritative</option>
-                                <option value="Friendly">Friendly</option>
-                            </select>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Typical Ticket (₹)</label>
+                        <input type="text" id="ticket" class="input-field" placeholder="e.g., ₹1.2L">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Language</label>
+                        <select id="language" class="input-field">
+                            <option value="hindi">Hindi</option>
+                            <option value="english">English</option>
+                            <option value="hinglish" selected>Hinglish</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Tone</label>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="radio-card">
+                                <input type="radio" name="tone" value="authoritative" class="hidden" checked>
+                                <div class="radio-card-inner">
+                                    <div class="radio-indicator"></div>
+                                    <div>
+                                        <span class="block font-medium">Authoritative</span>
+                                        <span class="text-xs text-slate-400">Clear roadmap, no fluff.</span>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="tone" value="friendly" class="hidden">
+                                <div class="radio-card-inner">
+                                    <div class="radio-indicator"></div>
+                                    <div>
+                                        <span class="block font-medium">Friendly</span>
+                                        <span class="text-xs text-slate-400">Simple, supportive guidance.</span>
+                                    </div>
+                                </div>
+                            </label>
                         </div>
                     </div>
                 </div>
-
-                <div class="mt-6 flex justify-between">
-                    <button id="btnBack2" class="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-semibold transition-all">
-                        ← Back
-                    </button>
-                    <button id="btnNext2" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all">
-                        Next →
-                    </button>
+                <div class="flex gap-3 mt-6">
+                    <button id="btn-back-2" class="btn-secondary">Back</button>
+                    <button id="btn-next-2" class="btn-primary">Next</button>
                 </div>
             </div>
 
-            <!-- Step 3: Business Specifics -->
-            <div id="step3" class="step-content hidden">
-                <h3 class="text-2xl font-bold mb-4">Step 3: Business Specifics</h3>
-                <p class="text-gray-600 mb-6">Offer details aur positioning define karein</p>
-
+            <!-- Step 3: Business Details -->
+            <div id="step-3" class="step-content hidden">
+                <h3 class="text-2xl font-bold mb-4">Business Details</h3>
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Offer Name</label>
-                        <input type="text" id="offerName" placeholder="e.g., Growth Accelerator Program" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <label class="block text-sm font-medium mb-2">Offer Name</label>
+                        <input type="text" id="offer-name" class="input-field" placeholder="e.g., Pipeline Accelerator">
                     </div>
-
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Core Promise (External Outcome)</label>
-                        <input type="text" id="corePromise" placeholder="e.g., 10L/month predictable pipeline" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <label class="block text-sm font-medium mb-2">External Promise</label>
+                        <input type="text" id="external-promise" class="input-field" placeholder="e.g., predictable pipeline">
                     </div>
-
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Internal Outcome</label>
-                        <input type="text" id="internalOutcome" placeholder="e.g., Freedom from daily firefighting" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <label class="block text-sm font-medium mb-2">Internal Win</label>
+                        <input type="text" id="internal-win" class="input-field" placeholder="e.g., freedom/time">
                     </div>
-
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Top 3 Pains (comma-separated)</label>
-                        <input type="text" id="topPains" placeholder="e.g., Unpredictable pipeline, Long sales cycles, Unqualified demos" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <label class="block text-sm font-medium mb-2">Top 3 Pains (click to add)</label>
+                        <div id="pains-list" class="flex flex-wrap gap-2 mb-2"></div>
+                        <div id="selected-pains" class="flex flex-wrap gap-2"></div>
                     </div>
-
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">CTA Type</label>
-                        <input type="text" id="ctaType" value="GrowthMap (₹499) • refundable screen" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <label class="block text-sm font-medium mb-2">Objections to Handle</label>
+                        <div id="objections-list" class="space-y-2"></div>
                     </div>
-
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Calendar Link</label>
-                        <input type="text" id="calendarLink" placeholder="https://cal.example.com/growthmap" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <label class="block text-sm font-medium mb-2">CTA / Next Step</label>
+                        <input type="text" id="cta-text" class="input-field" placeholder="e.g., Book clarity call">
                     </div>
                 </div>
-
-                <div class="mt-6 flex justify-between">
-                    <button id="btnBack3" class="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-semibold transition-all">
-                        ← Back
-                    </button>
-                    <button id="btnGenerate" class="px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white rounded-lg font-semibold shadow-lg transition-all">
-                        Generate HVSP ✨
-                    </button>
+                <div class="flex gap-3 mt-6">
+                    <button id="btn-back-3" class="btn-secondary">Back</button>
+                    <button id="btn-generate" class="btn-primary btn-primary-large">Generate HVSP</button>
                 </div>
             </div>
-
         </section>
 
-        <!-- Progress & Matching Section -->
-        <section id="progressSection" class="hidden mb-8">
+        <!-- Matching & Progress -->
+        <section id="matching-section" class="max-w-6xl mx-auto mb-12 hidden">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-                <!-- Matched Data Panel -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
-                        <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                        </svg>
-                        Matched Data
-                    </h3>
-                    <div id="matchedChips" class="flex flex-wrap gap-2">
-                        <!-- Chips will be populated here -->
-                    </div>
+                <!-- Matched Data -->
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-4">Matched Data</h3>
+                    <div class="space-y-2" id="matched-chips"></div>
                 </div>
 
-                <!-- Pipeline Panel -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
-                        <svg class="w-5 h-5 text-blue-500 animate-spin" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
-                        </svg>
-                        Processing Pipeline
-                    </h3>
-                    <div id="pipelineStages" class="space-y-3">
-                        <!-- Pipeline stages will be populated here -->
-                    </div>
+                <!-- Pipeline Progress -->
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-4">Pipeline</h3>
+                    <div class="space-y-3" id="pipeline-bars"></div>
                 </div>
-
             </div>
 
-            <!-- Typing Log -->
-            <div class="bg-gray-900 rounded-xl shadow-lg p-6 mt-6">
-                <h3 class="text-lg font-bold mb-3 text-green-400 font-mono">System Log</h3>
-                <div id="typingLog" class="font-mono text-xs text-green-300 space-y-1 max-h-64 overflow-y-auto">
-                    <!-- Log lines will be typed here -->
-                </div>
+            <!-- Log Console -->
+            <div class="card mt-6">
+                <h4 class="text-sm font-mono text-slate-400 mb-2">Processing Log</h4>
+                <div id="log-console" class="log-console"></div>
             </div>
         </section>
 
-        <!-- HVSP Outline Section -->
-        <section id="hvspOutline" class="hidden bg-white rounded-xl shadow-lg p-8 mb-8">
-            <h3 class="text-3xl font-bold mb-6 text-center">Generated HVSP Outline</h3>
-
-            <div class="space-y-6">
-                <!-- Hook -->
-                <div class="border-l-4 border-blue-500 pl-6">
-                    <h4 class="text-xl font-bold mb-3 text-blue-600">🎯 Hook</h4>
-                    <div id="hookContent" class="text-gray-700 space-y-2">
-                        <!-- Hook bullets will be populated here -->
-                    </div>
-                </div>
-
-                <!-- Value -->
-                <div class="border-l-4 border-green-500 pl-6">
-                    <h4 class="text-xl font-bold mb-3 text-green-600">💎 Value (80%)</h4>
-                    <div id="valueContent" class="space-y-4">
-                        <!-- Value modules will be populated here -->
-                    </div>
-                </div>
-
-                <!-- Story -->
-                <div class="border-l-4 border-purple-500 pl-6">
-                    <h4 class="text-xl font-bold mb-3 text-purple-600">📖 Story</h4>
-                    <div id="storyContent" class="text-gray-700">
-                        <!-- Story will be populated here -->
-                    </div>
-                </div>
-
-                <!-- Pitch -->
-                <div class="border-l-4 border-orange-500 pl-6">
-                    <h4 class="text-xl font-bold mb-3 text-orange-600">🎁 Pitch (20%)</h4>
-                    <div id="pitchContent" class="text-gray-700">
-                        <!-- Pitch will be populated here -->
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-8 text-center">
-                <button id="btnPreviewSlides" class="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-lg font-semibold shadow-lg transition-all text-lg">
-                    Preview Slides (12) →
-                </button>
-            </div>
+        <!-- HVSP Outline -->
+        <section id="outline-section" class="card max-w-4xl mx-auto mb-12 hidden">
+            <h3 class="text-2xl font-bold mb-4">HVSP Outline</h3>
+            <div id="outline-content" class="space-y-6"></div>
+            <button id="btn-preview-slides" class="btn-primary mt-6">Preview Slides (12)</button>
         </section>
 
-        <!-- Slides Preview Section -->
-        <section id="slidesPreview" class="hidden bg-white rounded-xl shadow-lg p-8 mb-8">
-            <h3 class="text-3xl font-bold mb-6 text-center">Slide Deck Preview</h3>
-            <p class="text-center text-gray-600 mb-8">Auto-generated from your inputs • Click to view details</p>
-
-            <div id="slidesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
-                <!-- Slide thumbnails will be populated here -->
-            </div>
-
-            <div class="text-center">
-                <button id="btnRenderVideo" class="px-8 py-4 bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white rounded-lg font-semibold shadow-lg transition-all text-lg">
-                    Render Video 🎬
-                </button>
-            </div>
-        </section>
-
-        <!-- Video Renderer Section -->
-        <section id="videoRenderer" class="hidden bg-white rounded-xl shadow-lg p-8 mb-8">
-            <h3 class="text-3xl font-bold mb-6 text-center">Video Renderer</h3>
-
-            <div id="renderProgress" class="mb-6">
-                <div class="space-y-4">
-                    <div id="renderStatus" class="text-center text-gray-600 mb-4">
-                        Initializing render pipeline...
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-4">
-                        <div id="renderBar" class="bg-gradient-to-r from-blue-500 to-purple-500 h-4 rounded-full transition-all" style="width: 0%"></div>
-                    </div>
-                    <div id="renderLogs" class="font-mono text-xs text-gray-600 space-y-1">
-                        <!-- Render logs will appear here -->
+        <!-- Slides Preview & Output Options -->
+        <section id="slides-section" class="max-w-7xl mx-auto mb-12 hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                <!-- Slides Grid (3/4) -->
+                <div class="lg:col-span-3">
+                    <div class="card">
+                        <h3 class="text-2xl font-bold mb-4">Slides Preview</h3>
+                        <div id="slides-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mb-4"></div>
+                        <p class="text-sm text-slate-400 mt-4">Auto-generated from your inputs. Voiceover optional in HVSP. (Illustrative; results vary.)</p>
                     </div>
                 </div>
-            </div>
 
-            <div id="videoCard" class="hidden">
-                <div class="max-w-3xl mx-auto">
-                    <div class="aspect-video bg-gray-900 rounded-lg overflow-hidden mb-4 relative">
-                        <video id="renderedVideo" class="w-full h-full" controls loop muted>
-                            <source src="assets/hvsp_ready.mp4" type="video/mp4">
-                            Your browser does not support video playback.
-                        </video>
-                        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 hover:bg-opacity-30 transition-all cursor-pointer" id="playOverlay">
-                            <svg class="w-20 h-20 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
-                            </svg>
+                <!-- Output Options (1/4) -->
+                <div class="lg:col-span-1">
+                    <div class="card sticky top-24">
+                        <h3 class="text-xl font-bold mb-4">Output Options</h3>
+
+                        <!-- Voice -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium mb-3">Voice</label>
+                            <div class="space-y-2">
+                                <label class="radio-small">
+                                    <input type="radio" name="voice" value="tts" class="mr-2" checked>
+                                    <div>
+                                        <div class="font-medium text-sm">Generate voice with ElevenLabs (TTS)</div>
+                                        <div class="text-xs text-slate-400">Simulating ElevenLabs pipeline… (Illustrative)</div>
+                                    </div>
+                                </label>
+                                <label class="radio-small">
+                                    <input type="radio" name="voice" value="upload" class="mr-2">
+                                    <div class="font-medium text-sm">Use my voice (upload .wav/.mp3)</div>
+                                </label>
+                                <label class="radio-small">
+                                    <input type="radio" name="voice" value="extract" class="mr-2">
+                                    <div class="font-medium text-sm">Extract voice from my video</div>
+                                </label>
+                            </div>
+                            <input type="file" id="voice-upload" class="hidden" accept=".wav,.mp3,audio/*">
+                            <button id="btn-voice-upload" class="btn-secondary btn-sm mt-2 w-full hidden">Choose Audio File</button>
                         </div>
-                    </div>
-                    <p class="text-sm text-gray-600 mb-4 text-center">
-                        Auto-generated from your inputs. Voiceover optional in webinar. <span class="font-semibold">(Illustrative; results vary.)</span>
-                    </p>
-                    <div class="flex justify-center gap-4">
-                        <button id="btnDownloadVideo" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                            </svg>
-                            Download
-                        </button>
-                        <button id="btnCopyLink" class="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-semibold transition-all flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"/>
-                                <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"/>
-                            </svg>
-                            Copy Link
-                        </button>
+
+                        <!-- Avatar -->
+                        <div class="mb-6">
+                            <label class="flex items-center mb-3">
+                                <input type="checkbox" id="avatar-toggle" class="mr-2">
+                                <span class="text-sm font-medium">Include avatar as picture-in-picture</span>
+                            </label>
+                            <div id="avatar-options" class="space-y-3 hidden">
+                                <input type="file" id="avatar-upload" class="hidden" accept="video/*">
+                                <button id="btn-avatar-upload" class="btn-secondary btn-sm w-full">Upload a short video</button>
+                                <div>
+                                    <label class="block text-xs text-slate-400 mb-2">PIP Placement</label>
+                                    <select id="pip-position" class="input-field text-sm">
+                                        <option value="bottom-right">Bottom Right</option>
+                                        <option value="top-right">Top Right</option>
+                                        <option value="bottom-left">Bottom Left</option>
+                                        <option value="top-left">Top Left</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="btn-render" class="btn-primary w-full">Render HVSP Video</button>
                     </div>
                 </div>
             </div>
         </section>
 
-    </div>
+        <!-- Video Renderer -->
+        <section id="renderer-section" class="max-w-4xl mx-auto mb-12 hidden">
+            <div class="card">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-2xl font-bold">Rendering HVSP Video</h3>
+                    <div class="text-right">
+                        <div class="text-sm text-slate-400">Estimated</div>
+                        <div id="eta-label" class="text-2xl font-mono font-bold text-brand">00:00</div>
+                    </div>
+                </div>
 
-    <!-- Bottom Sticky CTA -->
-    <div id="bottomCTA" class="hidden fixed bottom-0 left-0 right-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 shadow-2xl z-40">
-        <div class="container mx-auto px-4 flex items-center justify-between flex-wrap gap-4">
-            <div>
-                <p class="font-semibold text-lg">First step: GrowthMap (₹499, refundable)</p>
-                <p class="text-sm text-blue-100">Screens for seriousness • bonus items on call</p>
+                <!-- Progress Bar -->
+                <div class="mb-6">
+                    <div class="flex justify-between text-sm mb-2">
+                        <span id="countdown-label" class="font-mono">00:00</span>
+                        <span id="progress-percent">0%</span>
+                    </div>
+                    <div class="h-3 bg-slate-700 rounded-full overflow-hidden">
+                        <div id="render-progress" class="h-full bg-brand transition-all duration-1000" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- Pipeline Stages -->
+                <div class="mb-6">
+                    <h4 class="text-sm font-medium mb-3">Pipeline Stages</h4>
+                    <div id="render-stages" class="space-y-2"></div>
+                </div>
+
+                <!-- Live Log -->
+                <div>
+                    <h4 class="text-sm font-mono text-slate-400 mb-2">Live Processing Log</h4>
+                    <div id="render-log" class="log-console"></div>
+                </div>
             </div>
-            <button id="btnBookGrowthMap" class="px-6 py-3 bg-white text-blue-600 hover:bg-blue-50 rounded-lg font-bold transition-all shadow-lg">
-                Book GrowthMap →
-            </button>
-        </div>
-    </div>
+        </section>
+
+        <!-- Video Ready -->
+        <section id="result-section" class="card max-w-4xl mx-auto mb-12 hidden">
+            <h3 class="text-2xl font-bold mb-4">Video Ready</h3>
+
+            <!-- Video Player -->
+            <div class="mb-6">
+                <video id="result-video" class="w-full rounded-lg" controls muted loop>
+                    <source src="assets/hvsp_ready.mp4" type="video/mp4">
+                </video>
+            </div>
+
+            <!-- Actions -->
+            <div class="space-y-4">
+                <button id="btn-download" class="btn-primary w-full flex items-center justify-center gap-2">
+                    <img src="assets/icon_download.svg" alt="" class="w-5 h-5">
+                    Download MP4
+                </button>
+
+                <div class="bg-slate-800 rounded-lg p-4">
+                    <div class="text-sm text-slate-400 mb-1">Saved to:</div>
+                    <div class="flex items-center gap-2">
+                        <code id="saved-path" class="flex-1 text-sm font-mono text-slate-200"></code>
+                        <button id="btn-copy-path" class="btn-secondary btn-sm">Copy Path</button>
+                    </div>
+                </div>
+
+                <p class="text-sm text-slate-400 text-center">You can review slides any time and re-render.</p>
+            </div>
+        </section>
+
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300 py-8 mt-16">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div class="text-sm">
-                    <p class="text-gray-400">Proof shown is illustrative; results vary. Roadmap ≠ guarantee.</p>
-                </div>
-                <div class="text-sm text-right">
-                    <p class="text-gray-300 font-semibold">₹13Cr+ ad spend (₹10Cr+ YouTube)</p>
-                    <p class="text-gray-400">₹53Cr+ high-ticket sales attributed • ~3.8x ROAS • CPL ₹179–₹210</p>
-                </div>
-            </div>
+    <footer class="border-t border-slate-800 py-6 mt-12">
+        <div class="container mx-auto px-4 flex items-center justify-between text-sm text-slate-400">
+            <div>Illustrative; results vary.</div>
+            <div>Press <kbd class="kbd">?</kbd> for keyboard shortcuts</div>
         </div>
     </footer>
 
-    <!-- Presenter Notes Panel (Toggle with H) -->
-    <div id="presenterNotes" class="hidden fixed right-4 top-20 w-96 max-h-[80vh] bg-white rounded-xl shadow-2xl border-2 border-blue-500 overflow-hidden z-50">
-        <div class="bg-blue-600 text-white px-4 py-3 flex items-center justify-between">
-            <h4 class="font-bold">Presenter Notes (5 min)</h4>
-            <button id="closeNotes" class="text-white hover:text-gray-200">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                </svg>
-            </button>
-        </div>
-        <div class="p-4 overflow-y-auto max-h-[calc(80vh-60px)]">
-            <div class="space-y-4 text-sm">
-                <div>
-                    <p class="font-semibold text-blue-600">0:00–0:40 • Set the Scene</p>
-                    <p class="text-gray-700">Camera-off HVSP, 80/20 value-pitch, India-tuned, ₹53Cr dataset. Not generic AI — structured for high-value conversions.</p>
+    <!-- Knowledge Base Modal -->
+    <div id="knowledge-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content modal-large">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-2xl font-bold">Knowledge Base</h3>
+                <button id="close-knowledge" class="text-slate-400 hover:text-slate-100 text-3xl leading-none">&times;</button>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[70vh]">
+                <!-- Tree -->
+                <div class="lg:col-span-1 overflow-y-auto">
+                    <div id="kb-tree" class="space-y-1"></div>
                 </div>
-                <div>
-                    <p class="font-semibold text-blue-600">0:40–1:40 • Fill Form</p>
-                    <p class="text-gray-700">Pick model/niche, language=tone, pains, CTA ₹499 refundable. Or use demo preset for quick flow.</p>
-                </div>
-                <div>
-                    <p class="font-semibold text-blue-600">1:40–3:00 • Generate</p>
-                    <p class="text-gray-700">Call out logs: cluster match, 80/20, doctor-frame, micro-proof chips with disclaimer. Watch the believability engine.</p>
-                </div>
-                <div>
-                    <p class="font-semibold text-blue-600">3:00–4:10 • Slides Preview</p>
-                    <p class="text-gray-700">Show 12 slides; point at "Generic AI ≠ Our Engine" (Structure/Balance/Data). Emphasize India-first training.</p>
-                </div>
-                <div>
-                    <p class="font-semibold text-blue-600">4:10–4:40 • Render Video</p>
-                    <p class="text-gray-700">Progress → ready card; mention "voiceover optional for webinar." Download available.</p>
-                </div>
-                <div>
-                    <p class="font-semibold text-blue-600">4:40–5:00 • CTA</p>
-                    <p class="text-gray-700">GrowthMap ₹499 refundable, "Not a course — 3-Month Consulting + 9 AI Agents System," up to 90% automation.</p>
+                <!-- File Viewer -->
+                <div class="lg:col-span-2 overflow-y-auto bg-slate-900 rounded-lg p-4">
+                    <div id="kb-viewer" class="text-slate-400 text-center py-12">Select a file to preview</div>
                 </div>
             </div>
+            <p class="text-xs text-slate-400 mt-4">Anonymized, aggregated learnings. Illustrative; results vary.</p>
         </div>
     </div>
 
-    <!-- Slide Modal -->
-    <div id="slideModal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div class="sticky top-0 bg-white border-b px-6 py-4 flex items-center justify-between">
-                <h3 id="modalSlideTitle" class="text-xl font-bold">Slide Title</h3>
-                <button id="closeModal" class="text-gray-500 hover:text-gray-700">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                    </svg>
-                </button>
+    <!-- Shortcuts Modal -->
+    <div id="shortcuts-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-2xl font-bold">Keyboard Shortcuts</h3>
+                <button id="close-shortcuts" class="text-slate-400 hover:text-slate-100 text-3xl leading-none">&times;</button>
             </div>
-            <div class="p-6">
-                <div id="modalSlideContent" class="mb-6">
-                    <!-- Slide content will be shown here -->
+            <div class="space-y-3">
+                <div class="flex items-center justify-between">
+                    <span>Prefill form with preset</span>
+                    <kbd class="kbd">1</kbd>
                 </div>
-                <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
-                    <p class="text-sm font-semibold text-blue-700 mb-2">Presenter Notes:</p>
-                    <p id="modalSlideNotes" class="text-sm text-gray-700">
-                        <!-- Presenter notes will be shown here -->
-                    </p>
+                <div class="flex items-center justify-between">
+                    <span>Start generation pipeline</span>
+                    <kbd class="kbd">2</kbd>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span>Open Slides Preview</span>
+                    <kbd class="kbd">3</kbd>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span>Start Video Render</span>
+                    <kbd class="kbd">4</kbd>
+                </div>
+                <div class="flex items-center justify-between">
+                    <span>Toggle Presenter Notes</span>
+                    <kbd class="kbd">H</kbd>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="hidden fixed bottom-24 right-4 bg-gray-900 text-white px-6 py-3 rounded-lg shadow-xl z-50 transition-all">
-        <p id="toastMessage"></p>
-    </div>
-
-    <!-- GrowthMap Modal -->
-    <div id="growthMapModal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-xl max-w-2xl w-full p-8">
-            <h3 class="text-2xl font-bold mb-4">GrowthMap Session (₹499)</h3>
-            <p class="text-gray-700 mb-4">60-minute deep-dive roadmap session • Refundable deposit screens for seriousness</p>
-            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
-                <p class="text-sm text-blue-800">
-                    <strong>Doctor-frame:</strong> Hum pehle screen karte hain — fit hue to aage chalte hain, warna clear path batate hain. No hard sell.
-                </p>
+    <!-- Slide Detail Modal -->
+    <div id="slide-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content modal-large">
+            <div class="flex items-center justify-between mb-4">
+                <h3 id="slide-modal-title" class="text-2xl font-bold">Slide Details</h3>
+                <button id="close-slide" class="text-slate-400 hover:text-slate-100 text-3xl leading-none">&times;</button>
             </div>
-            <div class="space-y-4">
-                <p class="text-sm text-gray-600">In the actual app, this would link to your calendar. For demo purposes, this is a placeholder.</p>
-                <input type="text" id="growthMapCalendar" placeholder="https://cal.example.com/growthmap" class="w-full px-4 py-2 border border-gray-300 rounded-lg" readonly>
-            </div>
-            <div class="mt-6 flex justify-end gap-4">
-                <button id="closeGrowthMapModal" class="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-semibold transition-all">
-                    Close
-                </button>
-                <button class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all">
-                    Open Calendar →
-                </button>
+            <div id="slide-modal-content" class="mb-6"></div>
+            <div id="slide-modal-notes" class="bg-slate-800 rounded-lg p-4">
+                <h4 class="text-sm font-bold mb-2">Presenter Notes</h4>
+                <div id="slide-notes-content" class="text-sm text-slate-300"></div>
             </div>
         </div>
     </div>
 
-    <script type="module" src="js/app.js"></script>
+    <!-- Toast Container -->
+    <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2"></div>
+
+    <script src="js/app.js"></script>
 </body>
 </html>
