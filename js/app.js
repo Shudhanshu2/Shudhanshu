@@ -1,44 +1,59 @@
-// HVSP AI Twin Engine - Main Application Logic
+// ScaleEdge AI Twin Engine - Main Application
 // ============================================
 
 // Global State
-let appState = {
+const appState = {
     currentStep: 1,
     formData: {},
+    selectedPains: [],
+    selectedObjections: [],
     niches: [],
     frameworks: {},
     testimonials: [],
+    knowledgeBase: [],
     generatedHVSP: null,
-    generatedSlides: []
+    generatedSlides: [],
+    outputOptions: {
+        voiceMode: 'tts', // 'tts' | 'upload' | 'extract'
+        voiceFile: null,
+        avatarEnabled: false,
+        avatarFile: null,
+        pipPosition: 'bottom-right'
+    },
+    renderETA: 0,
+    presenterNotesVisible: false
 };
 
-// Demo Preset Data
-const DEMO_PRESET = {
-    businessModel: 'Consulting',
-    niche: 'B2B Growth Consultant',
+// Preset Data (for keyboard shortcut 1 and ?demo=1)
+const PRESET_DATA = {
+    businessModel: 'consulting',
+    niche: 'b2b_consulting',
     customNiche: '',
-    targetPersona: 'Founders 5-50 CR ARR',
-    ticketValue: '₹1.2L',
-    language: 'Hinglish',
-    tone: 'Doctor-frame',
-    offerName: 'Growth Accelerator Program',
-    corePromise: '10L/month predictable pipeline',
-    internalOutcome: 'Freedom from daily firefighting',
-    topPains: 'Unpredictable pipeline, Long sales cycles, Unqualified demos',
-    ctaType: 'GrowthMap (₹499) • refundable screen',
-    calendarLink: 'https://cal.example.com/growthmap'
+    persona: 'Founders (5-50 Cr ARR)',
+    ticket: '₹1.2L',
+    language: 'hinglish',
+    tone: 'authoritative',
+    offerName: 'Pipeline Accelerator',
+    externalPromise: 'predictable pipeline',
+    internalWin: 'freedom/time',
+    pains: ['No predictable pipeline', 'Long sales cycles', 'Unqualified calls'],
+    objections: ['Custom work needed', 'Budget concerns', 'Timeline unclear'],
+    ctaText: 'Book clarity call'
 };
 
 // Utility Functions
 // =================
 
 function showToast(message, duration = 3000) {
-    const toast = document.getElementById('toast');
-    const toastMessage = document.getElementById('toastMessage');
-    toastMessage.textContent = message;
-    toast.classList.remove('hidden');
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    container.appendChild(toast);
+
     setTimeout(() => {
-        toast.classList.add('hidden');
+        toast.classList.add('removing');
+        setTimeout(() => toast.remove(), 300);
     }, duration);
 }
 
@@ -46,16 +61,31 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function typeText(element, text, speed = 30) {
-    element.textContent = '';
-    for (let char of text) {
-        element.textContent += char;
-        await sleep(speed);
-    }
+function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
 }
 
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+function detectOS() {
+    const platform = navigator.platform.toLowerCase();
+    const userAgent = navigator.userAgent.toLowerCase();
+    if (platform.includes('mac') || userAgent.includes('mac')) return 'macos';
+    if (platform.includes('win') || userAgent.includes('win')) return 'windows';
+    return 'macos'; // default
+}
+
+function generateSavedPath(niche, slug) {
+    const now = new Date();
+    const date = now.toISOString().split('T')[0]; // YYYY-MM-DD
+    const time = now.toTimeString().split(' ')[0].replace(/:/g, ''); // HHmmss
+    const os = detectOS();
+
+    if (os === 'windows') {
+        return `C:\\Users\\<User>\\Documents\\ScaleEdge\\Exports\\${niche}\\${date}\\HVSP_${slug}_${time}.mp4`;
+    } else {
+        return `~/Documents/ScaleEdge/Exports/${niche}/${date}/HVSP_${slug}_${time}.mp4`;
+    }
 }
 
 // Data Loading
@@ -63,25 +93,28 @@ function getRandomInt(min, max) {
 
 async function loadData() {
     try {
-        const [nichesRes, frameworksRes, testimonialsRes] = await Promise.all([
-            fetch('data/niches.json'),
-            fetch('data/frameworks.json'),
-            fetch('data/testimonials.json')
+        const responses = await Promise.all([
+            fetch('data/niches.json').catch(() => null),
+            fetch('data/frameworks.json').catch(() => null),
+            fetch('data/testimonials.json').catch(() => null),
+            fetch('data/knowledge_base.json').catch(() => null)
         ]);
 
-        appState.niches = await nichesRes.json();
-        appState.frameworks = await frameworksRes.json();
-        appState.testimonials = await testimonialsRes.json();
+        if (responses[0]) appState.niches = await responses[0].json();
+        if (responses[1]) appState.frameworks = await responses[1].json();
+        if (responses[2]) appState.testimonials = await responses[2].json();
+        if (responses[3]) appState.knowledgeBase = await responses[3].json();
 
         populateNicheDropdown();
     } catch (error) {
-        console.error('Error loading data:', error);
-        showToast('Error loading data files. Please check console.');
+        console.error('Data loading error:', error);
     }
 }
 
 function populateNicheDropdown() {
-    const dropdown = document.getElementById('nicheDropdown');
+    const dropdown = document.getElementById('niche-select');
+    if (!dropdown) return;
+
     appState.niches.forEach(niche => {
         const option = document.createElement('option');
         option.value = niche.id;
@@ -93,691 +126,1196 @@ function populateNicheDropdown() {
 // Form & Stepper Logic
 // ====================
 
-function initStepperHandlers() {
-    // Step 1
-    document.getElementById('btnNext1').addEventListener('click', () => {
-        const selected = document.querySelector('input[name="businessModel"]:checked');
-        if (!selected) {
-            showToast('Please select a business model');
-            return;
-        }
-        appState.formData.businessModel = selected.value;
-        goToStep(2);
-    });
+function initFormHandlers() {
+    // Hero buttons
+    const btnStart = document.getElementById('btn-start');
+    const btnPreset = document.getElementById('btn-preset');
 
-    // Step 2
-    document.getElementById('btnBack2').addEventListener('click', () => goToStep(1));
-    document.getElementById('btnNext2').addEventListener('click', () => {
-        const nicheId = document.getElementById('nicheDropdown').value;
-        const customNiche = document.getElementById('customNiche').value;
-        const targetPersona = document.getElementById('targetPersona').value;
-        const ticketValue = document.getElementById('ticketValue').value;
+    if (btnStart) {
+        btnStart.addEventListener('click', () => {
+            document.getElementById('hero').classList.add('hidden');
+            document.getElementById('stepper-section').classList.remove('hidden');
+        });
+    }
 
-        if (!nicheId && !customNiche) {
-            showToast('Please select or enter a niche');
-            return;
-        }
+    if (btnPreset) {
+        btnPreset.addEventListener('click', () => {
+            prefillPreset();
+            document.getElementById('hero').classList.add('hidden');
+            document.getElementById('stepper-section').classList.remove('hidden');
+        });
+    }
 
-        if (!targetPersona) {
-            showToast('Please enter target persona');
-            return;
-        }
+    // Step 1: Business Model
+    const btnNext1 = document.getElementById('btn-next-1');
+    if (btnNext1) {
+        btnNext1.addEventListener('click', () => {
+            const selected = document.querySelector('input[name="business_model"]:checked');
+            if (!selected) {
+                showToast('Please select a business model');
+                return;
+            }
+            appState.formData.businessModel = selected.value;
+            goToStep(2);
+        });
+    }
 
-        appState.formData.nicheId = nicheId;
-        appState.formData.customNiche = customNiche;
-        appState.formData.targetPersona = targetPersona;
-        appState.formData.ticketValue = ticketValue;
-        appState.formData.language = document.getElementById('language').value;
-        appState.formData.tone = document.getElementById('tone').value;
+    // Step 2: Niche & Market
+    const btnBack2 = document.getElementById('btn-back-2');
+    const btnNext2 = document.getElementById('btn-next-2');
 
-        goToStep(3);
-    });
+    if (btnBack2) btnBack2.addEventListener('click', () => goToStep(1));
+    if (btnNext2) {
+        btnNext2.addEventListener('click', () => {
+            const nicheId = document.getElementById('niche-select')?.value;
+            const customNiche = document.getElementById('niche-custom')?.value;
+            const persona = document.getElementById('persona')?.value;
 
-    // Step 3
-    document.getElementById('btnBack3').addEventListener('click', () => goToStep(2));
-    document.getElementById('btnGenerate').addEventListener('click', () => {
-        const offerName = document.getElementById('offerName').value;
-        const corePromise = document.getElementById('corePromise').value;
-        const internalOutcome = document.getElementById('internalOutcome').value;
-        const topPains = document.getElementById('topPains').value;
+            if (!nicheId && !customNiche) {
+                showToast('Please select or enter a niche');
+                return;
+            }
+            if (!persona) {
+                showToast('Please enter target persona');
+                return;
+            }
 
-        if (!offerName || !corePromise || !topPains) {
-            showToast('Please fill in all required fields');
-            return;
-        }
+            appState.formData.nicheId = nicheId;
+            appState.formData.customNiche = customNiche;
+            appState.formData.persona = persona;
+            appState.formData.ticket = document.getElementById('ticket')?.value || '';
+            appState.formData.language = document.getElementById('language')?.value || 'hinglish';
+            appState.formData.tone = document.querySelector('input[name="tone"]:checked')?.value || 'authoritative';
 
-        appState.formData.offerName = offerName;
-        appState.formData.corePromise = corePromise;
-        appState.formData.internalOutcome = internalOutcome;
-        appState.formData.topPains = topPains;
-        appState.formData.ctaType = document.getElementById('ctaType').value;
-        appState.formData.calendarLink = document.getElementById('calendarLink').value;
+            populateStep3FromNiche(nicheId);
+            goToStep(3);
+        });
+    }
 
-        generateHVSP();
-    });
+    // Step 3: Business Details
+    const btnBack3 = document.getElementById('btn-back-3');
+    const btnGenerate = document.getElementById('btn-generate');
+
+    if (btnBack3) btnBack3.addEventListener('click', () => goToStep(2));
+    if (btnGenerate) {
+        btnGenerate.addEventListener('click', () => {
+            const offerName = document.getElementById('offer-name')?.value;
+            const externalPromise = document.getElementById('external-promise')?.value;
+
+            if (!offerName || !externalPromise) {
+                showToast('Please fill in required fields');
+                return;
+            }
+
+            appState.formData.offerName = offerName;
+            appState.formData.externalPromise = externalPromise;
+            appState.formData.internalWin = document.getElementById('internal-win')?.value || '';
+            appState.formData.pains = appState.selectedPains;
+            appState.formData.objections = appState.selectedObjections;
+            appState.formData.ctaText = document.getElementById('cta-text')?.value || 'Book call';
+
+            generateHVSP();
+        });
+    }
 }
 
-function goToStep(stepNum) {
+function goToStep(step) {
     // Hide all steps
-    document.querySelectorAll('.step-content').forEach(el => el.classList.add('hidden'));
+    for (let i = 1; i <= 3; i++) {
+        const stepEl = document.getElementById(`step-${i}`);
+        if (stepEl) stepEl.classList.add('hidden');
+    }
 
     // Show target step
-    document.getElementById(`step${stepNum}`).classList.remove('hidden');
+    const targetStep = document.getElementById(`step-${step}`);
+    if (targetStep) targetStep.classList.remove('hidden');
 
-    // Update progress indicators
-    document.querySelectorAll('.step-indicator').forEach((el, idx) => {
-        if (idx < stepNum - 1) {
-            el.classList.add('active');
-            el.querySelector('div').classList.remove('bg-gray-200', 'text-gray-600');
-            el.querySelector('div').classList.add('bg-blue-600', 'text-white');
-        } else if (idx === stepNum - 1) {
-            el.classList.add('active');
-            el.querySelector('div').classList.remove('bg-gray-200', 'text-gray-600');
-            el.querySelector('div').classList.add('bg-blue-600', 'text-white');
+    // Update indicators
+    const indicators = document.querySelectorAll('.step-indicator');
+    indicators.forEach((ind, idx) => {
+        if (idx < step) {
+            ind.classList.add('active');
         } else {
-            el.classList.remove('active');
-            el.querySelector('div').classList.remove('bg-blue-600', 'text-white');
-            el.querySelector('div').classList.add('bg-gray-200', 'text-gray-600');
+            ind.classList.remove('active');
         }
     });
 
-    // Update progress bars
-    document.getElementById('progress1').style.width = stepNum >= 2 ? '100%' : '0%';
-    document.getElementById('progress2').style.width = stepNum >= 3 ? '100%' : '0%';
+    // Update progress bar
+    const progress = document.getElementById('stepper-progress');
+    if (progress) {
+        progress.style.width = `${(step / 3) * 100}%`;
+    }
 
-    appState.currentStep = stepNum;
-
-    // Scroll to top of stepper
-    document.getElementById('stepperCard').scrollIntoView({ behavior: 'smooth' });
+    appState.currentStep = step;
 }
 
-// HVSP Generation Logic
-// =====================
+function populateStep3FromNiche(nicheId) {
+    const niche = appState.niches.find(n => n.id === nicheId);
+    if (!niche) return;
+
+    // Populate pains
+    const painsList = document.getElementById('pains-list');
+    if (painsList && niche.pains) {
+        painsList.innerHTML = niche.pains.map((pain, idx) =>
+            `<span class="chip chip-clickable" data-pain="${pain}">${pain}</span>`
+        ).join('');
+
+        painsList.querySelectorAll('.chip').forEach(chip => {
+            chip.addEventListener('click', () => togglePain(chip));
+        });
+    }
+
+    // Populate objections
+    const objectionsList = document.getElementById('objections-list');
+    if (objectionsList && niche.objections) {
+        objectionsList.innerHTML = niche.objections.map(obj =>
+            `<label class="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" value="${obj}" class="objection-check">
+                <span class="text-sm">${obj}</span>
+            </label>`
+        ).join('');
+
+        objectionsList.querySelectorAll('.objection-check').forEach(check => {
+            check.addEventListener('change', updateObjections);
+        });
+    }
+}
+
+function togglePain(chip) {
+    const pain = chip.dataset.pain;
+    if (chip.classList.contains('chip-selected')) {
+        chip.classList.remove('chip-selected');
+        appState.selectedPains = appState.selectedPains.filter(p => p !== pain);
+    } else {
+        if (appState.selectedPains.length >= 3) {
+            showToast('Maximum 3 pains allowed');
+            return;
+        }
+        chip.classList.add('chip-selected');
+        appState.selectedPains.push(pain);
+    }
+    updateSelectedPainsDisplay();
+}
+
+function updateSelectedPainsDisplay() {
+    const container = document.getElementById('selected-pains');
+    if (!container) return;
+    container.innerHTML = appState.selectedPains.map(pain =>
+        `<span class="chip chip-selected">${pain}</span>`
+    ).join('');
+}
+
+function updateObjections() {
+    const checks = document.querySelectorAll('.objection-check:checked');
+    appState.selectedObjections = Array.from(checks).map(c => c.value);
+}
+
+// HVSP Generation
+// ===============
 
 async function generateHVSP() {
-    // Hide form, show progress
-    document.getElementById('stepperCard').classList.add('hidden');
-    document.getElementById('progressSection').classList.remove('hidden');
-    document.getElementById('progressSection').scrollIntoView({ behavior: 'smooth' });
+    // Hide form, show matching section
+    document.getElementById('stepper-section').classList.add('hidden');
+    document.getElementById('matching-section').classList.remove('hidden');
 
-    // Get niche data
     const nicheData = appState.niches.find(n => n.id === appState.formData.nicheId) || {
         id: 'custom',
-        label: appState.formData.customNiche || 'Custom Niche',
-        pains: appState.formData.topPains.split(',').map(p => p.trim()),
-        objections: [],
-        examples: ['Strategic approach', 'Implementation framework', 'Metrics tracking']
+        label: appState.formData.customNiche || 'Custom',
+        pains: appState.formData.pains || [],
+        examples: ['Approach 1', 'Approach 2', 'Approach 3']
     };
 
     // Populate matched data chips
-    populateMatchedChips(nicheData);
+    const matchedChips = document.getElementById('matched-chips');
+    if (matchedChips) {
+        const chips = [
+            'Framework: HVSP-Core (Hook/Value/Story/Pitch)',
+            'Balance: 80/20',
+            `Linguistics: ${appState.formData.language} (India)`,
+            `Tone: ${appState.formData.tone}`,
+            `Cluster hits: ${Math.floor(Math.random() * 8) + 8} assets`,
+            'Source scope: internal multi-niche dataset'
+        ];
+        matchedChips.innerHTML = chips.map(c => `<div class="chip">${c}</div>`).join('');
+    }
 
     // Run pipeline
     await runPipeline(nicheData);
 
-    // Generate HVSP outline
+    // Generate outline
     generateOutline(nicheData);
 
     // Show outline section
-    document.getElementById('hvspOutline').classList.remove('hidden');
-    document.getElementById('hvspOutline').scrollIntoView({ behavior: 'smooth' });
-
-    // Show bottom CTA
-    document.getElementById('bottomCTA').classList.remove('hidden');
-}
-
-function populateMatchedChips(nicheData) {
-    const container = document.getElementById('matchedChips');
-    const chips = [
-        { label: 'Framework: HVSP-Core (Hook/Value/Story/Pitch)', color: 'blue' },
-        { label: 'Balance: 80/20', color: 'green' },
-        { label: `Linguistics: ${appState.formData.language} (India)`, color: 'purple' },
-        { label: `Tone: ${appState.formData.tone}`, color: 'pink' },
-        { label: `Cluster hits: ${getRandomInt(8, 15)} assets`, color: 'yellow' },
-        { label: 'Source scope: ₹53Cr+ sales / 44+ niches', color: 'indigo' }
-    ];
-
-    container.innerHTML = chips.map(chip => `
-        <span class="px-3 py-1 bg-${chip.color}-100 text-${chip.color}-700 rounded-full text-xs font-medium border border-${chip.color}-200">
-            ${chip.label}
-        </span>
-    `).join('');
+    document.getElementById('outline-section').classList.remove('hidden');
 }
 
 async function runPipeline(nicheData) {
     const stages = [
         { name: 'Parsing intake & normalizing…', duration: 1200 },
         { name: 'Framework selection (HVSP-Core + Niche-Adapt)…', duration: 2000 },
-        { name: 'Value block synthesis (India market psych)…', duration: 2400 },
+        { name: 'Value block synthesis (India psych)…', duration: 2400 },
         { name: 'Slides layout pass (contrast, clarity)…', duration: 2200 },
-        { name: 'Pitch graft (CTA + Doctor-frame)…', duration: 1800 }
+        { name: 'Pitch graft & recap…', duration: 1800 }
     ];
 
-    const pipelineContainer = document.getElementById('pipelineStages');
-    pipelineContainer.innerHTML = stages.map((stage, idx) => `
-        <div class="pipeline-stage">
-            <div class="flex items-center justify-between mb-1">
-                <span class="text-sm text-gray-700">${stage.name}</span>
-                <span id="stagePercent${idx}" class="text-xs font-semibold text-blue-600">0%</span>
+    const pipelineBars = document.getElementById('pipeline-bars');
+    if (pipelineBars) {
+        pipelineBars.innerHTML = stages.map((s, i) => `
+            <div class="pipeline-bar">
+                <div class="pipeline-bar-text">${s.name}</div>
+                <div class="pipeline-bar-progress">
+                    <div class="pipeline-bar-fill" id="pipeline-fill-${i}" style="width: 0%"></div>
+                </div>
+                <div class="pipeline-bar-time">${(s.duration / 1000).toFixed(1)}s</div>
             </div>
-            <div class="w-full bg-gray-200 rounded-full h-2">
-                <div id="stageBar${idx}" class="bg-blue-600 h-2 rounded-full transition-all" style="width: 0%"></div>
-            </div>
-        </div>
-    `).join('');
+        `).join('');
+    }
 
-    // Prepare log lines
-    const logLines = generateLogLines(nicheData);
-    const logContainer = document.getElementById('typingLog');
+    // Generate logs
+    const logLines = [
+        `[match] niche=${nicheData.id} • language=${appState.formData.language} • tone=${appState.formData.tone}`,
+        `[cluster] ${Math.floor(Math.random() * 8) + 8} assets matched from India-B2B pool`,
+        '[apply] balance=80/20',
+        '[slides] generating 12 frames; optimizing legibility ratios',
+        `[objections] ${appState.selectedObjections.join(', ')} included`,
+        '[safety] marking outputs: "Illustrative; results vary."',
+        '[framework] HVSP-Core structure loaded',
+        `[pains] ${appState.selectedPains.slice(0, 3).join(' / ')}`,
+        '[value] 3 modules synthesized',
+        '[story] India-market narrative layer active',
+        `[tone] ${appState.formData.tone} microcopy applied`,
+        '[pitch] soft next-step copy prepared',
+        '[quality] checking India relevance: 92.4%',
+        '[captions] optional subtitle track ready',
+        '[export] HVSP outline compiled'
+    ];
 
-    let logIdx = 0;
+    const logConsole = document.getElementById('log-console');
+    let logIndex = 0;
+
     const logInterval = setInterval(() => {
-        if (logIdx < logLines.length) {
+        if (logIndex < logLines.length && logConsole) {
             const line = document.createElement('div');
-            line.textContent = logLines[logIdx];
-            line.className = 'opacity-0 transition-opacity';
-            logContainer.appendChild(line);
-            setTimeout(() => line.classList.remove('opacity-0'), 10);
-            logContainer.scrollTop = logContainer.scrollHeight;
-            logIdx++;
+            line.className = 'log-line';
+            line.textContent = logLines[logIndex];
+            logConsole.appendChild(line);
+            logConsole.scrollTop = logConsole.scrollHeight;
+            logIndex++;
         }
-    }, 350);
+    }, 400);
 
-    // Run stages
+    // Animate stages
     for (let i = 0; i < stages.length; i++) {
         await animateStage(i, stages[i].duration);
     }
 
     clearInterval(logInterval);
-
-    // Add final log
-    const finalLine = document.createElement('div');
-    finalLine.textContent = '[final] HVSP outline ready • slide deck compiled • video render queued';
-    finalLine.className = 'text-green-400 font-bold';
-    logContainer.appendChild(finalLine);
 }
 
-function generateLogLines(nicheData) {
-    const pains = nicheData.pains || [];
-    const examples = nicheData.examples || [];
-
-    return [
-        `[init] session_start • timestamp=${new Date().toISOString()}`,
-        `[match] niche=${nicheData.id} • language=${appState.formData.language} • tone=${appState.formData.tone}`,
-        `[cluster] ${getRandomInt(8, 15)} assets matched from ${nicheData.label} pool`,
-        `[apply] balance=80/20 • pitch=${appState.formData.ctaType}`,
-        `[linguistics] ${appState.formData.language} mode • India-market psychology layer active`,
-        `[framework] HVSP-Core selected • Hook/Value/Story/Pitch structure`,
-        `[proof] attaching ${appState.testimonials.length} micro-tiles • disclaimer on`,
-        `[pains] identified: ${pains.slice(0, 3).join(' / ')}`,
-        `[value] synthesizing 3 modules from ${examples.join(', ')}`,
-        `[slides] generating 12 frames • optimizing contrast/legibility`,
-        `[tone] ${appState.formData.tone} microcopy injected`,
-        `[cta] doc-frame copy injected • refund note added`,
-        `[story] personal angle: ${nicheData.label} journey`,
-        `[objections] pre-handled: pricing, timeline, fit`,
-        `[quality] checking India-market relevance score: 94.2%`,
-        `[export] preparing slide deck assets • video render queue`
-    ];
-}
-
-async function animateStage(idx, duration) {
-    const bar = document.getElementById(`stageBar${idx}`);
-    const percent = document.getElementById(`stagePercent${idx}`);
+async function animateStage(index, duration) {
+    const fill = document.getElementById(`pipeline-fill-${index}`);
+    if (!fill) return;
 
     const steps = 20;
     const stepDuration = duration / steps;
 
     for (let i = 0; i <= steps; i++) {
-        const progress = (i / steps) * 100;
-        bar.style.width = `${progress}%`;
-        percent.textContent = `${Math.round(progress)}%`;
+        fill.style.width = `${(i / steps) * 100}%`;
         await sleep(stepDuration);
     }
 }
 
 function generateOutline(nicheData) {
-    const framework = appState.frameworks.hvsp_core;
-    const pains = nicheData.pains || appState.formData.topPains.split(',').map(p => p.trim());
-    const examples = nicheData.examples || ['Strategic approach', 'Implementation framework', 'Results tracking'];
+    const outlineContent = document.getElementById('outline-content');
+    if (!outlineContent) return;
 
-    // Hook
-    const hookContent = document.getElementById('hookContent');
-    hookContent.innerHTML = `
-        <p class="font-semibold">Agar aap ${nicheData.label} ho aur yeh challenges face kar rahe ho:</p>
-        <ul class="list-disc list-inside space-y-1 ml-4">
-            ${pains.slice(0, 3).map(pain => `<li>${pain}</li>`).join('')}
-        </ul>
-        <p class="mt-2">Camera-off, slide-based HVSP jo India market ke liye tuned hai — 80/20 value-pitch balance.</p>
-    `;
+    const pains = appState.selectedPains.length > 0 ? appState.selectedPains : nicheData.pains || [];
+    const examples = nicheData.examples || ['Approach 1', 'Approach 2', 'Approach 3'];
 
-    // Value
-    const valueContent = document.getElementById('valueContent');
-    valueContent.innerHTML = examples.slice(0, 3).map((example, idx) => `
-        <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
-            <h5 class="font-bold text-green-800 mb-2">Module ${idx + 1}: ${example}</h5>
-            <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-                <li>Kyu kaam karta hai (psychology + India market context)</li>
-                <li>Kaise apply karein (actionable framework)</li>
-                <li>Common mistake jo avoid karna hai</li>
+    outlineContent.innerHTML = `
+        <div class="outline-section-box hook">
+            <h4 class="text-lg font-bold mb-2" style="color: #3b82f6;">Hook</h4>
+            <ul class="list-disc list-inside space-y-1 text-slate-300">
+                <li>Agar ${appState.formData.persona} ho aur ${pains[0] || 'challenges'} face kar rahe ho</li>
+                <li>${pains[1] || 'Common struggle'} se pareshan</li>
+                <li>Camera-off, slide-based HVSP jo 80/20 balance maintain karta hai</li>
             </ul>
         </div>
-    `).join('');
 
-    // Story
-    const storyContent = document.getElementById('storyContent');
-    storyContent.innerHTML = `
-        <p>Main bhi ${nicheData.label.toLowerCase()} ki tarah <strong>${pains[0] || 'challenges'}</strong> se guzra hoon — issi liye HVSP ko India ke liye 80/20 balance ke saath banaya. Camera-off presentation, slide-based delivery, aur high-value conversion focus. Yeh system ₹53Cr+ sales data se trained hai across 44+ niches.</p>
-    `;
+        <div class="outline-section-box value">
+            <h4 class="text-lg font-bold mb-2" style="color: #10b981;">Value (80%)</h4>
+            ${examples.slice(0, 3).map((ex, i) => `
+                <div class="mb-3">
+                    <h5 class="font-semibold text-slate-200">Module ${i + 1}: ${ex}</h5>
+                    <ul class="list-disc list-inside text-sm text-slate-400 ml-4">
+                        <li>Kyu kaam karta hai</li>
+                        <li>Kaise apply karein</li>
+                        <li>Common mistake to avoid</li>
+                    </ul>
+                </div>
+            `).join('')}
+        </div>
 
-    // Pitch
-    const pitchContent = document.getElementById('pitchContent');
-    pitchContent.innerHTML = `
-        <p class="font-semibold mb-2">Next step simple hai — ${appState.formData.ctaType}</p>
-        <p class="text-sm">60-min deep-dive session jahaan hum <strong>${appState.formData.corePromise}</strong> ka roadmap banate hain aur fit check karte hain.</p>
-        <p class="mt-2 text-sm"><strong>Doctor-frame:</strong> Hum pehle screen karte hain — fit hue to aage chalte hain, warna clear path batate hain. No hard sell.</p>
-        <div class="mt-4 p-4 bg-orange-50 border border-orange-200 rounded-lg">
-            <p class="text-sm font-semibold text-orange-800">Bonus on call:</p>
-            <ul class="list-disc list-inside text-sm text-gray-700 mt-2">
-                <li>Templates & frameworks</li>
-                <li>AI Agents System overview</li>
-                <li>Custom roadmap to ${appState.formData.corePromise}</li>
-            </ul>
+        <div class="outline-section-box story">
+            <h4 class="text-lg font-bold mb-2" style="color: #8b5cf6;">Story</h4>
+            <p class="text-slate-300">India-market realities ko dhyan me rakhkar HVSP ko 80/20 balance ke saath banaya gaya. Camera-off presentation, slide-based delivery.</p>
+        </div>
+
+        <div class="outline-section-box pitch">
+            <h4 class="text-lg font-bold mb-2" style="color: #f59e0b;">Pitch (20%)</h4>
+            <p class="text-slate-300">Next step: ${appState.formData.ctaText}. Clear path forward, koi hard sell nahi. (Illustrative; results vary.)</p>
         </div>
     `;
 
-    // Store for slides
-    appState.generatedHVSP = {
-        nicheData,
-        pains,
-        examples
-    };
+    appState.generatedHVSP = { nicheData, pains, examples };
 }
 
-// Slides Generation
-// =================
+// Slides Generation & Preview
+// ============================
 
-function initSlidesHandler() {
-    document.getElementById('btnPreviewSlides').addEventListener('click', () => {
-        generateSlides();
-        document.getElementById('slidesPreview').classList.remove('hidden');
-        document.getElementById('slidesPreview').scrollIntoView({ behavior: 'smooth' });
-    });
+function initSlidesHandlers() {
+    const btnPreview = document.getElementById('btn-preview-slides');
+    if (btnPreview) {
+        btnPreview.addEventListener('click', () => {
+            generateSlides();
+            document.getElementById('outline-section').classList.add('hidden');
+            document.getElementById('slides-section').classList.remove('hidden');
+        });
+    }
 }
 
 function generateSlides() {
     const { nicheData, pains, examples } = appState.generatedHVSP;
-    const slides = [];
 
-    // Slide 1: Title
-    slides.push({
-        num: 1,
-        title: `${appState.formData.offerName} — ${nicheData.label} ke liye HVSP`,
-        content: ['Camera-off • Slide-based', '80/20 value-pitch', 'India-first AI Engine'],
-        notes: 'Start with offer name and positioning. Emphasize camera-off, slide-based format.'
-    });
-
-    // Slide 2: Pain
-    slides.push({
-        num: 2,
-        title: 'Agar yeh problems familiar lage…',
-        content: pains.slice(0, 3),
-        notes: 'Address top 3 pains directly. Make it relatable and specific to niche.'
-    });
-
-    // Slide 3: Reframe
-    slides.push({
-        num: 3,
-        title: 'Problem yeh nahi ki aap koshish nahi kar rahe…',
-        content: ['Structure, balance, aur India-market psychology ki zaroorat hai.', 'Generic AI ≠ Our Engine'],
-        notes: 'Reframe the problem. It\'s not about effort, it\'s about approach.'
-    });
-
-    // Slide 4: Proof
-    slides.push({
-        num: 4,
-        title: 'Real Results (Illustrative; results vary)',
-        content: appState.testimonials.slice(0, 3).map(t => `${t.name}: ${t.blurb}`),
-        notes: 'Show proof but ALWAYS include disclaimer. These are examples, not guarantees.'
-    });
-
-    // Slides 5-7: Value Modules
-    examples.slice(0, 3).forEach((example, idx) => {
-        slides.push({
-            num: 5 + idx,
-            title: `Module ${idx + 1}: ${example}`,
+    const slides = [
+        {
+            num: 1,
+            title: `${appState.formData.offerName} — HVSP (India-First)`,
+            content: ['Camera-off, slide-based', '80% value / 20% pitch', 'India market tuned'],
+            notes: 'Title slide. Emphasize HVSP format and India-first approach.'
+        },
+        {
+            num: 2,
+            title: 'Agar yeh pains familiar lage…',
+            content: pains.slice(0, 3),
+            notes: 'Address top pains directly. Make it relatable.'
+        },
+        {
+            num: 3,
+            title: 'Problem approach ki hai, effort ki nahi',
+            content: ['Structure chahiye', 'Balance chahiye', 'India-market psychology'],
+            notes: 'Reframe: not about working harder, but smarter.'
+        },
+        {
+            num: 4,
+            title: 'Real Results',
+            content: appState.testimonials.slice(0, 3).map(t => `${t.name}: ${t.blurb}`),
+            notes: 'Proof tiles. Note: Illustrative; results vary.'
+        },
+        ...examples.slice(0, 3).map((ex, i) => ({
+            num: 5 + i,
+            title: `Step ${i + 1}: ${ex}`,
+            content: ['Kyu kaam karta hai', 'Kaise apply karein', 'Common mistake'],
+            notes: `Value module ${i + 1}. Provide actionable framework.`
+        })),
+        {
+            num: 8,
+            title: 'System Overview',
+            content: ['[Visual: Simple diagram]', 'Structured approach', 'India-first methodology'],
+            notes: 'Show system architecture at high level.'
+        },
+        {
+            num: 9,
+            title: 'Generic AI ≠ Our Approach',
             content: [
-                'Kyu kaam karta hai (psychology + India context)',
-                'Kaise apply karein (actionable framework)',
-                'Common mistake jo avoid karna hai'
+                'Structure: HVSP-Core framework',
+                'Balance: 80/20 for India market',
+                'Data: Multi-niche internal dataset'
             ],
-            notes: `Deep dive into ${example}. Provide actionable value, not just theory.`
-        });
-    });
-
-    // Slide 8: Diagram
-    slides.push({
-        num: 8,
-        title: 'AI Agents Funnel — System Overview',
-        content: ['[Visual: Funnel diagram with 9 AI Agents]', 'Lead → Qualify → Nurture → Convert → Deliver', 'Up to 90% automation'],
-        notes: 'Show the system architecture. Visual representation of AI Agents Funnel.'
-    });
-
-    // Slide 9: Differentiation
-    slides.push({
-        num: 9,
-        title: 'Generic AI ≠ Our Engine',
-        content: [
-            'Structure: HVSP-Core framework (Hook/Value/Story/Pitch)',
-            'Balance: 80/20 optimized for India market trust-building',
-            'Data: Trained on ₹53Cr+ sales across 44+ niches'
-        ],
-        notes: 'Critical differentiation slide. Explain why our engine is different from ChatGPT.'
-    });
-
-    // Slide 10: Doctor Frame
-    slides.push({
-        num: 10,
-        title: 'Doctor-frame • Accept/Reject',
-        content: [
-            'Hum pehle screen karte hain',
-            'Fit hue to aage, warna clear path',
-            'No hard sell — mutual decision'
-        ],
-        notes: 'Establish authority and selectivity. We choose clients, not just sell to anyone.'
-    });
-
-    // Slide 11: CTA
-    slides.push({
-        num: 11,
-        title: `${appState.formData.ctaType}`,
-        content: [
-            'Deep-dive roadmap session (60 min)',
-            'Deposit screens for seriousness',
-            'Bonus: templates & frameworks on call',
-            appState.formData.calendarLink
-        ],
-        notes: 'Clear CTA with deposit barrier. Emphasize refundable and screening purpose.'
-    });
-
-    // Slide 12: Final
-    slides.push({
-        num: 12,
-        title: 'Not a course — 3-Month Consulting + 9 AI Agents System',
-        content: [
-            'Up to 90% automation',
-            'Done-with-you implementation',
-            'India-first, high-ticket focused'
-        ],
-        notes: 'Final positioning. Emphasize it\'s consulting, not a course. Implementation support.'
-    });
+            notes: 'Critical differentiation. Explain why this is different.'
+        },
+        {
+            num: 10,
+            title: 'Qualification & Fit',
+            content: ['Mutual fit check', 'Clear yes/no path', 'No pressure approach'],
+            notes: 'Establish selectivity. Not selling to everyone.'
+        },
+        {
+            num: 11,
+            title: `Next Step: ${appState.formData.ctaText}`,
+            content: ['Clear next action', 'Neutral framing', 'No hard sell'],
+            notes: 'CTA slide. Keep it low-pressure and clear.'
+        },
+        {
+            num: 12,
+            title: 'Recap & What You\'ll Get',
+            content: [`Outcome: ${appState.formData.externalPromise}`, 'Structured delivery', 'India-market focus'],
+            notes: 'Final recap. Reinforce key value points.'
+        }
+    ];
 
     appState.generatedSlides = slides;
     renderSlidesGrid(slides);
 }
 
 function renderSlidesGrid(slides) {
-    const grid = document.getElementById('slidesGrid');
+    const grid = document.getElementById('slides-grid');
+    if (!grid) return;
+
     grid.innerHTML = slides.map(slide => `
-        <div class="slide-card bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-all hover:scale-105" data-slide="${slide.num}">
-            <div class="text-xs font-bold text-gray-500 mb-2">SLIDE ${slide.num}</div>
-            <h4 class="font-bold text-sm mb-3 text-gray-900 line-clamp-2">${slide.title}</h4>
-            <div class="text-xs text-gray-600 space-y-1">
-                ${slide.content.slice(0, 3).map(c => `<div class="line-clamp-1">• ${c}</div>`).join('')}
-            </div>
-            <div class="mt-3 pt-3 border-t border-gray-300">
-                <p class="text-xs text-gray-500 italic">Illustrative; results vary.</p>
+        <div class="slide-card" data-slide="${slide.num}">
+            <div class="slide-number">SLIDE ${slide.num}</div>
+            <div class="slide-title">${slide.title}</div>
+            <div class="slide-content">
+                ${slide.content.slice(0, 2).map(c => `<div>• ${c}</div>`).join('')}
             </div>
         </div>
     `).join('');
 
     // Add click handlers
-    document.querySelectorAll('.slide-card').forEach(card => {
+    grid.querySelectorAll('.slide-card').forEach(card => {
         card.addEventListener('click', () => {
             const slideNum = parseInt(card.dataset.slide);
-            openSlideModal(slides.find(s => s.num === slideNum));
+            const slide = slides.find(s => s.num === slideNum);
+            if (slide) openSlideModal(slide);
         });
     });
 }
 
 function openSlideModal(slide) {
-    const modal = document.getElementById('slideModal');
-    document.getElementById('modalSlideTitle').textContent = `Slide ${slide.num}: ${slide.title}`;
-    document.getElementById('modalSlideContent').innerHTML = `
-        <div class="space-y-2">
-            ${slide.content.map(c => `<p class="text-gray-700">• ${c}</p>`).join('')}
-        </div>
-    `;
-    document.getElementById('modalSlideNotes').textContent = slide.notes;
+    const modal = document.getElementById('slide-modal');
+    if (!modal) return;
+
+    const title = document.getElementById('slide-modal-title');
+    const content = document.getElementById('slide-modal-content');
+    const notes = document.getElementById('slide-notes-content');
+
+    if (title) title.textContent = `Slide ${slide.num}: ${slide.title}`;
+    if (content) {
+        content.innerHTML = `<div class="space-y-2">${slide.content.map(c => `<p>• ${c}</p>`).join('')}</div>`;
+    }
+    if (notes) notes.textContent = slide.notes;
+
     modal.classList.remove('hidden');
+}
+
+// Output Options
+// ==============
+
+function initOutputOptionsHandlers() {
+    // Voice mode selection
+    document.querySelectorAll('input[name="voice"]').forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            appState.outputOptions.voiceMode = e.target.value;
+            updateVoiceUploadUI();
+        });
+    });
+
+    // Voice file upload
+    const voiceUpload = document.getElementById('voice-upload');
+    const btnVoiceUpload = document.getElementById('btn-voice-upload');
+
+    if (voiceUpload && btnVoiceUpload) {
+        btnVoiceUpload.addEventListener('click', () => voiceUpload.click());
+        voiceUpload.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                appState.outputOptions.voiceFile = e.target.files[0];
+                showToast(`Voice file selected: ${e.target.files[0].name}`);
+            }
+        });
+    }
+
+    // Avatar toggle
+    const avatarToggle = document.getElementById('avatar-toggle');
+    if (avatarToggle) {
+        avatarToggle.addEventListener('change', (e) => {
+            appState.outputOptions.avatarEnabled = e.target.checked;
+            updateAvatarUI();
+        });
+    }
+
+    // Avatar file upload
+    const avatarUpload = document.getElementById('avatar-upload');
+    const btnAvatarUpload = document.getElementById('btn-avatar-upload');
+
+    if (avatarUpload && btnAvatarUpload) {
+        btnAvatarUpload.addEventListener('click', () => avatarUpload.click());
+        avatarUpload.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                appState.outputOptions.avatarFile = e.target.files[0];
+                showToast(`Avatar video selected: ${e.target.files[0].name}`);
+            }
+        });
+    }
+
+    // PIP position
+    const pipPosition = document.getElementById('pip-position');
+    if (pipPosition) {
+        pipPosition.addEventListener('change', (e) => {
+            appState.outputOptions.pipPosition = e.target.value;
+        });
+    }
+}
+
+function updateVoiceUploadUI() {
+    const btn = document.getElementById('btn-voice-upload');
+    if (btn) {
+        btn.classList.toggle('hidden', appState.outputOptions.voiceMode === 'tts');
+    }
+}
+
+function updateAvatarUI() {
+    const options = document.getElementById('avatar-options');
+    if (options) {
+        options.classList.toggle('hidden', !appState.outputOptions.avatarEnabled);
+    }
 }
 
 // Video Rendering
 // ===============
 
-function initVideoHandler() {
-    document.getElementById('btnRenderVideo').addEventListener('click', async () => {
-        document.getElementById('videoRenderer').classList.remove('hidden');
-        document.getElementById('videoRenderer').scrollIntoView({ behavior: 'smooth' });
-        await renderVideo();
-    });
+function initRenderHandlers() {
+    const btnRender = document.getElementById('btn-render');
+    if (btnRender) {
+        btnRender.addEventListener('click', startRender);
+    }
 }
 
-async function renderVideo() {
-    const renderBar = document.getElementById('renderBar');
-    const renderStatus = document.getElementById('renderStatus');
-    const renderLogs = document.getElementById('renderLogs');
+function calculateETA() {
+    // Base: 9:30 (570 seconds)
+    let eta = 570;
 
-    const stages = [
-        'Compiling slides into frames…',
-        'Generating narration template…',
-        'Applying transitions & animations…',
-        'Rendering captions (India-market style)…',
-        'Muxing audio tracks (optional)…',
-        'Final packaging & optimization…',
-        'Quality check: contrast, legibility…',
-        'Exporting video file…'
-    ];
+    // Add jitter: 0-180s
+    eta += Math.floor(Math.random() * 181);
 
-    renderLogs.innerHTML = '';
-
-    for (let i = 0; i < stages.length; i++) {
-        renderStatus.textContent = stages[i];
-        const log = document.createElement('div');
-        log.textContent = `[${new Date().toLocaleTimeString()}] ${stages[i]}`;
-        renderLogs.appendChild(log);
-
-        const progress = ((i + 1) / stages.length) * 100;
-        renderBar.style.width = `${progress}%`;
-
-        await sleep(getRandomInt(800, 1400));
+    // +60s if avatar enabled with HeyGen (no file uploaded)
+    if (appState.outputOptions.avatarEnabled && !appState.outputOptions.avatarFile) {
+        eta += 60;
     }
 
-    renderStatus.textContent = 'Video ready! 🎉';
-    await sleep(500);
+    // +45s if TTS (ElevenLabs)
+    if (appState.outputOptions.voiceMode === 'tts') {
+        eta += 45;
+    }
 
-    // Show video card
-    document.getElementById('renderProgress').classList.add('hidden');
-    document.getElementById('videoCard').classList.remove('hidden');
+    // +30s if slides > 12
+    if (appState.generatedSlides.length > 12) {
+        eta += 30;
+    }
 
-    // Add confetti effect (optional)
-    showToast('🎉 Video rendered successfully!');
+    // Ensure minimum 10:00 (600 seconds)
+    eta = Math.max(eta, 600);
+
+    return eta;
 }
 
-// Modal & Interaction Handlers
-// =============================
+async function startRender() {
+    // Hide slides section, show renderer
+    document.getElementById('slides-section').classList.add('hidden');
+    document.getElementById('renderer-section').classList.remove('hidden');
+
+    // Calculate ETA
+    appState.renderETA = calculateETA();
+    const etaLabel = document.getElementById('eta-label');
+    if (etaLabel) {
+        etaLabel.textContent = formatTime(appState.renderETA);
+    }
+
+    // Setup stages
+    const stagesList = [
+        'Preparing assets & matching niche data',
+        'Building slides timeline (12 scenes)',
+        getVoiceStageText(),
+        getAvatarStageText(),
+        'Merging slides + avatar PIP + audio',
+        'Encoding H.264 (mp4)',
+        'Finalizing & saving'
+    ];
+
+    const stagesContainer = document.getElementById('render-stages');
+    if (stagesContainer) {
+        stagesContainer.innerHTML = stagesList.map((text, i) => `
+            <div class="render-stage" id="stage-${i}">
+                <img src="assets/icon_spinner.svg" class="render-stage-icon animate-spin" id="stage-icon-${i}">
+                <div class="render-stage-text">${text}</div>
+            </div>
+        `).join('');
+    }
+
+    // Start countdown and progress
+    await runRenderSimulation();
+
+    // Show result
+    showVideoReady();
+}
+
+function getVoiceStageText() {
+    const mode = appState.outputOptions.voiceMode;
+    if (mode === 'upload') return 'Using uploaded voice';
+    if (mode === 'extract') return 'Extracting voice from uploaded video';
+    return 'Generating TTS (ElevenLabs)';
+}
+
+function getAvatarStageText() {
+    if (!appState.outputOptions.avatarEnabled) return 'Skipping avatar (camera-off)';
+    if (appState.outputOptions.avatarFile) return 'Using uploaded avatar video (PIP)';
+    return 'Generating avatar (HeyGen)';
+}
+
+async function runRenderSimulation() {
+    const totalTime = appState.renderETA;
+    let elapsed = 0;
+
+    const countdownLabel = document.getElementById('countdown-label');
+    const progressPercent = document.getElementById('progress-percent');
+    const progressBar = document.getElementById('render-progress');
+    const logContainer = document.getElementById('render-log');
+
+    // Generate logs
+    const logs = generateRenderLogs();
+    const logInterval = totalTime / logs.length;
+    let logIndex = 0;
+
+    // Update every second
+    const interval = setInterval(() => {
+        elapsed++;
+        const remaining = totalTime - elapsed;
+        const progress = (elapsed / totalTime) * 100;
+
+        // Update UI
+        if (countdownLabel) countdownLabel.textContent = formatTime(remaining);
+        if (progressPercent) progressPercent.textContent = `${Math.floor(progress)}%`;
+        if (progressBar) progressBar.style.width = `${progress}%`;
+
+        // Add log line
+        if (logContainer && logIndex < logs.length && elapsed % Math.ceil(logInterval) === 0) {
+            const line = document.createElement('div');
+            line.className = 'log-line';
+            line.textContent = logs[logIndex];
+            logContainer.appendChild(line);
+            logContainer.scrollTop = logContainer.scrollHeight;
+            logIndex++;
+        }
+
+        // Update stages
+        updateRenderStages(progress);
+
+        // Complete
+        if (elapsed >= totalTime) {
+            clearInterval(interval);
+            if (countdownLabel) countdownLabel.textContent = '00:00';
+            if (progressPercent) progressPercent.textContent = '100%';
+            if (progressBar) progressBar.style.width = '100%';
+            completeAllStages();
+        }
+    }, 1000);
+
+    // Wait for completion
+    await sleep(totalTime * 1000);
+}
+
+function updateRenderStages(progress) {
+    const stages = [0, 15, 35, 55, 70, 85, 95];
+    stages.forEach((threshold, i) => {
+        const stage = document.getElementById(`stage-${i}`);
+        const icon = document.getElementById(`stage-icon-${i}`);
+
+        if (stage && icon && progress >= threshold) {
+            if (!stage.classList.contains('complete')) {
+                icon.src = 'assets/icon_check.svg';
+                icon.classList.remove('animate-spin');
+                stage.classList.add('complete');
+            }
+        } else if (stage && progress >= threshold - 5 && !stage.classList.contains('active')) {
+            stage.classList.add('active');
+        }
+    });
+}
+
+function completeAllStages() {
+    for (let i = 0; i < 7; i++) {
+        const stage = document.getElementById(`stage-${i}`);
+        const icon = document.getElementById(`stage-icon-${i}`);
+        if (stage && icon) {
+            icon.src = 'assets/icon_check.svg';
+            icon.classList.remove('animate-spin');
+            stage.classList.add('complete');
+        }
+    }
+}
+
+function generateRenderLogs() {
+    const mode = appState.outputOptions.voiceMode;
+    const avatar = appState.outputOptions.avatarEnabled;
+    const avatarFile = appState.outputOptions.avatarFile;
+
+    const logs = [
+        '[init] render pipeline started',
+        `[config] slides=${appState.generatedSlides.length} • voice=${mode} • avatar=${avatar}`,
+        '[assets] loading slide templates',
+        `[niche] matching data for ${appState.formData.nicheId || 'custom'}`
+    ];
+
+    if (mode === 'tts') {
+        logs.push('[tts] ElevenLabs sim: en-IN neutral • 16kHz • 0.25 jitter');
+        logs.push('[tts] generating voice track • duration: 8m 34s');
+    } else if (mode === 'upload') {
+        logs.push('[voice] using uploaded audio file');
+        logs.push('[voice] normalizing levels • 16kHz conversion');
+    } else {
+        logs.push('[voice] extracting from uploaded video');
+        logs.push('[voice] audio track isolated • cleanup applied');
+    }
+
+    if (avatar) {
+        if (avatarFile) {
+            logs.push(`[avatar] using uploaded video • PIP @ ${appState.outputOptions.pipPosition}`);
+            logs.push('[avatar] scaling to 240x240 • overlay prepared');
+        } else {
+            logs.push('[avatar] HeyGen sim: generating avatar • PIP mode');
+            logs.push(`[avatar] positioning @ ${appState.outputOptions.pipPosition}`);
+        }
+    }
+
+    logs.push('[timeline] building 12 scenes • transitions added');
+    logs.push('[slides] slide_01 → slide_12 compiled');
+    logs.push('[captions] SRT track injected (optional)');
+    logs.push('[mux] merging video + audio + PIP layers');
+    logs.push('[encode] h264 yuv420p • crf=21 • preset=veryfast');
+    logs.push('[optimize] filesize check: 42.3 MB');
+    logs.push('[metadata] title, tags, timestamp embedded');
+    logs.push('[validate] playback compatibility check');
+    logs.push('[save] path prepared • file written');
+    logs.push('[complete] HVSP video ready for download');
+
+    return logs;
+}
+
+function showVideoReady() {
+    // Hide renderer, show result
+    document.getElementById('renderer-section').classList.add('hidden');
+    document.getElementById('result-section').classList.remove('hidden');
+
+    // Setup video player
+    const video = document.getElementById('result-video');
+    if (video) {
+        // Try to use the actual file if it exists
+        fetch('assets/hvsp_ready.mp4', { method: 'HEAD' })
+            .then(response => {
+                if (response.ok) {
+                    video.src = 'assets/hvsp_ready.mp4';
+                }
+            })
+            .catch(() => {
+                // If file doesn't exist, create a placeholder blob
+                createPlaceholderVideo(video);
+            });
+    }
+
+    // Generate saved path
+    const nicheLabel = appState.generatedHVSP?.nicheData?.label || 'custom';
+    const slug = appState.formData.offerName.toLowerCase().replace(/\s+/g, '_').substring(0, 20);
+    const path = generateSavedPath(nicheLabel, slug);
+
+    const pathEl = document.getElementById('saved-path');
+    if (pathEl) pathEl.textContent = path;
+
+    showToast('Video ready!');
+}
+
+function createPlaceholderVideo(videoElement) {
+    // Create a minimal video blob (1x1 pixel, 1 frame)
+    // This is a fallback if hvsp_ready.mp4 doesn't exist
+    const canvas = document.createElement('canvas');
+    canvas.width = 1920;
+    canvas.height = 1080;
+    const ctx = canvas.getContext('2d');
+
+    // Draw a simple gradient
+    const gradient = ctx.createLinearGradient(0, 0, 1920, 1080);
+    gradient.addColorStop(0, '#DC2626');
+    gradient.addColorStop(1, '#0B0F1A');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 1920, 1080);
+
+    // Add text
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 48px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('ScaleEdge HVSP Video Ready', 960, 540);
+
+    canvas.toBlob(blob => {
+        if (blob) {
+            videoElement.src = URL.createObjectURL(blob);
+        }
+    });
+}
+
+// Result Actions
+// ==============
+
+function initResultHandlers() {
+    const btnDownload = document.getElementById('btn-download');
+    const btnCopyPath = document.getElementById('btn-copy-path');
+
+    if (btnDownload) {
+        btnDownload.addEventListener('click', () => {
+            const video = document.getElementById('result-video');
+            if (video && video.src) {
+                const link = document.createElement('a');
+                link.href = video.src;
+                link.download = 'HVSP_Video.mp4';
+                link.click();
+                showToast('Download started');
+            }
+        });
+    }
+
+    if (btnCopyPath) {
+        btnCopyPath.addEventListener('click', () => {
+            const pathEl = document.getElementById('saved-path');
+            if (pathEl) {
+                navigator.clipboard.writeText(pathEl.textContent).then(() => {
+                    showToast('Path copied to clipboard');
+                }).catch(() => {
+                    showToast('Failed to copy path');
+                });
+            }
+        });
+    }
+}
+
+// Knowledge Base Modal
+// ====================
+
+function initKnowledgeBaseHandlers() {
+    const btnKB = document.getElementById('btn-knowledge-base');
+    const closeKB = document.getElementById('close-knowledge');
+    const modal = document.getElementById('knowledge-modal');
+
+    if (btnKB) {
+        btnKB.addEventListener('click', () => {
+            if (modal) modal.classList.remove('hidden');
+            renderKnowledgeBaseTree();
+        });
+    }
+
+    if (closeKB) {
+        closeKB.addEventListener('click', () => {
+            if (modal) modal.classList.add('hidden');
+        });
+    }
+
+    // Close on overlay click
+    if (modal) {
+        modal.querySelector('.modal-overlay')?.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
+    }
+}
+
+function renderKnowledgeBaseTree() {
+    const tree = document.getElementById('kb-tree');
+    if (!tree) return;
+
+    const data = appState.knowledgeBase.length > 0 ? appState.knowledgeBase : generateLightweightKB();
+
+    tree.innerHTML = data.map((niche, nicheIdx) => `
+        <div class="kb-niche-item" data-niche="${nicheIdx}">
+            <span>▸ ${niche.name} (${niche.sizeGB}GB)</span>
+        </div>
+        <div class="kb-folder hidden" id="kb-niche-${nicheIdx}">
+            ${(niche.folders || []).map((folder, folderIdx) => `
+                <div class="kb-folder-item" data-niche="${nicheIdx}" data-folder="${folderIdx}">
+                    <span>📁 ${folder.name}</span>
+                </div>
+                <div class="kb-file hidden" id="kb-folder-${nicheIdx}-${folderIdx}">
+                    ${(folder.files || []).map((file, fileIdx) => `
+                        <div class="kb-file-item" data-niche="${nicheIdx}" data-folder="${folderIdx}" data-file="${fileIdx}">
+                            ${file.name} (${file.sizeKB}KB)
+                        </div>
+                    `).join('')}
+                </div>
+            `).join('')}
+        </div>
+    `).join('');
+
+    // Add interaction handlers
+    tree.querySelectorAll('.kb-niche-item').forEach(item => {
+        item.addEventListener('click', () => toggleNiche(item));
+    });
+
+    tree.querySelectorAll('.kb-folder-item').forEach(item => {
+        item.addEventListener('click', () => toggleFolder(item));
+    });
+
+    tree.querySelectorAll('.kb-file-item').forEach(item => {
+        item.addEventListener('click', () => viewFile(item));
+    });
+}
+
+function toggleNiche(item) {
+    const nicheIdx = item.dataset.niche;
+    const folder = document.getElementById(`kb-niche-${nicheIdx}`);
+    if (folder) {
+        folder.classList.toggle('hidden');
+        item.classList.toggle('expanded');
+        const arrow = item.querySelector('span');
+        if (arrow) {
+            arrow.textContent = folder.classList.contains('hidden') ?
+                `▸ ${arrow.textContent.substring(2)}` :
+                `▾ ${arrow.textContent.substring(2)}`;
+        }
+    }
+}
+
+function toggleFolder(item) {
+    const nicheIdx = item.dataset.niche;
+    const folderIdx = item.dataset.folder;
+    const files = document.getElementById(`kb-folder-${nicheIdx}-${folderIdx}`);
+    if (files) {
+        files.classList.toggle('hidden');
+        item.classList.toggle('expanded');
+    }
+}
+
+function viewFile(item) {
+    const nicheIdx = parseInt(item.dataset.niche);
+    const folderIdx = parseInt(item.dataset.folder);
+    const fileIdx = parseInt(item.dataset.file);
+
+    const data = appState.knowledgeBase.length > 0 ? appState.knowledgeBase : generateLightweightKB();
+    const file = data[nicheIdx]?.folders?.[folderIdx]?.files?.[fileIdx];
+
+    if (file) {
+        const viewer = document.getElementById('kb-viewer');
+        if (viewer) {
+            viewer.innerHTML = `
+                <div class="code-viewer">
+                    <div class="text-slate-400 text-xs mb-2">${file.name} • ${file.sizeKB}KB</div>
+                    <pre class="text-slate-300">${file.preview || 'No preview available'}</pre>
+                </div>
+            `;
+        }
+
+        // Highlight active file
+        document.querySelectorAll('.kb-file-item').forEach(f => f.classList.remove('active'));
+        item.classList.add('active');
+    }
+}
+
+function generateLightweightKB() {
+    // Lightweight fallback if knowledge_base.json doesn't load
+    return [
+        {
+            name: 'B2B Consulting',
+            sizeGB: 1.2,
+            folders: [
+                {
+                    name: 'Offer',
+                    files: [{name: 'offer.md', sizeKB: 18, preview: '# Offer\nOutcome-focused framing\nStructured delivery'}]
+                },
+                {
+                    name: 'Positioning',
+                    files: [{name: 'positioning.md', sizeKB: 25, preview: '# Positioning\nCategory → Vehicle → Proof\nIndia-first approach'}]
+                }
+            ]
+        }
+    ];
+}
+
+// Modals & UI Interactions
+// =========================
 
 function initModalHandlers() {
+    // Shortcuts modal
+    const btnShortcuts = document.getElementById('btn-shortcuts');
+    const closeShortcuts = document.getElementById('close-shortcuts');
+    const shortcutsModal = document.getElementById('shortcuts-modal');
+
+    if (btnShortcuts) {
+        btnShortcuts.addEventListener('click', () => {
+            if (shortcutsModal) shortcutsModal.classList.remove('hidden');
+        });
+    }
+
+    if (closeShortcuts) {
+        closeShortcuts.addEventListener('click', () => {
+            if (shortcutsModal) shortcutsModal.classList.add('hidden');
+        });
+    }
+
     // Slide modal
-    document.getElementById('closeModal').addEventListener('click', () => {
-        document.getElementById('slideModal').classList.add('hidden');
-    });
+    const closeSlide = document.getElementById('close-slide');
+    const slideModal = document.getElementById('slide-modal');
 
-    document.getElementById('slideModal').addEventListener('click', (e) => {
-        if (e.target.id === 'slideModal') {
-            document.getElementById('slideModal').classList.add('hidden');
-        }
-    });
+    if (closeSlide) {
+        closeSlide.addEventListener('click', () => {
+            if (slideModal) slideModal.classList.add('hidden');
+        });
+    }
 
-    // GrowthMap modal
-    document.getElementById('btnBookGrowthMap').addEventListener('click', () => {
-        document.getElementById('growthMapModal').classList.remove('hidden');
-        document.getElementById('growthMapCalendar').value = appState.formData.calendarLink || 'https://cal.example.com/growthmap';
-    });
-
-    document.getElementById('closeGrowthMapModal').addEventListener('click', () => {
-        document.getElementById('growthMapModal').classList.add('hidden');
-    });
-
-    // Presenter notes
-    document.getElementById('closeNotes').addEventListener('click', () => {
-        document.getElementById('presenterNotes').classList.add('hidden');
-    });
-
-    // Video interactions
-    document.getElementById('playOverlay')?.addEventListener('click', () => {
-        const video = document.getElementById('renderedVideo');
-        if (video) {
-            video.play();
-            document.getElementById('playOverlay').style.display = 'none';
-        }
-    });
-
-    document.getElementById('btnDownloadVideo')?.addEventListener('click', () => {
-        // In real implementation, this would trigger download
-        showToast('Downloading HVSP_Ready.mp4...');
-        // Simulate download
-        const link = document.createElement('a');
-        link.href = 'assets/hvsp_ready.mp4';
-        link.download = 'HVSP_Ready.mp4';
-        link.click();
-    });
-
-    document.getElementById('btnCopyLink')?.addEventListener('click', () => {
-        // Copy placeholder link
-        navigator.clipboard.writeText(window.location.href + '#video-ready').then(() => {
-            showToast('Link copied to clipboard!');
+    // Close modals on overlay click
+    document.querySelectorAll('.modal').forEach(modal => {
+        modal.querySelector('.modal-overlay')?.addEventListener('click', () => {
+            modal.classList.add('hidden');
         });
     });
 }
 
-// Demo Mode & Keyboard Shortcuts
-// ===============================
+// Keyboard Shortcuts
+// ==================
 
-function initDemoMode() {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('demo') === '1') {
+function initKeyboardShortcuts() {
+    document.addEventListener('keydown', (e) => {
+        // Ignore if typing
+        if (e.target.matches('input, textarea, select')) return;
+
+        switch(e.key) {
+            case '1':
+                prefillPreset();
+                break;
+            case '2':
+                if (appState.currentStep === 3) {
+                    document.getElementById('btn-generate')?.click();
+                }
+                break;
+            case '3':
+                if (!document.getElementById('outline-section')?.classList.contains('hidden')) {
+                    document.getElementById('btn-preview-slides')?.click();
+                }
+                break;
+            case '4':
+                if (!document.getElementById('slides-section')?.classList.contains('hidden')) {
+                    document.getElementById('btn-render')?.click();
+                }
+                break;
+            case 'h':
+            case 'H':
+                togglePresenterNotes();
+                break;
+        }
+    });
+}
+
+function togglePresenterNotes() {
+    const slideModal = document.getElementById('slide-modal');
+    const notes = document.getElementById('slide-modal-notes');
+
+    if (slideModal && !slideModal.classList.contains('hidden') && notes) {
+        appState.presenterNotesVisible = !appState.presenterNotesVisible;
+        notes.classList.toggle('hidden', !appState.presenterNotesVisible);
+        showToast(appState.presenterNotesVisible ? 'Presenter notes shown' : 'Presenter notes hidden');
+    }
+}
+
+// Prefill Preset
+// ==============
+
+function prefillPreset() {
+    // Step 1
+    const modelRadio = document.querySelector(`input[name="business_model"][value="${PRESET_DATA.businessModel}"]`);
+    if (modelRadio) modelRadio.checked = true;
+    appState.formData.businessModel = PRESET_DATA.businessModel;
+
+    // Step 2
+    const nicheSelect = document.getElementById('niche-select');
+    if (nicheSelect) nicheSelect.value = PRESET_DATA.niche;
+
+    const personaInput = document.getElementById('persona');
+    if (personaInput) personaInput.value = PRESET_DATA.persona;
+
+    const ticketInput = document.getElementById('ticket');
+    if (ticketInput) ticketInput.value = PRESET_DATA.ticket;
+
+    const languageSelect = document.getElementById('language');
+    if (languageSelect) languageSelect.value = PRESET_DATA.language;
+
+    const toneRadio = document.querySelector(`input[name="tone"][value="${PRESET_DATA.tone}"]`);
+    if (toneRadio) toneRadio.checked = true;
+
+    // Step 3
+    const offerInput = document.getElementById('offer-name');
+    if (offerInput) offerInput.value = PRESET_DATA.offerName;
+
+    const promiseInput = document.getElementById('external-promise');
+    if (promiseInput) promiseInput.value = PRESET_DATA.externalPromise;
+
+    const winInput = document.getElementById('internal-win');
+    if (winInput) winInput.value = PRESET_DATA.internalWin;
+
+    const ctaInput = document.getElementById('cta-text');
+    if (ctaInput) ctaInput.value = PRESET_DATA.ctaText;
+
+    // Set selected pains
+    appState.selectedPains = [...PRESET_DATA.pains];
+    appState.selectedObjections = [...PRESET_DATA.objections];
+
+    // Populate step 3 data
+    populateStep3FromNiche(PRESET_DATA.niche);
+
+    // Mark preset pains as selected
+    setTimeout(() => {
+        PRESET_DATA.pains.forEach(pain => {
+            const chip = document.querySelector(`.chip[data-pain="${pain}"]`);
+            if (chip) chip.classList.add('chip-selected');
+        });
+        updateSelectedPainsDisplay();
+    }, 100);
+
+    showToast('Preset loaded');
+}
+
+// Auto Mode (?demo=1)
+// ===================
+
+function initAutoMode() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('demo') === '1') {
         setTimeout(() => {
-            prefillDemoPreset();
+            prefillPreset();
+
             setTimeout(() => {
+                document.getElementById('hero')?.classList.add('hidden');
+                document.getElementById('stepper-section')?.classList.remove('hidden');
                 goToStep(3);
+
                 setTimeout(() => {
-                    document.getElementById('btnGenerate').click();
+                    document.getElementById('btn-generate')?.click();
+
+                    // Auto-continue through steps
+                    setTimeout(() => {
+                        document.getElementById('btn-preview-slides')?.click();
+
+                        setTimeout(() => {
+                            document.getElementById('btn-render')?.click();
+                        }, 3000);
+                    }, 2000);
                 }, 1000);
             }, 600);
         }, 600);
     }
 }
 
-function prefillDemoPreset() {
-    // Business model
-    document.querySelector(`input[name="businessModel"][value="${DEMO_PRESET.businessModel}"]`).checked = true;
-
-    // Niche
-    const nicheOption = Array.from(document.getElementById('nicheDropdown').options)
-        .find(opt => opt.textContent === DEMO_PRESET.niche);
-    if (nicheOption) {
-        document.getElementById('nicheDropdown').value = nicheOption.value;
-    }
-
-    document.getElementById('customNiche').value = DEMO_PRESET.customNiche;
-    document.getElementById('targetPersona').value = DEMO_PRESET.targetPersona;
-    document.getElementById('ticketValue').value = DEMO_PRESET.ticketValue;
-    document.getElementById('language').value = DEMO_PRESET.language;
-    document.getElementById('tone').value = DEMO_PRESET.tone;
-
-    // Business specifics
-    document.getElementById('offerName').value = DEMO_PRESET.offerName;
-    document.getElementById('corePromise').value = DEMO_PRESET.corePromise;
-    document.getElementById('internalOutcome').value = DEMO_PRESET.internalOutcome;
-    document.getElementById('topPains').value = DEMO_PRESET.topPains;
-    document.getElementById('ctaType').value = DEMO_PRESET.ctaType;
-    document.getElementById('calendarLink').value = DEMO_PRESET.calendarLink;
-
-    // Update form data
-    appState.formData = { ...DEMO_PRESET };
-
-    showToast('Demo preset loaded!');
-}
-
-function initKeyboardShortcuts() {
-    document.addEventListener('keydown', (e) => {
-        // Ignore if typing in input
-        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
-            return;
-        }
-
-        switch (e.key) {
-            case '1':
-                prefillDemoPreset();
-                break;
-            case '2':
-                if (appState.currentStep === 3) {
-                    document.getElementById('btnGenerate').click();
-                }
-                break;
-            case '3':
-                if (document.getElementById('hvspOutline').classList.contains('hidden') === false) {
-                    document.getElementById('btnPreviewSlides').click();
-                }
-                break;
-            case '4':
-                if (document.getElementById('slidesPreview').classList.contains('hidden') === false) {
-                    document.getElementById('btnRenderVideo').click();
-                }
-                break;
-            case 'h':
-            case 'H':
-                const notes = document.getElementById('presenterNotes');
-                notes.classList.toggle('hidden');
-                break;
-        }
-    });
-}
-
-// Hero Button Handlers
-// ====================
-
-function initHeroHandlers() {
-    document.getElementById('btnStartDemo').addEventListener('click', () => {
-        document.getElementById('stepperCard').scrollIntoView({ behavior: 'smooth' });
-    });
-
-    document.getElementById('btnDemoPreset').addEventListener('click', () => {
-        prefillDemoPreset();
-        goToStep(1);
-        document.getElementById('stepperCard').scrollIntoView({ behavior: 'smooth' });
-    });
-}
-
 // Initialization
 // ==============
 
 async function init() {
-    console.log('🚀 HVSP AI Twin Engine initializing...');
+    console.log('ScaleEdge AI Twin Engine starting...');
 
     await loadData();
 
-    initStepperHandlers();
-    initSlidesHandler();
-    initVideoHandler();
+    initFormHandlers();
+    initSlidesHandlers();
+    initOutputOptionsHandlers();
+    initRenderHandlers();
+    initResultHandlers();
+    initKnowledgeBaseHandlers();
     initModalHandlers();
     initKeyboardShortcuts();
-    initHeroHandlers();
-    initDemoMode();
+    initAutoMode();
 
-    console.log('✅ Application ready!');
+    console.log('Application ready');
 }
 
-// Start the app
 document.addEventListener('DOMContentLoaded', init);
