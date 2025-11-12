@@ -1,0 +1,151 @@
+{
+  "hvsp_core": {
+    "hook_template": [
+      "Agar aap {niche_label} ho aur {pain1}, {pain2} se pareshaan ho…",
+      "Camera-off, slide-based HVSP jo India market ke liye tuned hai.",
+      "80/20 value-pitch balance with doctor-frame acceptance."
+    ],
+    "value_blocks": [
+      {
+        "title": "Step 1 — {example1}",
+        "bullets": [
+          "Kyu kaam karta hai (psychology + India market context)",
+          "Kaise apply karein (actionable framework)",
+          "Common mistake jo avoid karna hai"
+        ]
+      },
+      {
+        "title": "Step 2 — {example2}",
+        "bullets": [
+          "Quick win jo confidence build kare",
+          "Proof cue (data point ya case reference)",
+          "Actionable next step with timeline"
+        ]
+      },
+      {
+        "title": "Step 3 — {example3}",
+        "bullets": [
+          "Metric to track for progress validation",
+          "Expected time to see results",
+          "Pitfall to avoid (common derailment)"
+        ]
+      }
+    ],
+    "story_seed": "Main bhi {niche_label_lower} ki tarah {pain1} se guzra hoon — issi liye HVSP ko India ke liye 80/20 balance ke saath banaya. Camera-off presentation, slide-based delivery, aur high-value conversion focus.",
+    "pitch": "Next step simple hai — GrowthMap (₹499, refundable). 60-min deep-dive session jahaan hum roadmap banate hain aur fit check karte hain. Doctor-frame: hum accept/reject karte hain to keep quality high. Serious buyers hi aage badhte hain."
+  },
+  "balances": {
+    "default": {
+      "value": 0.8,
+      "pitch": 0.2,
+      "label": "80% value / 20% pitch",
+      "description": "India market ke liye optimized — trust build first, pitch soft."
+    }
+  },
+  "tones": {
+    "doctor": {
+      "label": "Doctor-frame",
+      "microcopy": "Fit ho to aage chalte hain, warna clear path batate hain — no hard sell.",
+      "cta_modifier": "Hum screen karte hain pehle, then mutual decision."
+    },
+    "authoritative": {
+      "label": "Authoritative",
+      "microcopy": "Clear roadmap, no fluff. Data-driven decisions.",
+      "cta_modifier": "Strategic approach — results matter."
+    },
+    "friendly": {
+      "label": "Friendly",
+      "microcopy": "Supportive journey, step-by-step guidance.",
+      "cta_modifier": "Let's figure this out together."
+    }
+  },
+  "slide_templates": [
+    {
+      "slide_num": 1,
+      "type": "title",
+      "template": "{offer_name} — {niche_label} ke liye HVSP",
+      "subtitle": "Camera-off • Slide-based • 80/20 value-pitch • India-first"
+    },
+    {
+      "slide_num": 2,
+      "type": "pain",
+      "template": "Agar yeh problems familiar lage…",
+      "content": "{pain1} / {pain2} / {pain3}"
+    },
+    {
+      "slide_num": 3,
+      "type": "reframe",
+      "template": "Problem yeh nahi ki aap koshish nahi kar rahe…",
+      "content": "Structure, balance, aur India-market psychology ki zaroorat hai."
+    },
+    {
+      "slide_num": 4,
+      "type": "proof",
+      "template": "Real results (illustrative; results vary)",
+      "content": "Micro-tiles: Ayush, Rudra, JP with disclaimer footer."
+    },
+    {
+      "slide_num": 5,
+      "type": "value",
+      "template": "Module 1: {example1}",
+      "content": "3 bullets with actionable insights."
+    },
+    {
+      "slide_num": 6,
+      "type": "value",
+      "template": "Module 2: {example2}",
+      "content": "3 bullets with quick wins."
+    },
+    {
+      "slide_num": 7,
+      "type": "value",
+      "template": "Module 3: {example3}",
+      "content": "3 bullets with metrics & timelines."
+    },
+    {
+      "slide_num": 8,
+      "type": "diagram",
+      "template": "System Overview (Visual)",
+      "content": "SVG diagram showing AI Agents Funnel flow."
+    },
+    {
+      "slide_num": 9,
+      "type": "differentiation",
+      "template": "Generic AI ≠ Our Engine",
+      "content": "Structure (HVSP-Core) / Balance (80/20) / Data (₹53Cr+ sales, 44+ niches)"
+    },
+    {
+      "slide_num": 10,
+      "type": "doctor_frame",
+      "template": "Doctor-frame • Accept/Reject",
+      "content": "Hum pehle screen karte hain. Fit hue to aage, warna best next step."
+    },
+    {
+      "slide_num": 11,
+      "type": "cta",
+      "template": "GrowthMap (₹499) • Refundable • 60-min",
+      "content": "Deep-dive roadmap session. Deposit screens for seriousness. Bonus: templates & frameworks on call."
+    },
+    {
+      "slide_num": 12,
+      "type": "final",
+      "template": "Not a course — 3-Month Consulting + 9 AI Agents System",
+      "content": "Up to 90% automation. Done-with-you implementation."
+    }
+  ],
+  "log_templates": [
+    "[match] niche={niche_id} • language={language} • tone={tone}",
+    "[cluster] {cluster_count} assets matched from {niche_label} pool",
+    "[apply] balance=80/20 • pitch={cta_type}",
+    "[proof] attaching 3 micro-tiles (Ayush, Rudra, JP) • disclaimer on",
+    "[linguistics] Hinglish mode • India-market psychology layer active",
+    "[framework] HVSP-Core selected • Hook/Value/Story/Pitch structure",
+    "[value] synthesizing 3 modules from {examples}",
+    "[slides] generating 12 frames • optimizing contrast/legibility",
+    "[tone] {tone_label} microcopy injected • {tone_modifier}",
+    "[cta] doc-frame copy injected • refund note added",
+    "[story] personal angle: {story_seed_snippet}",
+    "[objections] pre-handled: {objection1}, {objection2}",
+    "[final] HVSP outline ready • slide deck compiled • video render queued"
+  ]
+}

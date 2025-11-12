@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Ayush",
+    "niche": "E-commerce",
+    "blurb": "Daily ₹50k ads → 4.2x at scale via AdsEdge + TargetEdge",
+    "metric": "4.2x ROAS",
+    "disclaimer": true
+  },
+  {
+    "name": "Rudra",
+    "niche": "Coaching",
+    "blurb": "3 to 18 L/mo with HVSP + NurtureEdge",
+    "metric": "6x revenue growth",
+    "disclaimer": true
+  },
+  {
+    "name": "JP",
+    "niche": "Consulting",
+    "blurb": "CPL ₹189, English not required; scripts word-for-word",
+    "metric": "₹189 CPL",
+    "disclaimer": true
+  },
+  {
+    "name": "Priya",
+    "niche": "Agency",
+    "blurb": "Client retention 80%+ with automated nurture flows",
+    "metric": "80% retention",
+    "disclaimer": true
+  },
+  {
+    "name": "Karan",
+    "niche": "Freelancing",
+    "blurb": "₹30k → ₹1.2L avg ticket via positioning shift + HVCO",
+    "metric": "4x ticket increase",
+    "disclaimer": true
+  }
+]
