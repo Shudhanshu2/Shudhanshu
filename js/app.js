@@ -20,7 +20,18 @@ const appState = {
         avatarFile: null,
         pipPosition: 'bottom-right'
     },
+    ui: {
+        uploadProgress: 0,
+        slideTimer: null,
+        renderTimer: null,
+        gatedMax: 0.6,
+        slideTimerComplete: false
+    },
+    preview: {
+        avatarURL: null
+    },
     renderETA: 0,
+    slideETA: 0,
     presenterNotesVisible: false
 };
 
@@ -339,6 +350,11 @@ async function generateHVSP() {
         matchedChips.innerHTML = chips.map(c => `<div class="chip">${c}</div>`).join('');
     }
 
+    // Start slide timer (2:30-4:00) immediately
+    appState.slideETA = 150 + Math.floor(Math.random() * 91); // 150-240 seconds (2:30-4:00)
+    appState.ui.slideTimerComplete = false;
+    startSlideTimer();
+
     // Run pipeline
     await runPipeline(nicheData);
 
@@ -468,6 +484,35 @@ function generateOutline(nicheData) {
     `;
 
     appState.generatedHVSP = { nicheData, pains, examples };
+}
+
+function startSlideTimer() {
+    console.log(`[slides] starting slide generation timer: ${appState.slideETA}s (${formatTime(appState.slideETA)})`);
+
+    let elapsed = 0;
+    const totalTime = appState.slideETA;
+
+    // Show skeleton slides immediately
+    showSkeletonSlides();
+
+    appState.ui.slideTimer = setInterval(() => {
+        elapsed++;
+        const remaining = totalTime - elapsed;
+
+        console.log(`[slides] generating... ${formatTime(remaining)} remaining`);
+
+        if (elapsed >= totalTime) {
+            clearInterval(appState.ui.slideTimer);
+            appState.ui.slideTimerComplete = true;
+            console.log('[slides] generation complete • 12 slides ready');
+        }
+    }, 1000);
+}
+
+function showSkeletonSlides() {
+    // This would show a loading state for slides
+    // For now, we'll just log it
+    console.log('[slides] rendering skeleton UI (12 placeholder slides)');
 }
 
 // Slides Generation & Preview
@@ -642,8 +687,22 @@ function initOutputOptionsHandlers() {
         btnAvatarUpload.addEventListener('click', () => avatarUpload.click());
         avatarUpload.addEventListener('change', (e) => {
             if (e.target.files.length > 0) {
-                appState.outputOptions.avatarFile = e.target.files[0];
-                showToast(`Avatar video selected: ${e.target.files[0].name}`);
+                const file = e.target.files[0];
+                appState.outputOptions.avatarFile = file;
+
+                // File size warning at 50MB
+                if (file.size > 50 * 1024 * 1024) {
+                    showToast('Warning: File size > 50MB. This may take longer to process.', 5000);
+                }
+
+                // Create Object URL for preview
+                if (appState.preview.avatarURL) {
+                    URL.revokeObjectURL(appState.preview.avatarURL);
+                }
+                appState.preview.avatarURL = URL.createObjectURL(file);
+
+                // Start fake upload progress
+                fakeUploadProgress(file);
             }
         });
     }
@@ -659,8 +718,14 @@ function initOutputOptionsHandlers() {
 
 function updateVoiceUploadUI() {
     const btn = document.getElementById('btn-voice-upload');
+    const caption = document.getElementById('voice-upload-caption');
+    const showUpload = appState.outputOptions.voiceMode !== 'tts';
+
     if (btn) {
-        btn.classList.toggle('hidden', appState.outputOptions.voiceMode === 'tts');
+        btn.classList.toggle('hidden', !showUpload);
+    }
+    if (caption) {
+        caption.classList.toggle('hidden', !showUpload);
     }
 }
 
@@ -669,6 +734,30 @@ function updateAvatarUI() {
     if (options) {
         options.classList.toggle('hidden', !appState.outputOptions.avatarEnabled);
     }
+}
+
+function fakeUploadProgress(file) {
+    // Simulate upload progress: 80-140 seconds
+    const duration = 80000 + Math.random() * 60000; // 80-140s in ms
+    const startTime = performance.now();
+    appState.ui.uploadProgress = 0;
+
+    const animate = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min((elapsed / duration) * 100, 100);
+        appState.ui.uploadProgress = progress;
+
+        console.log(`[upload] ${file.name} • progress: ${progress.toFixed(1)}%`);
+
+        if (progress < 100) {
+            requestAnimationFrame(animate);
+        } else {
+            console.log(`[upload] ${file.name} • complete • ready for render`);
+            showToast(`${file.name} uploaded successfully`);
+        }
+    };
+
+    requestAnimationFrame(animate);
 }
 
 // Video Rendering
@@ -775,12 +864,23 @@ async function runRenderSimulation() {
     const logs = generateRenderLogs();
     const logInterval = totalTime / logs.length;
     let logIndex = 0;
+    let gateWarningShown = false;
 
     // Update every second
-    const interval = setInterval(() => {
+    appState.ui.renderTimer = setInterval(() => {
         elapsed++;
         const remaining = totalTime - elapsed;
-        const progress = (elapsed / totalTime) * 100;
+        let progress = (elapsed / totalTime) * 100;
+
+        // Apply gating: cap at 60% until slides complete
+        if (!appState.ui.slideTimerComplete && progress > (appState.ui.gatedMax * 100)) {
+            progress = appState.ui.gatedMax * 100;
+
+            if (!gateWarningShown) {
+                console.log(`[render] progress gated at ${Math.floor(progress)}% • waiting for slides to complete`);
+                gateWarningShown = true;
+            }
+        }
 
         // Update UI
         if (countdownLabel) countdownLabel.textContent = formatTime(remaining);
@@ -802,7 +902,7 @@ async function runRenderSimulation() {
 
         // Complete
         if (elapsed >= totalTime) {
-            clearInterval(interval);
+            clearInterval(appState.ui.renderTimer);
             if (countdownLabel) countdownLabel.textContent = '00:00';
             if (progressPercent) progressPercent.textContent = '100%';
             if (progressBar) progressBar.style.width = '100%';
@@ -848,6 +948,7 @@ function generateRenderLogs() {
     const mode = appState.outputOptions.voiceMode;
     const avatar = appState.outputOptions.avatarEnabled;
     const avatarFile = appState.outputOptions.avatarFile;
+    const voiceFile = appState.outputOptions.voiceFile;
 
     const logs = [
         '[init] render pipeline started',
@@ -855,6 +956,17 @@ function generateRenderLogs() {
         '[assets] loading slide templates',
         `[niche] matching data for ${appState.formData.nicheId || 'custom'}`
     ];
+
+    // Local file handling
+    if (avatarFile || voiceFile) {
+        logs.push('[local] using local files • stays on your device');
+        if (avatarFile) {
+            logs.push(`[local] avatar file: ${avatarFile.name} (${(avatarFile.size / (1024 * 1024)).toFixed(1)}MB)`);
+        }
+        if (voiceFile) {
+            logs.push(`[local] voice file: ${voiceFile.name} (${(voiceFile.size / (1024 * 1024)).toFixed(1)}MB)`);
+        }
+    }
 
     if (mode === 'tts') {
         logs.push('[tts] ElevenLabs sim: en-IN neutral • 16kHz • 0.25 jitter');
@@ -871,10 +983,16 @@ function generateRenderLogs() {
         if (avatarFile) {
             logs.push(`[avatar] using uploaded video • PIP @ ${appState.outputOptions.pipPosition}`);
             logs.push('[avatar] scaling to 240x240 • overlay prepared');
+            logs.push('[avatar] local file processing • no API calls');
         } else {
             logs.push('[avatar] HeyGen sim: generating avatar • PIP mode');
             logs.push(`[avatar] positioning @ ${appState.outputOptions.pipPosition}`);
         }
+    }
+
+    // Gating awareness
+    if (!appState.ui.slideTimerComplete) {
+        logs.push('[gating] render will wait at 60% for slides to complete');
     }
 
     logs.push('[timeline] building 12 scenes • transitions added');
@@ -1297,6 +1415,20 @@ function initAutoMode() {
     }
 }
 
+// Memory Management & Cleanup
+// ============================
+
+function initCleanupHandlers() {
+    // Cleanup Object URLs when user leaves or refreshes page
+    window.addEventListener('beforeunload', () => {
+        if (appState.preview.avatarURL) {
+            console.log('[cleanup] revoking Object URL for avatar preview');
+            URL.revokeObjectURL(appState.preview.avatarURL);
+            appState.preview.avatarURL = null;
+        }
+    });
+}
+
 // Initialization
 // ==============
 
@@ -1313,6 +1445,7 @@ async function init() {
     initKnowledgeBaseHandlers();
     initModalHandlers();
     initKeyboardShortcuts();
+    initCleanupHandlers();
     initAutoMode();
 
     console.log('Application ready');
