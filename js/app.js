@@ -627,77 +627,84 @@ function initSlidesHandlers() {
     }
 }
 
-function generateSlides() {
-    const { nicheData, pains, examples } = appState.generatedHVSP;
+// Slide Engine Helpers
+// ====================
 
-    const slides = [
-        {
-            num: 1,
-            title: `${appState.formData.offerName} — HVSP (India-First)`,
-            content: ['Camera-off, slide-based', '80% value / 20% pitch', 'India market tuned'],
-            notes: 'Title slide. Emphasize HVSP format and India-first approach.'
-        },
-        {
-            num: 2,
-            title: 'Agar yeh pains familiar lage…',
-            content: pains.slice(0, 3),
-            notes: 'Address top pains directly. Make it relatable.'
-        },
-        {
-            num: 3,
-            title: 'Problem approach ki hai, effort ki nahi',
-            content: ['Structure chahiye', 'Balance chahiye', 'India-market psychology'],
-            notes: 'Reframe: not about working harder, but smarter.'
-        },
-        {
-            num: 4,
-            title: 'Real Results',
-            content: appState.testimonials.slice(0, 3).map(t => `${t.name}: ${t.blurb}`),
-            notes: 'Proof tiles. Note: Illustrative; results vary.'
-        },
-        ...examples.slice(0, 3).map((ex, i) => ({
-            num: 5 + i,
-            title: `Step ${i + 1}: ${ex}`,
-            content: ['Kyu kaam karta hai', 'Kaise apply karein', 'Common mistake'],
-            notes: `Value module ${i + 1}. Provide actionable framework.`
-        })),
-        {
-            num: 8,
-            title: 'System Overview',
-            content: ['[Visual: Simple diagram]', 'Structured approach', 'India-first methodology'],
-            notes: 'Show system architecture at high level.'
-        },
-        {
-            num: 9,
-            title: 'Generic AI ≠ Our Approach',
-            content: [
-                'Structure: HVSP-Core framework',
-                'Balance: 80/20 for India market',
-                'Data: Multi-niche internal dataset'
-            ],
-            notes: 'Critical differentiation. Explain why this is different.'
-        },
-        {
-            num: 10,
-            title: 'Qualification & Fit',
-            content: ['Mutual fit check', 'Clear yes/no path', 'No pressure approach'],
-            notes: 'Establish selectivity. Not selling to everyone.'
-        },
-        {
-            num: 11,
-            title: `Next Step: ${appState.formData.ctaText}`,
-            content: ['Clear next action', 'Neutral framing', 'No hard sell'],
-            notes: 'CTA slide. Keep it low-pressure and clear.'
-        },
-        {
-            num: 12,
-            title: 'Recap & What You\'ll Get',
-            content: [`Outcome: ${appState.formData.externalPromise}`, 'Structured delivery', 'India-market focus'],
-            notes: 'Final recap. Reinforce key value points.'
-        }
+function seedFromInputs() {
+    // Deterministic seed from: nicheId + persona + offer + ticket
+    const str = `${appState.formData.nicheId || ''}${appState.formData.persona || ''}${appState.formData.offerName || ''}${appState.formData.ticket || ''}`;
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash |= 0; // Convert to 32bit integer
+    }
+    return Math.abs(hash);
+}
+
+function seededRandom(seed) {
+    // Simple seeded random generator
+    const x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
+}
+
+function humanize(text, seedOffset = 0) {
+    // Add micro-imperfections: vary bullets, em-dashes, ellipsis
+    const seed = appState.slideSeed + seedOffset;
+    const rand = seededRandom(seed);
+
+    const variations = [
+        text,
+        text.replace(/\.$/, '…'),
+        text.replace(/ - /, ' — '),
+        text.replace(/:/g, ' —'),
+        text + '.',
+        text.replace(/\./g, '')
     ];
 
+    return variations[Math.floor(rand * variations.length)];
+}
+
+function getLayoutForSlide(slideNum, seed) {
+    // Deterministic layout assignment
+    const layouts = ['TITLE', 'BULLETS', 'TWOCOL', 'DIAGRAM', 'PROOF', 'CTA'];
+    const rand = seededRandom(seed + slideNum);
+
+    if (slideNum === 1) return 'TITLE';
+    if (slideNum === appState.formData.slideLength) return 'CTA';
+    if (slideNum === 4) return 'PROOF';
+    if (slideNum === 6 || slideNum === 8) return 'DIAGRAM';
+
+    return rand < 0.5 ? 'BULLETS' : 'TWOCOL';
+}
+
+function getSlideTime(slideNum, seed) {
+    // Random time per slide: 40-120 seconds
+    const rand = seededRandom(seed + slideNum * 100);
+    return Math.floor(40 + rand * 80);
+}
+
+function getBuildDots(slideNum, seed) {
+    // 1-3 build dots per slide
+    const rand = seededRandom(seed + slideNum * 200);
+    return Math.floor(1 + rand * 3);
+}
+
+function getProvenance(slideNum, seed) {
+    // Fake provenance: "src: pains.csv#12, examples#3"
+    const rand1 = seededRandom(seed + slideNum * 300);
+    const rand2 = seededRandom(seed + slideNum * 400);
+    const sources = ['pains.csv', 'examples', 'objections', 'frameworks'];
+    const src = sources[Math.floor(rand1 * sources.length)];
+    const num = Math.floor(rand2 * 50) + 1;
+    return `src: ${src}#${num}`;
+}
+
+function generateSlides() {
+    // Use new realistic slide engine
+    const slides = buildRealisticSlides(appState);
     appState.generatedSlides = slides;
+    console.log(`[slides] generated ${slides.length} slides • seed=${appState.slideSeed} • layouts mixed`);
     renderSlidesGrid(slides);
 }
 
@@ -705,41 +712,11 @@ function renderSlidesGrid(slides) {
     const grid = document.getElementById('slides-grid');
     if (!grid) return;
 
-    grid.innerHTML = slides.map(slide => `
-        <div class="slide-card" data-slide="${slide.num}">
-            <div class="slide-number">SLIDE ${slide.num}</div>
-            <div class="slide-title">${slide.title}</div>
-            <div class="slide-content">
-                ${slide.content.slice(0, 2).map(c => `<div>• ${c}</div>`).join('')}
-            </div>
-        </div>
-    `).join('');
+    // Render using new engine with 16:9 thumbs
+    grid.innerHTML = slides.map(slide => renderSlideThumb(slide, appState.preview.logoURL)).join('');
 
-    // Add click handlers
-    grid.querySelectorAll('.slide-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const slideNum = parseInt(card.dataset.slide);
-            const slide = slides.find(s => s.num === slideNum);
-            if (slide) openSlideModal(slide);
-        });
-    });
-}
-
-function openSlideModal(slide) {
-    const modal = document.getElementById('slide-modal');
-    if (!modal) return;
-
-    const title = document.getElementById('slide-modal-title');
-    const content = document.getElementById('slide-modal-content');
-    const notes = document.getElementById('slide-notes-content');
-
-    if (title) title.textContent = `Slide ${slide.num}: ${slide.title}`;
-    if (content) {
-        content.innerHTML = `<div class="space-y-2">${slide.content.map(c => `<p>• ${c}</p>`).join('')}</div>`;
-    }
-    if (notes) notes.textContent = slide.notes;
-
-    modal.classList.remove('hidden');
+    // Attach event listeners
+    attachSlideListeners();
 }
 
 // Output Options
@@ -1364,10 +1341,24 @@ function initModalHandlers() {
     // Slide modal
     const closeSlide = document.getElementById('close-slide');
     const slideModal = document.getElementById('slide-modal');
+    const prevSlide = document.getElementById('prev-slide');
+    const nextSlide = document.getElementById('next-slide');
 
     if (closeSlide) {
         closeSlide.addEventListener('click', () => {
             if (slideModal) slideModal.classList.add('hidden');
+        });
+    }
+
+    if (prevSlide) {
+        prevSlide.addEventListener('click', () => {
+            navigateSlideModal(-1);
+        });
+    }
+
+    if (nextSlide) {
+        nextSlide.addEventListener('click', () => {
+            navigateSlideModal(1);
         });
     }
 
