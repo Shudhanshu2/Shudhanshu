@@ -4,14 +4,7 @@
 // Global State
 const appState = {
     currentStep: 1,
-    formData: {
-        brandColor: '#DC2626',
-        logoFile: null,
-        salesModel: 'one-time',
-        ctaLink: '',
-        slideLength: 12,
-        proofTiles: []
-    },
+    formData: {},
     selectedPains: [],
     selectedObjections: [],
     niches: [],
@@ -20,8 +13,6 @@ const appState = {
     knowledgeBase: [],
     generatedHVSP: null,
     generatedSlides: [],
-    slideSeed: 0,
-    currentModalSlide: 0,
     outputOptions: {
         voiceMode: 'tts', // 'tts' | 'upload' | 'extract'
         voiceFile: null,
@@ -37,8 +28,7 @@ const appState = {
         slideTimerComplete: false
     },
     preview: {
-        avatarURL: null,
-        logoURL: null
+        avatarURL: null
     },
     renderETA: 0,
     slideETA: 0,
@@ -218,110 +208,22 @@ function initFormHandlers() {
     const btnGenerate = document.getElementById('btn-generate');
 
     if (btnBack3) btnBack3.addEventListener('click', () => goToStep(2));
-
-    // Brand color picker
-    const brandColor = document.getElementById('brand-color');
-    const brandColorText = document.getElementById('brand-color-text');
-    if (brandColor && brandColorText) {
-        brandColor.addEventListener('input', (e) => {
-            const color = e.target.value;
-            appState.formData.brandColor = color;
-            brandColorText.value = color;
-            document.documentElement.style.setProperty('--brand', color);
-            console.log(`[style] theme=${color} • applied live`);
-        });
-    }
-
-    // Logo upload
-    const logoUpload = document.getElementById('logo-upload');
-    const btnLogoUpload = document.getElementById('btn-logo-upload');
-    if (logoUpload && btnLogoUpload) {
-        btnLogoUpload.addEventListener('click', () => logoUpload.click());
-        logoUpload.addEventListener('change', (e) => {
-            if (e.target.files.length > 0) {
-                const file = e.target.files[0];
-                appState.formData.logoFile = file;
-                if (appState.preview.logoURL) {
-                    URL.revokeObjectURL(appState.preview.logoURL);
-                }
-                appState.preview.logoURL = URL.createObjectURL(file);
-                console.log(`[style] logo=${file.name} • ready for watermark`);
-                showToast(`Logo uploaded: ${file.name}`);
-            }
-        });
-    }
-
-    // Sales model dropdown
-    const salesModel = document.getElementById('sales-model');
-    if (salesModel) {
-        salesModel.addEventListener('change', (e) => {
-            appState.formData.salesModel = e.target.value;
-            console.log(`[pitch] model=${e.target.value}`);
-        });
-    }
-
-    // Advanced section toggle
-    const toggleAdvanced = document.getElementById('toggle-advanced');
-    const advancedSection = document.getElementById('advanced-section');
-    const advancedArrow = document.getElementById('advanced-arrow');
-    if (toggleAdvanced && advancedSection && advancedArrow) {
-        toggleAdvanced.addEventListener('click', () => {
-            const isHidden = advancedSection.classList.contains('hidden');
-            advancedSection.classList.toggle('hidden');
-            advancedArrow.textContent = isHidden ? '▾' : '▸';
-        });
-    }
-
-    // Advanced fields
-    const ctaLink = document.getElementById('cta-link');
-    if (ctaLink) {
-        ctaLink.addEventListener('input', (e) => {
-            appState.formData.ctaLink = e.target.value;
-        });
-    }
-
-    const slideLength = document.getElementById('slide-length');
-    if (slideLength) {
-        slideLength.addEventListener('change', (e) => {
-            appState.formData.slideLength = parseInt(e.target.value);
-            const countSpan = document.getElementById('slide-count');
-            if (countSpan) countSpan.textContent = e.target.value;
-        });
-    }
-
-    const language = document.getElementById('language');
-    if (language) {
-        language.addEventListener('change', (e) => {
-            appState.formData.language = e.target.value;
-        });
-    }
-
-    const tone = document.getElementById('tone');
-    if (tone) {
-        tone.addEventListener('change', (e) => {
-            appState.formData.tone = e.target.value;
-        });
-    }
-
     if (btnGenerate) {
         btnGenerate.addEventListener('click', () => {
             const offerName = document.getElementById('offer-name')?.value;
-            const ticket = document.getElementById('ticket')?.value;
+            const externalPromise = document.getElementById('external-promise')?.value;
 
-            if (!offerName || !ticket) {
+            if (!offerName || !externalPromise) {
                 showToast('Please fill in required fields');
                 return;
             }
 
             appState.formData.offerName = offerName;
-            appState.formData.ticket = ticket;
+            appState.formData.externalPromise = externalPromise;
+            appState.formData.internalWin = document.getElementById('internal-win')?.value || '';
             appState.formData.pains = appState.selectedPains;
-
-            // Log instant bindings
-            console.log(`[niche] ICP=${appState.formData.persona || 'not set'} • geo=IN`);
-            console.log(`[match] pains=${appState.selectedPains.length} mapped → Hook block`);
-            console.log(`[style] theme=${appState.formData.brandColor} • logo=${appState.formData.logoFile ? 'ok' : 'none'}`);
-            console.log(`[pitch] ticket=₹${ticket} • model=${appState.formData.salesModel}`);
+            appState.formData.objections = appState.selectedObjections;
+            appState.formData.ctaText = document.getElementById('cta-text')?.value || 'Book call';
 
             generateHVSP();
         });

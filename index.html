@@ -45,11 +45,11 @@
                     </div>
                     <div class="step-indicator" data-step="2">
                         <span class="step-num">2</span>
-                        <span class="step-label">Niche & Market</span>
+                        <span class="step-label">Niche & ICP</span>
                     </div>
                     <div class="step-indicator" data-step="3">
                         <span class="step-num">3</span>
-                        <span class="step-label">Business Details</span>
+                        <span class="step-label">Offer & Branding</span>
                     </div>
                 </div>
                 <div class="h-1 bg-slate-700 rounded-full overflow-hidden">
@@ -93,10 +93,14 @@
                 <button id="btn-next-1" class="btn-primary mt-6">Next</button>
             </div>
 
-            <!-- Step 2: Niche & Market -->
+            <!-- Step 2: Niche & ICP -->
             <div id="step-2" class="step-content hidden">
-                <h3 class="text-2xl font-bold mb-4">Niche & Market</h3>
+                <h3 class="text-2xl font-bold mb-4">Niche & ICP</h3>
                 <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">ICP / Persona</label>
+                        <input type="text" id="persona" class="input-field" placeholder="Founders • 5–50CR ARR • India">
+                    </div>
                     <div>
                         <label class="block text-sm font-medium mb-2">Niche</label>
                         <select id="niche-select" class="input-field">
@@ -107,47 +111,6 @@
                         <label class="block text-sm font-medium mb-2">Custom Niche (optional override)</label>
                         <input type="text" id="niche-custom" class="input-field" placeholder="e.g., SaaS Product Marketing">
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Persona / ICP</label>
-                        <input type="text" id="persona" class="input-field" placeholder="e.g., Founders (5-50 Cr ARR)">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Typical Ticket (₹)</label>
-                        <input type="text" id="ticket" class="input-field" placeholder="e.g., ₹1.2L">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Language</label>
-                        <select id="language" class="input-field">
-                            <option value="hindi">Hindi</option>
-                            <option value="english">English</option>
-                            <option value="hinglish" selected>Hinglish</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Tone</label>
-                        <div class="grid grid-cols-2 gap-4">
-                            <label class="radio-card">
-                                <input type="radio" name="tone" value="authoritative" class="hidden" checked>
-                                <div class="radio-card-inner">
-                                    <div class="radio-indicator"></div>
-                                    <div>
-                                        <span class="block font-medium">Authoritative</span>
-                                        <span class="text-xs text-slate-400">Clear roadmap, no fluff.</span>
-                                    </div>
-                                </div>
-                            </label>
-                            <label class="radio-card">
-                                <input type="radio" name="tone" value="friendly" class="hidden">
-                                <div class="radio-card-inner">
-                                    <div class="radio-indicator"></div>
-                                    <div>
-                                        <span class="block font-medium">Friendly</span>
-                                        <span class="text-xs text-slate-400">Simple, supportive guidance.</span>
-                                    </div>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
                 </div>
                 <div class="flex gap-3 mt-6">
                     <button id="btn-back-2" class="btn-secondary">Back</button>
@@ -155,35 +118,94 @@
                 </div>
             </div>
 
-            <!-- Step 3: Business Details -->
+            <!-- Step 3: Offer & Branding -->
             <div id="step-3" class="step-content hidden">
-                <h3 class="text-2xl font-bold mb-4">Business Details</h3>
+                <h3 class="text-2xl font-bold mb-4">Offer & Branding</h3>
                 <div class="space-y-4">
+                    <!-- Primary inputs (6 visible) -->
                     <div>
-                        <label class="block text-sm font-medium mb-2">Offer Name</label>
+                        <label class="block text-sm font-medium mb-2">Offer / Outcome Headline</label>
                         <input type="text" id="offer-name" class="input-field" placeholder="e.g., Pipeline Accelerator">
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-2">External Promise</label>
-                        <input type="text" id="external-promise" class="input-field" placeholder="e.g., predictable pipeline">
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Ticket (₹)</label>
+                            <input type="text" id="ticket" class="input-field" placeholder="1.2L">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Sales Model</label>
+                            <select id="sales-model" class="input-field">
+                                <option value="one-time">One-time</option>
+                                <option value="retainer">Retainer</option>
+                            </select>
+                        </div>
                     </div>
+
                     <div>
-                        <label class="block text-sm font-medium mb-2">Internal Win</label>
-                        <input type="text" id="internal-win" class="input-field" placeholder="e.g., freedom/time">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Top 3 Pains (click to add)</label>
+                        <label class="block text-sm font-medium mb-2">Top 3 Pains (click to select)</label>
                         <div id="pains-list" class="flex flex-wrap gap-2 mb-2"></div>
                         <div id="selected-pains" class="flex flex-wrap gap-2"></div>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Objections to Handle</label>
-                        <div id="objections-list" class="space-y-2"></div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Brand Color</label>
+                            <div class="flex gap-2">
+                                <input type="color" id="brand-color" class="h-10 w-16 rounded cursor-pointer" value="#DC2626">
+                                <input type="text" id="brand-color-text" class="input-field flex-1" value="#DC2626" readonly>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Logo (optional)</label>
+                            <input type="file" id="logo-upload" class="hidden" accept=".png,.svg,image/*">
+                            <button id="btn-logo-upload" class="btn-secondary btn-sm w-full">Upload Logo</button>
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-2">CTA / Next Step</label>
-                        <input type="text" id="cta-text" class="input-field" placeholder="e.g., Book clarity call">
+
+                    <!-- Advanced (collapsed) -->
+                    <div class="border border-slate-700 rounded-lg">
+                        <button id="toggle-advanced" class="w-full flex items-center justify-between p-3 hover:bg-slate-800 transition">
+                            <span class="text-sm font-medium text-slate-300">Advanced (auto)</span>
+                            <span id="advanced-arrow" class="text-slate-400">▸</span>
+                        </button>
+                        <div id="advanced-section" class="hidden p-4 border-t border-slate-700 space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">CTA Link (calendar/Typeform)</label>
+                                <input type="text" id="cta-link" class="input-field" placeholder="https://calendly.com/...">
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Slide Length</label>
+                                    <select id="slide-length" class="input-field">
+                                        <option value="12" selected>12 slides</option>
+                                        <option value="16">16 slides</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Language</label>
+                                    <select id="language" class="input-field">
+                                        <option value="hinglish" selected>Hinglish</option>
+                                        <option value="english">English</option>
+                                        <option value="hindi">Hindi</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Tone</label>
+                                <select id="tone" class="input-field">
+                                    <option value="authoritative" selected>Authoritative</option>
+                                    <option value="friendly">Friendly</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Proof Tiles (auto-picked 3)</label>
+                                <div id="proof-tiles" class="space-y-2 text-sm text-slate-400"></div>
+                            </div>
+                        </div>
                     </div>
+
+                    <p class="text-xs text-slate-400">Auto-generated. Illustrative; results vary.</p>
                 </div>
                 <div class="flex gap-3 mt-6">
                     <button id="btn-back-3" class="btn-secondary">Back</button>
@@ -219,7 +241,7 @@
         <section id="outline-section" class="card max-w-4xl mx-auto mb-12 hidden">
             <h3 class="text-2xl font-bold mb-4">HVSP Outline</h3>
             <div id="outline-content" class="space-y-6"></div>
-            <button id="btn-preview-slides" class="btn-primary mt-6">Preview Slides (12)</button>
+            <button id="btn-preview-slides" class="btn-primary mt-6">Preview Slides (<span id="slide-count">12</span>)</button>
         </section>
 
         <!-- Slides Preview & Output Options -->
@@ -429,9 +451,13 @@
         <div class="modal-content modal-large">
             <div class="flex items-center justify-between mb-4">
                 <h3 id="slide-modal-title" class="text-2xl font-bold">Slide Details</h3>
-                <button id="close-slide" class="text-slate-400 hover:text-slate-100 text-3xl leading-none">&times;</button>
+                <div class="flex gap-2">
+                    <button id="prev-slide" class="text-slate-400 hover:text-slate-100 text-2xl px-3">←</button>
+                    <button id="next-slide" class="text-slate-400 hover:text-slate-100 text-2xl px-3">→</button>
+                    <button id="close-slide" class="text-slate-400 hover:text-slate-100 text-3xl leading-none">&times;</button>
+                </div>
             </div>
-            <div id="slide-modal-content" class="mb-6"></div>
+            <div id="slide-modal-content" class="mb-6 bg-slate-900 rounded-lg p-8 min-h-[400px]"></div>
             <div id="slide-modal-notes" class="bg-slate-800 rounded-lg p-4">
                 <h4 class="text-sm font-bold mb-2">Presenter Notes</h4>
                 <div id="slide-notes-content" class="text-sm text-slate-300"></div>
@@ -442,6 +468,7 @@
     <!-- Toast Container -->
     <div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2"></div>
 
+    <script src="js/diagrams.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
