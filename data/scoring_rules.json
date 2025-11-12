@@ -1,0 +1,46 @@
+{
+  "weights": {
+    "pain": 0.40,
+    "budget": 0.35,
+    "timeline": 0.15,
+    "fit": 0.10
+  },
+  "pain_keywords": {
+    "high_intensity": ["raat ko neend nahi", "desperate", "crisis", "urgent", "dying", "bleeding"],
+    "revenue_impact": ["revenue", "sales", "pipeline", "cash flow", "unpredictable", "inconsistent"],
+    "conversion": ["conversion", "closing", "demo", "leads", "qualification", "win rate"],
+    "retention": ["churn", "retention", "repeat", "LTV", "drop-off"],
+    "scaling": ["scale", "growth", "team", "hiring", "leverage", "capacity"],
+    "positioning": ["commoditized", "pricing pressure", "race to bottom", "differentiation"],
+    "operations": ["manual", "time-consuming", "inefficient", "chaotic", "messy"]
+  },
+  "budget_ranges": {
+    "₹50K-₹1.5L": { "min": 50000, "max": 150000 },
+    "₹1.5L-₹5L": { "min": 150000, "max": 500000 },
+    "₹5L+": { "min": 500000, "max": 99999999 }
+  },
+  "disqualify_rules": [
+    {
+      "condition": "budget_mismatch",
+      "threshold": 0.3,
+      "message": "Budget significantly lower than ticket size"
+    },
+    {
+      "condition": "low_urgency",
+      "timeline": "Someday eventually",
+      "message": "No clear timeline—not ready to commit"
+    },
+    {
+      "condition": "not_decision_maker",
+      "roles": ["Team consensus needed"],
+      "message": "Multiple stakeholders—lengthy decision process"
+    },
+    {
+      "condition": "poor_fit",
+      "revenue": "Pre-revenue",
+      "team": "Just me",
+      "message": "Too early stage for this engagement"
+    }
+  ],
+  "qualification_threshold": 65
+}

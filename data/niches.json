@@ -1,194 +1,569 @@
 [
   {
-    "id": "fitness_b2c",
-    "label": "Fitness Coach (B2C)",
-    "model": "Coaching",
-    "pains": ["Weight drop nahi ho raha", "Diet follow mushkil", "No consistency"],
-    "objections": ["Time nahi", "Pehle try kiya, kaam nahi kiya", "Budget tight"],
-    "examples": ["3-phase habit stack", "Meal prep basics", "Form correction"]
+    "id": "b2b_growth_consultant",
+    "name": "B2B Growth Consultant",
+    "pains": [
+      "pipeline inconsistent aur unpredictable",
+      "sales cycles bahut lambe (3-6 months)",
+      "unqualified demos waste time",
+      "cold outreach low response rate",
+      "clients budget objection dete hain",
+      "positioning weak—commoditized lag rahe",
+      "referrals kam aate hain",
+      "testimonials collect nahi ho paate"
+    ],
+    "objections": [
+      "Already tried consultants, didn't work",
+      "Budget tight hai right now",
+      "Need to see results first",
+      "Team mein resources nahi hain",
+      "Timeline bahut aggressive lagta hai"
+    ],
+    "examples": [
+      "Rudra (SaaS) ne pipeline 3x kiya in 60 days",
+      "Ayush (EdTech) ne closing rate 45% improve kiya",
+      "Priya (FinTech) ne avg deal size 2.1x badha diya"
+    ],
+    "industry_terms": ["pipeline velocity", "MQL-to-SQL", "deal velocity", "champion building", "multi-threading"]
   },
   {
-    "id": "b2b_consulting",
-    "label": "B2B Growth Consultant",
-    "model": "Consulting",
-    "pains": ["No predictable pipeline", "Long sales cycles", "Unqualified demos"],
-    "objections": ["Custom work chahiye", "Case studies kahan", "Price high"],
-    "examples": ["ICP focus", "Discovery template", "Value ladder"]
+    "id": "agency_owner",
+    "name": "Agency Owner / Founder",
+    "pains": [
+      "client retention low (3-6 month churn)",
+      "pricing pressure—race to bottom",
+      "team utilization uneven",
+      "proposal-to-close ratio weak",
+      "scope creep kills margins",
+      "no repeatable positioning",
+      "hiring talent mushkil hai",
+      "cash flow unpredictable"
+    ],
+    "objections": [
+      "We're bootstrapped, budget tight",
+      "Already have a sales process",
+      "Team size chhoti hai",
+      "Need hands-on execution, not strategy",
+      "Can't commit long-term retainer"
+    ],
+    "examples": [
+      "Karan (Design Agency) ne retainer revenue 4x kiya",
+      "Neha (Content Agency) ne churn 65% reduce kiya",
+      "Sameer (Dev Shop) ne avg project value ₹8L → ₹22L"
+    ],
+    "industry_terms": ["utilization rate", "gross margin", "SOW clarity", "value-based pricing", "land-and-expand"]
   },
   {
-    "id": "digital_marketing_agency",
-    "label": "Digital Marketing Agency",
-    "model": "Agency",
-    "pains": ["Client churn high", "Delivery scalability", "ROI proof mushkil"],
-    "objections": ["In-house team hai", "Previous agency fail", "Retainer commitment"],
-    "examples": ["Performance reporting", "Ad account audit", "Funnel optimization"]
+    "id": "saas_founder",
+    "name": "SaaS Founder (Seed/Series A)",
+    "pains": [
+      "CAC bahut high, unit economics break nahi ho rahe",
+      "demo-to-paid conversion low (<10%)",
+      "annual contracts sign nahi ho rahe",
+      "competitors price war kar rahe hain",
+      "onboarding drop-off zyada hai",
+      "expansion revenue nahi ban raha",
+      "investor deck mein traction weak dikhta hai",
+      "hiring sales team expensive"
+    ],
+    "objections": [
+      "Already have in-house growth team",
+      "Runway limited hai, ROI quick chahiye",
+      "Product-market fit still finding",
+      "Can't afford long sales cycle consultants",
+      "Need someone who knows SaaS metrics"
+    ],
+    "examples": [
+      "Aarav (HR Tech) ne ACV $12K → $34K in 90 days",
+      "Shreya (MarTech) ne CAC payback 9mo → 4mo",
+      "Vikram (FinTech SaaS) ne ARR 2.8x in 5 months"
+    ],
+    "industry_terms": ["CAC payback", "net revenue retention", "PQL funnel", "expansion ARR", "champion-led growth"]
   },
   {
-    "id": "web_dev_freelance",
-    "label": "Web Developer (Freelancer)",
-    "model": "Freelancing",
-    "pains": ["Project milte nahi consistently", "Rate negotiation difficult", "Scope creep"],
-    "objections": ["Portfolio kam hai", "Timeline long", "Maintenance kya hoga"],
-    "examples": ["Tech stack clarity", "Milestone-based payment", "Maintenance package"]
+    "id": "coach_consultant",
+    "name": "Coach / Solo Consultant",
+    "pains": [
+      "calendar full but revenue capped",
+      "hourly billing limits income",
+      "client acquisition ad-hoc",
+      "no systematized sales process",
+      "positioning generic—'me too' feel",
+      "referrals slow aur unpredictable",
+      "delivering aur selling dono akele karna mushkil",
+      "leverage nahi ban raha"
+    ],
+    "objections": [
+      "Personal brand still building",
+      "Budget tight—solo operator hoon",
+      "Time nahi hai complex setup ke liye",
+      "Already tried courses/programs",
+      "Need immediate revenue, not long-term strategy"
+    ],
+    "examples": [
+      "Meera (Leadership Coach) ne ₹25K → ₹1.8L packages",
+      "Rohan (Marketing Consultant) ne retainer model scale kiya",
+      "Anjali (Career Coach) ne waitlist 3 months ka create kiya"
+    ],
+    "industry_terms": ["leverage model", "productized service", "done-with-you", "anchor pricing", "waitlist positioning"]
   },
   {
-    "id": "business_coach",
-    "label": "Business Coach",
-    "model": "Coaching",
-    "pains": ["Client results inconsistent", "Accountability maintain nahi ho raha", "Premium positioning mushkil"],
-    "objections": ["Self-help books se kya fark", "Time investment zyada", "Already tried coaching"],
-    "examples": ["90-day intensive", "Weekly accountability", "Resource library"]
+    "id": "ecom_brand",
+    "name": "D2C / E-commerce Brand",
+    "pains": [
+      "CAC Facebook/Google pe 3-4x ho gaya",
+      "repeat purchase rate low (single-order customers)",
+      "inventory planning unpredictable",
+      "margins squeeze ho rahe thin",
+      "retention email automation basic hai",
+      "LTV:CAC ratio negative territory mein",
+      "WhatsApp commerce setup nahi hai",
+      "Amazon dependency high, brand equity low"
+    ],
+    "objections": [
+      "Already working with performance agency",
+      "Margins tight, can't afford consultants",
+      "Need tech/ops execution, not strategy",
+      "Cash flow unpredictable",
+      "Inventory risk ke saath experiment nahi kar sakte"
+    ],
+    "examples": [
+      "Ravi (Fashion D2C) ne repeat rate 12% → 38%",
+      "Simran (Beauty Brand) ne LTV 2.4x improve kiya",
+      "Kunal (Home Decor) ne WhatsApp se 22% repeat orders"
+    ],
+    "industry_terms": ["LTV expansion", "cohort retention", "reactivation flows", "replenishment cadence", "community commerce"]
   },
   {
-    "id": "saas_consultant",
-    "label": "SaaS Growth Consultant",
-    "model": "Consulting",
-    "pains": ["Churn rate high", "CAC vs LTV imbalance", "Onboarding dropout"],
-    "objections": ["Product issues pehle", "Budget tight for consulting", "Timeline urgency"],
-    "examples": ["Retention audit", "Onboarding flow redesign", "Pricing strategy"]
+    "id": "edtech_founder",
+    "name": "EdTech Founder / Course Creator",
+    "pains": [
+      "lead-to-enrollment conversion low",
+      "webinar show-up rate poor (20-30%)",
+      "course completion rate low—refunds badh rahe",
+      "pricing objection heavy (affordability)",
+      "cohort size unpredictable",
+      "organic reach declining",
+      "community engagement drop-off",
+      "testimonials authenticity pe doubt"
+    ],
+    "objections": [
+      "Already tried funnels, didn't work",
+      "Audience size chhota hai",
+      "Need recorded course marketing, not consulting",
+      "Budget constraints—bootstrapped",
+      "Refund rate increase se darr lagta hai"
+    ],
+    "examples": [
+      "Pooja (Finance Course) ne enrollment 3.2x kiya",
+      "Arjun (Coding Bootcamp) ne completion rate 41% → 78%",
+      "Divya (Design Course) ne cohort waitlist build kiya"
+    ],
+    "industry_terms": ["enrollment funnel", "cohort velocity", "completion rate", "social proof layering", "payment plan psychology"]
   },
   {
-    "id": "content_agency",
-    "label": "Content Marketing Agency",
-    "model": "Agency",
-    "pains": ["Quality vs quantity balance", "SEO results slow", "Client education tough"],
-    "objections": ["In-house writer hai", "ROI track nahi hota", "Niche expertise"],
-    "examples": ["Content calendar", "SEO blueprint", "Thought leadership plan"]
+    "id": "real_estate_consultant",
+    "name": "Real Estate Consultant / Broker",
+    "pains": [
+      "lead quality poor—tire-kickers zyada",
+      "site visits convert nahi ho rahe",
+      "follow-up manual aur inconsistent",
+      "builder commissions squeeze ho rahe",
+      "trust factor low—credibility issue",
+      "WhatsApp broadcast ineffective",
+      "CRM data messy, insights nahi milte",
+      "referrals track nahi hote"
+    ],
+    "objections": [
+      "Real estate is relationship business, automation won't work",
+      "Margins already tight",
+      "Clients want personal touch, not templates",
+      "Tech adoption team mein low hai",
+      "ROI dikhana mushkil lagta hai"
+    ],
+    "examples": [
+      "Rajesh (Gurgaon) ne site-visit-to-booking 18% → 34%",
+      "Sneha (Pune) ne avg deal value ₹42L → ₹1.1Cr",
+      "Manoj (Bangalore) ne WhatsApp nurture se 60-day pipeline"
+    ],
+    "industry_terms": ["site visit conversion", "token-to-registry", "inventory velocity", "referral loop", "trust anchoring"]
   },
   {
-    "id": "graphic_designer",
-    "label": "Graphic Designer",
-    "model": "Freelancing",
-    "pains": ["Revisions unlimited hote hain", "Pricing race to bottom", "Brand clients nahi milte"],
-    "objections": ["Fiverr pe sasta milta", "Portfolio style match nahi", "Turnaround time"],
-    "examples": ["Brand identity package", "Revision policy clear", "Case study showcase"]
+    "id": "fintech_advisor",
+    "name": "Financial Advisor / Wealth Manager",
+    "pains": [
+      "AUM growth slow aur unpredictable",
+      "client acquisition cost high",
+      "portfolio review meetings low engagement",
+      "referrals sporadic aur untracked",
+      "compliance documentation burden",
+      "younger clients (30-40) tough to convert",
+      "competition from robo-advisors",
+      "client education time-consuming"
+    ],
+    "objections": [
+      "Wealth management is trust-based, can't automate",
+      "Regulatory constraints limit marketing",
+      "Client base mature hai, digital hesitant",
+      "Budget small for experiments",
+      "Need compliance-cleared content"
+    ],
+    "examples": [
+      "Suresh (Mumbai) ne AUM ₹45Cr → ₹110Cr in 18mo",
+      "Kavita (Delhi) ne client referrals 3.4x kiya",
+      "Ramesh (Hyderabad) ne avg portfolio size 2.1x"
+    ],
+    "industry_terms": ["AUM velocity", "wallet share", "referral multiplier", "portfolio stickiness", "HNI positioning"]
   },
   {
-    "id": "health_coach",
-    "label": "Health & Wellness Coach",
-    "model": "Coaching",
-    "pains": ["Client motivation drop", "Medical concerns overlap", "Certification credibility"],
-    "objections": ["Doctor se consult better", "Costly supplements", "Time commitment"],
-    "examples": ["Habit tracking system", "Nutrition basics", "Mindset shifts"]
+    "id": "healthcare_clinic",
+    "name": "Healthcare Clinic / Practitioner",
+    "pains": [
+      "appointment no-shows high (15-25%)",
+      "patient retention weak—one-time visits",
+      "Google reviews inconsistent",
+      "WhatsApp appointment booking manual",
+      "follow-up reminders miss ho jaate",
+      "treatment plan adherence low",
+      "insurance claims delay revenue",
+      "referral tracking absent"
+    ],
+    "objections": [
+      "Healthcare is personal, automation feels impersonal",
+      "Budget tight for clinics",
+      "Staff training time nahi hai",
+      "Patient privacy concerns",
+      "Need HIPAA/local compliance"
+    ],
+    "examples": [
+      "Dr. Sharma (Dental) ne no-show 22% → 6%",
+      "Dr. Anjali (Dermatology) ne repeat visits 2.8x",
+      "Dr. Verma (Physio) ne review score 3.9 → 4.7"
+    ],
+    "industry_terms": ["appointment adherence", "patient LTV", "treatment completion", "referral velocity", "review cadence"]
   },
   {
-    "id": "ecommerce_consultant",
-    "label": "E-commerce Consultant",
-    "model": "Consulting",
-    "pains": ["Platform migration risky", "Inventory issues", "Ad ROAS declining"],
-    "objections": ["DIY kar sakte hain", "Platform lock-in fear", "Implementation support"],
-    "examples": ["Store audit", "Conversion rate optimization", "Ad creative framework"]
+    "id": "fitness_studio",
+    "name": "Fitness Studio / Gym Owner",
+    "pains": [
+      "membership churn 40-60% annually",
+      "trial-to-paid conversion low",
+      "class attendance unpredictable",
+      "personal training upsell weak",
+      "seasonal dips revenue ko hit karte hain",
+      "lead follow-up manual aur slow",
+      "referral incentives underutilized",
+      "retention campaigns generic"
+    ],
+    "objections": [
+      "Fitness is community-driven, systems won't work",
+      "Margins already tight",
+      "Staff turnover high, training mushkil",
+      "Tried CRM software, didn't stick",
+      "Need boots-on-ground execution"
+    ],
+    "examples": [
+      "Rahul (CrossFit Mumbai) ne retention 52% → 81%",
+      "Priya (Yoga Studio) ne upsell revenue 3.1x",
+      "Karan (Boutique Gym) ne referrals 2.6x kiya"
+    ],
+    "industry_terms": ["member LTV", "attendance cadence", "PT attach rate", "referral loop", "churn mitigation"]
   },
   {
-    "id": "video_production",
-    "label": "Video Production Agency",
-    "model": "Agency",
-    "pains": ["Project timeline delays", "Client feedback loops long", "Equipment costs high"],
-    "objections": ["Budget constraints", "Creative control", "Delivery timeline"],
-    "examples": ["Pre-production checklist", "Revision rounds defined", "Stock footage library"]
+    "id": "it_services",
+    "name": "IT Services / Dev Shop",
+    "pains": [
+      "project scoping unclear—scope creep",
+      "client expectation mismatch",
+      "pricing race-to-bottom",
+      "proposals generic, win rate low",
+      "offshore perception commoditizes",
+      "payment milestones dispute hote hain",
+      "capacity planning unpredictable",
+      "retainer clients nahi ban rahe"
+    ],
+    "objections": [
+      "Already have sales/BD team",
+      "Margins tight, consultants expensive",
+      "Need execution partners, not advisors",
+      "Tech talent retention bigger issue",
+      "Client base mostly referrals, formal process nahi chahiye"
+    ],
+    "examples": [
+      "Tushar (Dev Agency) ne avg deal ₹6L → ₹18L",
+      "Nidhi (Cloud Consulting) ne retainer model 4x revenue",
+      "Vikrant (AI/ML Shop) ne proposal-to-close 19% → 42%"
+    ],
+    "industry_terms": ["value-based scoping", "SOW precision", "land-and-expand", "utilization rate", "gross margin optimization"]
   },
   {
-    "id": "copywriter",
-    "label": "Copywriter (Freelance)",
-    "model": "Freelancing",
-    "pains": ["Niche specialization dilemma", "Client ghosting post-delivery", "Rate perception low"],
-    "objections": ["AI se kar lenge", "ROI direct nahi dikhta", "Turnaround expectation"],
-    "examples": ["Sales page framework", "Email sequence", "Ad copy testing"]
+    "id": "event_planner",
+    "name": "Event Planner / Wedding Planner",
+    "pains": [
+      "inquiry-to-booking conversion low",
+      "pricing negotiation heavy",
+      "vendor coordination chaotic",
+      "client revisions endless—scope creep",
+      "payment collection delayed",
+      "testimonials aur portfolio underutilized",
+      "peak season capacity maxed, off-season slow",
+      "referrals inconsistent"
+    ],
+    "objections": [
+      "Events are bespoke, can't template",
+      "Budget cycles unpredictable",
+      "Need execution bandwidth, not strategy",
+      "Client hand-holding mandatory",
+      "Vendor relationships > systems"
+    ],
+    "examples": [
+      "Rina (Wedding Planner Delhi) ne booking rate 26% → 54%",
+      "Sanjay (Corporate Events) ne avg invoice ₹4.5L → ₹11L",
+      "Meera (Destination Weddings) ne referral velocity 3x"
+    ],
+    "industry_terms": ["inquiry-to-booking", "package anchoring", "vendor margin", "portfolio velocity", "peak season leverage"]
   },
   {
-    "id": "career_coach",
-    "label": "Career Coach",
-    "model": "Coaching",
-    "pains": ["Job market volatility", "Resume services commoditized", "Interview prep repetitive"],
-    "objections": ["Placement guarantee", "Industry connections", "Success rate proof"],
-    "examples": ["LinkedIn optimization", "Interview simulation", "Salary negotiation"]
+    "id": "legal_services",
+    "name": "Legal Services / Law Firm",
+    "pains": [
+      "client intake process slow",
+      "lead response time poor (24-48hr)",
+      "fee negotiation heavy",
+      "case status communication gaps",
+      "referral tracking absent",
+      "positioning generic—commoditized",
+      "junior associate utilization low",
+      "billing disputes frequent"
+    ],
+    "objections": [
+      "Legal is relationship-driven, automation risky",
+      "Compliance aur ethics constraints",
+      "Client confidentiality paramount",
+      "Partners don't want to 'sell'",
+      "Budget approval slow in partnerships"
+    ],
+    "examples": [
+      "Advocate Sharma (IP Law) ne intake-to-retainer 2.4x",
+      "Mehta & Associates (Corporate) ne avg retainer ₹8L → ₹20L",
+      "Gupta Law (Family) ne Google leads 3.1x convert kiye"
+    ],
+    "industry_terms": ["intake velocity", "retainer positioning", "case load balancing", "referral multiplier", "hourly to value-based"]
   },
   {
-    "id": "hr_consultant",
-    "label": "HR Consultant",
-    "model": "Consulting",
-    "pains": ["Compliance constantly changing", "Culture fit assessment", "Remote hiring challenges"],
-    "objections": ["In-house HR sufficient", "Legal liability concerns", "Implementation bandwidth"],
-    "examples": ["Hiring playbook", "Performance review system", "Culture audit"]
+    "id": "interior_designer",
+    "name": "Interior Designer / Architect",
+    "pains": [
+      "consultation-to-project conversion low",
+      "pricing objection heavy",
+      "project timelines overrun",
+      "client revisions endless",
+      "vendor coordination chaotic",
+      "portfolio presentation generic",
+      "retainer model nahi hai",
+      "referrals track nahi hote"
+    ],
+    "objections": [
+      "Design is creative, can't systematize",
+      "Each project unique hai",
+      "Need execution support, not sales strategy",
+      "Budget tight for consulting",
+      "Client relationships > process"
+    ],
+    "examples": [
+      "Neha (Residential Design) ne project value ₹12L → ₹28L",
+      "Arjun (Commercial Interiors) ne consultation close rate 3x",
+      "Ritu (Luxury Homes) ne waitlist 4 months ka"
+    ],
+    "industry_terms": ["consultation conversion", "project value ladder", "scope precision", "portfolio velocity", "design retainer"]
   },
   {
-    "id": "social_media_agency",
-    "label": "Social Media Management Agency",
-    "model": "Agency",
-    "pains": ["Content approval bottleneck", "Algorithm changes impact", "Engagement to conversion gap"],
-    "objections": ["Intern se ho jayega", "Organic reach dead", "ROI metrics unclear"],
-    "examples": ["Content batching system", "Platform-specific strategy", "Community management"]
+    "id": "hr_consulting",
+    "name": "HR Consulting / Talent Acquisition",
+    "pains": [
+      "client acquisition slow",
+      "pricing pressure from platforms",
+      "candidate quality inconsistent",
+      "placement-to-retention gap",
+      "client expectation mismatch",
+      "proposal-to-contract low",
+      "niche positioning weak",
+      "referral loop slow"
+    ],
+    "objections": [
+      "Already using platforms (Naukri, LinkedIn)",
+      "Margins tight in recruitment",
+      "Need scale, not premium positioning",
+      "Client budgets squeezed",
+      "Candidate supply > demand, why pay premium?"
+    ],
+    "examples": [
+      "Radhika (Tech Hiring) ne retainer clients 5 → 18 in 6mo",
+      "Siddharth (Executive Search) ne avg fee ₹2.5L → ₹7L",
+      "Pooja (HR Ops Consulting) ne proposal win rate 3.2x"
+    ],
+    "industry_terms": ["retainer positioning", "placement velocity", "candidate quality score", "client LTV", "niche specialization"]
   },
   {
-    "id": "seo_freelancer",
-    "label": "SEO Specialist",
-    "model": "Freelancing",
-    "pains": ["Results time lagta hai", "Client expectations unrealistic", "Black-hat perception"],
-    "objections": ["Google Ads faster", "Previous SEO waste", "Ongoing cost"],
-    "examples": ["Technical SEO audit", "Content cluster strategy", "Link building plan"]
+    "id": "ca_tax_advisor",
+    "name": "CA / Tax Advisor",
+    "pains": [
+      "client onboarding slow",
+      "annual compliance churn high",
+      "advisory upsell weak (stuck in compliance)",
+      "pricing race-to-bottom",
+      "client education time-consuming",
+      "referral velocity low",
+      "seasonal revenue spikes/dips",
+      "staff utilization uneven"
+    ],
+    "objections": [
+      "CA practice is trust-based, can't template",
+      "Compliance constraints heavy",
+      "Client base traditional, digital hesitant",
+      "Budget tight for experiments",
+      "Need compliance accuracy > sales tactics"
+    ],
+    "examples": [
+      "CA Mehta (Mumbai) ne advisory revenue 2.8x in 12mo",
+      "CA Priya (Bangalore) ne avg client value ₹45K → ₹1.2L",
+      "CA Ramesh (Delhi) ne referral velocity 3.4x"
+    ],
+    "industry_terms": ["compliance-to-advisory", "client LTV", "seasonal leverage", "referral multiplier", "value-based pricing"]
   },
   {
-    "id": "leadership_coach",
-    "label": "Leadership Coach",
-    "model": "Coaching",
-    "pains": ["Executive access difficult", "ROI measurement soft", "Competition from big firms"],
-    "objections": ["MBA better investment", "Time constraints", "Privacy concerns"],
-    "examples": ["360 feedback", "Executive presence", "Decision frameworks"]
+    "id": "manufacturing_sme",
+    "name": "Manufacturing SME / B2B Supplier",
+    "pains": [
+      "lead generation inconsistent",
+      "inquiry-to-order conversion low",
+      "pricing negotiation heavy",
+      "payment cycles long (60-90 days)",
+      "customer concentration risk (few large clients)",
+      "capacity utilization uneven",
+      "positioning commoditized",
+      "referral tracking absent"
+    ],
+    "objections": [
+      "Manufacturing is relationship-driven",
+      "Margins tight, can't afford consultants",
+      "Need working capital, not sales strategy",
+      "Industry-specific challenges",
+      "Buyers are procurement teams, not individual decision-makers"
+    ],
+    "examples": [
+      "Rajesh Plastics (Pune) ne order value ₹8L → ₹22L",
+      "Kumar Auto Parts (Chennai) ne client base diversified 2.6x",
+      "Sharma Textiles (Surat) ne inquiry-to-order 3.1x"
+    ],
+    "industry_terms": ["order velocity", "customer concentration", "capacity leverage", "payment terms optimization", "B2B positioning"]
   },
   {
-    "id": "finance_consultant",
-    "label": "Financial Consultant",
-    "model": "Consulting",
-    "pains": ["Regulation compliance heavy", "Trust building slow", "Market volatility affects perception"],
-    "objections": ["DIY apps available", "Commission model doubt", "Risk disclosure scary"],
-    "examples": ["Cash flow optimization", "Tax planning basics", "Investment education"]
+    "id": "hospitality_owner",
+    "name": "Restaurant / Hotel Owner",
+    "pains": [
+      "online ordering commissions kill margins",
+      "repeat customer rate low",
+      "Google/Zomato reviews inconsistent",
+      "WhatsApp reservations manual",
+      "off-peak hours underutilized",
+      "upsell weak (avg bill value capped)",
+      "loyalty programs ineffective",
+      "event bookings sporadic"
+    ],
+    "objections": [
+      "Hospitality is experience-driven, systems feel impersonal",
+      "Staff turnover high, training hard",
+      "Margins tight already",
+      "Need footfall, not consultants",
+      "Tried apps/CRM, didn't stick"
+    ],
+    "examples": [
+      "Cafe Aroma (Mumbai) ne repeat rate 18% → 47%",
+      "Hotel Meridian (Goa) ne avg booking value 2.3x",
+      "Spice Kitchen (Delhi) ne Google reviews 3.8 → 4.6"
+    ],
+    "industry_terms": ["repeat rate", "avg check size", "off-peak leverage", "loyalty velocity", "review cadence"]
   },
   {
-    "id": "branding_agency",
-    "label": "Branding Agency",
-    "model": "Agency",
-    "pains": ["Subjective feedback loops", "Strategy to execution gap", "Premium pricing justification"],
-    "objections": ["Logo se kya hoga", "Implementation support", "Timeline long"],
-    "examples": ["Brand strategy workshop", "Visual identity system", "Brand guidelines"]
+    "id": "logistics_services",
+    "name": "Logistics / Supply Chain Services",
+    "pains": [
+      "client acquisition slow",
+      "pricing pressure intense",
+      "capacity utilization uneven",
+      "client retention weak (transactional)",
+      "payment cycles long",
+      "operational efficiency gaps",
+      "positioning commoditized",
+      "referral velocity low"
+    ],
+    "objections": [
+      "Logistics is rate-driven, not value-based",
+      "Margins razor-thin already",
+      "Need operational efficiency, not sales consulting",
+      "Buyer relationships > systems",
+      "Budget constraints heavy"
+    ],
+    "examples": [
+      "Swift Logistics (NCR) ne avg contract ₹6L → ₹15L",
+      "Fast Track Courier (Mumbai) ne client retention 2.4x",
+      "Prime Freight (Bangalore) ne capacity utilization 68% → 89%"
+    ],
+    "industry_terms": ["contract value", "capacity leverage", "client LTV", "utilization rate", "value-based pricing"]
   },
   {
-    "id": "tech_consultant",
-    "label": "Technology Consultant",
-    "model": "Consulting",
-    "pains": ["Vendor neutrality questioned", "Implementation risks high", "Post-project support expectations"],
-    "objections": ["In-house IT team", "Budget approval layers", "Migration downtime"],
-    "examples": ["Tech stack audit", "Digital transformation roadmap", "Cloud migration plan"]
+    "id": "beauty_salon",
+    "name": "Beauty Salon / Spa Owner",
+    "pains": [
+      "appointment no-shows 20-30%",
+      "membership packages undersold",
+      "repeat visit rate low",
+      "upsell weak during appointments",
+      "Google/Instagram engagement low",
+      "seasonal dips hit revenue",
+      "staff utilization uneven",
+      "referral programs ineffective"
+    ],
+    "objections": [
+      "Beauty is personal, automation feels cold",
+      "Staff incentives already in place",
+      "Budget tight for experiments",
+      "Need footfall, not consulting",
+      "Client relationships > systems"
+    ],
+    "examples": [
+      "Glow Spa (Bangalore) ne membership revenue 3.4x",
+      "Radiance Salon (Mumbai) ne repeat rate 31% → 64%",
+      "Bliss Beauty (Delhi) ne avg ticket ₹1800 → ₹4200"
+    ],
+    "industry_terms": ["appointment adherence", "membership velocity", "upsell rate", "repeat cadence", "client LTV"]
   },
   {
-    "id": "sales_coach",
-    "label": "Sales Coach",
-    "model": "Coaching",
-    "pains": ["Script resistance", "Personality vs system", "Follow-up discipline"],
-    "objections": ["Experience better teacher", "Industry-specific doubt", "Practice time nahi"],
-    "examples": ["Discovery framework", "Objection handling library", "Pipeline management"]
-  },
-  {
-    "id": "pr_agency",
-    "label": "PR & Communications Agency",
-    "model": "Agency",
-    "pains": ["Media coverage unpredictable", "Crisis management reactive", "Retainer value perception"],
-    "objections": ["Press release DIY", "Connections matter more", "Measurement difficult"],
-    "examples": ["Media kit", "Crisis playbook", "Thought leadership positioning"]
-  },
-  {
-    "id": "data_analyst",
-    "label": "Data Analyst (Freelance)",
-    "model": "Freelancing",
-    "pains": ["Business context missing", "Dashboard maintenance overhead", "Non-technical stakeholder communication"],
-    "objections": ["Tools costly", "One-time need", "In-house resources"],
-    "examples": ["Analytics setup", "Custom dashboard", "Insight report template"]
-  },
-  {
-    "id": "nutrition_coach",
-    "label": "Nutrition Coach",
-    "model": "Coaching",
-    "pains": ["Fad diet confusion", "Compliance tracking hard", "Medical overlap boundaries"],
-    "objections": ["Diet apps free", "Customization doubt", "Results timeline"],
-    "examples": ["Macro tracking simplified", "Meal prep guide", "Supplement basics"]
+    "id": "photography_studio",
+    "name": "Photography Studio / Videographer",
+    "pains": [
+      "inquiry-to-booking conversion low",
+      "pricing negotiation heavy",
+      "portfolio presentation generic",
+      "seasonal revenue spikes/dips",
+      "album/print upsell weak",
+      "payment collection delayed",
+      "referral tracking absent",
+      "social proof underutilized"
+    ],
+    "objections": [
+      "Photography is portfolio-driven, not sales-driven",
+      "Each shoot is bespoke",
+      "Budget unpredictable",
+      "Need creative time, not admin systems",
+      "Client relationships > processes"
+    ],
+    "examples": [
+      "Lens Stories (Delhi) ne booking rate 22% → 51%",
+      "Frame Perfect (Mumbai) ne avg project ₹35K → ₹85K",
+      "Capture Moments (Bangalore) ne referral velocity 3.2x"
+    ],
+    "industry_terms": ["inquiry conversion", "package anchoring", "album velocity", "portfolio leverage", "referral multiplier"]
   }
 ]

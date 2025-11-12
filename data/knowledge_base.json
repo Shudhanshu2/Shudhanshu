@@ -1,0 +1,117 @@
+{
+  "note": "Anonymized, aggregated learnings from 53+ crore interaction patterns (internal corpus). Illustrative; results vary.",
+  "folders": [
+    {
+      "category": "Offer Design",
+      "items": [
+        { "title": "Value Ladder Framework", "preview": "Entry → Pilot → Retainer pricing structure" },
+        { "title": "Anchor Pricing Psychology", "preview": "How to position ₹1.2L as 'mid-tier' option" },
+        { "title": "Productized Service Model", "preview": "Package clarity > custom scoping" },
+        { "title": "Outcome-Based Positioning", "preview": "Sell results, not hours/deliverables" }
+      ]
+    },
+    {
+      "category": "ICP & Positioning",
+      "items": [
+        { "title": "ICP Tightness Test", "preview": "Founders • 5-50CR ARR • India → ultra-specific" },
+        { "title": "Niche Down Strategy", "preview": "Riches in niches—generalist = commoditized" },
+        { "title": "Pain-First Positioning", "preview": "Lead with pain, not your credentials" },
+        { "title": "Industry Term Injection", "preview": "Pipeline velocity, MQL-to-SQL → credibility" }
+      ]
+    },
+    {
+      "category": "Qualification Framework",
+      "items": [
+        { "title": "PAIN-BUDGET-TIMELINE-FIT", "preview": "4-axis scoring for prospects" },
+        { "title": "Disqualification Signals", "preview": "Budget mismatch, no timeline → decline fast" },
+        { "title": "Champion vs Proxy", "preview": "Decision-maker on call = 3x win rate" },
+        { "title": "Urgency Validation", "preview": "'This week' vs 'Someday'—filter early" }
+      ]
+    },
+    {
+      "category": "Pre-Sell Nurture",
+      "items": [
+        { "title": "WhatsApp Drip Cadence", "preview": "T-48h, T-24h, T-4h, T-1h, T-10m timing" },
+        { "title": "Value Tip Framework", "preview": "Give 1 actionable insight before call" },
+        { "title": "Proof Chip Strategy", "preview": "Case study in 80 words—hook fast" },
+        { "title": "Belief Break Messaging", "preview": "Challenge myths ('More leads ≠ more revenue')" },
+        { "title": "Mini-Diagram Usage", "preview": "Funnel/timeline/matrix → visual credibility" }
+      ]
+    },
+    {
+      "category": "Booking Orchestration",
+      "items": [
+        { "title": "Optimal Gap: Booking → Call", "preview": "36-60h for high-ticket (build anticipation)" },
+        { "title": "Reminder Sequence", "preview": "T-24h, T-1h, T-10m + no-show nudge" },
+        { "title": "Prep Checklist Messaging", "preview": "Pipeline data, pain points, ideal outcome" },
+        { "title": "Calendar Psychology", "preview": "Zoom/Google Meet badge = trust signal" }
+      ]
+    },
+    {
+      "category": "Closing Script",
+      "items": [
+        { "title": "Open → Diagnose → Align", "preview": "Context check → quantify pain → outcome clarity" },
+        { "title": "Budget Anchor Technique", "preview": "Frame ROI (3-5x) before stating price" },
+        { "title": "Objection Pre-Emption", "preview": "Address 'tried before' upfront with diff" },
+        { "title": "Risk Reversal Moves", "preview": "Milestones, quick wins, money-back" },
+        { "title": "Token Psychology", "preview": "₹30K token → commitment, balance later" }
+      ]
+    },
+    {
+      "category": "Objection Handling",
+      "items": [
+        { "title": "Budget Tight → ROI Reframe", "preview": "Lost revenue vs investment comparison" },
+        { "title": "Tried Before → Differentiator", "preview": "What failed + our unique approach" },
+        { "title": "Need to Think → Isolate Concern", "preview": "Budget/timeline/trust—which one?" },
+        { "title": "Talk to Partner → Fast Track", "preview": "Offer 15-min call same day with partner" }
+      ]
+    },
+    {
+      "category": "Post-Call Follow-Up",
+      "items": [
+        { "title": "Token Paid → Kickoff Prep", "preview": "Confirmation + prep checklist" },
+        { "title": "Balance Due → Milestone Link", "preview": "Deliverable proof + payment nudge" },
+        { "title": "Defer with Date → Deadline Nudge", "preview": "Slot hold expiry creates urgency" },
+        { "title": "Thinking → Clarification Offer", "preview": "10-min call to address concerns" },
+        { "title": "No-Show → Graceful Reschedule", "preview": "Empathy + one reschedule offer" }
+      ]
+    },
+    {
+      "category": "Slide Design Principles",
+      "items": [
+        { "title": "Layout Variety (6 types)", "preview": "Title, Bullets, Two-col, Diagram, Proof, CTA" },
+        { "title": "Build Order Dots", "preview": "• • • → animation sequence visual" },
+        { "title": "Provenance Badges", "preview": "src: pains.csv#12 → data-driven feel" },
+        { "title": "Micro-Imperfections", "preview": "Uneven bullets, em-dash → human touch" },
+        { "title": "Presenter Notes Layer", "preview": "Hover note icon → 2-3 talking points" }
+      ]
+    },
+    {
+      "category": "Video Render Logic",
+      "items": [
+        { "title": "Base Time + Jitter", "preview": "9:30 base + 0-180s jitter = realism" },
+        { "title": "60% Gate Until Slides Ready", "preview": "Parallel timers, dependency logic" },
+        { "title": "TTS vs Uploaded Audio", "preview": "Stage text adapts based on input" },
+        { "title": "Avatar PIP Positioning", "preview": "Bottom-right corner, HeyGen sim or upload" },
+        { "title": "Encode Settings Display", "preview": "h264 main • crf 23 → technical feel" }
+      ]
+    },
+    {
+      "category": "Tone & Microcopy",
+      "items": [
+        { "title": "Hinglish Balance", "preview": "'Pipeline unpredictable' not 'अनियमित'" },
+        { "title": "Authority Without Hype", "preview": "Data-driven, not 'revolutionary game-changer'" },
+        { "title": "Compliance Footers", "preview": "'Illustrative; results vary' on proof" },
+        { "title": "Privacy Captions", "preview": "'Local only—stays on your device'" }
+      ]
+    },
+    {
+      "category": "Demo Mode Presets",
+      "items": [
+        { "title": "B2B Consultant Preset", "preview": "Persona, niche, pains, ticket pre-filled" },
+        { "title": "Auto-Run Sequence", "preview": "Setup → Form → Intake → Pre-sell → Timers" },
+        { "title": "Keyboard Shortcut Map", "preview": "1-5 for steps, H for notes toggle" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "open": {
+    "default": "Thanks for joining, {name}! Before we dive in—quick context check: aapne form mein mention kiya tha '{pain_snippet}'... yeh still top priority hai ya kuch aur shift ho gaya?",
+    "high_urgency": "{name}, appreciate you prioritizing this. Dekha maine form mein urgency high thi—kya trigger hua recently jo isse urgent bana diya?"
+  },
+  "diagnose": {
+    "revenue_impact": "Got it. Toh basically yeh pain aapke revenue ko directly impact kar raha—agar quantify karo toh kitna revenue table pe chhod rahe ho monthly due to this?",
+    "operational_pain": "Samajh gaya. Yeh operational level pe kitna bandwidth le raha tumhara aur team ka? Hours mein bol sakte ho weekly?",
+    "strategic_gap": "Makes sense. Strategy level pe agar yeh solve ho jaye in next 60-90 days, company trajectory kaise change hoti?"
+  },
+  "align_outcome": {
+    "default": "Perfect. Toh end outcome jo chahiye—tumhare words mein—kya hai? Agar main 90 days mein deliver karunga toh success kaisi dikhegi?",
+    "specific": "Clear hai. Toh specifically: pipeline predictable chahiye, conversion {target}%+, aur cycle {timeline} se kam. Sahi samjha?"
+  },
+  "budget_anchor": {
+    "high_ticket": "Cool. Ab investment side—tumne budget mention kiya tha {budget_range}. Agar hum deliver kare yeh outcome consistently, ROI toh easily {roi_multiple}x hoga in 6-12 months. Make sense?",
+    "retainer": "Investment-wise, hamara typical engagement ₹{ticket} hai as retainer for {duration} months. Isme aapka system build hoga, team train hogi, aur predictable results milenge. Comfortable lag raha?",
+    "pilot": "Ek option hai—₹{pilot_price} ka pilot for {pilot_duration} days. Usme hum quick wins deliver karenge aur validation milegi. Phir full engagement decide kar sakte. Sound fair?"
+  },
+  "objection_handlers": {
+    "budget_tight": "I get it—budget always tight hota. But yeh dekhte hain: currently jo revenue/pipeline chhoot raha due to this pain, woh kitna hai monthly? Agar {lost_revenue} chhoot raha aur investment {ticket} hai toh payback {payback_months} months. Still tight lag raha?",
+    "tried_before": "Fair point—pehle kisi ne deliver nahi kiya. Kya specifically miss hua tha? (Listen...) Got it. Hamara approach different hai—hum {differentiator}. Plus accountability tight hai with weekly milestones. Ek pilot try kar sakte agar comfort chahiye?",
+    "need_to_think": "Absolutely, sochna chahiye. But ek quick check—kya concern budget hai, timeline hai, ya trust/validation? Agar main address kar sakoon concern toh aaj decide ho sakta kya?",
+    "talk_to_partner": "Makes sense—partner involved hona chahiye. Kya main aaj hi 15-min call setup kar sakta partner ke saath? Ya tum internally discuss karke revert karoge—timeline kya hoga?"
+  },
+  "risk_reversal": {
+    "milestone_based": "Risk minimize karne ke liye milestones rakhte hain—har 2 weeks pe deliverable. Agar kisi stage pe lagta nahi chal raha toh pause/exit kar sakte. Fair?",
+    "quick_win": "First 14 days mein ek quick win guaranteed deliver karenge—chahe basic qualification framework ho ya messaging template. Tangible output dekhoge early.",
+    "money_back": "Aur agar 30 days mein visible progress nahi dikha (pipeline data/conversion improvement) toh refund kar dete hain. Skin in the game hai hamara bhi."
+  },
+  "next_step": {
+    "close_now": "Perfect! Toh let's lock this—main contract aur payment link send karta hoon. Token ₹{token} aaj process kar sakte? Balance {balance} milestone-1 ke baad.",
+    "token_today": "Great. Toh aaj token process karo ₹{token}—slot lock ho jayega. Implementation start hoga {start_date} se. Payment link abhi share karta?",
+    "schedule_kickoff": "Awesome! Toh kickoff call schedule karte hain {kickoff_date} ko. Aapko team access, tools setup sab ready rakhna. Excited? 🚀"
+  },
+  "follow_up_templates": {
+    "token_paid": "Hey {name}! Token received ✅\n\nKickoff: {kickoff_date}\nPrep needed: Pipeline data (last 90 days), current sales process doc\n\nReply 'Ready' when you have these—let's gooo! 🔥",
+    "balance_due": "Hi {name} 👋\n\nMilestone-1 complete: {deliverable} ✅\n\nBalance payment due: ₹{balance}\nLink: {payment_link}\n\nOnce processed, we kick off Phase-2. Thanks!",
+    "defer_with_date": "{name}, you mentioned {defer_date} tak decide karoge.\n\nJust a quick nudge—slot hold kar rakha hai but {deadline} tak confirm karna hoga otherwise release ho jayega.\n\nStill on? Let me know! 😊",
+    "thinking_nudge": "Hey {name},\n\n{days} days ho gaye our call ko—soch rahe ho still ya koi concern address karna hai?\n\nHappy to jump on a quick 10-min clarification call agar helpful ho.\n\nWarna all good—no pressure! 🙏"
+  }
+}

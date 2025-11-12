@@ -1,366 +1,321 @@
-# HVSP AI Twin Engine Demo
+# ScaleEdge Authority Close Engine
 
-**A complete, runnable, static demo showcasing our India-first High-Value Sales Presentation (HVSP) generation system.**
+Complete static demo for the **Authority Close Engine** — a single-agent system that automates application building, scoring, pre-sell nurturing, booking orchestration, and closing workflows.
 
-Perfect for 5-minute live webinar demos with zero setup required.
+## Features
 
----
+- **Application Form Auto-Builder**: Generates optimized forms from client inputs with live preview
+- **Smart Scoring System**: PAIN/BUDGET/TIMELINE/FIT qualification with adjustable weights
+- **WhatsApp Pre-Sell Drip**: 3-5 message sequences with Twin Engine assets
+- **Booking Orchestration**: Gap calculation, reminders, and meeting platform integration (simulated)
+- **Per-Prospect Closing Scripts**: Custom scripts generated from applicant data
+- **Post-Call Follow-ups**: Branching workflows for Token/Balance/Defer/Thinking states
+- **Workflow Visualization**: Interactive swim-lane map of the entire funnel
+- **Multiple Exports**: WhatsApp JSON, Funnel JSON (Lovable), Follow-up CSV, Closing Scripts
 
-## 🚀 Quick Start
+## Tech Stack
 
-### Option 1: Direct Open (Simplest)
+- **100% Static** - No backend required, works offline
+- **Tailwind CSS** - Via Play CDN for styling
+- **Vanilla JavaScript** - No frameworks, pure ES6 modules
+- **Local Data** - All data stored in JSON files
+- **Privacy-First** - No network calls except Tailwind CDN
+
+## Quick Start
+
+### Option 1: Direct File Open
+
+Simply open `index.html` in your browser:
+
 ```bash
-# Just open the file in your browser
 open index.html
-# or double-click index.html
+# or double-click the file
 ```
 
-### Option 2: Local Server (Recommended for video playback)
-```bash
-# If you have Python installed
-python -m http.server 8000
+### Option 2: Local Server (Recommended)
 
-# Or use npx (if you have Node.js)
+```bash
+# Using Python
+python3 -m http.server 8000
+
+# Using Node.js
 npx http-server
 
-# Then open: http://localhost:8000
+# Using PHP
+php -S localhost:8000
 ```
 
-### Option 3: Demo Mode (Auto-run)
-```bash
-# Open with demo parameter for auto-flow
-open index.html?demo=1
-# or navigate to: http://localhost:8000?demo=1
+Then open: `http://localhost:8000`
+
+### Demo Mode
+
+Access the full auto-run demo:
+
+```
+http://localhost:8000?demo=authority
 ```
 
----
+This will:
+1. Prefill the form with B2B Consulting preset
+2. Auto-build the application form
+3. Start intake simulation with 20 applicants
+4. Run through the entire workflow automatically
 
-## ✨ Features
+## Keyboard Shortcuts
 
-- **3-Step Intake Form**: Business model → Niche → Business specifics
-- **Believability Engine**: Realistic progress pipeline, typing logs, matched data chips
-- **HVSP Generation**: Auto-generated Hook/Value/Story/Pitch outline from inputs
-- **Slide Deck Preview**: 12 auto-generated slides with presenter notes
-- **Video Renderer**: Fake progress to 100% → placeholder video with download
-- **Demo Mode**: `?demo=1` auto-fills and runs entire flow
-- **Keyboard Shortcuts**: Quick navigation for presenters
-- **India-First Copy**: Hinglish tone, doctor-frame positioning, compliance disclaimers
-- **Zero Network Calls**: Everything runs offline (except Tailwind CDN)
+Press these keys anywhere (not in input fields):
 
----
+- `1` - Prefill form (B2B Consulting preset)
+- `2` - Lock form & build application form
+- `3` - Start intake simulation
+- `4` - Assemble pre-sell pack
+- `5` - Start parallel timers (slides + video)
+- `H` - Toggle presenter notes
 
-## ⌨️ Keyboard Shortcuts
-
-Perfect for live demos and presentations:
-
-| Key | Action |
-|-----|--------|
-| `1` | Prefill form with demo preset |
-| `2` | Start HVSP generation (when on Step 3) |
-| `3` | Open Slides Preview (when HVSP outline is ready) |
-| `4` | Start Video Render (when slides are visible) |
-| `H` | Toggle Presenter Notes panel |
-
----
-
-## 📁 File Structure
+## File Structure
 
 ```
 /
-├── index.html              # Main application (single-page app)
+├── index.html              # Main application file
 ├── css/
-│   └── styles.css         # Custom CSS (animations, utilities)
+│   └── styles.css          # ScaleEdge red theme + components
 ├── js/
-│   └── app.js            # All application logic
+│   └── app.js              # Complete application logic
 ├── data/
-│   ├── niches.json       # 24 niche options across 4 business models
-│   ├── frameworks.json   # HVSP-Core framework, slide templates, logs
-│   └── testimonials.json # Proof micro-tiles with disclaimers
-├── assets/
-│   ├── hvsp_ready.mp4    # Placeholder video (see VIDEO_PLACEHOLDER.md)
-│   └── VIDEO_PLACEHOLDER.md
-└── README.md             # This file
+│   ├── niches.json         # 20+ niche definitions with pains/examples
+│   ├── questions.json      # Application form question bank
+│   ├── scoring_rules.json  # Weights & disqualification rules
+│   ├── applicants.json     # 20 sample Indian market applicants
+│   ├── messages.json       # WhatsApp pre-sell templates
+│   ├── closing_snippets.json  # Closing script blocks
+│   ├── proof.json          # Testimonial micro-tiles
+│   └── knowledge_base.json # 30-40 KB folders
+└── README.md               # This file
 ```
 
----
+## Workflow Overview
 
-## 🎬 Demo Mode Flow
+1. **Client Setup**: Configure ICP, niche, offer, ticket, pains, branding
+2. **Form Designer**: Auto-generate application questions with scoring rules
+3. **Intake Simulation**: Load & score 20 applicants over 45-90 seconds
+4. **Qualification**: Split into Top Picks (≥65) and Rejects with reasons
+5. **Pre-Sell Pack**: 3-5 WhatsApp messages with timing (T-48h, T-24h, etc.)
+6. **Parallel Timers**: 
+   - Slides: 2:30-4:00 with real 16:9 thumbnails
+   - Video: 10:00+ with 60% gate until slides complete
+7. **Booking Orchestration**: Gap suggestion + reminder sequence
+8. **Closing Script**: Per-prospect customized from their answers
+9. **Follow-ups**: Token/Balance/Defer/Thinking branching workflows
+10. **Workflow Map**: Interactive SVG visualization
 
-When you open `index.html?demo=1`, the app automatically:
+## Key Features in Detail
 
-1. **Waits 600ms** (for dramatic effect)
-2. **Pre-fills the form** with B2B Consulting preset:
-   - Model: Consulting
-   - Niche: B2B Growth Consultant
-   - Persona: Founders 5-50 CR ARR
-   - Ticket: ₹1.2L
-   - Language: Hinglish
-   - Tone: Doctor-frame
-   - Pains: Unpredictable pipeline, Long cycles, Unqualified demos
-3. **Opens Step 3** of the form
-4. **Clicks "Generate HVSP"** after 1s
-5. **Runs the entire pipeline** (12-15 seconds of believable progress)
+### Realistic Timers
 
-Perfect for screen-sharing where you just narrate over the automation.
+- **Slides Timer**: 150-240 seconds with live log updates
+- **Video Timer**: 600-825 seconds with 60% gate dependency
+- Both run in parallel with deterministic + randomized timing
+- Progress bars, ETAs, and scrolling logs
 
----
+### Scoring System
 
-## 🎯 Presenter Script (5 Minutes)
+Adjustable weights (default):
+- Pain: 40%
+- Budget: 35%
+- Timeline: 15%
+- Fit: 10%
 
-Use this timing guide for live demos:
+Composite score ≥65 = Qualified
 
-### 0:00–0:40 • Set the Scene
-> "This is our HVSP AI Twin Engine — camera-off, slide-based presentations optimized for India market. 80/20 value-pitch balance. Trained on ₹53Cr+ sales data across 44+ niches. Not generic AI — this is structured for high-value conversions."
+### Privacy & Compliance
 
-### 0:40–1:40 • Fill Form (or Auto)
-> "Let me show you the intake. We capture business model, niche, target persona, language, tone... all India-market specific. I'll use our demo preset for a B2B consultant."
+- All processing happens locally
+- No data sent to servers
+- Object URLs cleaned up on unload
+- "Illustrative; results vary" disclaimers on proof
+- "Local only—stays on your device" captions on uploads
 
-**Action**: Press `1` to prefill, or click "Use Demo Preset"
+### Mock Integrations
 
-### 1:40–3:00 • Generate
-> "Watch the believability engine. We're matching assets from our training clusters, applying 80/20 balance, doctor-frame tone, India-market psychology layers. See the logs — framework selection, proof attachment with disclaimers, slide optimization..."
+All connections are simulated:
+- WhatsApp Business API (badge: Connected)
+- Google Meet / Zoom (badge: Connected)
+- Lovable (badge: Ready - export funnel JSON)
 
-**Action**: Press `2` or click "Generate HVSP"
+## Data Files
 
-### 3:00–4:10 • Slides Preview
-> "Here's the auto-generated outline — Hook addresses specific pains, Value modules give 80% actionable content, Story connects personally, Pitch is soft with doctor-frame. Now the slide deck... 12 slides, fully customized. Notice slide 9: 'Generic AI ≠ Our Engine' — that's Structure, Balance, Data."
+### niches.json
+20+ Indian market niches with:
+- Pains (8 per niche)
+- Objections (5 per niche)
+- Examples (3 per niche)
+- Industry terms (5 per niche)
 
-**Action**: Press `3` or click "Preview Slides"
+### applicants.json
+20 realistic Indian applicants with:
+- Names, companies, roles
+- Pain narratives (Hinglish)
+- Budget ranges (₹ notation)
+- Timeline urgency
+- Decision-maker status
 
-### 4:10–4:40 • Render Video
-> "Now we render. Compiling slides, generating narration template, captions... and done. Voiceover is optional for webinars. Download ready."
+### messages.json
+Pre-sell templates:
+- Value tips (2-3)
+- Proof chips (2-3)
+- Belief breaks (1-2)
+- CTA reminders (T-1h, T-10m, no-show)
+- Mini-video reference (hvsp_ready.mp4)
 
-**Action**: Press `4` or click "Render Video"
+## Customization
 
-### 4:40–5:00 • CTA
-> "Next step: GrowthMap — ₹499 refundable deposit that screens for seriousness. 60-min roadmap session. Not a course — this is 3-month consulting with 9 AI Agents System. Up to 90% automation."
+### Change Brand Color
 
-**Action**: Point at bottom sticky CTA
+Edit in Client Setup or via CSS variable:
+```css
+:root {
+  --brand: #DC2626;  /* ScaleEdge red */
+}
+```
 
----
+### Add More Niches
 
-## 🛠️ Customization
-
-### Update Default Copy
-
-**Niches**: Edit `data/niches.json` to add/modify niche options
+Edit `data/niches.json`:
 ```json
 {
   "id": "your_niche",
-  "label": "Your Niche Label",
-  "pains": ["Pain 1", "Pain 2", "Pain 3"],
-  "objections": ["Objection 1", "Objection 2"],
-  "examples": ["Module 1", "Module 2", "Module 3"]
+  "name": "Your Niche Name",
+  "pains": ["pain 1", "pain 2", ...],
+  "objections": [...],
+  "examples": [...],
+  "industry_terms": [...]
 }
 ```
 
-**Framework**: Edit `data/frameworks.json` for hook templates, slide templates, log lines
+### Modify Scoring Rules
 
-**Testimonials**: Edit `data/testimonials.json` to add proof examples (always include `"disclaimer": true`)
-
-### Change Demo Preset
-
-Edit `DEMO_PRESET` object in `js/app.js` (around line 18):
-```javascript
-const DEMO_PRESET = {
-    businessModel: 'Your Model',
-    niche: 'Your Niche',
-    // ... other fields
-};
+Edit `data/scoring_rules.json`:
+```json
+{
+  "weights": {
+    "pain": 0.40,
+    "budget": 0.35,
+    "timeline": 0.15,
+    "fit": 0.10
+  },
+  "qualification_threshold": 65
+}
 ```
 
-### Modify Brand Colors
+## Export Formats
 
-Edit Tailwind config in `index.html` (around line 9):
-```javascript
-tailwind.config = {
-    theme: {
-        extend: {
-            colors: {
-                primary: '#your-color',
-                // ...
-            }
-        }
+### WhatsApp JSON
+```json
+{
+  "messages": [
+    {
+      "type": "Value Tip",
+      "timing": "T-48h",
+      "title": "...",
+      "content": "..."
     }
+  ]
 }
 ```
 
----
-
-## 📹 Video Placeholder
-
-The demo references `assets/hvsp_ready.mp4`. If the file doesn't exist:
-
-1. **Download any short video** (6-10 seconds)
-2. **Rename to** `hvsp_ready.mp4`
-3. **Place in** `assets/` folder
-
-Or create a custom one:
-
-```bash
-# Using ffmpeg (if installed)
-ffmpeg -f lavfi -i color=c=0x1e293b:s=1280x720:d=8 \
-  -vf "drawtext=text='HVSP Ready':fontcolor=white:fontsize=48:x=(w-text_w)/2:y=(h-text_h)/2" \
-  -c:v libx264 -t 8 -pix_fmt yuv420p assets/hvsp_ready.mp4
+### Funnel JSON (Lovable)
+```json
+{
+  "funnel": "Authority Close Engine",
+  "steps": [...],
+  "config": { /* setup data */ }
+}
 ```
 
-The app will work without the video file — it just won't play in the final step.
+### Follow-up CSV
+```
+State,Template
+Token Paid,Kickoff confirmation + prep
+Balance Due,Milestone proof + payment nudge
+...
+```
 
----
+### Closing Script (TXT)
+```
+OPEN
+[Custom opening from prospect's pain]
 
-## 🎨 Brand Guidelines
+DIAGNOSE
+[Revenue impact question]
 
-The demo enforces these brand elements:
+...
+```
 
-### Required Phrases
-- "AI Agents System" / "AI Agents Funnel"
-- "HVCO" (High-Value Conversion Offer)
-- "Up to 90% automation" (never as success-rate %)
-- "Doctor-frame: Accept/Reject"
-- "Not a course — 3-Month Consulting + 9 AI Agents System"
+## Browser Compatibility
 
-### Proof Stats (with disclaimers)
-- "₹53Cr+ high-ticket sales attributed"
-- "~3.8x ROAS"
-- "CPL ₹179–₹210"
-- "₹13Cr+ ad spend (₹10Cr+ YouTube)"
+- **Chrome/Edge**: Full support
+- **Firefox**: Full support
+- **Safari**: Full support (may need to allow local file access)
 
-### Compliance
-All proof/testimonials include: **"Illustrative; results vary. Roadmap ≠ guarantee."**
+## Notes
 
-### Tone
-- **Hinglish** by default (can switch to Hindi/English)
-- **Doctor-frame** positioning (we accept/reject clients)
-- **India-first** psychology and market context
+### Illustrative Data
+All applicant data, testimonials, and examples are illustrative. Real implementations would connect to actual CRM/database systems.
 
----
+### No Backend
+This is a pure frontend demo. In production, you'd need:
+- Real WhatsApp Business API integration
+- CRM/database for applicant storage
+- Payment processing integration
+- Calendar API (Google/Zoom)
+- Email/SMS automation platform
 
-## 🧪 Testing Checklist
+### Hinglish Microcopy
+The app uses India-first Hinglish throughout:
+- "Agar yeh problems familiar lage..."
+- "Pipeline unpredictable hai"
+- "Kab tak solve karna hai?"
 
-Before your demo, verify:
+This reflects the target market (India, 5-50CR ARR businesses).
 
-- [ ] Open `index.html` — loads without errors
-- [ ] Click through all 3 steps manually
-- [ ] Fill form and click "Generate HVSP" — progress runs
-- [ ] HVSP outline appears with correct data
-- [ ] Click "Preview Slides" — 12 slides render
-- [ ] Click any slide — modal opens with notes
-- [ ] Click "Render Video" — progress reaches 100%
-- [ ] Video card appears (with or without actual MP4)
-- [ ] Bottom sticky CTA is visible
-- [ ] Press `H` — Presenter Notes toggle
-- [ ] Press `1` — Form prefills
-- [ ] Open `?demo=1` — Auto-runs entire flow
-- [ ] All disclaimers visible in footer and proof sections
+## Development
 
----
+### Code Structure
 
-## 🔧 Troubleshooting
+All logic is in `js/app.js`:
+- **State Management**: Global `state` object
+- **Data Loading**: Fetch all JSON files on init
+- **Event Handlers**: Attached via `attachEventListeners()`
+- **Timers**: `setInterval` with cleanup
+- **Exports**: Blob downloads (CSV, JSON, TXT)
 
-### Tailwind styles not loading
-- **Check internet connection** (Tailwind loads from CDN)
-- Fallback: Download Tailwind CSS and link locally
+### Debugging
 
-### Data not loading
-- **Check console** for fetch errors
-- Ensure `data/*.json` files are in correct location
-- If running via `file://`, some browsers block fetch — use local server
+Open browser DevTools Console to see:
+- Data loading confirmation
+- Error messages (if any)
+- State mutations (you can inspect `window.state`)
 
-### Video not playing
-- **Use local server** instead of opening file directly
-- Browser autoplay policies may block muted videos
-- Click the play overlay manually
+### Adding Features
 
-### Form validation issues
-- **Check console** for JavaScript errors
-- Ensure all required fields have values
-- Try demo preset (`1` key or "Use Demo Preset" button)
+1. Add UI in `index.html`
+2. Add styles in `css/styles.css`
+3. Add logic in `js/app.js`
+4. Update data files in `data/` if needed
 
-### Demo mode not working
-- Ensure URL has `?demo=1` parameter
+## License
+
+This is a demonstration project. Modify as needed for your use case.
+
+## Support
+
+For issues or questions:
 - Check browser console for errors
-- Manually trigger with `1` then `2` keys
+- Ensure all data files are present
+- Try demo mode: `?demo=authority`
 
 ---
 
-## 📦 Deployment
+**ScaleEdge Authority Close Engine** - Built for India-first high-ticket consulting automation.
 
-To share this demo:
-
-### GitHub Pages
-```bash
-# Push to GitHub, enable Pages on main branch
-# Access at: https://username.github.io/repo-name
-```
-
-### Netlify Drop
-```bash
-# Drag entire folder to: https://app.netlify.com/drop
-# Get instant URL
-```
-
-### Zip & Share
-```bash
-# Zip the entire folder
-zip -r hvsp-demo.zip . -x "*.git*" "node_modules/*"
-# Share the zip file
-```
-
----
-
-## 🎓 Educational Notes
-
-### Why Static?
-- **Zero dependencies** (except Tailwind CDN)
-- **Instant load** — no build step
-- **Portable** — runs anywhere
-- **Believable** — feels like real AI processing
-
-### Architecture Decisions
-- **Vanilla JS** for simplicity and transparency
-- **Tailwind** for rapid UI development
-- **JSON data files** for easy customization
-- **Typing effects** for believability
-- **Randomized durations** for organic feel
-
-### Demo Psychology
-- **Progress bars** = trust (users see "work" happening)
-- **Typing logs** = transparency (detailed process)
-- **Matched chips** = specificity (not generic)
-- **Disclaimers** = honesty (builds credibility)
-- **Doctor-frame** = authority (we choose clients)
-
----
-
-## 📄 License
-
-Proprietary demo for Edges • AI Agents System.
-Not for redistribution or white-labeling without permission.
-
----
-
-## 🤝 Support
-
-For issues or customization requests:
-1. Check this README thoroughly
-2. Review `js/app.js` comments for logic flow
-3. Inspect browser console for errors
-4. Test with `?demo=1` mode first
-
----
-
-## 🎉 You're Ready!
-
-**For a 5-minute demo:**
-1. Open `index.html?demo=1`
-2. Press `H` to open Presenter Notes
-3. Follow the 5-min script
-4. Use keyboard shortcuts (1/2/3/4/H) as needed
-
-**For live filling:**
-1. Open `index.html`
-2. Click "Start Demo"
-3. Fill each step, explaining as you go
-4. Generate → Slides → Video
-
-**Happy presenting! 🚀**
+Illustrative; results vary. No messages actually sent. Local data only—stays on your device.

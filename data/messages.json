@@ -1,0 +1,90 @@
+{
+  "value_tips": [
+    {
+      "id": "v1",
+      "title": "Quick Win: Pipeline Audit",
+      "content": "Hey {name} 👋\n\nOur call hai {days} days mein—ek quick tip share kar raha before that:\n\n✅ Apne last 20 demos ka audit karo:\n• Kitne qualified the actually?\n• Kitne \"just exploring\" the?\n• Decision-maker call pe tha ya proxy?\n\nInsight: 60-70% demos unqualified hote hain—agar yeh filter ho jaye upfront, conversion 3-4x jump karta.\n\nCall pe discuss karenge how to build this filter systematically.\n\n— ScaleEdge Team",
+      "diagram_type": "funnel",
+      "timing": "T-48h"
+    },
+    {
+      "id": "v2",
+      "title": "Value Ladder Framework",
+      "content": "Hi {name},\n\nAapki industry mein jo players scale kar rahe, unka secret ek simple ladder:\n\n₹5K → Entry consult (qualify)\n₹50K → Pilot project (prove)\n₹2.5L+ → Retainer (scale)\n\nMost log ek hi price pe stuck hain... buyers ko choice nahi milta.\n\nHamari call mein aapke offer ke liye yeh map karenge based on your actual pipeline data.\n\nTaiyaar rahiye! 📊",
+      "diagram_type": "matrix",
+      "timing": "T-24h"
+    },
+    {
+      "id": "v3",
+      "title": "Timeline vs Budget Matrix",
+      "content": "{name}, quick heads-up:\n\nProspects jo \"urgent\" bolte hain but budget nahi—red flag 🚩\nProspects jo budget committed but timeline vague—yellow flag ⚠️\n\nBest prospects: Clear timeline + Budget allocated = Green ✅\n\nCall pe we'll map your prospects on this grid—you'll instantly see who's real aur kaun time-waste.\n\nSee you soon!",
+      "diagram_type": "timeline",
+      "timing": "T-24h"
+    }
+  ],
+  "proof_chips": [
+    {
+      "id": "p1",
+      "title": "Case: Pipeline 3x in 60 Days",
+      "content": "Hey {name},\n\nQuick case share kar raha jo relevant lagega:\n\n**Rudra (B2B SaaS)**\nProblem: Pipeline ₹40L/mo unpredictable\nSolution: Qualification framework + pre-sell sequence\nResult: ₹1.2Cr pipeline in 60 days (predictable)\n\nTumhare industry mein bhi similar pattern dekhte hain.\n\nCall pe discuss—what worked, what didn't, aur kaise apply hoga.\n\n📹 2-min explainer attached.",
+      "has_video": true,
+      "timing": "T-48h"
+    },
+    {
+      "id": "p2",
+      "title": "Proof: Retainer Revenue 4x",
+      "content": "Hi {name} 👋\n\n**Karan (Design Agency)** ka recent win:\n• Transactional projects se stuck (₹6-8L/mo)\n• Retainer model design kiya with anchor pricing\n• MRR: ₹6L → ₹24L in 5 months\n\nKey move: Value-based positioning (not hourly/project)\n\nYeh approach aapke setup mein bhi fit hoga—call pe blueprint dekhenge.\n\nExcited! 🚀",
+      "has_video": false,
+      "timing": "T-24h"
+    },
+    {
+      "id": "p3",
+      "title": "Win: Closing Rate 45% Boost",
+      "content": "{name}, one more:\n\n**Ayush (EdTech)**\nChallenge: Webinar-to-enrollment 4%\nApproach: Pre-sell nurture + objection handling upfront\nOutcome: 18% conversion + ₹18L cohort revenue\n\nSecret: Don't \"pitch\" on call—pre-sell karo messaging mein, call sirf close karo.\n\nHamari call isi principle pe hogi 😊\n\nReady?",
+      "has_video": false,
+      "timing": "T-4h"
+    }
+  ],
+  "belief_breaks": [
+    {
+      "id": "b1",
+      "title": "Myth: More Leads = More Revenue",
+      "content": "Hey {name},\n\nCommon myth: \"Humein zyada leads chahiye\"\n\nReality check:\n❌ 100 leads × 8% conversion = 8 clients\n✅ 40 qualified leads × 35% conversion = 14 clients\n\nIssue leads ki quantity nahi, qualification hai.\n\nCall pe dekhenge how to build this filter for YOUR pipeline—no guesswork.\n\nCya soon! 💡",
+      "diagram_type": null,
+      "timing": "T-24h"
+    },
+    {
+      "id": "b2",
+      "title": "Reality: Sales is a System, Not Hustle",
+      "content": "Hi {name},\n\nMost founders think: \"Sales = grind harder\"\n\nBut scale karne waale know:\nSales = System\n\n• Right ICP\n• Qualifying questions\n• Pre-sell nurture\n• Closing script\n• Follow-up cadence\n\nHustle ≠ Predictability. Systems = Predictability.\n\nCall pe aapka system design karenge step-by-step.\n\nLet's go! 🔥",
+      "diagram_type": null,
+      "timing": "T-48h"
+    }
+  ],
+  "cta_reminders": [
+    {
+      "id": "c1",
+      "title": "Call Reminder (1 Hour)",
+      "content": "Hey {name} 👋\n\nOur call hai in 1 hour:\n🕐 Time: {call_time}\n📹 Link: {call_link}\n\n✅ Aapka biggest pain point ready rakhna\n✅ Last 3 months ka pipeline data (rough bhi chalega)\n✅ Ideal outcome—agar 90 days mein solve ho jaye toh kya chahiye\n\nMilte hain! 🚀\n\n— ScaleEdge",
+      "timing": "T-1h"
+    },
+    {
+      "id": "c2",
+      "title": "Call Reminder (10 Min)",
+      "content": "{name}, joining in 10 mins?\n\n📹 {call_link}\n\nReady with your top 2-3 pain points.\n\nSee you there! 😊",
+      "timing": "T-10m"
+    },
+    {
+      "id": "c3",
+      "title": "No-Show Nudge",
+      "content": "Hi {name},\n\nHamara scheduled call miss ho gaya—sab theek?\n\nAgar reschedule karna ho toh reply karo, main slot share karunga.\n\nOtherwise all good—wishing you the best! 🙏\n\n— ScaleEdge Team",
+      "timing": "post-no-show"
+    }
+  ],
+  "mini_video": {
+    "title": "How We Build Your Close Engine",
+    "description": "6-sec explainer: Application → Scoring → Pre-sell → Booking → Close → Payment",
+    "file": "hvsp_ready.mp4",
+    "duration": "0:06"
+  }
+}

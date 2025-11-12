@@ -1,0 +1,217 @@
+[
+  {
+    "id": "q1",
+    "question": "What's your current role/title?",
+    "type": "short",
+    "weight": 0.8,
+    "category": "fit",
+    "niches": ["all"],
+    "scoring_map": {
+      "founder": 5,
+      "ceo": 5,
+      "director": 4,
+      "head": 4,
+      "manager": 3,
+      "executive": 2
+    }
+  },
+  {
+    "id": "q2",
+    "question": "Company name aur website?",
+    "type": "short",
+    "weight": 0.5,
+    "category": "fit",
+    "niches": ["all"]
+  },
+  {
+    "id": "q3",
+    "question": "Team size kitni hai currently?",
+    "type": "select",
+    "options": ["Just me", "2-5", "6-15", "16-50", "50+"],
+    "weight": 1.2,
+    "category": "fit",
+    "niches": ["all"],
+    "scoring_map": {
+      "Just me": 2,
+      "2-5": 4,
+      "6-15": 5,
+      "16-50": 5,
+      "50+": 3
+    }
+  },
+  {
+    "id": "q4",
+    "question": "Annual revenue range (approx)?",
+    "type": "select",
+    "options": ["Pre-revenue", "<₹50L", "₹50L-₹2Cr", "₹2Cr-₹10Cr", "₹10Cr+"],
+    "weight": 2.5,
+    "category": "budget",
+    "niches": ["all"],
+    "scoring_map": {
+      "Pre-revenue": 1,
+      "<₹50L": 2,
+      "₹50L-₹2Cr": 4,
+      "₹2Cr-₹10Cr": 5,
+      "₹10Cr+": 5
+    }
+  },
+  {
+    "id": "q5",
+    "question": "Biggest pain point right now jo aapko raat ko neend nahi aane deta?",
+    "type": "long",
+    "weight": 3.0,
+    "category": "pain",
+    "niches": ["all"],
+    "pain_keywords": [
+      "pipeline", "unpredictable", "inconsistent", "revenue", "sales",
+      "conversion", "churn", "retention", "pricing", "margin",
+      "cash flow", "closing", "qualification", "leads", "demos"
+    ]
+  },
+  {
+    "id": "q6",
+    "question": "How urgent is solving this? Kab tak solve karna hai?",
+    "type": "select",
+    "options": ["This week", "This month", "Next quarter", "Someday eventually"],
+    "weight": 2.0,
+    "category": "timeline",
+    "niches": ["all"],
+    "scoring_map": {
+      "This week": 5,
+      "This month": 5,
+      "Next quarter": 3,
+      "Someday eventually": 1
+    }
+  },
+  {
+    "id": "q7",
+    "question": "Pehle kisi consultant/agency/coach ke saath try kiya hai?",
+    "type": "select",
+    "options": ["Yes, didn't work", "Yes, kuch help mili", "No, first time"],
+    "weight": 1.5,
+    "category": "fit",
+    "niches": ["all"],
+    "scoring_map": {
+      "Yes, didn't work": 5,
+      "Yes, kuch help mili": 4,
+      "No, first time": 3
+    }
+  },
+  {
+    "id": "q8",
+    "question": "Budget allocated hai is problem solve karne ke liye?",
+    "type": "select",
+    "options": ["No budget yet", "<₹50K", "₹50K-₹1.5L", "₹1.5L-₹5L", "₹5L+"],
+    "weight": 3.5,
+    "category": "budget",
+    "niches": ["all"],
+    "scoring_map": {
+      "No budget yet": 1,
+      "<₹50K": 2,
+      "₹50K-₹1.5L": 4,
+      "₹1.5L-₹5L": 5,
+      "₹5L+": 5
+    }
+  },
+  {
+    "id": "q9",
+    "question": "Agar hum aapki is problem ko solve kar de in next 60-90 days, kya outcome hoga?",
+    "type": "long",
+    "weight": 2.8,
+    "category": "pain",
+    "niches": ["all"]
+  },
+  {
+    "id": "q10",
+    "question": "Current sales/marketing setup kaisa hai?",
+    "type": "select",
+    "options": ["Kuch nahi hai", "Basic setup hai", "Team hai but results weak", "Mature setup hai"],
+    "weight": 1.8,
+    "category": "fit",
+    "niches": ["b2b_growth_consultant", "agency_owner", "saas_founder"],
+    "scoring_map": {
+      "Kuch nahi hai": 3,
+      "Basic setup hai": 5,
+      "Team hai but results weak": 5,
+      "Mature setup hai": 2
+    }
+  },
+  {
+    "id": "q11",
+    "question": "Aapka current client acquisition process kya hai?",
+    "type": "long",
+    "weight": 2.2,
+    "category": "pain",
+    "niches": ["coach_consultant", "agency_owner", "b2b_growth_consultant"]
+  },
+  {
+    "id": "q12",
+    "question": "Aapke top 3 objections jo prospects dete hain?",
+    "type": "long",
+    "weight": 2.5,
+    "category": "pain",
+    "niches": ["all"]
+  },
+  {
+    "id": "q13",
+    "question": "Decision maker aap ho ya aur kisi ko involve karna padega?",
+    "type": "select",
+    "options": ["I decide", "Partner/co-founder ke saath", "Board/investors involved", "Team consensus needed"],
+    "weight": 2.0,
+    "category": "fit",
+    "niches": ["all"],
+    "scoring_map": {
+      "I decide": 5,
+      "Partner/co-founder ke saath": 4,
+      "Board/investors involved": 3,
+      "Team consensus needed": 2
+    }
+  },
+  {
+    "id": "q14",
+    "question": "Aapka ICP (ideal customer) kaun hai?",
+    "type": "long",
+    "weight": 1.5,
+    "category": "fit",
+    "niches": ["b2b_growth_consultant", "agency_owner", "saas_founder"]
+  },
+  {
+    "id": "q15",
+    "question": "Average deal/ticket size kya hai currently?",
+    "type": "short",
+    "weight": 2.0,
+    "category": "fit",
+    "niches": ["b2b_growth_consultant", "agency_owner", "coach_consultant"]
+  },
+  {
+    "id": "q16",
+    "question": "Phone number (WhatsApp updates ke liye)",
+    "type": "short",
+    "weight": 0.5,
+    "category": "contact",
+    "niches": ["all"]
+  },
+  {
+    "id": "q17",
+    "question": "LinkedIn profile link (optional)",
+    "type": "short",
+    "weight": 0.3,
+    "category": "contact",
+    "niches": ["all"]
+  },
+  {
+    "id": "q18",
+    "question": "Kya aapne pehle automation/CRM tools try kiye hain?",
+    "type": "select",
+    "options": ["Never", "Tried, didn't stick", "Using but underutilized", "Power user hoon"],
+    "weight": 1.2,
+    "category": "fit",
+    "niches": ["all"],
+    "scoring_map": {
+      "Never": 3,
+      "Tried, didn't stick": 5,
+      "Using but underutilized": 5,
+      "Power user hoon": 2
+    }
+  }
+]

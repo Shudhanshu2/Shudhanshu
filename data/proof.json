@@ -1,0 +1,90 @@
+[
+  {
+    "id": "pr1",
+    "name": "Rudra S.",
+    "company": "SaaS Founder",
+    "avatar_initials": "RS",
+    "avatar_color": "#3B82F6",
+    "headline": "Pipeline 3x kiya in 60 days",
+    "blurb": "Pipeline ₹40L/mo unpredictable thi—qualification framework + pre-sell sequence se ₹1.2Cr predictable pipeline built. Conversion bhi 12% → 31%.",
+    "metric": "3x pipeline",
+    "industry": "B2B SaaS"
+  },
+  {
+    "id": "pr2",
+    "name": "Ayush K.",
+    "company": "EdTech Founder",
+    "avatar_initials": "AK",
+    "avatar_color": "#8B5CF6",
+    "headline": "Closing rate 45% improve",
+    "blurb": "Webinar-to-enrollment 4% thi. Pre-sell nurture + objection handling upfront se 18% conversion achieve kiya. Cohort revenue ₹4L → ₹18L.",
+    "metric": "+45% close rate",
+    "industry": "EdTech"
+  },
+  {
+    "id": "pr3",
+    "name": "Priya M.",
+    "company": "FinTech Growth",
+    "avatar_initials": "PM",
+    "avatar_color": "#EC4899",
+    "headline": "Avg deal size 2.1x",
+    "blurb": "Deal size ₹8L stuck thi. Value-based positioning + anchor pricing se avg deal ₹17L ho gaya. Win rate bhi 19% → 38%.",
+    "metric": "2.1x deal size",
+    "industry": "FinTech"
+  },
+  {
+    "id": "pr4",
+    "name": "Karan D.",
+    "company": "Design Agency",
+    "avatar_initials": "KD",
+    "avatar_color": "#F59E0B",
+    "headline": "Retainer revenue 4x",
+    "blurb": "Transactional projects se ₹6L/mo stuck. Retainer model design kiya—MRR ₹24L in 5 months. Client LTV 8mo → 18mo avg.",
+    "metric": "4x retainer revenue",
+    "industry": "Agency"
+  },
+  {
+    "id": "pr5",
+    "name": "Neha P.",
+    "company": "Content Agency",
+    "avatar_initials": "NP",
+    "avatar_color": "#10B981",
+    "headline": "Churn 65% reduce",
+    "blurb": "Client churn 4-5 months mein ho jata tha. Retention playbook + upsell ladder se avg retention 14 months. Revenue stability 3.2x.",
+    "metric": "-65% churn",
+    "industry": "Agency"
+  },
+  {
+    "id": "pr6",
+    "name": "Sameer R.",
+    "company": "Dev Shop",
+    "avatar_initials": "SR",
+    "avatar_color": "#6366F1",
+    "headline": "Avg project ₹8L → ₹22L",
+    "blurb": "Generic proposals aur price war mein stuck. Value-based scoping + case study positioning se avg project 2.75x. Proposal-to-close 14% → 41%.",
+    "metric": "2.75x project value",
+    "industry": "IT Services"
+  },
+  {
+    "id": "pr7",
+    "name": "Meera I.",
+    "company": "Leadership Coach",
+    "avatar_initials": "MI",
+    "avatar_color": "#EF4444",
+    "headline": "₹25K → ₹1.8L packages",
+    "blurb": "Hourly billing se income capped thi ₹40K/mo. Productized service + waitlist positioning se ₹1.8L packages sell kar rahi consistently.",
+    "metric": "7.2x package value",
+    "industry": "Coaching"
+  },
+  {
+    "id": "pr8",
+    "name": "Rohan T.",
+    "company": "Marketing Consultant",
+    "avatar_initials": "RT",
+    "avatar_color": "#14B8A6",
+    "headline": "Retainer model scale kiya",
+    "blurb": "Solo consultant se ₹12L/mo retainer business built. Team hire kiya, leverage create kiya. Calendar se time bhi free hua 40%.",
+    "metric": "Retainer scaled",
+    "industry": "Consulting"
+  }
+]
