@@ -15,6 +15,52 @@ const state = {
     videoGated: true, videoComplete: false }
 };
 
+// ====================================================
+// Demo Constants & Helpers
+// ====================================================
+const DEMO = true; // never call real APIs
+const WA_DEEPLINK = (text) => `https://wa.me/?text=${encodeURIComponent(text)}`;
+
+const LAYOUTS = ['Title', 'Bullets', 'TwoCol', 'Diagram', 'Proof', 'CTA'];
+
+function downloadFile(name, content, type='text/plain') {
+  const blob = new Blob([content], { type });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(a.href);
+}
+
+async function copyText(txt) {
+  try {
+    await navigator.clipboard.writeText(txt);
+    showToast('Copied ✓');
+  } catch(err) {
+    console.warn('Clipboard copy failed:', err);
+  }
+}
+
+function showToast(msg) {
+  const toast = document.createElement('div');
+  toast.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#DC2626;color:white;padding:12px 20px;border-radius:8px;z-index:9999;box-shadow:0 4px 12px rgba(0,0,0,.3);';
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 2000);
+}
+
+// ====================================================
+// Journey Map Tracking
+// ====================================================
+function markJourney(stepNum) {
+  const steps = document.querySelectorAll('#journey .step');
+  if (steps.length === 0) return;
+
+  for (let i = 0; i < stepNum && i < steps.length; i++) {
+    steps[i].classList.add('done');
+  }
+}
+
 // Data Loading
 async function loadData() {
   try {
@@ -44,6 +90,10 @@ function initializeUI() {
   populateProofTiles();
   populateKnowledgeBase();
   attachEventListeners();
+  initDripDrawer();
+  initSlideModal();
+  initConnections();
+  initLovableHook();
   checkDemoMode();
 }
 
@@ -301,6 +351,8 @@ function buildApplicationForm() {
     container.appendChild(qDiv);
   });
 
+  markJourney(1); // Application
+
   setTimeout(() => {
     document.getElementById('section-form-designer').scrollIntoView({ behavior: 'smooth' });
   }, 100);
@@ -466,6 +518,8 @@ function filterProspects() {
     selector.appendChild(option);
   });
 
+  markJourney(2); // Qualify
+
   setTimeout(() => {
     document.getElementById('section-qualification').scrollIntoView({ behavior: 'smooth' });
   }, 100);
@@ -509,10 +563,95 @@ function assemblePresell() {
 
 function scheduleDrip() {
   alert('WhatsApp drip scheduled (simulated). No messages sent.');
+  markJourney(3); // Pre-sell Drip
   document.getElementById('section-booking').classList.remove('hidden');
   setTimeout(() => {
     document.getElementById('section-booking').scrollIntoView({ behavior: 'smooth' });
   }, 100);
+}
+
+// ====================================================
+// Drip Drawer
+// ====================================================
+function buildDripPlan() {
+  return [
+    {
+      label: 'T-48h',
+      subject: 'Quick question...',
+      body: 'Hey! Quick Q—did the slides make sense? Any section unclear? (I can hop on a 10-min clarity call if helpful.)',
+      provenance: 'messages#belief_break_1'
+    },
+    {
+      label: 'T-24h',
+      subject: 'Real quick',
+      body: 'Noticed you haven\'t booked yet. All good! But slots are filling fast for next week. Want me to hold one for you?',
+      provenance: 'calendar_urgency_soft'
+    },
+    {
+      label: 'T-2h',
+      subject: 'Proof chip',
+      body: 'In case helpful: Rajiv (SaaS founder) had the same hesitation. After our call, he closed 2 pilots in 9 days. Screenshot attached 📊',
+      provenance: 'proof#social_proof_recent'
+    },
+    {
+      label: 'T-30m',
+      subject: 'Last call (literally)',
+      body: 'This is the last slot today. If you miss it, next opening is in 6 days. No pressure—just didn\'t want you waiting if you\'re ready now.',
+      provenance: 'scarcity_final'
+    }
+  ];
+}
+
+function renderDripDrawer() {
+  const plan = buildDripPlan();
+  const container = document.getElementById('drip-items');
+  container.innerHTML = '';
+
+  plan.forEach((msg, i) => {
+    const item = document.createElement('div');
+    item.className = 'drip-item';
+    item.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+        <span style="display:inline-block; padding:3px 8px; background:#172135; border-radius:999px; font-size:11px; font-weight:600; color:#60a5fa;">${msg.label}</span>
+        <span class="provenance-tag">${msg.provenance}</span>
+      </div>
+      <div style="font-size:13px; font-weight:600; color:#f1f5f9; margin-bottom:4px;">${msg.subject}</div>
+      <div class="bubble">${msg.body}</div>
+    `;
+    container.appendChild(item);
+  });
+}
+
+function initDripDrawer() {
+  const drawer = document.getElementById('drip-drawer');
+  const openBtn = document.getElementById('btn-open-drip');
+  const closeBtn = document.getElementById('close-drip');
+  const testBtn = document.getElementById('btn-send-test');
+
+  if (openBtn) {
+    openBtn.onclick = () => {
+      renderDripDrawer();
+      drawer.classList.remove('hidden');
+    };
+  }
+
+  if (closeBtn) {
+    closeBtn.onclick = () => {
+      drawer.classList.add('hidden');
+    };
+  }
+
+  if (testBtn) {
+    testBtn.onclick = () => {
+      if (DEMO) {
+        showToast('Demo mode: No messages sent');
+      } else {
+        const plan = buildDripPlan();
+        const text = plan.map(m => `${m.label}: ${m.subject}\n${m.body}`).join('\n\n');
+        window.open(WA_DEEPLINK(text), '_blank');
+      }
+    };
+  }
 }
 
 // Parallel Timers
@@ -564,17 +703,115 @@ function startSlidesTimer(duration) {
 
 function generateSlideThumbs(container) {
   container.innerHTML = '';
-  const timings = ['1:20', '0:45', '2:10', '1:35', '0:50', '1:15', '2:00', '1:40', '0:55'];
+  const timings = ['1:20', '0:45', '2:10', '1:35', '0:50', '1:15', '2:00', '1:40', '0:55', '1:10', '0:50', '1:25'];
 
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < 12; i++) {
+    const layout = LAYOUTS[i % LAYOUTS.length];
     const thumb = document.createElement('div');
-    thumb.className = 'slide-thumb';
-    thumb.style.borderColor = state.setup.brandColor;
-    thumb.innerHTML = '<div class="slide-thumb-content">' +
-      '<div class="slide-thumb-title">Slide ' + (i + 1) + '</div>' +
-      '<div class="slide-thumb-dots">• • •</div>' +
-      '<div class="slide-thumb-timing">' + timings[i] + '</div></div>';
+    thumb.className = 'thumb16';
+    thumb.style.cursor = 'pointer';
+    thumb.innerHTML = thumbHtml(i + 1, layout, timings[i]);
+    thumb.onclick = () => openSlideModal(i + 1, layout, timings[i]);
     container.appendChild(thumb);
+  }
+}
+
+function thumbHtml(num, layout, timing) {
+  let content = '';
+
+  switch(layout) {
+    case 'Title':
+      content = `<div style="text-align:center; padding-top:20%;">
+        <div style="font-size:14px; font-weight:700; color:#f1f5f9;">${state.setup.offer || 'Title Slide'}</div>
+        <div style="font-size:10px; color:#64748b; margin-top:4px;">ScaleEdge</div>
+      </div>`;
+      break;
+    case 'Bullets':
+      content = `<div style="padding:8px;">
+        <div style="font-size:11px; font-weight:600; color:#f1f5f9; margin-bottom:6px;">Key Points</div>
+        <div style="font-size:9px; color:#94a3b8;">• Point one<br>• Point two<br>• Point three</div>
+      </div>`;
+      break;
+    case 'TwoCol':
+      content = `<div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; padding:8px; height:100%;">
+        <div style="background:#0f172a; border:1px solid #1e293b; border-radius:6px; padding:6px;">
+          <div style="font-size:9px; color:#94a3b8;">Before</div>
+        </div>
+        <div style="background:#0f172a; border:1px solid #1e293b; border-radius:6px; padding:6px;">
+          <div style="font-size:9px; color:#94a3b8;">After</div>
+        </div>
+      </div>`;
+      break;
+    case 'Diagram':
+      content = `<div style="padding:8px; display:flex; align-items:center; justify-content:center; height:100%;">
+        <svg width="100%" height="100%" viewBox="0 0 120 60" style="max-width:120px;">
+          <rect x="10" y="20" width="30" height="20" fill="none" stroke="#DC2626" stroke-width="1.5" rx="3"/>
+          <line x1="40" y1="30" x2="50" y2="30" stroke="#64748b" stroke-width="1.5"/>
+          <rect x="50" y="20" width="30" height="20" fill="none" stroke="#DC2626" stroke-width="1.5" rx="3"/>
+          <line x1="80" y1="30" x2="90" y2="30" stroke="#64748b" stroke-width="1.5"/>
+          <rect x="90" y="20" width="30" height="20" fill="none" stroke="#DC2626" stroke-width="1.5" rx="3"/>
+        </svg>
+      </div>`;
+      break;
+    case 'Proof':
+      content = `<div style="padding:8px;">
+        <div style="font-size:10px; font-weight:600; color:#f1f5f9; margin-bottom:6px;">Social Proof</div>
+        <div style="display:flex; gap:3px; margin-bottom:4px;">
+          ${state.proof.slice(0, 3).map(p => `<div style="width:20px; height:20px; border-radius:50%; background:${p.avatar_color}; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:700;">${p.avatar_initials}</div>`).join('')}
+        </div>
+        <div style="font-size:8px; color:#64748b;">"Results speak..."</div>
+      </div>`;
+      break;
+    case 'CTA':
+      content = `<div style="text-align:center; padding-top:25%;">
+        <div style="font-size:12px; font-weight:700; color:#DC2626; margin-bottom:4px;">Next Step</div>
+        <div style="font-size:9px; color:#94a3b8;">Book your call</div>
+      </div>`;
+      break;
+  }
+
+  return `
+    ${content}
+    <div style="position:absolute; bottom:6px; right:8px; font-size:9px; color:#475569; font-weight:600;">${timing}</div>
+    <div style="position:absolute; top:6px; left:8px; font-size:8px; color:#475569; background:#0f172a; padding:2px 6px; border-radius:999px;">#${num} ${layout}</div>
+  `;
+}
+
+function openSlideModal(num, layout, timing) {
+  const modal = document.getElementById('slide-modal');
+  const preview = document.getElementById('slide-preview');
+  const notes = document.getElementById('slide-notes');
+
+  preview.innerHTML = `
+    <div style="background:#0b0f1a; border:2px solid #DC2626; border-radius:16px; padding:40px; aspect-ratio:16/9; max-width:800px; margin:0 auto;">
+      ${thumbHtml(num, layout, timing)}
+    </div>
+  `;
+
+  notes.innerHTML = `
+    <div style="font-size:13px; color:#cbd5e1; line-height:1.6;">
+      <div style="font-weight:600; margin-bottom:8px;">Presenter Notes: Slide ${num}</div>
+      <div>• Emphasize the ${layout.toLowerCase()} layout here</div>
+      <div>• Timing: ${timing} recommended</div>
+      <div>• ${layout === 'CTA' ? 'Strong call-to-action' : layout === 'Proof' ? 'Show social validation' : 'Keep it concise'}</div>
+    </div>
+  `;
+
+  modal.classList.remove('hidden');
+}
+
+function initSlideModal() {
+  const modal = document.getElementById('slide-modal');
+  const closeBtn = document.getElementById('close-slide-modal');
+
+  if (closeBtn) {
+    closeBtn.onclick = () => modal.classList.add('hidden');
+  }
+
+  if (modal) {
+    modal.onclick = (e) => {
+      if (e.target === modal) modal.classList.add('hidden');
+    };
   }
 }
 
@@ -638,10 +875,16 @@ function formatTime(seconds) {
 // Booking
 function orchestrateBooking() {
   alert('Booking orchestration confirmed (simulated).');
+  markJourney(4); // Call Booked
+
   document.getElementById('section-closing-script').classList.remove('hidden');
   document.getElementById('section-followup').classList.remove('hidden');
   document.getElementById('section-workflow').classList.remove('hidden');
   document.getElementById('section-result').classList.remove('hidden');
+
+  // Render collector and mark final journey step
+  renderCollector();
+  markJourney(5); // Collect
 
   setTimeout(() => {
     document.getElementById('section-closing-script').scrollIntoView({ behavior: 'smooth' });
@@ -783,6 +1026,230 @@ function generateWorkflowMap() {
     text.textContent = node.label;
     svg.appendChild(text);
   });
+}
+
+// ====================================================
+// Connections Modal
+// ====================================================
+function generateICS() {
+  const now = new Date();
+  const start = new Date(now.getTime() + 2 * 24 * 60 * 60 * 1000); // +2 days
+  const end = new Date(start.getTime() + 30 * 60 * 1000); // +30 mins
+
+  const formatDate = (d) => {
+    return d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+  };
+
+  const ics = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//ScaleEdge//Authority Close Engine//EN
+BEGIN:VEVENT
+UID:${Date.now()}@scaleedge.demo
+DTSTAMP:${formatDate(now)}
+DTSTART:${formatDate(start)}
+DTEND:${formatDate(end)}
+SUMMARY:Discovery Call - ScaleEdge Demo
+DESCRIPTION:Demo call for Authority Close Engine. This is a simulated booking.
+LOCATION:https://meet.scaleedge.demo/call-${Math.random().toString(36).substr(2, 9)}
+STATUS:TENTATIVE
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Call in 15 minutes
+END:VALARM
+END:VEVENT
+END:VCALENDAR`;
+
+  downloadFile('scaleedge-demo-call.ics', ics, 'text/calendar');
+  showToast('Calendar invite downloaded ✓');
+}
+
+function initConnections() {
+  const waDocBtn = document.getElementById('btn-wa-doc');
+  const icsBtn = document.getElementById('btn-ics');
+  const reserveBtn = document.getElementById('btn-reserve');
+  const copyHostBtn = document.getElementById('btn-copy-host');
+
+  if (waDocBtn) {
+    waDocBtn.onclick = () => {
+      showToast('Demo mode: WA Business setup guide');
+      // In real app, would show PDF or link
+    };
+  }
+
+  if (icsBtn) {
+    icsBtn.onclick = () => {
+      generateICS();
+    };
+  }
+
+  if (reserveBtn) {
+    reserveBtn.onclick = () => {
+      const demoLink = 'https://meet.scaleedge.demo/call-' + Math.random().toString(36).substr(2, 9);
+      showToast('Demo link reserved (simulated)');
+      console.log('Reserved demo link:', demoLink);
+    };
+  }
+
+  if (copyHostBtn) {
+    copyHostBtn.onclick = () => {
+      const hostLink = 'https://meet.scaleedge.demo/host-' + Math.random().toString(36).substr(2, 9);
+      copyText(hostLink);
+    };
+  }
+}
+
+// ====================================================
+// Money-Collector Panel
+// ====================================================
+function renderCollector() {
+  const container = document.getElementById('collector-rows');
+  if (!container) return;
+
+  const rows = [
+    {
+      name: 'Priya K.',
+      state: 'Token Paid (₹30K)',
+      due: '₹90K',
+      lastPing: '2d ago',
+      next: 'Milestone 1 reminder',
+      phone: '919876543210'
+    },
+    {
+      name: 'Arjun M.',
+      state: 'Balance Due (₹1.2L)',
+      due: '₹1.2L',
+      lastPing: '5d ago',
+      next: 'Payment nudge + proof',
+      phone: '919876543211'
+    },
+    {
+      name: 'Neha S.',
+      state: 'Full Paid ✓',
+      due: '—',
+      lastPing: '1w ago',
+      next: 'Upsell check-in',
+      phone: '919876543212'
+    }
+  ];
+
+  container.innerHTML = '';
+  rows.forEach(row => {
+    const div = document.createElement('div');
+    div.className = 'collector-row';
+    div.innerHTML = `
+      <div style="flex:1;">
+        <div style="font-weight:600; color:#f1f5f9; margin-bottom:2px;">${row.name}</div>
+        <div style="font-size:11px; color:#64748b;">${row.state} • Due: <b>${row.due}</b></div>
+      </div>
+      <div style="flex:1; font-size:12px; color:#94a3b8;">
+        <div>Last: ${row.lastPing}</div>
+        <div style="color:#64748b;">→ ${row.next}</div>
+      </div>
+      <div style="display:flex; gap:6px; align-items:center;">
+        <button class="btn-secondary text-xs" onclick="window.open('${WA_DEEPLINK('Hi ' + row.name + ', following up on payment...')}', '_blank')">
+          📱 Ping
+        </button>
+        <span class="provenance-tag">wa.me/${row.phone.substr(-4)}</span>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+// ====================================================
+// Lovable Funnel Spec Generation
+// ====================================================
+function lovableSpec() {
+  return {
+    project: 'ScaleEdge Authority Close Engine',
+    generated_at: new Date().toISOString(),
+    funnel_structure: {
+      stage_1_application: {
+        type: 'dynamic_form',
+        questions: state.formQuestions.map(q => ({
+          id: q.id,
+          question: q.question,
+          type: q.type,
+          category: q.category
+        })),
+        auto_build: true,
+        niche_conditional: true
+      },
+      stage_2_scoring: {
+        algorithm: 'composite_weighted',
+        weights: state.scoringRules.weights,
+        threshold: state.scoringRules.qualification_threshold,
+        outputs: ['qualified', 'rejected']
+      },
+      stage_3_presell: {
+        channels: ['whatsapp_drip', 'slides_video'],
+        messages: state.presellMessages.map(m => ({
+          type: m.type,
+          timing: m.timing,
+          title: m.title
+        })),
+        parallel_timers: {
+          slides: '2:30-4:00',
+          video: '10:00+',
+          gate_at: '60%'
+        }
+      },
+      stage_4_booking: {
+        orchestration: 'calendar_integration',
+        reminder_system: true,
+        drip_plan: buildDripPlan()
+      },
+      stage_5_closing: {
+        script_engine: 'dynamic',
+        snippets: Object.keys(state.closingSnippets),
+        personalization: true
+      },
+      stage_6_collection: {
+        payment_tracking: true,
+        followup_automation: 'whatsapp_deeplink',
+        states: ['token_paid', 'balance_due', 'full_paid']
+      }
+    },
+    ui_config: {
+      brand_color: state.setup.brandColor,
+      theme: 'dark',
+      framework: 'tailwind_cdn',
+      components: ['journey_map', 'drip_drawer', 'slide_modal', 'collector_panel']
+    },
+    data_sources: {
+      niches: state.niches.length + ' options',
+      questions: state.questions.length + ' total',
+      applicants: state.applicants.length + ' simulated',
+      messages: Object.keys(state.messages).length + ' templates',
+      proof: state.proof.length + ' social proof tiles'
+    },
+    deployment: {
+      type: 'static_spa',
+      dependencies: ['tailwind_cdn'],
+      run_command: 'python3 -m http.server 5500',
+      demo_mode: DEMO,
+      demo_url_param: '?demo=authority'
+    }
+  };
+}
+
+function initLovableHook() {
+  const btn = document.getElementById('btn-lovable');
+  if (!btn) return;
+
+  btn.onclick = () => {
+    const spec = lovableSpec();
+    const json = JSON.stringify(spec, null, 2);
+
+    // Download
+    downloadFile('lovable-funnel-spec.json', json, 'application/json');
+
+    // Copy to clipboard
+    copyText(json);
+
+    showToast('Lovable spec downloaded + copied ✓');
+  };
 }
 
 // Modals

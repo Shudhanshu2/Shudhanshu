@@ -24,6 +24,19 @@
   <!-- Main Container -->
   <main class="container mx-auto px-6 py-8">
 
+    <!-- Journey Map -->
+    <div id="journey" class="journey mb-4">
+      <div class="step">Application</div>
+      <div class="sep"></div>
+      <div class="step">Qualify</div>
+      <div class="sep"></div>
+      <div class="step">Pre-sell Drip</div>
+      <div class="sep"></div>
+      <div class="step">Call Booked</div>
+      <div class="sep"></div>
+      <div class="step">Collect</div>
+    </div>
+
     <!-- Section 1: Client Setup -->
     <section id="section-setup" class="section-card mb-8">
       <h2 class="section-title">Client Setup</h2>
@@ -282,7 +295,10 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <!-- Slides Timer -->
         <div class="bg-ink-2/30 rounded-lg p-4">
-          <h3 class="text-sm font-semibold text-brand mb-2">Slides Prep</h3>
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="text-sm font-semibold text-brand">Slides Plan (for drip video)</h3>
+            <button id="btn-drip-drawer" class="btn-secondary text-xs">Drip Timeline</button>
+          </div>
           <div class="mb-2">
             <div class="flex justify-between text-xs text-gray-400 mb-1">
               <span>Progress</span>
@@ -326,6 +342,20 @@
 
       <button id="btn-schedule-drip" class="btn-primary">Schedule WhatsApp Drip (simulated)</button>
       <p class="text-xs text-gray-500 mt-2">Simulated connections. No messages sent.</p>
+
+      <!-- Money-Collector Section -->
+      <section id="collector" class="bg-ink-2/30 rounded-lg p-4 mt-6">
+        <div class="flex items-center gap-2 mb-3">
+          <h3 class="text-sm font-semibold text-brand">Payment Follow-ups</h3>
+          <span class="text-xs text-slate-400">Stages: Pending → Token → Partial → Paid</span>
+        </div>
+        <div id="collector-rows" class="space-y-2"></div>
+        <div class="text-xs text-slate-500 mt-2">Receipts → ~/Documents/ScaleEdge/Collections/... (simulated)</div>
+      </section>
+
+      <!-- Lovable Button -->
+      <button id="btn-lovable" class="btn-secondary mt-4">Generate Funnel Spec for Lovable</button>
+      <p class="text-xs text-gray-500 mt-1">Illustrative; results vary.</p>
     </section>
 
     <!-- Section 6: Booking Orchestration -->
@@ -562,42 +592,61 @@
 
   <!-- Connections Modal -->
   <div id="modal-connections" class="modal hidden">
-    <div class="modal-content">
+    <div class="modal-content w-[680px]">
       <div class="modal-header">
         <h2 class="text-xl font-bold">Connections</h2>
         <button class="modal-close" data-modal="modal-connections">&times;</button>
       </div>
       <div class="modal-body">
-        <div class="space-y-4">
-          <div class="connection-item">
-            <div class="flex items-center justify-between">
-              <div>
-                <div class="font-semibold">WhatsApp Business API</div>
-                <div class="text-xs text-gray-500">Simulated. No messages sent.</div>
-              </div>
-              <span class="badge badge-green">Connected</span>
-            </div>
+        <div class="grid grid-cols-3 gap-3 mb-4">
+          <div class="connection-tile">
+            <h4 class="font-semibold mb-1">WhatsApp Business</h4>
+            <p class="text-xs text-gray-500 mb-2">State: <b>Demo mode</b></p>
+            <button class="btn-secondary text-xs" id="btn-wa-doc">View setup guide</button>
           </div>
-          <div class="connection-item">
-            <div class="flex items-center justify-between">
-              <div>
-                <div class="font-semibold">Calendar (Google/Zoom)</div>
-                <div class="text-xs text-gray-500">Mock integration</div>
-              </div>
-              <span class="badge badge-green">Connected</span>
-            </div>
+          <div class="connection-tile">
+            <h4 class="font-semibold mb-1">Calendar</h4>
+            <p class="text-xs text-gray-500 mb-2">State: <b>Demo mode</b></p>
+            <button class="btn-secondary text-xs" id="btn-ics">Download .ics</button>
           </div>
-          <div class="connection-item">
-            <div class="flex items-center justify-between">
-              <div>
-                <div class="font-semibold">Lovable</div>
-                <div class="text-xs text-gray-500">Export funnel JSON ready</div>
-              </div>
-              <span class="badge badge-blue">Ready</span>
-            </div>
-            <button id="btn-export-lovable-modal" class="btn-secondary text-xs mt-2">Export Funnel JSON</button>
+          <div class="connection-tile">
+            <h4 class="font-semibold mb-1">Meeting</h4>
+            <p class="text-xs text-gray-500 mb-2">State: <b>Demo mode</b></p>
+            <button class="btn-secondary text-xs mb-1" id="btn-reserve">Reserve demo link</button>
+            <button class="btn-secondary text-xs" id="btn-copy-host">Copy host link</button>
           </div>
         </div>
+        <div class="text-xs text-slate-400 mt-3">Demo mode only—no external calls.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Drip Drawer -->
+  <aside id="drip-drawer" class="drawer hidden">
+    <div class="drawer-header">
+      <h3 class="text-lg font-semibold">WhatsApp Drip Timeline</h3>
+      <button id="close-drip" class="icon-btn">✕</button>
+    </div>
+    <div id="drip-items" class="drip-list"></div>
+    <div class="p-3 border-t border-slate-800 flex gap-2">
+      <button id="btn-send-test" class="btn-secondary text-xs">Send test to me</button>
+      <span class="text-xs text-slate-400 ml-auto">Simulated. No messages actually sent.</span>
+    </div>
+  </aside>
+
+  <!-- Slide Modal -->
+  <div id="slide-modal" class="modal hidden">
+    <div class="modal-content w-[800px]">
+      <div class="modal-header">
+        <h2 class="text-xl font-bold">Slide Preview</h2>
+        <div class="flex gap-2">
+          <button id="slide-prev" class="btn-secondary text-xs">← Prev</button>
+          <button id="slide-next" class="btn-secondary text-xs">Next →</button>
+          <button id="slide-close" class="btn-secondary text-xs">✕</button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div id="slide-preview" class="p-4 bg-ink rounded-lg"></div>
       </div>
     </div>
   </div>

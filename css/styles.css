@@ -616,3 +616,244 @@ body {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
+
+/* Journey Map */
+.journey {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.journey .step {
+  padding: 6px 10px;
+  border: 1px solid #334155;
+  border-radius: 999px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.journey .step.done {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: white;
+}
+
+.journey .sep {
+  height: 2px;
+  width: 28px;
+  background: #334155;
+  border-radius: 2px;
+}
+
+/* Drawer (Drip Timeline) */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 360px;
+  background: var(--panel);
+  border-left: 1px solid #0f172a;
+  box-shadow: -6px 0 20px rgba(0,0,0,.3);
+  z-index: 60;
+}
+
+.drawer.hidden {
+  display: none;
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid #0f172a;
+}
+
+.drip-list {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: auto;
+  height: calc(100% - 100px);
+}
+
+.drip-item {
+  background: #0b0f1a;
+  border: 1px solid #0f172a;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.drip-head {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.bubble {
+  background: #0f172a;
+  border: 1px solid #172135;
+  border-radius: 12px;
+  padding: 10px;
+  margin-top: 6px;
+  font-size: 13px;
+}
+
+.prov {
+  font-size: 10px;
+  color: #64748b;
+  margin-top: 6px;
+}
+
+.chips {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.chip-sim {
+  font-size: 10px;
+  border: 1px solid #334155;
+  border-radius: 999px;
+  padding: 2px 6px;
+  color: #94a3b8;
+}
+
+.icon-btn {
+  font-size: 16px;
+  opacity: 0.8;
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.icon-btn:hover {
+  opacity: 1;
+  color: var(--brand);
+}
+
+/* 16:9 Slide Thumbnails */
+.thumb16 {
+  aspect-ratio: 16/9;
+  background: #0b0f1a;
+  border: 1px solid #1f2937;
+  border-radius: 14px;
+  padding: 10px;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.thumb16:hover {
+  border-color: var(--brand);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+}
+
+.thumb-head {
+  display: flex;
+  justify-content: space-between;
+  color: #94a3b8;
+  font-size: 11px;
+  margin-bottom: 6px;
+}
+
+.thumb-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.thumb-body h4 {
+  font-weight: 600;
+  font-size: 13px;
+  margin-top: 6px;
+  color: #F1F5F9;
+}
+
+.mini {
+  font-size: 10px;
+  color: #64748b;
+}
+
+.mini-svg {
+  width: 100%;
+  height: 36px;
+  margin-top: 6px;
+  opacity: 0.7;
+}
+
+.build {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.note-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 14px;
+  opacity: 0.8;
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 2px 6px;
+}
+
+.note-btn:hover {
+  opacity: 1;
+  color: var(--brand);
+}
+
+.note-fly {
+  position: absolute;
+  background: #0f172a;
+  border: 1px solid #1f2937;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 12px;
+  color: #cbd5e1;
+  top: 30px;
+  right: 0;
+  max-width: 200px;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.time {
+  color: var(--brand);
+  font-weight: 600;
+}
+
+/* Connection Tiles */
+.connection-tile {
+  background: var(--ink);
+  border: 1px solid #334155;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.connection-tile button {
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+/* Collector */
+#collector-rows .flex {
+  background: var(--ink);
+  transition: all 0.2s;
+}
+
+#collector-rows .flex:hover {
+  border-color: var(--brand);
+  background: var(--ink-2);
+}
