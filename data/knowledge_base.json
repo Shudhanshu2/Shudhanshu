@@ -1,0 +1,769 @@
+[
+  {
+    "name": "B2B Consulting",
+    "sizeGB": 1.2,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Fitness Coach B2C",
+    "sizeGB": 0.8,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "SaaS Agency",
+    "sizeGB": 1.5,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Real Estate Coach",
+    "sizeGB": 0.9,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "E-commerce Store Owner",
+    "sizeGB": 1.1,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Career Coach",
+    "sizeGB": 0.7,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Freelance Designer",
+    "sizeGB": 0.6,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Content Creator Coach",
+    "sizeGB": 1.0,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Financial Advisor",
+    "sizeGB": 1.3,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Life Coach",
+    "sizeGB": 0.8,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Sales Training",
+    "sizeGB": 1.1,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Marketing Consultant",
+    "sizeGB": 1.4,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "HR Consultant",
+    "sizeGB": 0.9,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Legal Services",
+    "sizeGB": 1.6,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Nutrition Coach",
+    "sizeGB": 0.7,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Yoga Instructor",
+    "sizeGB": 0.6,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Business Coach",
+    "sizeGB": 1.3,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Tech Consultant",
+    "sizeGB": 1.5,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Brand Strategist",
+    "sizeGB": 1.1,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "SEO Specialist",
+    "sizeGB": 0.9,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "PPC Agency",
+    "sizeGB": 1.2,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Email Marketing",
+    "sizeGB": 0.8,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Social Media Agency",
+    "sizeGB": 1.0,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Video Production",
+    "sizeGB": 1.4,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Copywriting Agency",
+    "sizeGB": 1.1,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Web Design Agency",
+    "sizeGB": 1.3,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "App Development",
+    "sizeGB": 1.7,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Product Manager Coach",
+    "sizeGB": 1.2,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Startup Advisor",
+    "sizeGB": 1.4,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Investment Coach",
+    "sizeGB": 1.5,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Crypto Consultant",
+    "sizeGB": 1.1,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "NFT Strategist",
+    "sizeGB": 0.9,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Gaming Coach",
+    "sizeGB": 0.8,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Esports Training",
+    "sizeGB": 1.0,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Music Production",
+    "sizeGB": 1.2,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Photography Business",
+    "sizeGB": 0.9,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Event Planning",
+    "sizeGB": 1.0,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Interior Design",
+    "sizeGB": 1.1,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Fashion Stylist",
+    "sizeGB": 0.8,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Beauty Consultant",
+    "sizeGB": 0.7,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Pet Training",
+    "sizeGB": 0.6,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Language Coach",
+    "sizeGB": 0.8,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Public Speaking",
+    "sizeGB": 0.9,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Executive Coaching",
+    "sizeGB": 1.5,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Leadership Training",
+    "sizeGB": 1.3,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Team Building",
+    "sizeGB": 1.0,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Recruitment Agency",
+    "sizeGB": 1.2,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+,
+  {
+    "name": "Talent Development",
+    "sizeGB": 1.1,
+    "folders": [
+      {"name": "Offer", "files": [{"name": "offer.md", "sizeKB": 18, "preview": "# Offer\nOutcome-focused offer framing.\nStructured delivery vehicle."}]},
+      {"name": "Positioning", "files": [{"name": "positioning.md", "sizeKB": 25, "preview": "# Positioning\nCategory → Vehicle → Proof.\nIndia-first approach."}]},
+      {"name": "Tone", "files": [{"name": "tone.json", "sizeKB": 4, "preview": "{\n  \"tone\": \"authoritative\",\n  \"style\": \"clear\"\n}"}]},
+      {"name": "Expressions", "files": [{"name": "expressions.json", "sizeKB": 6, "preview": "{\n  \"phrases\": [\"seedha point\", \"clear path\"]\n}"}]},
+      {"name": "Scripts", "files": [{"name": "outlines.md", "sizeKB": 22, "preview": "# Script Outlines\n- Hook\n- Value (80%)\n- Story\n- Pitch (20%)"}]},
+      {"name": "Psychology", "files": [{"name": "pains.csv", "sizeKB": 9, "preview": "pain,description\nclarity,Need clear direction\nresults,Want measurable outcomes"}]},
+      {"name": "Frameworks/HVSP", "files": [{"name": "structure.md", "sizeKB": 16, "preview": "# HVSP Structure\nHook → Value(80%) → Story → Pitch(20%)"}]},
+      {"name": "Frameworks/Objections", "files": [{"name": "common.md", "sizeKB": 14, "preview": "# Objections\n- Price: value demonstration\n- Time: ROI focus"}]},
+      {"name": "Examples", "files": [{"name": "slide_snippets.md", "sizeKB": 12, "preview": "# Examples\nSlide templates and frameworks."}]}
+    ]
+  }
+]
