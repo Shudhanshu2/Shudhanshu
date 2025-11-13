@@ -1,0 +1,26 @@
+{
+  "search_harvest": {
+    "budget_per_day_inr": 700,
+    "keywords": [
+      "career coach program price",
+      "b2b growth consultant for founders",
+      "tax consultant premium advisory"
+    ],
+    "creatives": ["clip", "slide", "faq"],
+    "routing": "HVSP"
+  },
+  "piggyback": {
+    "placements": [
+      {"channel": "Growth Talk India", "type": "video", "note": "B2B founders audience"},
+      {"channel": "Tax Tips Daily", "type": "video", "note": "SMB finance owners"}
+    ],
+    "message_match": "Same struggle → HVSP solves it"
+  },
+  "partner_tap": {
+    "partners": [
+      {"name": "SaaS Micro-Newsletter", "reach": 8500, "deal": "fixed slot"},
+      {"name": "Ops WhatsApp Community", "reach": 2300, "deal": "CPM"}
+    ],
+    "asset": "HVSP teaser + consult deposit"
+  }
+}
