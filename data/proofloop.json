@@ -1,0 +1,143 @@
+{
+  "config": {
+    "enabled": true,
+    "triggers": {
+      "watchPctMin": 60,
+      "includeNoShow": true,
+      "includeDisqualified": true
+    },
+    "languageDefault": "hinglish"
+  },
+  "feedback": [
+    {
+      "id": "fb_001",
+      "prospectId": "1",
+      "hvspWatchPct": 83,
+      "rating": 5,
+      "takeaway": "Framework bohot clear tha—especially 77-day roadmap part",
+      "name": "Priya K.",
+      "role": "Founder",
+      "language": "hinglish",
+      "consentDisplay": true,
+      "createdAt": "2025-11-10T10:30:00+05:30",
+      "moderation": {
+        "redacted": false,
+        "approved": true
+      },
+      "watchBadge": "Verified viewer • 83% watched"
+    },
+    {
+      "id": "fb_002",
+      "prospectId": "3",
+      "hvspWatchPct": 67,
+      "rating": 4,
+      "takeaway": "Pre-sell drip strategy was new to me, useful for my agency",
+      "name": "Arjun M.",
+      "role": "Agency Owner",
+      "language": "hinglish",
+      "consentDisplay": true,
+      "createdAt": "2025-11-11T14:20:00+05:30",
+      "moderation": {
+        "redacted": false,
+        "approved": true
+      },
+      "watchBadge": "Verified viewer • 67% watched"
+    },
+    {
+      "id": "fb_003",
+      "prospectId": "5",
+      "hvspWatchPct": 92,
+      "rating": 5,
+      "takeaway": "Scoring algorithm explanation was gold. Will implement ASAP.",
+      "language": "en",
+      "consentDisplay": false,
+      "createdAt": "2025-11-12T09:15:00+05:30",
+      "moderation": {
+        "redacted": false,
+        "approved": true
+      },
+      "watchBadge": "Verified viewer • 92% watched"
+    }
+  ],
+  "bonusLibrary": [
+    {
+      "id": "bonus_001",
+      "kind": "checklist",
+      "title": "Pipeline Readiness Checklist (हिंगलिश)",
+      "language": "hinglish",
+      "niche": "b2b_growth_consultant",
+      "pains": ["Pipeline unpredictable hai", "Lead qualify nahi ho rahe"],
+      "description": "23-point checklist for B2B pipeline health"
+    },
+    {
+      "id": "bonus_002",
+      "kind": "scorecard",
+      "title": "Authority Positioning Scorecard",
+      "language": "en",
+      "niche": "b2b_growth_consultant",
+      "pains": ["Not seen as authority", "Price resistance"],
+      "description": "Score your authority positioning across 7 dimensions"
+    },
+    {
+      "id": "bonus_003",
+      "kind": "swipe",
+      "title": "WhatsApp Pre-sell Swipe File (हिंगलिश)",
+      "language": "hinglish",
+      "niche": "b2b_growth_consultant",
+      "pains": ["Low show-up rates", "Not converting on calls"],
+      "description": "12 proven WhatsApp message templates for pre-selling"
+    },
+    {
+      "id": "bonus_004",
+      "kind": "prompt_pack",
+      "title": "AI Twin Prompt Pack",
+      "language": "en",
+      "niche": "all",
+      "pains": ["Content creation slow", "Personalization at scale"],
+      "description": "20 GPT prompts for sales content generation"
+    },
+    {
+      "id": "bonus_005",
+      "kind": "loom_teardown",
+      "title": "Pipeline Teardown Script (हिंगलिश)",
+      "language": "hinglish",
+      "niche": "b2b_growth_consultant",
+      "pains": ["Pipeline not converting", "Funnel leaky"],
+      "description": "15-min Loom-style audit script to teardown any B2B pipeline"
+    }
+  ],
+  "dripMessages": [
+    {
+      "label": "T+0 (Invite)",
+      "timing": "Immediately after disqualification",
+      "subject": "Quick content feedback? 🎁",
+      "body": "Ek chhota honest feedback denge? Aapke liye ek solid bonus ready hai. (60–90 sec)",
+      "provenance": "proofloop#invite_template"
+    },
+    {
+      "label": "T+1d (Nudge)",
+      "timing": "24 hours later",
+      "subject": "Bas 60 seconds...",
+      "body": "Bas 60 sec—feedback ke baad bonus turant milega. Koi commitment nahi, sirf honest feedback.",
+      "provenance": "proofloop#nudge_template"
+    },
+    {
+      "label": "T+3d (Last Call)",
+      "timing": "72 hours later",
+      "subject": "Last call for bonus",
+      "body": "Last call for bonus—feedback window band ho rahi hai. Click karke 90 sec mein complete karo.",
+      "provenance": "proofloop#lastcall_template"
+    }
+  ],
+  "copy": {
+    "invite": "Ek chhota honest feedback denge? Aapke liye ek solid bonus ready hai. (60–90 sec)",
+    "nudge": "Bas 60 sec—feedback ke baad bonus turant milega.",
+    "lastCall": "Last call for bonus—feedback window band ho rahi hai.",
+    "formTitle": "Content Feedback (not program review)",
+    "formSubtitle": "Apna honest feedback share karo. Positive/negative dono welcome.",
+    "consent": "Mera quote name/initials ke saath dikha sakte ho",
+    "delivered": "Bonus delivered ✓ (72h valid)",
+    "disclaimer": "Simulated connections. No messages actually sent.",
+    "wallDisclaimer": "Illustrative; results vary."
+  }
+}

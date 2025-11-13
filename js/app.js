@@ -12,7 +12,16 @@ const state = {
   formQuestions: [], scoredApplicants: [], topPicks: [], rejects: [],
   presellMessages: [], closingScript: {},
   timers: { slidesProgress: 0, slidesComplete: false, videoProgress: 0,
-    videoGated: true, videoComplete: false }
+    videoGated: true, videoComplete: false },
+  proofloop: {
+    config: null,
+    feedback: [],
+    bonusLibrary: [],
+    dripMessages: [],
+    copy: {},
+    selectedBonus: null,
+    voiceBlob: null
+  }
 };
 
 // ====================================================
@@ -64,7 +73,7 @@ function markJourney(stepNum) {
 // Data Loading
 async function loadData() {
   try {
-    const [niches, questions, scoring, applicants, messages, closing, proof, kb] =
+    const [niches, questions, scoring, applicants, messages, closing, proof, kb, proofloopData] =
       await Promise.all([
         fetch('data/niches.json').then(r => r.json()),
         fetch('data/questions.json').then(r => r.json()),
@@ -73,11 +82,20 @@ async function loadData() {
         fetch('data/messages.json').then(r => r.json()),
         fetch('data/closing_snippets.json').then(r => r.json()),
         fetch('data/proof.json').then(r => r.json()),
-        fetch('data/knowledge_base.json').then(r => r.json())
+        fetch('data/knowledge_base.json').then(r => r.json()),
+        fetch('data/proofloop.json').then(r => r.json())
       ]);
 
     Object.assign(state, {niches, questions, scoringRules: scoring, applicants,
       messages, closingSnippets: closing, proof, knowledgeBase: kb});
+
+    // Load ProofLoop data
+    state.proofloop.config = proofloopData.config;
+    state.proofloop.feedback = proofloopData.feedback;
+    state.proofloop.bonusLibrary = proofloopData.bonusLibrary;
+    state.proofloop.dripMessages = proofloopData.dripMessages;
+    state.proofloop.copy = proofloopData.copy;
+
     initializeUI();
   } catch (error) {
     console.error('Error loading data:', error);
@@ -94,6 +112,7 @@ function initializeUI() {
   initSlideModal();
   initConnections();
   initLovableHook();
+  initProofLoop();
   checkDemoMode();
 }
 
@@ -1250,6 +1269,531 @@ function initLovableHook() {
 
     showToast('Lovable spec downloaded + copied ✓');
   };
+}
+
+// ====================================================
+// ProofLoop™ Module
+// ====================================================
+
+function initProofLoop() {
+  // Toggle
+  const toggle = document.getElementById('proofloop-toggle');
+  if (toggle) {
+    toggle.checked = state.proofloop.config.enabled;
+    toggle.onchange = () => {
+      state.proofloop.config.enabled = toggle.checked;
+      showToast(toggle.checked ? 'ProofLoop™ enabled' : 'ProofLoop™ disabled');
+    };
+  }
+
+  // Config inputs
+  const watchMin = document.getElementById('proofloop-watch-min');
+  const noShow = document.getElementById('proofloop-noshow');
+  const disqualified = document.getElementById('proofloop-disqualified');
+
+  if (watchMin) {
+    watchMin.value = state.proofloop.config.triggers.watchPctMin;
+    watchMin.onchange = () => {
+      state.proofloop.config.triggers.watchPctMin = parseInt(watchMin.value);
+    };
+  }
+
+  if (noShow) {
+    noShow.checked = state.proofloop.config.triggers.includeNoShow;
+    noShow.onchange = () => {
+      state.proofloop.config.triggers.includeNoShow = noShow.checked;
+    };
+  }
+
+  if (disqualified) {
+    disqualified.checked = state.proofloop.config.triggers.includeDisqualified;
+    disqualified.onchange = () => {
+      state.proofloop.config.triggers.includeDisqualified = disqualified.checked;
+    };
+  }
+
+  // View Proof Wall button
+  const wallBtn = document.getElementById('btn-proofloop-wall');
+  if (wallBtn) {
+    wallBtn.onclick = () => {
+      document.getElementById('section-proof-wall').classList.remove('hidden');
+      renderProofWall();
+      setTimeout(() => {
+        document.getElementById('section-proof-wall').scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    };
+  }
+
+  // Trigger ProofLoop button
+  const triggerBtn = document.getElementById('btn-trigger-proofloop');
+  if (triggerBtn) {
+    triggerBtn.onclick = () => {
+      renderProofLoopDrip();
+      showToast('ProofLoop™ triggered for cohort (simulated)');
+    };
+  }
+
+  // Test Feedback Form button
+  const testFeedbackBtn = document.getElementById('btn-test-feedback-form');
+  if (testFeedbackBtn) {
+    testFeedbackBtn.onclick = () => {
+      // Pre-fill with AI-suggested takeaway
+      const takeawayField = document.getElementById('feedback-takeaway');
+      if (takeawayField) {
+        takeawayField.value = 'Framework bohot clear tha—especially the 77-day roadmap part';
+      }
+      openModal('modal-proofloop-feedback');
+    };
+  }
+
+  // Test WA button
+  const testWABtn = document.getElementById('btn-test-proofloop-wa');
+  if (testWABtn) {
+    testWABtn.onclick = () => {
+      const testMsg = state.proofloop.copy.invite;
+      if (DEMO) {
+        showToast('Demo mode: WA test message');
+        console.log('Test message:', testMsg);
+      } else {
+        window.open(WA_DEEPLINK(testMsg), '_blank');
+      }
+    };
+  }
+
+  // View Proof Wall from drip section
+  const viewWallBtn = document.getElementById('btn-view-proof-wall');
+  if (viewWallBtn) {
+    viewWallBtn.onclick = () => {
+      document.getElementById('section-proof-wall').classList.remove('hidden');
+      renderProofWall();
+      setTimeout(() => {
+        document.getElementById('section-proof-wall').scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    };
+  }
+
+  // Initialize feedback form
+  initProofLoopFeedbackForm();
+
+  // Initialize bonus library
+  initBonusLibrary();
+
+  // Initialize export buttons
+  initProofWallExports();
+}
+
+function renderProofLoopDrip() {
+  const container = document.getElementById('proofloop-drip-messages');
+  if (!container) return;
+
+  container.innerHTML = '';
+  state.proofloop.dripMessages.forEach((msg, i) => {
+    const bubble = document.createElement('div');
+    bubble.className = 'proofloop-message-bubble';
+
+    // Random status for demo
+    const statuses = ['queued', 'sent', 'read'];
+    const status = statuses[Math.min(i, statuses.length - 1)];
+
+    bubble.innerHTML = `
+      <div class="bubble-header">
+        <span class="proofloop-message-label">${msg.label}</span>
+        <div class="flex items-center gap-2">
+          <span class="proofloop-status-chip ${status}">${status.charAt(0).toUpperCase() + status.slice(1)}</span>
+          <span class="provenance-tag">${msg.provenance}</span>
+        </div>
+      </div>
+      <div class="message-subject">${msg.subject}</div>
+      <div class="message-body">${msg.body}</div>
+    `;
+
+    container.appendChild(bubble);
+  });
+
+  document.getElementById('section-proofloop-drip').classList.remove('hidden');
+  setTimeout(() => {
+    document.getElementById('section-proofloop-drip').scrollIntoView({ behavior: 'smooth' });
+  }, 100);
+}
+
+function initProofLoopFeedbackForm() {
+  // Rating buttons
+  const ratingBtns = document.querySelectorAll('.rating-btn');
+  const ratingInput = document.getElementById('feedback-rating');
+
+  ratingBtns.forEach(btn => {
+    btn.onclick = () => {
+      ratingBtns.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      if (ratingInput) ratingInput.value = btn.dataset.rating;
+    };
+  });
+
+  // Voice recording (simulated)
+  const recordBtn = document.getElementById('btn-record-voice');
+  const voiceStatus = document.getElementById('voice-status');
+
+  if (recordBtn && voiceStatus) {
+    recordBtn.onclick = () => {
+      if (state.proofloop.voiceBlob) {
+        state.proofloop.voiceBlob = null;
+        voiceStatus.textContent = 'Not recorded';
+        voiceStatus.classList.remove('voice-recording');
+        recordBtn.textContent = '🎤 Record';
+      } else {
+        voiceStatus.textContent = '🔴 Recording...';
+        voiceStatus.classList.add('voice-recording');
+        setTimeout(() => {
+          state.proofloop.voiceBlob = new Blob(['demo-voice-note'], { type: 'audio/webm' });
+          voiceStatus.textContent = '✓ Recorded (12s)';
+          voiceStatus.classList.remove('voice-recording');
+          recordBtn.textContent = '🗑️ Delete';
+        }, 2000);
+      }
+    };
+  }
+
+  // Form submission
+  const form = document.getElementById('proofloop-feedback-form');
+  if (form) {
+    form.onsubmit = (e) => {
+      e.preventDefault();
+
+      const rating = parseInt(document.getElementById('feedback-rating').value);
+      const takeaway = document.getElementById('feedback-takeaway').value;
+      const name = document.getElementById('feedback-name').value;
+      const role = document.getElementById('feedback-role').value;
+      const language = document.getElementById('feedback-language').value;
+      const consent = document.getElementById('feedback-consent').checked;
+
+      const feedback = {
+        id: 'fb_' + Date.now(),
+        prospectId: 'demo_user',
+        hvspWatchPct: 75 + Math.floor(Math.random() * 20),
+        rating,
+        takeaway,
+        name,
+        role,
+        language,
+        consentDisplay: consent,
+        createdAt: new Date().toISOString(),
+        moderation: {
+          redacted: false,
+          approved: true
+        },
+        watchBadge: `Verified viewer • ${75 + Math.floor(Math.random() * 20)}% watched`
+      };
+
+      // Run moderation
+      const moderated = moderateFeedback(feedback);
+      state.proofloop.feedback.push(moderated);
+
+      // Select and deliver bonus
+      selectAndDeliverBonus({ niche: state.setup.niche?.id || 'all', pains: state.setup.pains, language });
+
+      // Close feedback modal
+      closeModal('modal-proofloop-feedback');
+
+      // Reset form
+      form.reset();
+      ratingBtns.forEach(b => b.classList.remove('selected'));
+
+      showToast('Feedback saved ✓');
+    };
+  }
+}
+
+function moderateFeedback(feedback) {
+  // Simple profanity/PII redaction (demo)
+  const profanityList = ['damn', 'hell', 'crap'];
+  const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b/g;
+  const phoneRegex = /\b\d{10,12}\b/g;
+
+  let takeaway = feedback.takeaway;
+  let redacted = false;
+
+  // Redact profanity
+  profanityList.forEach(word => {
+    const regex = new RegExp(word, 'gi');
+    if (regex.test(takeaway)) {
+      takeaway = takeaway.replace(regex, '[…]');
+      redacted = true;
+    }
+  });
+
+  // Redact PII
+  if (emailRegex.test(takeaway) || phoneRegex.test(takeaway)) {
+    takeaway = takeaway.replace(emailRegex, '[email]').replace(phoneRegex, '[phone]');
+    redacted = true;
+  }
+
+  return {
+    ...feedback,
+    takeaway,
+    moderation: {
+      redacted,
+      approved: !redacted
+    }
+  };
+}
+
+function selectAndDeliverBonus(criteria) {
+  // Select best bonus from library
+  const { niche, pains, language } = criteria;
+
+  let candidates = state.proofloop.bonusLibrary.filter(b => {
+    const nicheMatch = b.niche === 'all' || b.niche === niche;
+    const langMatch = b.language === language;
+    const painMatch = pains.some(p => b.pains.some(bp => bp.toLowerCase().includes(p.toLowerCase())));
+    return nicheMatch && (langMatch || painMatch);
+  });
+
+  if (candidates.length === 0) {
+    candidates = state.proofloop.bonusLibrary.filter(b => b.niche === 'all');
+  }
+
+  const selected = candidates[Math.floor(Math.random() * candidates.length)];
+
+  // Create signed URL (simulated)
+  const expiresAt = new Date();
+  expiresAt.setHours(expiresAt.getHours() + 72);
+
+  selected.urlSigned = `https://bonus.scaleedge.demo/${selected.id}?expires=${expiresAt.getTime()}&sig=demo123`;
+  selected.expiresAt = expiresAt.toISOString();
+  selected.watermark = document.getElementById('feedback-name').value || 'Viewer';
+
+  state.proofloop.selectedBonus = selected;
+
+  // Open bonus modal
+  renderBonusPreview(selected);
+  openModal('modal-proofloop-bonus');
+}
+
+function renderBonusPreview(bonus) {
+  const container = document.getElementById('bonus-preview-content');
+  if (!container) return;
+
+  container.innerHTML = `
+    <div class="mb-3">
+      <span class="bonus-kind">${bonus.kind}</span>
+    </div>
+    <h3 class="text-lg font-bold text-white mb-2">${bonus.title}</h3>
+    <p class="text-sm text-gray-400 mb-3">${bonus.description}</p>
+    <div class="flex gap-2 mb-3">
+      <span class="bonus-tag">Niche: ${bonus.niche}</span>
+      <span class="bonus-tag">Language: ${bonus.language}</span>
+    </div>
+    <div class="text-xs text-gray-400">
+      Watermark: ${bonus.watermark}<br>
+      Expires: ${new Date(bonus.expiresAt).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}
+    </div>
+  `;
+
+  // Download button
+  const downloadBtn = document.getElementById('btn-download-bonus');
+  if (downloadBtn) {
+    downloadBtn.onclick = () => {
+      if (DEMO) {
+        showToast('Bonus delivered ✓ (72h valid)');
+        setTimeout(() => closeModal('modal-proofloop-bonus'), 1500);
+      } else {
+        window.open(bonus.urlSigned, '_blank');
+      }
+    };
+  }
+
+  // Copy link button
+  const copyBtn = document.getElementById('btn-copy-bonus-link');
+  if (copyBtn) {
+    copyBtn.onclick = () => {
+      copyText(bonus.urlSigned);
+    };
+  }
+}
+
+function initBonusLibrary() {
+  const drawer = document.getElementById('bonus-library-drawer');
+  const closeBtn = document.getElementById('close-bonus-library');
+
+  if (closeBtn) {
+    closeBtn.onclick = () => {
+      drawer.classList.add('hidden');
+    };
+  }
+
+  // Render bonus cards
+  const container = document.getElementById('bonus-library-items');
+  if (!container) return;
+
+  container.innerHTML = '';
+  state.proofloop.bonusLibrary.forEach(bonus => {
+    const card = document.createElement('div');
+    card.className = 'bonus-card';
+    card.innerHTML = `
+      <div class="bonus-kind">${bonus.kind}</div>
+      <div class="bonus-title">${bonus.title}</div>
+      <div class="bonus-desc">${bonus.description}</div>
+      <div class="bonus-tags">
+        <span class="bonus-tag">${bonus.language}</span>
+        <span class="bonus-tag">${bonus.niche}</span>
+      </div>
+    `;
+    card.onclick = () => {
+      showToast('Preview in demo mode');
+    };
+    container.appendChild(card);
+  });
+}
+
+function renderProofWall() {
+  const feedback = state.proofloop.feedback.filter(f => f.moderation.approved);
+
+  // KPIs
+  const total = feedback.length;
+  const avgRating = total > 0 ? (feedback.reduce((sum, f) => sum + f.rating, 0) / total).toFixed(1) : '0.0';
+  const consented = total > 0 ? Math.round((feedback.filter(f => f.consentDisplay).length / total) * 100) : 0;
+  const avgWatch = total > 0 ? Math.round(feedback.reduce((sum, f) => sum + f.hvspWatchPct, 0) / total) : 0;
+
+  document.getElementById('proof-total').textContent = total;
+  document.getElementById('proof-avg-rating').textContent = avgRating;
+  document.getElementById('proof-consented').textContent = consented + '%';
+  document.getElementById('proof-avg-watch').textContent = avgWatch + '%';
+
+  // Histogram
+  const histogram = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+  feedback.forEach(f => histogram[f.rating]++);
+
+  const histogramContainer = document.getElementById('proof-histogram');
+  if (histogramContainer) {
+    histogramContainer.innerHTML = '';
+    [5, 4, 3, 2, 1].forEach(rating => {
+      const count = histogram[rating];
+      const pct = total > 0 ? (count / total) * 100 : 0;
+
+      const bar = document.createElement('div');
+      bar.className = 'histogram-bar';
+      bar.innerHTML = `
+        <div class="histogram-bar-label">${rating} ⭐</div>
+        <div class="histogram-bar-track">
+          <div class="histogram-bar-fill" style="width: ${pct}%">${count}</div>
+        </div>
+      `;
+      histogramContainer.appendChild(bar);
+    });
+  }
+
+  // Quotes Carousel
+  const quotesContainer = document.getElementById('proof-quotes-carousel');
+  if (quotesContainer) {
+    quotesContainer.innerHTML = '';
+    const quotes = feedback.filter(f => f.consentDisplay);
+
+    if (quotes.length === 0) {
+      quotesContainer.innerHTML = '<p class="text-sm text-gray-400">No consented quotes yet</p>';
+    } else {
+      quotes.slice(0, 5).forEach(q => {
+        const card = document.createElement('div');
+        card.className = 'quote-card';
+        card.innerHTML = `
+          <div class="quote-text">"${q.takeaway}"</div>
+          <div class="quote-meta">
+            <div class="quote-author">
+              ${q.name ? `<strong>${q.name}</strong>` : 'Anonymous'}${q.role ? ` • ${q.role}` : ''}
+            </div>
+            <div class="watch-badge">${q.watchBadge}</div>
+          </div>
+        `;
+        quotesContainer.appendChild(card);
+      });
+    }
+  }
+
+  // Moderation Queue
+  renderModerationQueue();
+}
+
+function renderModerationQueue() {
+  const container = document.getElementById('proof-moderation-queue');
+  if (!container) return;
+
+  const allFeedback = state.proofloop.feedback;
+
+  if (allFeedback.length === 0) {
+    container.innerHTML = '<p class="text-sm text-gray-400">No feedback to moderate</p>';
+    return;
+  }
+
+  container.innerHTML = '';
+  allFeedback.slice(0, 5).forEach(f => {
+    const item = document.createElement('div');
+    item.className = 'moderation-item';
+
+    const redactionNote = f.moderation.redacted ?
+      '<span class="redaction-diff">Auto-redacted</span>' : '';
+
+    item.innerHTML = `
+      <div class="item-content">
+        <div class="item-text">"${f.takeaway}" ${redactionNote}</div>
+        <div class="item-meta">
+          Rating: ${f.rating}/5 • ${f.name || 'Anonymous'}${f.role ? ' • ' + f.role : ''} • ${new Date(f.createdAt).toLocaleDateString()}
+        </div>
+      </div>
+      <div class="item-actions">
+        <div class="approve-toggle ${f.moderation.approved ? 'approved' : ''}" data-id="${f.id}"></div>
+      </div>
+    `;
+
+    // Toggle approve
+    const toggle = item.querySelector('.approve-toggle');
+    toggle.onclick = () => {
+      f.moderation.approved = !f.moderation.approved;
+      toggle.classList.toggle('approved');
+      renderProofWall(); // Re-render
+    };
+
+    container.appendChild(item);
+  });
+}
+
+function initProofWallExports() {
+  const pngBtn = document.getElementById('btn-export-proof-png');
+  const pdfBtn = document.getElementById('btn-export-proof-pdf');
+  const jsonBtn = document.getElementById('btn-export-proof-json');
+
+  if (pngBtn) {
+    pngBtn.onclick = () => {
+      showToast('PNG export (simulated)');
+      // In real app, would use html2canvas or similar
+    };
+  }
+
+  if (pdfBtn) {
+    pdfBtn.onclick = () => {
+      showToast('PDF export (simulated)');
+      // In real app, would use jsPDF or similar
+    };
+  }
+
+  if (jsonBtn) {
+    jsonBtn.onclick = () => {
+      const exportData = {
+        generated_at: new Date().toISOString(),
+        total_feedback: state.proofloop.feedback.length,
+        avg_rating: (state.proofloop.feedback.reduce((sum, f) => sum + f.rating, 0) / state.proofloop.feedback.length).toFixed(2),
+        feedback: state.proofloop.feedback.filter(f => f.moderation.approved).map(f => ({
+          rating: f.rating,
+          takeaway: f.takeaway,
+          name: f.consentDisplay ? f.name : null,
+          role: f.consentDisplay ? f.role : null,
+          watch_pct: f.hvspWatchPct,
+          created_at: f.createdAt
+        }))
+      };
+
+      downloadFile('proofloop-export.json', JSON.stringify(exportData, null, 2), 'application/json');
+      showToast('JSON exported ✓');
+    };
+  }
 }
 
 // Modals

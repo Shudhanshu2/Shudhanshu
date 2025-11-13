@@ -259,7 +259,36 @@
     <section id="section-qualification" class="section-card mb-8 hidden">
       <h2 class="section-title">Qualification & Right-Prospect Selector</h2>
       <p class="text-sm text-gray-400 mb-6">Top Picks (score ≥65) vs Rejects with auto-decline messaging.</p>
-      
+
+      <!-- ProofLoop Toggle -->
+      <div class="bg-ink-2/30 rounded-lg p-4 mb-6 border border-gray-700">
+        <div class="flex items-center justify-between mb-2">
+          <div>
+            <h3 class="text-sm font-semibold text-brand mb-1">ProofLoop™ Module</h3>
+            <p class="text-xs text-gray-400">Convert sub-qualified/no-show leads into honest content feedback → auto-deliver bonus → Proof Wall</p>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" id="proofloop-toggle" class="sr-only peer" checked>
+            <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand"></div>
+          </label>
+        </div>
+        <div id="proofloop-config" class="mt-3 grid grid-cols-3 gap-4 text-xs">
+          <div>
+            <label class="text-gray-400 block mb-1">Watch % Min</label>
+            <input type="number" id="proofloop-watch-min" class="form-input text-xs py-1" value="60" min="0" max="100">
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="checkbox" id="proofloop-noshow" class="w-4 h-4" checked>
+            <label class="text-gray-400">Include No-Show</label>
+          </div>
+          <div class="flex items-center gap-2">
+            <input type="checkbox" id="proofloop-disqualified" class="w-4 h-4" checked>
+            <label class="text-gray-400">Include Disqualified</label>
+          </div>
+        </div>
+        <button id="btn-proofloop-wall" class="btn-secondary text-xs mt-3">View Proof Wall →</button>
+      </div>
+
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         <!-- Top Picks -->
         <div>
@@ -534,6 +563,94 @@
     Illustrative; results vary. No messages actually sent. Local data only—stays on your device.
   </footer>
 
+  <!-- ProofLoop Drip Timeline Section (Hidden by default) -->
+  <section id="section-proofloop-drip" class="section-card mb-8 hidden">
+    <h2 class="section-title">ProofLoop™ Drip Timeline</h2>
+    <p class="text-sm text-gray-400 mb-6">Auto-invite sub-qualified/no-show prospects for honest content feedback.</p>
+
+    <div class="bg-ink-2/30 rounded-lg p-4 mb-4">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-sm font-semibold text-white">Message Schedule</h3>
+        <button id="btn-test-proofloop-wa" class="btn-secondary text-xs">Send test to me</button>
+      </div>
+
+      <div id="proofloop-drip-messages" class="space-y-3">
+        <!-- Drip messages will be populated here -->
+      </div>
+
+      <p class="text-xs text-gray-400 mt-4 border-t border-gray-700 pt-3">
+        <b>Disclaimer:</b> Simulated connections. No messages actually sent.
+      </p>
+    </div>
+
+    <div class="flex gap-3">
+      <button id="btn-trigger-proofloop" class="btn-primary">Trigger ProofLoop™ for Cohort</button>
+      <button id="btn-test-feedback-form" class="btn-secondary">Test Feedback Form</button>
+      <button id="btn-view-proof-wall" class="btn-secondary">View Proof Wall →</button>
+    </div>
+  </section>
+
+  <!-- Proof Wall Section (Hidden by default) -->
+  <section id="section-proof-wall" class="section-card mb-8 hidden">
+    <h2 class="section-title">ProofLoop™ Proof Wall</h2>
+    <p class="text-sm text-gray-400 mb-6">Aggregate content feedback, ratings, and quotes—export for decks and website.</p>
+
+    <!-- KPIs -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <div class="bg-ink-2/30 rounded-lg p-4">
+        <div class="text-2xl font-bold text-brand" id="proof-total">0</div>
+        <div class="text-xs text-gray-400">Total Feedback</div>
+      </div>
+      <div class="bg-ink-2/30 rounded-lg p-4">
+        <div class="text-2xl font-bold text-brand" id="proof-avg-rating">0.0</div>
+        <div class="text-xs text-gray-400">Avg Rating</div>
+      </div>
+      <div class="bg-ink-2/30 rounded-lg p-4">
+        <div class="text-2xl font-bold text-brand" id="proof-consented">0%</div>
+        <div class="text-xs text-gray-400">Consented Quotes</div>
+      </div>
+      <div class="bg-ink-2/30 rounded-lg p-4">
+        <div class="text-2xl font-bold text-brand" id="proof-avg-watch">0%</div>
+        <div class="text-xs text-gray-400">Avg Watch Time</div>
+      </div>
+    </div>
+
+    <!-- Ratings Histogram -->
+    <div class="bg-ink-2/30 rounded-lg p-4 mb-6">
+      <h3 class="text-sm font-semibold text-white mb-3">Ratings Distribution</h3>
+      <div id="proof-histogram" class="space-y-2">
+        <!-- Histogram bars will be populated here -->
+      </div>
+    </div>
+
+    <!-- Quotes Carousel -->
+    <div class="bg-ink-2/30 rounded-lg p-4 mb-6">
+      <h3 class="text-sm font-semibold text-white mb-3">Content Feedback Quotes</h3>
+      <div id="proof-quotes-carousel" class="space-y-3">
+        <!-- Quotes will be populated here -->
+      </div>
+    </div>
+
+    <!-- Moderation Queue -->
+    <div class="bg-ink-2/30 rounded-lg p-4 mb-6">
+      <h3 class="text-sm font-semibold text-white mb-3">Moderation Queue</h3>
+      <div id="proof-moderation-queue" class="space-y-2">
+        <!-- Moderation items will be populated here -->
+      </div>
+    </div>
+
+    <!-- Export Actions -->
+    <div class="flex gap-3">
+      <button id="btn-export-proof-png" class="btn-secondary">Add to Deck (PNG)</button>
+      <button id="btn-export-proof-pdf" class="btn-secondary">Export PDF</button>
+      <button id="btn-export-proof-json" class="btn-secondary">Export JSON</button>
+    </div>
+
+    <p class="text-xs text-gray-400 mt-4 border-t border-gray-700 pt-3">
+      <b>Disclaimer:</b> Illustrative; results vary.
+    </p>
+  </section>
+
   <!-- Modals -->
 
   <!-- Knowledge Base Modal -->
@@ -650,6 +767,124 @@
       </div>
     </div>
   </div>
+
+  <!-- ProofLoop Feedback Form Modal -->
+  <div id="modal-proofloop-feedback" class="modal hidden">
+    <div class="modal-content w-[600px]">
+      <div class="modal-header">
+        <h2 class="text-xl font-bold">Content Feedback (not program review)</h2>
+        <button class="modal-close" data-modal="modal-proofloop-feedback">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="text-sm text-gray-400 mb-4">Apna honest feedback share karo. Positive/negative dono welcome.</p>
+
+        <form id="proofloop-feedback-form">
+          <!-- Rating -->
+          <div class="mb-4">
+            <label class="form-label">Usefulness (1-5)</label>
+            <div class="flex gap-2">
+              <button type="button" class="rating-btn" data-rating="1">1</button>
+              <button type="button" class="rating-btn" data-rating="2">2</button>
+              <button type="button" class="rating-btn" data-rating="3">3</button>
+              <button type="button" class="rating-btn" data-rating="4">4</button>
+              <button type="button" class="rating-btn" data-rating="5">5</button>
+            </div>
+            <input type="hidden" id="feedback-rating" required>
+          </div>
+
+          <!-- Takeaway -->
+          <div class="mb-4">
+            <label class="form-label">One-line takeaway</label>
+            <textarea id="feedback-takeaway" class="form-input" rows="2" placeholder="AI-suggested..." required></textarea>
+            <p class="text-xs text-gray-400 mt-1">AI will suggest based on your viewing pattern</p>
+          </div>
+
+          <!-- Name & Role -->
+          <div class="grid grid-cols-2 gap-3 mb-4">
+            <div>
+              <label class="form-label">Name (optional)</label>
+              <input type="text" id="feedback-name" class="form-input" placeholder="Priya K.">
+            </div>
+            <div>
+              <label class="form-label">Role (optional)</label>
+              <input type="text" id="feedback-role" class="form-input" placeholder="Founder">
+            </div>
+          </div>
+
+          <!-- Language -->
+          <div class="mb-4">
+            <label class="form-label">Language</label>
+            <select id="feedback-language" class="form-input">
+              <option value="hinglish">Hinglish</option>
+              <option value="hi">Hindi</option>
+              <option value="en">English</option>
+            </select>
+          </div>
+
+          <!-- Consent -->
+          <div class="mb-4">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" id="feedback-consent" class="w-4 h-4">
+              <span class="text-sm text-gray-300">Mera quote name/initials ke saath dikha sakte ho</span>
+            </label>
+          </div>
+
+          <!-- Voice Note (Optional) -->
+          <div class="mb-4">
+            <label class="form-label">Quick voice note (≤20s) - Optional</label>
+            <div class="flex gap-2">
+              <button type="button" id="btn-record-voice" class="btn-secondary text-xs">🎤 Record</button>
+              <span id="voice-status" class="text-xs text-gray-400">Not recorded</span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary w-full">Submit Feedback & Get Bonus 🎁</button>
+        </form>
+
+        <p class="text-xs text-gray-400 mt-4 text-center">Demo mode: Bonus will be simulated</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ProofLoop Bonus Preview Modal -->
+  <div id="modal-proofloop-bonus" class="modal hidden">
+    <div class="modal-content w-[600px]">
+      <div class="modal-header">
+        <h2 class="text-xl font-bold">Your Bonus is Ready! 🎁</h2>
+        <button class="modal-close" data-modal="modal-proofloop-bonus">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="bonus-preview-content" class="bg-ink-2/30 rounded-lg p-4 mb-4">
+          <!-- Bonus details will be populated here -->
+        </div>
+
+        <div class="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3 mb-4">
+          <p class="text-sm text-yellow-200">
+            <b>Valid for 72 hours</b> • Watermarked with your name • Download immediately
+          </p>
+        </div>
+
+        <button id="btn-download-bonus" class="btn-primary w-full mb-2">Download Bonus</button>
+        <button id="btn-copy-bonus-link" class="btn-secondary w-full text-xs">Copy Link</button>
+
+        <p class="text-xs text-gray-400 mt-4 text-center">Demo mode: Download simulated</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bonus Library Drawer -->
+  <aside id="bonus-library-drawer" class="drawer hidden">
+    <div class="drawer-header">
+      <h3 class="text-lg font-semibold">Bonus Library</h3>
+      <button id="close-bonus-library" class="icon-btn">✕</button>
+    </div>
+    <div id="bonus-library-items" class="p-4 space-y-3">
+      <!-- Bonus cards will be populated here -->
+    </div>
+    <div class="p-3 border-t border-slate-800">
+      <p class="text-xs text-slate-400">Read-only in demo mode</p>
+    </div>
+  </aside>
 
   <script type="module" src="js/app.js"></script>
 </body>
