@@ -561,9 +561,55 @@
   </main>
 
   <!-- Sticky Footer -->
-  <footer class="sticky bottom-0 bg-panel border-t border-gray-800 py-2 px-6 text-center text-xs text-gray-500">
-    Illustrative; results vary. No messages actually sent. Local data only—stays on your device.
+  <footer class="sticky bottom-0 bg-panel border-t border-gray-800 py-2 px-6 flex items-center justify-between text-xs text-gray-500">
+    <span>Illustrative; results vary • Up to 90% automation</span>
+    <div id="acceptance-checks" class="flex gap-2">
+      <span class="text-gray-600" id="checks-status">0/10</span>
+    </div>
   </footer>
+
+  <!-- EventLog Floating Button -->
+  <button id="eventlog-toggle" class="fixed bottom-20 right-6 bg-brand text-white px-4 py-2 rounded-lg shadow-lg hover:bg-red-700 transition z-40 text-sm font-semibold">
+    EventLog (L)
+  </button>
+
+  <!-- EventLog Drawer -->
+  <aside id="eventlog-drawer" class="drawer right-0 hidden" style="width: 450px;">
+    <div class="drawer-header">
+      <h3 class="text-lg font-semibold">EventLog</h3>
+      <div class="flex gap-2">
+        <button id="eventlog-copy" class="icon-btn" title="Copy all">📋</button>
+        <button id="eventlog-export-json" class="icon-btn" title="Export JSON">JSON</button>
+        <button id="eventlog-export-csv" class="icon-btn" title="Export CSV">CSV</button>
+        <button id="eventlog-clear" class="icon-btn" title="Clear">🗑️</button>
+        <button id="eventlog-close" class="icon-btn">✕</button>
+      </div>
+    </div>
+    <div id="eventlog-entries" class="p-4 overflow-y-auto" style="max-height: calc(100vh - 80px);"></div>
+  </aside>
+
+  <!-- Keyboard Shortcuts Overlay -->
+  <div id="keyboard-overlay" class="hidden fixed inset-0 bg-black/60 z-50 flex items-center justify-center">
+    <div class="bg-panel border border-gray-700 rounded-xl p-6 max-w-md">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-xl font-bold">Keyboard Shortcuts</h3>
+        <button id="shortcuts-close" class="text-gray-400 hover:text-white">✕</button>
+      </div>
+      <div class="grid grid-cols-2 gap-3 text-sm">
+        <div><kbd class="kbd">G</kbd> Gate</div>
+        <div><kbd class="kbd">D</kbd> Drip</div>
+        <div><kbd class="kbd">C</kbd> Calendar</div>
+        <div><kbd class="kbd">H</kbd> Handoff</div>
+        <div><kbd class="kbd">M</kbd> Money</div>
+        <div><kbd class="kbd">P</kbd> ProofLoop</div>
+        <div><kbd class="kbd">T</kbd> Traffic</div>
+        <div><kbd class="kbd">E</kbd> Export</div>
+        <div><kbd class="kbd">L</kbd> EventLog</div>
+        <div><kbd class="kbd">?</kbd> Help</div>
+        <div><kbd class="kbd">Esc</kbd> Close</div>
+      </div>
+    </div>
+  </div>
 
   <!-- ProofLoop Drip Timeline Section (Hidden by default) -->
   <section id="section-proofloop-drip" class="section-card mb-8 hidden">
