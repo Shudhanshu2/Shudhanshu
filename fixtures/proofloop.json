@@ -1,0 +1,50 @@
+[
+  {
+    "id": "fb_seed_001",
+    "name": "Anil K.",
+    "role": "Founder",
+    "rating": 5,
+    "takeaway": "Framework bohot clear tha—especially 77-day roadmap part",
+    "language": "hinglish",
+    "watch_pct": 83,
+    "consent_display": true,
+    "created_at": "2025-11-08T14:30:00+05:30",
+    "badge": "Verified viewer • 83% watched"
+  },
+  {
+    "id": "fb_seed_002",
+    "name": "Sneha M.",
+    "role": "Agency Owner",
+    "rating": 4,
+    "takeaway": "Pre-sell drip strategy was new—useful for my consulting business",
+    "language": "hinglish",
+    "watch_pct": 67,
+    "consent_display": true,
+    "created_at": "2025-11-09T10:15:00+05:30",
+    "badge": "Verified viewer • 67% watched"
+  },
+  {
+    "id": "fb_seed_003",
+    "name": null,
+    "role": null,
+    "rating": 5,
+    "takeaway": "Scoring algorithm explanation was gold. Will implement ASAP.",
+    "language": "english",
+    "watch_pct": 92,
+    "consent_display": false,
+    "created_at": "2025-11-10T09:45:00+05:30",
+    "badge": "Verified viewer • 92% watched"
+  },
+  {
+    "id": "fb_seed_004",
+    "name": "Rahul P.",
+    "role": "Tax Consultant",
+    "rating": 4,
+    "takeaway": "प्रूफ वाला part जबरदस्त था—real examples se समझ आया",
+    "language": "hindi",
+    "watch_pct": 75,
+    "consent_display": true,
+    "created_at": "2025-11-11T16:20:00+05:30",
+    "badge": "Verified viewer • 75% watched"
+  }
+]

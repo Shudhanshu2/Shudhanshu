@@ -1,0 +1,62 @@
+[
+  {
+    "id": "bonus_checklist_90d",
+    "kind": "checklist",
+    "title": "Niche Scorecard (90-day)",
+    "title_hi": "90-दिन का Niche Scorecard",
+    "title_hinglish": "90-din ka Niche Scorecard",
+    "language": "hinglish",
+    "niche": "b2b_growth_consultant",
+    "pains": ["Pipeline unpredictable", "Lead qualify nahi"],
+    "description": "23-point diagnostic checklist to audit your current B2B pipeline health",
+    "file": "checklist-90day-scorecard.pdf"
+  },
+  {
+    "id": "bonus_swipe_pack",
+    "kind": "swipe",
+    "title": "Quick Wins Swipe Pack (7 scripts)",
+    "title_hi": "Quick Wins Swipe Pack (7 scripts)",
+    "title_hinglish": "Quick Wins Swipe Pack (7 scripts)",
+    "language": "hinglish",
+    "niche": "all",
+    "pains": ["Price pushback", "Conversion low"],
+    "description": "7 proven WhatsApp/email scripts for pre-sell, objection handling, and payment nudges",
+    "file": "swipe-pack-7-scripts.pdf"
+  },
+  {
+    "id": "bonus_audit_template",
+    "kind": "mini_audit",
+    "title": "Mini Audit Template",
+    "title_hi": "Mini Audit Template",
+    "title_hinglish": "Mini Audit Template",
+    "language": "english",
+    "niche": "all",
+    "pains": ["Not sure where problem is"],
+    "description": "15-minute self-audit framework to identify your #1 bottleneck",
+    "file": "mini-audit-template.pdf"
+  },
+  {
+    "id": "bonus_prompt_pack",
+    "kind": "prompt_pack",
+    "title": "AI Twin Prompt Pack (20 prompts)",
+    "title_hi": "AI Twin Prompt Pack (20 prompts)",
+    "title_hinglish": "AI Twin Prompt Pack (20 prompts)",
+    "language": "english",
+    "niche": "all",
+    "pains": ["Content creation slow", "Personalization hard"],
+    "description": "20 GPT prompts for slides, drip messages, scripts, and objection handling",
+    "file": "ai-twin-prompts-20.pdf"
+  },
+  {
+    "id": "bonus_teardown_script",
+    "kind": "loom_teardown",
+    "title": "Pipeline Teardown Script (15-min Loom)",
+    "title_hi": "Pipeline Teardown Script (15-min Loom)",
+    "title_hinglish": "Pipeline Teardown Script (15-min Loom)",
+    "language": "hinglish",
+    "niche": "b2b_growth_consultant",
+    "pains": ["Pipeline not converting", "Funnel leaky"],
+    "description": "Step-by-step Loom recording script to audit any B2B pipeline",
+    "file": "teardown-script-loom.pdf"
+  }
+]

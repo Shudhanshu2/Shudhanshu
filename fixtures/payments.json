@@ -1,0 +1,54 @@
+[
+  {
+    "id": "pay_001",
+    "name": "Priya Sharma",
+    "state": "token",
+    "amount_total": 120000,
+    "amount_paid": 30000,
+    "amount_due": 90000,
+    "due_date": "2025-11-20",
+    "last_ping": "2d ago",
+    "next_action": "Milestone 1 reminder",
+    "phone": "919876543210",
+    "notes": "Token received, waiting for project kickoff"
+  },
+  {
+    "id": "pay_002",
+    "name": "Neha Kapoor",
+    "state": "partial",
+    "amount_total": 200000,
+    "amount_paid": 120000,
+    "amount_due": 80000,
+    "due_date": "2025-11-18",
+    "last_ping": "5d ago",
+    "next_action": "Final payment nudge + proof",
+    "phone": "919876543211",
+    "notes": "60% paid, final installment pending"
+  },
+  {
+    "id": "pay_003",
+    "name": "Kabir Singh",
+    "state": "pending",
+    "amount_total": 75000,
+    "amount_paid": 0,
+    "amount_due": 75000,
+    "due_date": "2025-11-25",
+    "last_ping": "Never",
+    "next_action": "Gentle T+1d nudge",
+    "phone": "919876543212",
+    "notes": "Proposal accepted, awaiting payment initiation"
+  },
+  {
+    "id": "pay_004",
+    "name": "Ravi Kumar",
+    "state": "paid",
+    "amount_total": 150000,
+    "amount_paid": 150000,
+    "amount_due": 0,
+    "due_date": null,
+    "last_ping": "1w ago",
+    "next_action": "Upsell check-in",
+    "phone": "919876543213",
+    "notes": "Fully paid ✓ — Happy client, referral potential"
+  }
+]

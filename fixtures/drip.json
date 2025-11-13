@@ -1,0 +1,34 @@
+[
+  {
+    "t": "T-72h",
+    "label": "3 days before call",
+    "template_hi": "{{firstName}} ji, kal hamari call hai. Yeh 8-min video dekh lijiye—exact system jo hum use karte hain. Call pe sirf aapke case pe apply karenge.",
+    "template_hinglish": "Hey {{firstName}}, kal milte hain. Yeh 2-min clip dekh lo—exact path jo hum use karte hain. Kal call pe sirf aapke case pe apply karenge.",
+    "template_en": "Hi {{firstName}}, quick prep for tomorrow's call: this 2-min clip shows the exact framework. Tomorrow we'll apply it to your specific case.",
+    "provenance": "pains#urgency_soft"
+  },
+  {
+    "t": "T-24h",
+    "label": "1 day before call",
+    "template_hi": "{{firstName}} ji, कल {{time}} बजे मिलते हैं। एक सवाल लेकर आइए—वो address करेंगे पहले। Slot confirm है?",
+    "template_hinglish": "{{firstName}}, kal {{time}} pe milte. Ek sawal leke aao—wo address karenge pehle. Slot confirm?",
+    "template_en": "{{firstName}}, tomorrow at {{time}}. Come with your #1 question—we'll tackle it first. Slot confirmed?",
+    "provenance": "calendar#reminder_24h"
+  },
+  {
+    "t": "T-2h",
+    "label": "2 hours before call",
+    "template_hi": "{{firstName}} ji, 2 घंटे में call। Quick recap: आपका main pain '{{pain}}' था। इसी पे focus रखेंगे। Ready?",
+    "template_hinglish": "{{firstName}}, 2 ghante mein call. Quick recap: tumhara main pain '{{pain}}' tha. Isi pe focus rakhenge. Ready?",
+    "template_en": "{{firstName}}, 2hrs to call. Quick recap: your main pain was '{{pain}}'. We'll focus there. Ready?",
+    "provenance": "proof#social_proof_recent"
+  },
+  {
+    "t": "T-30m",
+    "label": "30 minutes before call",
+    "template_hi": "{{firstName}} ji, 30 मिनट में call। Link tap करो exact time pe। See you!",
+    "template_hinglish": "{{firstName}}, 30 min mein call. Link tap karo exact time pe. See you!",
+    "template_en": "{{firstName}}, 30min to call. Tap link at exact time. See you!",
+    "provenance": "scarcity#final_reminder"
+  }
+]

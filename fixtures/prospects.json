@@ -1,0 +1,78 @@
+[
+  {
+    "id": "p_001",
+    "name": "Priya Sharma",
+    "company": "CloudScale SaaS",
+    "language": "hinglish",
+    "scores": {
+      "pain": 85,
+      "money": 75,
+      "intent": 90,
+      "total": 83
+    },
+    "reasons": {
+      "pain": "from Q7: Pipeline dry for 2 months",
+      "money": "from Q9: ₹1.5L budget allocated",
+      "intent": "from Q11: Need solution this quarter"
+    },
+    "qualified": true,
+    "notes": "Strong fit—already tried 2 consultants, ready for system"
+  },
+  {
+    "id": "p_002",
+    "name": "Arjun Mehta",
+    "company": "DesignStudio Pro",
+    "language": "hinglish",
+    "scores": {
+      "pain": 65,
+      "money": 45,
+      "intent": 60,
+      "total": 57
+    },
+    "reasons": {
+      "pain": "from Q7: Inconsistent client flow",
+      "money": "from Q9: Budget unclear—₹50K max",
+      "intent": "from Q11: Exploring options"
+    },
+    "qualified": false,
+    "notes": "Sub-qualified—budget too low, send to ProofLoop"
+  },
+  {
+    "id": "p_003",
+    "name": "Neha Kapoor",
+    "company": "TaxEase Consultancy",
+    "language": "hindi",
+    "scores": {
+      "pain": 90,
+      "money": 85,
+      "intent": 80,
+      "total": 85
+    },
+    "reasons": {
+      "pain": "from Q7: GST compliance nightmare",
+      "money": "from Q9: ₹2L budget ready",
+      "intent": "from Q11: Start next week"
+    },
+    "qualified": true,
+    "notes": "Premium fit—high urgency, clear pain, budget approved"
+  },
+  {
+    "id": "p_004",
+    "name": "Kabir Singh",
+    "company": "Growth Hacks Agency",
+    "language": "english",
+    "scores": {
+      "pain": 70,
+      "money": 50,
+      "intent": 40,
+      "total": 53
+    },
+    "reasons": {
+      "pain": "from Q7: Lead quality issues",
+      "money": "from Q9: ₹75K tentative",
+      "intent": "from Q11: Just researching"
+    },
+    "qualified": false,
+    "notes": "Not ready—low intent, route to nurture drip"
+  }
+]

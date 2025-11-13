@@ -1,0 +1,38 @@
+{
+  "b2b_growth_consultant": {
+    "hooks": [
+      "Pipeline unpredictable hai—ek month boom, next dry",
+      "Lead qualify nahi ho rahe—time waste conversations",
+      "Price pushback constant—₹5L bhi bargain lagta"
+    ],
+    "lexicon": ["ICP", "qualification matrix", "authority positioning", "pre-sell assets"],
+    "objections": ["Timeline too long", "Retainer commitment scary", "Already tried consultants"]
+  },
+  "career_coach": {
+    "hooks": [
+      "Generic CV tips se kuch nahi hota",
+      "HR gatekeepers ko bypass kaise?",
+      "Interview anxiety ka system chahiye"
+    ],
+    "lexicon": ["ATS optimization", "case studies", "mock interviews", "LinkedIn strategy"],
+    "objections": ["English weak hai", "Portfolio nahi hai", "Time nahi milta"]
+  },
+  "tax_consultant": {
+    "hooks": [
+      "GST filing stress har month",
+      "Cashflow aur compliance juggle",
+      "Penalty risk always looming"
+    ],
+    "lexicon": ["Input tax credit", "composition scheme", "audit trail", "TDS compliance"],
+    "objections": ["Fees zyada lagte", "Deadline pressure", "Records messy hain"]
+  },
+  "interior_designer": {
+    "hooks": [
+      "Space planning client ko samajh nahi aata",
+      "Budget vs aesthetic—constant fight",
+      "Contractor delays mar dete schedule"
+    ],
+    "lexicon": ["FF&E", "moodboard", "BOQ", "3D renders", "material sourcing"],
+    "objections": ["Scope creep common", "Timeline slip hoti", "Material cost fluctuation"]
+  }
+}
