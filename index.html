@@ -539,7 +539,7 @@
       <h2 class="section-title">Ready to Deploy</h2>
       <p class="text-sm text-gray-400 mb-6">Your Authority Close Engine is configured and ready—export assets below.</p>
       
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div class="result-card">
           <div class="text-sm font-semibold text-brand mb-2">Application Form</div>
           <div class="text-xs text-gray-400 mb-3">18 questions • Scoring rules configured</div>
@@ -554,6 +554,17 @@
           <div class="text-sm font-semibold text-brand mb-2">Closing Scripts</div>
           <div class="text-xs text-gray-400 mb-3">Per-prospect custom scripts</div>
           <button class="btn-secondary text-xs">Download All Scripts</button>
+        </div>
+      </div>
+
+      <!-- Traffic Engine Toggle -->
+      <div class="bg-ink-2/30 rounded-lg p-4 border border-brand/30">
+        <div class="flex items-center justify-between mb-2">
+          <div>
+            <div class="text-sm font-semibold text-white mb-1">Traffic Engine</div>
+            <div class="text-xs text-gray-400">Paid traffic strategy: Search + Piggyback + Partners</div>
+          </div>
+          <button id="btn-toggle-traffic" class="btn-primary text-xs">View Traffic Plan →</button>
         </div>
       </div>
     </section>
@@ -699,6 +710,28 @@
     </p>
   </section>
 
+  <!-- Traffic Engine Section (Hidden by default) -->
+  <section id="section-traffic" class="section-card mb-8 hidden">
+    <h2 class="section-title">Traffic Engine</h2>
+    <p class="text-sm text-gray-400 mb-6">Paid traffic strategy: Search Harvest + Piggyback + Partner Taps</p>
+
+    <!-- Tabs -->
+    <div class="flex gap-2 mb-6">
+      <button id="traffic-tab-search_harvest" class="btn-primary">Search Harvest</button>
+      <button id="traffic-tab-piggyback" class="btn-secondary">Piggyback</button>
+      <button id="traffic-tab-partner_tap" class="btn-secondary">Partner Taps</button>
+    </div>
+
+    <!-- Tab Content -->
+    <div id="traffic-content" class="bg-ink-2/30 rounded-lg p-6">
+      <!-- Content will be dynamically rendered here -->
+    </div>
+
+    <p class="text-xs text-gray-400 mt-4 border-t border-gray-700 pt-3">
+      <b>Note:</b> Traffic strategies based on fixture data. Actual performance will vary.
+    </p>
+  </section>
+
   <!-- Modals -->
 
   <!-- Knowledge Base Modal -->
@@ -757,31 +790,57 @@
 
   <!-- Connections Modal -->
   <div id="modal-connections" class="modal hidden">
-    <div class="modal-content w-[680px]">
+    <div class="modal-content w-[720px]">
       <div class="modal-header">
         <h2 class="text-xl font-bold">Connections</h2>
         <button class="modal-close" data-modal="modal-connections">&times;</button>
       </div>
       <div class="modal-body">
+        <!-- Local Preview Mode Badge -->
+        <div class="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3 mb-4">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-yellow-400 font-semibold text-sm">🏠 Local Preview Mode</span>
+            <span class="px-2 py-0.5 bg-gray-700 text-xs rounded">Local only</span>
+            <span class="px-2 py-0.5 bg-gray-700 text-xs rounded">No auto-sending</span>
+            <span class="px-2 py-0.5 bg-gray-700 text-xs rounded">Setup after onboarding</span>
+          </div>
+          <p class="text-xs text-yellow-200/80">
+            WhatsApp send, Payments gateway, aur API calls tab tak disabled jab tak provider setup complete nahi hota.
+          </p>
+        </div>
+
+        <!-- Connection Tiles -->
         <div class="grid grid-cols-3 gap-3 mb-4">
           <div class="connection-tile">
             <h4 class="font-semibold mb-1">WhatsApp Business</h4>
-            <p class="text-xs text-gray-500 mb-2">State: <b>Demo mode</b></p>
-            <button class="btn-secondary text-xs" id="btn-wa-doc">View setup guide</button>
+            <p class="text-xs text-gray-500 mb-2">Status: <b>Not connected</b></p>
+            <p class="text-xs text-gray-400 mb-2">WhatsApp abhi deeplink preview par chal raha hai; auto-send ke liye WABA/template approval zaroori hoga.</p>
+            <button class="btn-secondary text-xs" id="btn-wa-doc">Setup guide</button>
           </div>
           <div class="connection-tile">
-            <h4 class="font-semibold mb-1">Calendar</h4>
-            <p class="text-xs text-gray-500 mb-2">State: <b>Demo mode</b></p>
+            <h4 class="font-semibold mb-1">Calendar (Google)</h4>
+            <p class="text-xs text-gray-500 mb-2">Status: <b>Not connected</b></p>
+            <p class="text-xs text-gray-400 mb-2">Calendar ICS yahin locally generate hota hai.</p>
             <button class="btn-secondary text-xs" id="btn-ics">Download .ics</button>
           </div>
           <div class="connection-tile">
-            <h4 class="font-semibold mb-1">Meeting</h4>
-            <p class="text-xs text-gray-500 mb-2">State: <b>Demo mode</b></p>
-            <button class="btn-secondary text-xs mb-1" id="btn-reserve">Reserve demo link</button>
-            <button class="btn-secondary text-xs" id="btn-copy-host">Copy host link</button>
+            <h4 class="font-semibold mb-1">Payments (Razorpay/Stripe)</h4>
+            <p class="text-xs text-gray-500 mb-2">Status: <b>Not connected</b></p>
+            <p class="text-xs text-gray-400 mb-2">Payment collection UI tracking dikhata hai; real charge aapke gateway par hoga jab connect karoge.</p>
+            <button class="btn-secondary text-xs">Enable later</button>
           </div>
         </div>
-        <div class="text-xs text-slate-400 mt-3">Demo mode only—no external calls.</div>
+
+        <!-- Test Drive Info -->
+        <div class="bg-ink-2/30 rounded-lg p-3">
+          <h4 class="text-sm font-semibold mb-2">Test Drive kaise karein:</h4>
+          <ul class="text-xs text-gray-400 space-y-1">
+            <li>• "Mujhe test bhejo" → wa.me deeplink opens (WhatsApp web/app)</li>
+            <li>• "Calendar me add karo" → .ics file download hoti</li>
+            <li>• "Export PNG/PDF" → locally generate hoke download hota</li>
+            <li>• Sab local—koi external API call nahi</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
