@@ -2641,18 +2641,452 @@ function deliverBonusTo(name='Prospect'){
   log('proofloop.bonus_delivered','Bonus delivered (preview)',{to:name, bonus:b.id});
 }
 
+/* ---------- Schedule WhatsApp Drip ---------- */
+function scheduleWhatsAppDrip(){
+  const drip = window.APP?.state?.fixtures?.drip || [];
+  const lang = window.APP?.state?.currentLanguage || 'hinglish';
+  if(!drip.length){ alert('Drip data not loaded'); return; }
+
+  const messages = drip.slice(0, 5); // Get first 3-5 messages
+  messages.forEach((msg, idx)=>{
+    const text = msg.template?.[lang] || msg.template?.hinglish || msg.hook || '';
+    const waLink = `https://wa.me/?text=${encodeURIComponent(text)}`;
+    setTimeout(()=>{
+      window.open(waLink, '_blank');
+      log('drip.open', `Drip message ${idx+1} opened`, {timing: msg.timing, language: lang});
+    }, idx * 500); // Stagger opens by 500ms
+  });
+
+  showToast(`Opening ${messages.length} WhatsApp drip messages...`);
+  if(window.updateAcceptanceCounter) window.updateAcceptanceCounter('drip');
+  markJourney(3); // Mark Drip journey step
+}
+
+/* ---------- Traffic Panel ---------- */
+let currentTrafficTab = 'search';
+function openTrafficPanel(tab='search'){
+  const panel = $('#trafficPanel');
+  if(!panel) return;
+
+  panel.classList.remove('hidden');
+  panel.scrollIntoView({ behavior: 'smooth' });
+  switchTrafficTab(tab);
+  log('traffic.view', 'Traffic panel opened', {tab});
+  if(window.updateAcceptanceCounter) window.updateAcceptanceCounter('traffic');
+}
+
+function switchTrafficTab(tab){
+  currentTrafficTab = tab;
+  const traffic = window.APP?.state?.fixtures?.traffic || {};
+
+  // Update tab buttons
+  ['search', 'piggyback', 'partners'].forEach(t=>{
+    const btn = $(`#traffic-tab-${t}`);
+    if(btn){
+      if(t===tab){
+        btn.classList.remove('btn-secondary');
+        btn.classList.add('btn-primary');
+      }else{
+        btn.classList.remove('btn-primary');
+        btn.classList.add('btn-secondary');
+      }
+    }
+  });
+
+  const content = $('#traffic-content');
+  if(!content) return;
+
+  if(tab === 'search'){
+    const sh = traffic.search_harvest || {};
+    content.innerHTML = `
+      <h3 class="font-semibold mb-3">Search Harvest Strategy</h3>
+      <p class="text-sm mb-2"><strong>Budget:</strong> ₹${sh.budget_per_day_inr || 0}/day</p>
+      <p class="text-sm mb-2"><strong>Keywords (${(sh.keywords||[]).length}):</strong></p>
+      <ul class="list-disc pl-5 mb-3">${(sh.keywords||[]).map(k=>`<li class="text-sm">${k}</li>`).join('')}</ul>
+      <p class="text-sm mb-2"><strong>Creatives:</strong> ${(sh.creatives||[]).join(', ')}</p>
+      <p class="text-sm mb-3"><strong>Routing:</strong> ${sh.routing || 'HVSP'}</p>
+      <button id="btnExportKeywords" class="btn-secondary text-xs">Export Keywords CSV</button>
+    `;
+    $('#btnExportKeywords')?.addEventListener('click', ()=>{
+      exportCSV('keywords.csv', (sh.keywords||[]).map(k=>({keyword:k})));
+      log('traffic.export', 'Keywords exported as CSV');
+    });
+  }else if(tab === 'piggyback'){
+    const pb = traffic.piggyback || {};
+    content.innerHTML = `
+      <h3 class="font-semibold mb-3">Piggyback Placements</h3>
+      <p class="text-sm mb-3"><strong>Message Match:</strong> ${pb.message_match || '—'}</p>
+      <p class="text-sm mb-2"><strong>Placements (${(pb.placements||[]).length}):</strong></p>
+      <ul class="list-disc pl-5 mb-3">${(pb.placements||[]).map(p=>`<li class="text-sm">${p.channel} • ${p.type} • ${p.note||''}</li>`).join('')}</ul>
+      <button id="btnExportPlacements" class="btn-secondary text-xs">Export Placements CSV</button>
+    `;
+    $('#btnExportPlacements')?.addEventListener('click', ()=>{
+      exportCSV('placements.csv', pb.placements||[]);
+      log('traffic.export', 'Placements exported as CSV');
+    });
+  }else if(tab === 'partners'){
+    const pt = traffic.partner_tap || {};
+    content.innerHTML = `
+      <h3 class="font-semibold mb-3">Partner Taps</h3>
+      <p class="text-sm mb-3"><strong>Asset:</strong> ${pt.asset || '—'}</p>
+      <p class="text-sm mb-2"><strong>Partners (${(pt.partners||[]).length}):</strong></p>
+      <ul class="list-disc pl-5 mb-3">${(pt.partners||[]).map(p=>`<li class="text-sm">${p.name} • Reach: ${p.reach?.toLocaleString()||'—'} • ${p.deal||''}</li>`).join('')}</ul>
+      <button id="btnExportPartners" class="btn-secondary text-xs">Export Partners JSON</button>
+    `;
+    $('#btnExportPartners')?.addEventListener('click', ()=>{
+      saveFile('partners.json', JSON.stringify(pt.partners||[],null,2), 'application/json');
+      log('traffic.export', 'Partners exported as JSON');
+    });
+  }
+}
+
+/* ---------- ProofLoop Video & Collect Feedback ---------- */
+let videoStream = null;
+let mediaRecorder = null;
+let recordedChunks = [];
+let videoBlob = null;
+
+function openProofCollect(){
+  const modal = $('#proofCollectModal');
+  if(!modal) return;
+
+  modal.classList.remove('hidden');
+  log('proofloop.collect_open', 'Collect feedback modal opened');
+
+  // Wire tab switching
+  $('#tab-quick-form')?.addEventListener('click', ()=>{
+    $('#quick-form-tab')?.classList.remove('hidden');
+    $('#video-review-tab')?.classList.add('hidden');
+    $('#tab-quick-form')?.classList.remove('btn-secondary');
+    $('#tab-quick-form')?.classList.add('btn-primary');
+    $('#tab-video-review')?.classList.remove('btn-primary');
+    $('#tab-video-review')?.classList.add('btn-secondary');
+  });
+
+  $('#tab-video-review')?.addEventListener('click', ()=>{
+    $('#video-review-tab')?.classList.remove('hidden');
+    $('#quick-form-tab')?.classList.add('hidden');
+    $('#tab-video-review')?.classList.remove('btn-secondary');
+    $('#tab-video-review')?.classList.add('btn-primary');
+    $('#tab-quick-form')?.classList.remove('btn-primary');
+    $('#tab-quick-form')?.classList.add('btn-secondary');
+  });
+}
+
+async function startVideoRecording(){
+  try{
+    videoStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+    const preview = $('#video-preview');
+    if(preview) preview.srcObject = videoStream;
+
+    mediaRecorder = new MediaRecorder(videoStream, { mimeType: 'video/webm' });
+    recordedChunks = [];
+
+    mediaRecorder.ondataavailable = (e)=>{ if(e.data.size>0) recordedChunks.push(e.data); };
+    mediaRecorder.onstop = ()=>{
+      videoBlob = new Blob(recordedChunks, { type: 'video/webm' });
+      $('#video-recorded-status')?.classList.remove('hidden');
+      $('#btnSubmitVideo')?.classList.remove('hidden');
+      if(videoStream){
+        videoStream.getTracks().forEach(t=>t.stop());
+        videoStream = null;
+      }
+    };
+
+    mediaRecorder.start();
+    $('#btnStartRecord')?.classList.add('hidden');
+    $('#btnStopRecord')?.classList.remove('hidden');
+    log('proofloop.video_start', 'Video recording started');
+  }catch(err){
+    console.error('Video recording failed:', err);
+    alert('Camera access denied. Please upload a video file instead.');
+  }
+}
+
+function stopVideoRecording(){
+  if(mediaRecorder && mediaRecorder.state !== 'inactive'){
+    mediaRecorder.stop();
+    $('#btnStopRecord')?.classList.add('hidden');
+    $('#btnStartRecord')?.classList.remove('hidden');
+    log('proofloop.video_stop', 'Video recording stopped');
+  }
+}
+
+function handleVideoUpload(file){
+  if(file && file.type.startsWith('video/')){
+    videoBlob = file;
+    $('#video-recorded-status')?.classList.remove('hidden');
+    $('#btnSubmitVideo')?.classList.remove('hidden');
+    log('proofloop.video_upload', 'Video file uploaded', {size: file.size});
+  }
+}
+
+function saveProofEntry(data){
+  const st = window.APP?.state || {};
+  const feedback = st.fixtures?.proofloop || [];
+
+  const entry = {
+    id: 'proof_' + Date.now(),
+    name: data.name || 'Anonymous',
+    role: data.role || '',
+    rating: data.rating,
+    takeaway: data.takeaway,
+    consent_display: data.consent || false,
+    language: st.currentLanguage || 'hinglish',
+    watch_pct: data.watchPct || 0,
+    badge: data.videoBlobOrFile ? '🎬 Video' : `Verified • ${data.watchPct || 0}% watched`,
+    created_at: new Date().toISOString(),
+    has_video: !!data.videoBlobOrFile
+  };
+
+  feedback.push(entry);
+
+  // Run Bonus Engine
+  const niche = st.fixtures?.inputs?.niche || 'generic';
+  const pains = st.fixtures?.inputs?.pains || [];
+  const lang = st.currentLanguage || 'hinglish';
+  const bonus = pickBonus(niche, pains, lang);
+
+  // Generate signed bonus link
+  const bonusLink = createSignedBonusLink(bonus.id, entry.name);
+
+  showToast('Bonus delivered ✓');
+  log('proofloop.feedback_saved', 'Feedback entry saved', {id: entry.id, has_video: entry.has_video, bonus: bonus.id});
+
+  // Update acceptance counter
+  if(window.updateAcceptanceCounter){
+    window.updateAcceptanceCounter('proofloop');
+    window.updateAcceptanceCounter('proofwall');
+  }
+
+  // Close modal
+  $('#proofCollectModal')?.classList.add('hidden');
+
+  // Show bonus link
+  alert(`Bonus delivered! Link (72h): ${bonusLink}\n\n${bonus.title_hinglish || bonus.title}`);
+}
+
+function openProofWallModal(){
+  const feedback = window.APP?.state?.fixtures?.proofloop || [];
+  const modal = $('#proofWallModal');
+  if(!modal) return;
+
+  const grid = $('#proofWallGrid');
+  if(grid){
+    grid.innerHTML = feedback.map(f=>`
+      <div class="rounded-lg p-4 border border-gray-700 bg-ink-2/30">
+        <div class="flex items-center justify-between mb-2">
+          <strong class="text-white">${f.name}</strong>
+          <span class="text-xs text-brand">${'⭐'.repeat(f.rating)} ${f.badge||''}</span>
+        </div>
+        <p class="text-sm text-gray-300 mb-2">"${f.takeaway}"</p>
+        <div class="text-xs text-gray-500">${f.role||''} • ${(f.language||'').toUpperCase()}</div>
+      </div>
+    `).join('');
+  }
+
+  modal.classList.remove('hidden');
+  log('proofwall.open', 'Proof Wall modal opened', {count: feedback.length});
+}
+
+/* ---------- Money Collector ---------- */
+function renderMoneyCollector(){
+  const payments = window.APP?.state?.fixtures?.payments || [];
+  const container = $('#collector-rows');
+  if(!container) return;
+
+  container.innerHTML = payments.map(p=>{
+    const stateLabel = {
+      'pending': 'Pending',
+      'token': `Token Paid (₹${(p.amount_paid/1000).toFixed(0)}K)`,
+      'partial': `Partial (₹${(p.amount_paid/1000).toFixed(0)}K / ₹${(p.amount_total/1000).toFixed(0)}K)`,
+      'paid': 'Full Paid ✓'
+    }[p.state] || p.state;
+
+    const dueAmount = p.amount_due > 0 ? `₹${(p.amount_due/1000).toFixed(0)}K` : '—';
+    const showNudge = ['pending','token','partial'].includes(p.state);
+
+    let nudgeBtn = '';
+    if(showNudge){
+      const reminderText = `Hi ${p.name}, gentle reminder about payment of ${dueAmount}. Due: ${p.due_date||'soon'}. Thanks!`;
+      const waLink = `https://wa.me/${p.phone}?text=${encodeURIComponent(reminderText)}`;
+      nudgeBtn = `<button class="btn-secondary text-xs" onclick="window.open('${waLink}','_blank'); window.APP.log('money.nudge','WA nudge sent',{id:'${p.id}',state:'${p.state}'});">📱 Nudge</button>`;
+    }
+
+    return `
+      <div class="flex items-center justify-between p-3 rounded-lg bg-ink/30 border border-gray-700">
+        <div class="flex-1">
+          <div class="font-semibold text-white">${p.name}</div>
+          <div class="text-xs text-gray-400">${stateLabel} • Due: ${dueAmount}</div>
+        </div>
+        <div class="text-xs text-gray-400">
+          Last ping: ${p.last_ping||'—'}<br>
+          Next: ${p.next_action||'—'}
+        </div>
+        <div>${nudgeBtn}</div>
+      </div>
+    `;
+  }).join('');
+
+  if(window.updateAcceptanceCounter) window.updateAcceptanceCounter('money');
+  log('money.rendered', 'Money collector rendered', {count: payments.length});
+}
+
+/* ---------- Update Acceptance Counter ---------- */
+function updateAcceptanceCounter(check){
+  if(!window.APP?.state?.acceptanceChecks) return;
+
+  if(check){
+    window.APP.state.acceptanceChecks[check] = true;
+  }
+
+  const checks = window.APP.state.acceptanceChecks;
+  const total = Object.keys(checks).length;
+  const passed = Object.values(checks).filter(v=>v).length;
+  const counter = $('#checks-status');
+
+  if(counter){
+    counter.textContent = `${passed}/${total}`;
+    counter.className = passed === total ? 'text-green-400 font-semibold' : 'text-gray-600';
+  }
+}
+
+// Make it globally available
+window.updateAcceptanceCounter = updateAcceptanceCounter;
+
+/* ---------- Keyboard Shortcuts ---------- */
+document.addEventListener('keydown', (e)=>{
+  if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+  const key = e.key.toLowerCase();
+
+  if(key === 'd' && !e.ctrlKey && !e.metaKey){
+    e.preventDefault();
+    $('#btnScheduleDrip')?.scrollIntoView({ behavior: 'smooth' });
+    $('#btnScheduleDrip')?.focus();
+  }else if(key === 't' && !e.ctrlKey && !e.metaKey){
+    e.preventDefault();
+    const panel = $('#trafficPanel');
+    if(panel?.classList.contains('hidden')){
+      openTrafficPanel();
+    }else{
+      panel?.classList.add('hidden');
+    }
+  }else if(key === 'v' && !e.ctrlKey && !e.metaKey){
+    e.preventDefault();
+    openProofCollect();
+  }else if(key === 'enter' && document.activeElement?.id === 'btnScheduleDrip'){
+    e.preventDefault();
+    scheduleWhatsAppDrip();
+  }
+});
+
 /* ---------- Attach handlers on load ---------- */
 window.addEventListener('DOMContentLoaded', ()=>{
-  $('#btnTrafficPlan')?.addEventListener('click', renderTrafficPanel);
-  $('#btnProofWall')?.addEventListener('click', openProofWall);
-  $('#btnDrip')?.addEventListener('click', ()=> alert('Preview: opens WhatsApp deeplinks; auto-send requires WABA/template approval.'));
-  // convenience buttons near Qualification section
-  if(!document.getElementById('nurtureBtns')){
-    const bar=document.createElement('div'); bar.id='nurtureBtns'; bar.className='mt-4 flex gap-3';
-    bar.innerHTML=`<button id="btnBuildNurture" class="btn-secondary">Build Nurture Pack</button>
-                   <button id="btnDeliverBonus" class="btn-secondary">Deliver Bonus (preview)</button>`;
-    (document.querySelector('.qualification-section')||document.body).appendChild(bar);
-  }
-  document.getElementById('btnBuildNurture')?.addEventListener('click', buildNurturePack);
-  document.getElementById('btnDeliverBonus')?.addEventListener('click', ()=> deliverBonusTo('Prospect'));
+  // Drip
+  $('#btnScheduleDrip')?.addEventListener('click', scheduleWhatsAppDrip);
+
+  // Traffic
+  $('#btnTrafficPlan')?.addEventListener('click', ()=> openTrafficPanel('search'));
+  $('#traffic-tab-search')?.addEventListener('click', ()=> switchTrafficTab('search'));
+  $('#traffic-tab-piggyback')?.addEventListener('click', ()=> switchTrafficTab('piggyback'));
+  $('#traffic-tab-partners')?.addEventListener('click', ()=> switchTrafficTab('partners'));
+
+  // ProofLoop
+  $('#btnCollectFeedback')?.addEventListener('click', openProofCollect);
+  $('#btnViewProofWall')?.addEventListener('click', openProofWallModal);
+  $('#btn-view-proof-wall')?.addEventListener('click', openProofWallModal); // Alternative button
+
+  // ProofLoop Form
+  const ratingBtns = document.querySelectorAll('.rating-btn');
+  ratingBtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      ratingBtns.forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      $('#proof-rating').value = btn.dataset.rating;
+    });
+  });
+
+  $('#proofCollectForm')?.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const data = {
+      rating: parseInt($('#proof-rating')?.value || 0),
+      takeaway: $('#proof-takeaway')?.value || '',
+      name: $('#proof-name')?.value || '',
+      role: $('#proof-role')?.value || '',
+      consent: $('#proof-consent')?.checked || false,
+      watchPct: 75 + Math.floor(Math.random()*20) // Simulated watch percentage
+    };
+
+    if(!data.rating || !data.takeaway){
+      alert('Please provide rating and takeaway');
+      return;
+    }
+
+    saveProofEntry(data);
+  });
+
+  // Video recording
+  $('#btnStartRecord')?.addEventListener('click', startVideoRecording);
+  $('#btnStopRecord')?.addEventListener('click', stopVideoRecording);
+  $('#btnUploadVideo')?.addEventListener('click', ()=> $('#videoFileInput')?.click());
+  $('#videoFileInput')?.addEventListener('change', (e)=>{
+    const file = e.target.files?.[0];
+    if(file) handleVideoUpload(file);
+  });
+  $('#btnSubmitVideo')?.addEventListener('click', ()=>{
+    const data = {
+      rating: 5,
+      takeaway: 'Video review submitted',
+      name: 'Video Reviewer',
+      role: '',
+      consent: true,
+      watchPct: 100,
+      videoBlobOrFile: videoBlob
+    };
+    saveProofEntry(data);
+  });
+
+  // Proof Wall exports
+  $('#btnExportProofPNG')?.addEventListener('click', async ()=>{
+    if(typeof html2canvas === 'undefined'){ alert('html2canvas not loaded'); return; }
+    const grid = $('#proofWallGrid');
+    const canvas = await html2canvas(grid, {scale:2, backgroundColor:'#0B0F1A'});
+    canvas.toBlob(b=> saveFile('proofwall.png', b, 'image/png'));
+    log('proofwall.export', 'Exported as PNG');
+  });
+
+  $('#btnExportProofPDF')?.addEventListener('click', async ()=>{
+    if(typeof window.jspdf === 'undefined'){ alert('jsPDF not loaded'); return; }
+    const { jsPDF } = window.jspdf;
+    const grid = $('#proofWallGrid');
+    const canvas = await html2canvas(grid, {scale:2, backgroundColor:'#0B0F1A'});
+    const img = canvas.toDataURL('image/png');
+    const pdf = new jsPDF({orientation:'p',unit:'pt',format:'a4'});
+    const w=540, h=(canvas.height/canvas.width)*w;
+    pdf.addImage(img,'PNG',36,36,w,h);
+    pdf.save('proofwall.pdf');
+    log('proofwall.export', 'Exported as PDF');
+  });
+
+  $('#btnExportProofJSON')?.addEventListener('click', ()=>{
+    const feedback = window.APP?.state?.fixtures?.proofloop || [];
+    saveFile('proofwall.json', JSON.stringify(feedback,null,2), 'application/json');
+    log('proofwall.export', 'Exported as JSON');
+  });
+
+  // Nurture & Bonus
+  $('#btnBuildNurturePack')?.addEventListener('click', buildNurturePack);
+  $('#btnDeliverBonus')?.addEventListener('click', ()=> deliverBonusTo('Prospect'));
+
+  // Money Collector - render on load
+  renderMoneyCollector();
+
+  // Modal close handlers
+  document.querySelectorAll('.modal-close').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const modalId = btn.dataset.modal || btn.closest('.modal')?.id;
+      if(modalId) $(`#${modalId}`)?.classList.add('hidden');
+    });
+  });
 });

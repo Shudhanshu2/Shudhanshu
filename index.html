@@ -288,7 +288,10 @@
             <label class="text-gray-400">Include Disqualified</label>
           </div>
         </div>
-        <button id="btnProofWall" class="btn-secondary text-xs mt-3">View Proof Wall →</button>
+        <div class="flex gap-2 mt-3">
+          <button id="btnCollectFeedback" class="btn-primary text-xs">Collect Feedback</button>
+          <button id="btnViewProofWall" class="btn-secondary text-xs">View Proof Wall →</button>
+        </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -371,18 +374,24 @@
         </div>
       </div>
 
-      <button id="btnDrip" class="btn-danger">Schedule WhatsApp Drip (preview)</button>
-      <p class="text-xs text-gray-500 mt-2">Preview: opens WhatsApp deeplinks; auto-send requires WABA/template approval.</p>
+      <button id="btnScheduleDrip" class="btn-danger">Schedule WhatsApp Drip</button>
+      <small class="helper text-xs text-gray-500 mt-2 block" id="dripHelper">Opens WhatsApp deeplinks; auto-send requires WABA/template approval.</small>
 
       <!-- Money-Collector Section -->
-      <section id="collector" class="bg-ink-2/30 rounded-lg p-4 mt-6">
+      <section id="moneyCollector" class="bg-ink-2/30 rounded-lg p-4 mt-6">
         <div class="flex items-center gap-2 mb-3">
           <h3 class="text-sm font-semibold text-brand">Payment Follow-ups</h3>
           <span class="text-xs text-slate-400">Stages: Pending → Token → Partial → Paid</span>
         </div>
         <div id="collector-rows" class="space-y-2"></div>
-        <div class="text-xs text-slate-500 mt-2">Preview mode: Payment tracking only; receipts generated after gateway connection</div>
       </section>
+
+      <!-- Nurture Pack & Bonus Controls -->
+      <div class="mt-4 flex gap-3">
+        <button id="btnBuildNurturePack" class="btn-secondary">Build Nurture Pack</button>
+        <button id="btnDeliverBonus" class="btn-secondary">Deliver Bonus</button>
+      </div>
+      <p class="text-xs text-gray-500 mt-2">Nurture Pack ready—download/send. Bonus link active for 72h; auto-expires.</p>
 
       <!-- Lovable Button -->
       <button id="btn-lovable" class="btn-secondary mt-4">Generate Funnel Spec for Lovable</button>
@@ -710,16 +719,16 @@
     </p>
   </section>
 
-  <!-- Traffic Engine Section (Hidden by default) -->
-  <section id="section-traffic" class="section-card mb-8 hidden">
-    <h2 class="section-title">Traffic Engine</h2>
+  <!-- Traffic Engine Panel (Hidden by default) -->
+  <section id="trafficPanel" class="section-card mb-8 hidden">
+    <h2 class="section-title">Traffic Engine Plan</h2>
     <p class="text-sm text-gray-400 mb-6">Paid traffic strategy: Search Harvest + Piggyback + Partner Taps</p>
 
     <!-- Tabs -->
     <div class="flex gap-2 mb-6">
-      <button id="traffic-tab-search_harvest" class="btn-primary">Search Harvest</button>
+      <button id="traffic-tab-search" class="btn-primary">Search Harvest</button>
       <button id="traffic-tab-piggyback" class="btn-secondary">Piggyback</button>
-      <button id="traffic-tab-partner_tap" class="btn-secondary">Partner Taps</button>
+      <button id="traffic-tab-partners" class="btn-secondary">Partner Taps</button>
     </div>
 
     <!-- Tab Content -->
@@ -992,6 +1001,97 @@
       <p class="text-xs text-slate-400">Read-only in demo mode</p>
     </div>
   </aside>
+
+  <!-- Proof Wall Modal -->
+  <div id="proofWallModal" class="modal hidden">
+    <div class="modal-content w-[920px] max-w-[95vw]">
+      <div class="modal-header">
+        <h2 class="text-xl font-bold">Proof Wall — Content Feedback</h2>
+        <button class="modal-close" data-modal="proofWallModal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="proofWallGrid" class="grid md:grid-cols-2 gap-4 mb-4">
+          <!-- Feedback tiles will be rendered here -->
+        </div>
+        <div class="flex gap-2 mt-4 pt-4 border-t border-gray-700">
+          <button id="btnExportProofPNG" class="btn-secondary text-xs">Export PNG</button>
+          <button id="btnExportProofPDF" class="btn-secondary text-xs">Export PDF</button>
+          <button id="btnExportProofJSON" class="btn-secondary text-xs">Export JSON</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Proof Collect Modal -->
+  <div id="proofCollectModal" class="modal hidden">
+    <div class="modal-content w-[720px] max-w-[95vw]">
+      <div class="modal-header">
+        <h2 class="text-xl font-bold">Collect Feedback</h2>
+        <button class="modal-close" data-modal="proofCollectModal">✕</button>
+      </div>
+      <div class="modal-body">
+        <!-- Tabs -->
+        <div class="flex gap-2 mb-4">
+          <button id="tab-quick-form" class="btn-primary text-sm">Quick Form</button>
+          <button id="tab-video-review" class="btn-secondary text-sm">Video Review 🎬</button>
+        </div>
+
+        <!-- Quick Form Tab -->
+        <div id="quick-form-tab" class="tab-content">
+          <form id="proofCollectForm">
+            <div class="form-group">
+              <label class="form-label">Rating (1-5)</label>
+              <div class="flex gap-2">
+                <button type="button" class="rating-btn" data-rating="1">1</button>
+                <button type="button" class="rating-btn" data-rating="2">2</button>
+                <button type="button" class="rating-btn" data-rating="3">3</button>
+                <button type="button" class="rating-btn" data-rating="4">4</button>
+                <button type="button" class="rating-btn" data-rating="5">5</button>
+              </div>
+              <input type="hidden" id="proof-rating" name="rating" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Main Takeaway</label>
+              <textarea id="proof-takeaway" class="form-input" rows="3" placeholder="Ek sentence mein batayein..." required></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Your Name</label>
+              <input type="text" id="proof-name" class="form-input" placeholder="Name">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Your Role</label>
+              <input type="text" id="proof-role" class="form-input" placeholder="Role/Title">
+            </div>
+            <div class="form-group">
+              <label class="flex items-center gap-2">
+                <input type="checkbox" id="proof-consent">
+                <span class="text-sm">I consent to display this feedback publicly</span>
+              </label>
+            </div>
+            <button type="submit" class="btn-primary w-full">Submit & Get Bonus 🎁</button>
+          </form>
+        </div>
+
+        <!-- Video Review Tab -->
+        <div id="video-review-tab" class="tab-content hidden">
+          <p class="text-sm text-gray-400 mb-4">Record a short video review (or upload a video file)</p>
+          <div id="video-record-container" class="mb-4">
+            <video id="video-preview" class="w-full rounded-lg mb-2 bg-black" autoplay muted></video>
+            <div class="flex gap-2">
+              <button type="button" id="btnStartRecord" class="btn-primary text-sm">Start Recording 🔴</button>
+              <button type="button" id="btnStopRecord" class="btn-secondary text-sm hidden">Stop Recording ⏹</button>
+              <button type="button" id="btnUploadVideo" class="btn-secondary text-sm">Upload Video File 📁</button>
+            </div>
+            <input type="file" id="videoFileInput" accept="video/*" class="hidden">
+          </div>
+          <div id="video-recorded-status" class="text-sm text-green-400 hidden">✓ Video recorded! Submit to get your bonus.</div>
+          <button type="button" id="btnSubmitVideo" class="btn-primary w-full mt-4 hidden">Submit Video Review 🎁</button>
+        </div>
+
+        <p class="text-xs text-gray-400 mt-4">Honest feedback dijiye—bonus instantly milta hai (72h link).</p>
+      </div>
+    </div>
+  </div>
 
   <script type="module" src="js/app.js"></script>
 </body>
