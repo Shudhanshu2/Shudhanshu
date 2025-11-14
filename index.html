@@ -289,8 +289,12 @@
           </div>
         </div>
         <div class="flex gap-2 mt-3">
-          <button id="btnCollectFeedback" class="btn-primary text-xs">Collect Feedback</button>
-          <button id="btnViewProofWall" class="btn-secondary text-xs">View Proof Wall →</button>
+          <button id="btn-proofloop-wall" class="btn-secondary text-xs flex-1">View Proof Wall →</button>
+          <button id="btnCollectFeedback" class="btn-primary text-xs flex-1">Collect Feedback</button>
+        </div>
+        <div class="flex gap-2 mt-2">
+          <button id="btnBuildNurturePack" class="btn-secondary text-xs flex-1">Build Nurture Pack</button>
+          <button id="btnDeliverBonus" class="btn-secondary text-xs flex-1">Deliver Bonus</button>
         </div>
       </div>
 
@@ -374,24 +378,18 @@
         </div>
       </div>
 
-      <button id="btnScheduleDrip" class="btn-danger">Schedule WhatsApp Drip</button>
-      <small class="helper text-xs text-gray-500 mt-2 block" id="dripHelper">Opens WhatsApp deeplinks; auto-send requires WABA/template approval.</small>
+      <button id="btn-schedule-drip" class="btn-primary">Schedule WhatsApp Drip (preview)</button>
+      <p class="text-xs text-gray-500 mt-2">Opens preview WhatsApp links using fixture data. No messages sent automatically.</p>
 
       <!-- Money-Collector Section -->
-      <section id="moneyCollector" class="bg-ink-2/30 rounded-lg p-4 mt-6">
+      <section id="collector" class="bg-ink-2/30 rounded-lg p-4 mt-6">
         <div class="flex items-center gap-2 mb-3">
           <h3 class="text-sm font-semibold text-brand">Payment Follow-ups</h3>
           <span class="text-xs text-slate-400">Stages: Pending → Token → Partial → Paid</span>
         </div>
         <div id="collector-rows" class="space-y-2"></div>
+        <div class="text-xs text-slate-500 mt-2">Receipts → ~/Documents/ScaleEdge/Collections/... (simulated)</div>
       </section>
-
-      <!-- Nurture Pack & Bonus Controls -->
-      <div class="mt-4 flex gap-3">
-        <button id="btnBuildNurturePack" class="btn-secondary">Build Nurture Pack</button>
-        <button id="btnDeliverBonus" class="btn-secondary">Deliver Bonus</button>
-      </div>
-      <p class="text-xs text-gray-500 mt-2">Nurture Pack ready—download/send. Bonus link active for 72h; auto-expires.</p>
 
       <!-- Lovable Button -->
       <button id="btn-lovable" class="btn-secondary mt-4">Generate Funnel Spec for Lovable</button>
@@ -573,7 +571,7 @@
             <div class="text-sm font-semibold text-white mb-1">Traffic Engine</div>
             <div class="text-xs text-gray-400">Paid traffic strategy: Search + Piggyback + Partners</div>
           </div>
-          <button id="btnTrafficPlan" class="btn-primary text-xs">View Traffic Plan →</button>
+          <button id="btn-toggle-traffic" class="btn-primary text-xs">View Traffic Plan →</button>
         </div>
       </div>
     </section>
@@ -719,16 +717,16 @@
     </p>
   </section>
 
-  <!-- Traffic Engine Panel (Hidden by default) -->
-  <section id="trafficPanel" class="section-card mb-8 hidden">
-    <h2 class="section-title">Traffic Engine Plan</h2>
+  <!-- Traffic Engine Section (Hidden by default) -->
+  <section id="section-traffic" class="section-card mb-8 hidden">
+    <h2 class="section-title">Traffic Engine</h2>
     <p class="text-sm text-gray-400 mb-6">Paid traffic strategy: Search Harvest + Piggyback + Partner Taps</p>
 
     <!-- Tabs -->
     <div class="flex gap-2 mb-6">
-      <button id="traffic-tab-search" class="btn-primary">Search Harvest</button>
+      <button id="traffic-tab-search_harvest" class="btn-primary">Search Harvest</button>
       <button id="traffic-tab-piggyback" class="btn-secondary">Piggyback</button>
-      <button id="traffic-tab-partners" class="btn-secondary">Partner Taps</button>
+      <button id="traffic-tab-partner_tap" class="btn-secondary">Partner Taps</button>
     </div>
 
     <!-- Tab Content -->
@@ -957,7 +955,7 @@
           <button type="submit" class="btn-primary w-full">Submit Feedback & Get Bonus 🎁</button>
         </form>
 
-        <p class="text-xs text-gray-400 mt-4 text-center">Preview mode: Bonus delivery available after form submission</p>
+        <p class="text-xs text-gray-400 mt-4 text-center">Demo mode: Bonus will be simulated</p>
       </div>
     </div>
   </div>
@@ -983,7 +981,7 @@
         <button id="btn-download-bonus" class="btn-primary w-full mb-2">Download Bonus</button>
         <button id="btn-copy-bonus-link" class="btn-secondary w-full text-xs">Copy Link</button>
 
-        <p class="text-xs text-gray-400 mt-4 text-center">Preview: Link valid for 72h; download after bonus selection</p>
+        <p class="text-xs text-gray-400 mt-4 text-center">Demo mode: Download simulated</p>
       </div>
     </div>
   </div>

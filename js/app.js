@@ -924,8 +924,38 @@ function assemblePresell() {
 }
 
 function scheduleDrip() {
-  alert('WhatsApp drip scheduled (simulated). No messages sent.');
+  const drip = state.fixtures?.drip || [];
+  const lang = state.currentLanguage || 'hinglish';
+
+  if (!drip.length) {
+    alert('Drip data not loaded. Please ensure fixtures are loaded first.');
+    return;
+  }
+
+  // Get first 4 drip messages
+  const messages = drip.slice(0, 4);
+
+  // Open WhatsApp preview links (staggered)
+  messages.forEach((msg, idx) => {
+    const text = msg.template?.[lang] || msg.template?.hinglish || msg.hook || '';
+    const waLink = `https://wa.me/?text=${encodeURIComponent(text)}`;
+    setTimeout(() => {
+      window.open(waLink, '_blank');
+      eventLog.log('drip.preview', `Drip message ${idx + 1} preview opened`, {
+        timing: msg.timing,
+        language: lang
+      });
+    }, idx * 600); // Stagger by 600ms
+  });
+
+  // Mark Drip check as passed
+  state.acceptanceChecks.drip = true;
+  updateAcceptanceCounter();
+  eventLog.log('acceptance.pass', 'WhatsApp drip preview opened', { count: messages.length });
+
   markJourney(3); // Pre-sell Drip
+
+  // Show next section
   document.getElementById('section-booking').classList.remove('hidden');
   setTimeout(() => {
     document.getElementById('section-booking').scrollIntoView({ behavior: 'smooth' });
@@ -1683,15 +1713,35 @@ function initProofLoop() {
     };
   }
 
-  // View Proof Wall button
+  // View Proof Wall button - opens modal
   const wallBtn = document.getElementById('btn-proofloop-wall');
   if (wallBtn) {
     wallBtn.onclick = () => {
-      document.getElementById('section-proof-wall').classList.remove('hidden');
-      renderProofWall();
-      setTimeout(() => {
-        document.getElementById('section-proof-wall').scrollIntoView({ behavior: 'smooth' });
-      }, 100);
+      openProofWallModal();
+    };
+  }
+
+  // Collect Feedback button - opens collection modal
+  const collectBtn = document.getElementById('btnCollectFeedback');
+  if (collectBtn) {
+    collectBtn.onclick = () => {
+      openProofCollect();
+    };
+  }
+
+  // Build Nurture Pack button
+  const nurturePBtn = document.getElementById('btnBuildNurturePack');
+  if (nurturePBtn) {
+    nurturePBtn.onclick = () => {
+      buildNurturePack();
+    };
+  }
+
+  // Deliver Bonus button
+  const deliverBBtn = document.getElementById('btnDeliverBonus');
+  if (deliverBBtn) {
+    deliverBBtn.onclick = () => {
+      deliverBonus();
     };
   }
 
@@ -2491,304 +2541,132 @@ function prefillDemoForm() {
   }, 500);
 }
 
-// Cleanup
-window.addEventListener('beforeunload', () => {
-  if (state.setup.logoObjectURL) {
-    URL.revokeObjectURL(state.setup.logoObjectURL);
-  }
-});
+// ====================================================
+// ProofLoop Enhanced Functions
+// ====================================================
 
-// Init
-document.addEventListener('DOMContentLoaded', loadData);
-
-/* ---------- helpers ---------- */
+// Helper for querySelector
 const $ = (q) => document.querySelector(q);
-const log = (...a) => window.APP?.log ? window.APP.log(...a) : console.log('[LOG]', ...a);
-function saveFile(name, content, type){ const b=new Blob([content],{type}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download=name; a.click(); }
-function exportCSV(name, rows){
-  if(!rows || !rows.length){ alert('Nothing to export'); return; }
-  const keys = Object.keys(rows[0]); const csv=[keys.join(','), ...rows.map(r=>keys.map(k=>JSON.stringify(r[k]??'')).join(','))].join('\n');
-  saveFile(name, csv, 'text/csv');
-}
 
-/* ---------- Traffic Plan panel ---------- */
-function renderTrafficPanel(){
-  const fx = window.APP?.state?.fixtures?.traffic;
-  if(!fx){ alert('Traffic plan data not loaded'); return; }
-  const host = document.getElementById('traffic-panel') || (()=>{ const d=document.createElement('section'); d.id='traffic-panel'; d.className='mt-6 rounded-xl border border-zinc-700 p-5 bg-[#0B0F1A]'; document.body.appendChild(d); return d; })();
-  host.innerHTML = `
-    <h3 class="text-xl font-semibold mb-3">Traffic Engine Plan</h3>
-    <div class="grid md:grid-cols-3 gap-4">
-      <div class="rounded-xl border border-zinc-700 p-4">
-        <h4 class="font-semibold mb-2">YouTube Search Harvest</h4>
-        <p class="muted mb-2">Budget: ₹${fx.search_harvest.budget_per_day_inr}/day</p>
-        <details open><summary class="cursor-pointer">Keywords</summary>
-          <ul class="list-disc pl-5 mt-2">${fx.search_harvest.keywords.map(k=>`<li>${k}</li>`).join('')}</ul>
-        </details>
-        <button id="expKeywords" class="btn-secondary mt-3">Export Keywords CSV</button>
-      </div>
-      <div class="rounded-xl border border-zinc-700 p-4">
-        <h4 class="font-semibold mb-2">Placement Piggyback</h4>
-        <ul class="list-disc pl-5">${fx.piggyback.placements.map(p=>`<li>${p.channel} • ${p.type}</li>`).join('')}</ul>
-        <button id="expPlacements" class="btn-secondary mt-3">Export Placements CSV</button>
-      </div>
-      <div class="rounded-xl border border-zinc-700 p-4">
-        <h4 class="font-semibold mb-2">Partner Taps</h4>
-        <ul class="list-disc pl-5">${(fx.partner_tap.partners||[]).map(p=>`<li>${p.name} • ${p.format}</li>`).join('')}</ul>
-        <button id="expPartners" class="btn-secondary mt-3">Export Partners JSON</button>
-      </div>
-    </div>`;
-  window.scrollTo({ top: host.offsetTop - 60, behavior: 'smooth' });
-  log('traffic.open','Traffic Engine panel opened',{kw: fx.search_harvest.keywords.length});
-  if(window.updateAcceptanceCounter) window.updateAcceptanceCounter('traffic');
-  $('#expKeywords').onclick   = ()=> exportCSV('keywords.csv', fx.search_harvest.keywords.map(k=>({keyword:k})));
-  $('#expPlacements').onclick = ()=> exportCSV('placements.csv', fx.piggyback.placements);
-  $('#expPartners').onclick   = ()=> saveFile('partners.json', JSON.stringify(fx.partner_tap.partners||[],null,2), 'application/json');
-}
-
-/* ---------- Proof Wall modal + exports ---------- */
-function openProofWall(){
-  const list = window.APP?.state?.fixtures?.proofloop || [];
-  const wrap = document.createElement('section');
-  wrap.id='proofwall';
-  wrap.className='fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50';
-  wrap.innerHTML = `
-    <div class="w-[920px] max-h-[80vh] overflow-auto rounded-2xl bg-[#0B0F1A] p-6 border border-zinc-700">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="text-xl font-semibold">Proof Wall — Content Feedback</h3>
-        <div class="space-x-2">
-          <button id="btnPWpng" class="btn-secondary">Export PNG</button>
-          <button id="btnPWpdf" class="btn-secondary">Export PDF</button>
-          <button id="btnPWjson" class="btn-secondary">Export JSON</button>
-          <button id="btnPWclose" class="btn-ghost">✕</button>
-        </div>
-      </div>
-      <div id="pwGrid" class="grid md:grid-cols-2 gap-4"></div>
-    </div>`;
-  document.body.appendChild(wrap);
-  const grid = wrap.querySelector('#pwGrid');
-  grid.innerHTML = list.map(f=>`
-    <div class="rounded-xl p-4 border border-zinc-700">
-      <div class="flex items-center justify-between">
-        <strong>${f.name}</strong><span class="badge">★ ${f.rating} • ${f.badge||''}</span>
-      </div>
-      <p class="mt-2 text-zinc-300">"${f.takeaway}"</p>
-      <div class="mt-2 text-xs text-zinc-500">${(f.language||'').toUpperCase()} • ${new Date(f.created_at).toLocaleString()}</div>
-    </div>`).join('');
-  wrap.querySelector('#btnPWclose').onclick = ()=> wrap.remove();
-  wrap.querySelector('#btnPWpng').onclick   = async ()=>{
-    const canvas = await html2canvas(grid, {scale:2, backgroundColor:'#0B0F1A'});
-    canvas.toBlob(b=> saveFile('proofwall.png', b, 'image/png'));
-  };
-  wrap.querySelector('#btnPWpdf').onclick   = async ()=>{
-    const { jsPDF } = window.jspdf; const pdf = new jsPDF({orientation:'p',unit:'pt',format:'a4'});
-    const canvas = await html2canvas(grid, {scale:2, backgroundColor:'#0B0F1A'});
-    const img = canvas.toDataURL('image/png'); const w=540, h=(canvas.height/canvas.width)*w;
-    pdf.addImage(img,'PNG',36,36,w,h); pdf.save('proofwall.pdf');
-  };
-  wrap.querySelector('#btnPWjson').onclick  = ()=> saveFile('proofwall.json', JSON.stringify(list,null,2), 'application/json');
-  log('proofwall.open','Proof Wall opened',{count:list.length});
-  if(window.updateAcceptanceCounter) window.updateAcceptanceCounter('proofwall');
-}
-
-/* ---------- ProofLoop: Nurture + Bonus ---------- */
-function pickBonus(niche, pains=[], language='hinglish'){
-  const all = window.APP?.state?.fixtures?.bonuses || [];
-  let best=null, score=-1;
-  for(const b of all){
-    let s=0;
-    if(b.niche===niche) s+=2;
-    if((b.pains||[]).some(p=>pains.some(x=>(p+'').toLowerCase().includes(x.toLowerCase())))) s+=1;
-    if((b.language||'').toLowerCase()===(language||'').toLowerCase()) s+=1;
-    if(s>score){best=b; score=s;}
-  }
-  return best||all[0];
-}
-function createSignedBonusLink(bonusId, name=''){
-  const exp=Date.now()+72*60*60*1000, token=btoa(JSON.stringify({bonusId,exp,name}));
-  const url=`${location.origin}${location.pathname}?bonus=${bonusId}&token=${token}`;
-  localStorage.setItem(`se_bonus_${bonusId}`, JSON.stringify({exp}));
-  return url;
-}
-function buildNurturePack(){
-  const st = window.APP?.state || {};
-  const prospects = (st.prospects||[]).filter(p=>!p.qualified || p.no_show);
-  const niche = st.inputs?.niche || 'generic', pains = st.inputs?.pains||[], lang=(st.inputs?.language||'hinglish').toLowerCase();
-  const bonus = pickBonus(niche,pains,lang);
-  const template = (st.drip||[]).find(d=>d.t==='T-24h') || {};
-  const msgT = template[`template_${lang}`] || 'Quick value for you';
-  const pack = prospects.map(p=>{
-    const link = createSignedBonusLink(bonus.id, p.name);
-    return {
-      name: p.name,
-      phone: p.phone || '',
-      message: `${msgT}\n\n+ Bonus for you: ${bonus.title_hinglish||bonus.title}\nLink (72h): ${link}\n\nIf useful, reply with 1-line feedback 🙏`,
-      bonus: { id: bonus.id, title: bonus.title_hinglish||bonus.title, file: bonus.file }
-    };
-  });
-  saveFile('nurture_pack.json', JSON.stringify({generatedAt:new Date().toISOString(), count:pack.length, pack},null,2), 'application/json');
-  log('proofloop.nurture_pack','Nurture pack generated',{count:pack.length, bonus:bonus?.id});
-  return {pack, bonus};
-}
-function deliverBonusTo(name='Prospect'){
-  const st = window.APP?.state || {};
-  const niche = st.inputs?.niche, pains=st.inputs?.pains||[], lang=(st.inputs?.language||'hinglish').toLowerCase();
-  const b = pickBonus(niche,pains,lang);
-  saveFile(b.file || 'bonus.pdf', 'Bonus content placeholder', 'application/pdf');
-  const link = createSignedBonusLink(b.id, name);
-  navigator.clipboard.writeText(`Hi ${name}, yeh bonus aapke liye:\n${b.title_hinglish||b.title}\nLink (72h): ${link}`);
-  alert('Bonus link copied to clipboard and file download initiated.');
-  log('proofloop.bonus_delivered','Bonus delivered (preview)',{to:name, bonus:b.id});
-}
-
-/* ---------- Schedule WhatsApp Drip ---------- */
-function scheduleWhatsAppDrip(){
-  const drip = window.APP?.state?.fixtures?.drip || [];
-  const lang = window.APP?.state?.currentLanguage || 'hinglish';
-  if(!drip.length){ alert('Drip data not loaded'); return; }
-
-  const messages = drip.slice(0, 5); // Get first 3-5 messages
-  messages.forEach((msg, idx)=>{
-    const text = msg.template?.[lang] || msg.template?.hinglish || msg.hook || '';
-    const waLink = `https://wa.me/?text=${encodeURIComponent(text)}`;
-    setTimeout(()=>{
-      window.open(waLink, '_blank');
-      log('drip.open', `Drip message ${idx+1} opened`, {timing: msg.timing, language: lang});
-    }, idx * 500); // Stagger opens by 500ms
-  });
-
-  showToast(`Opening ${messages.length} WhatsApp drip messages...`);
-  if(window.updateAcceptanceCounter) window.updateAcceptanceCounter('drip');
-  markJourney(3); // Mark Drip journey step
-}
-
-/* ---------- Traffic Panel ---------- */
-let currentTrafficTab = 'search';
-function openTrafficPanel(tab='search'){
-  const panel = $('#trafficPanel');
-  if(!panel) return;
-
-  panel.classList.remove('hidden');
-  panel.scrollIntoView({ behavior: 'smooth' });
-  switchTrafficTab(tab);
-  log('traffic.view', 'Traffic panel opened', {tab});
-  if(window.updateAcceptanceCounter) window.updateAcceptanceCounter('traffic');
-}
-
-function switchTrafficTab(tab){
-  currentTrafficTab = tab;
-  const traffic = window.APP?.state?.fixtures?.traffic || {};
-
-  // Update tab buttons
-  ['search', 'piggyback', 'partners'].forEach(t=>{
-    const btn = $(`#traffic-tab-${t}`);
-    if(btn){
-      if(t===tab){
-        btn.classList.remove('btn-secondary');
-        btn.classList.add('btn-primary');
-      }else{
-        btn.classList.remove('btn-primary');
-        btn.classList.add('btn-secondary');
-      }
-    }
-  });
-
-  const content = $('#traffic-content');
-  if(!content) return;
-
-  if(tab === 'search'){
-    const sh = traffic.search_harvest || {};
-    content.innerHTML = `
-      <h3 class="font-semibold mb-3">Search Harvest Strategy</h3>
-      <p class="text-sm mb-2"><strong>Budget:</strong> ₹${sh.budget_per_day_inr || 0}/day</p>
-      <p class="text-sm mb-2"><strong>Keywords (${(sh.keywords||[]).length}):</strong></p>
-      <ul class="list-disc pl-5 mb-3">${(sh.keywords||[]).map(k=>`<li class="text-sm">${k}</li>`).join('')}</ul>
-      <p class="text-sm mb-2"><strong>Creatives:</strong> ${(sh.creatives||[]).join(', ')}</p>
-      <p class="text-sm mb-3"><strong>Routing:</strong> ${sh.routing || 'HVSP'}</p>
-      <button id="btnExportKeywords" class="btn-secondary text-xs">Export Keywords CSV</button>
-    `;
-    $('#btnExportKeywords')?.addEventListener('click', ()=>{
-      exportCSV('keywords.csv', (sh.keywords||[]).map(k=>({keyword:k})));
-      log('traffic.export', 'Keywords exported as CSV');
-    });
-  }else if(tab === 'piggyback'){
-    const pb = traffic.piggyback || {};
-    content.innerHTML = `
-      <h3 class="font-semibold mb-3">Piggyback Placements</h3>
-      <p class="text-sm mb-3"><strong>Message Match:</strong> ${pb.message_match || '—'}</p>
-      <p class="text-sm mb-2"><strong>Placements (${(pb.placements||[]).length}):</strong></p>
-      <ul class="list-disc pl-5 mb-3">${(pb.placements||[]).map(p=>`<li class="text-sm">${p.channel} • ${p.type} • ${p.note||''}</li>`).join('')}</ul>
-      <button id="btnExportPlacements" class="btn-secondary text-xs">Export Placements CSV</button>
-    `;
-    $('#btnExportPlacements')?.addEventListener('click', ()=>{
-      exportCSV('placements.csv', pb.placements||[]);
-      log('traffic.export', 'Placements exported as CSV');
-    });
-  }else if(tab === 'partners'){
-    const pt = traffic.partner_tap || {};
-    content.innerHTML = `
-      <h3 class="font-semibold mb-3">Partner Taps</h3>
-      <p class="text-sm mb-3"><strong>Asset:</strong> ${pt.asset || '—'}</p>
-      <p class="text-sm mb-2"><strong>Partners (${(pt.partners||[]).length}):</strong></p>
-      <ul class="list-disc pl-5 mb-3">${(pt.partners||[]).map(p=>`<li class="text-sm">${p.name} • Reach: ${p.reach?.toLocaleString()||'—'} • ${p.deal||''}</li>`).join('')}</ul>
-      <button id="btnExportPartners" class="btn-secondary text-xs">Export Partners JSON</button>
-    `;
-    $('#btnExportPartners')?.addEventListener('click', ()=>{
-      saveFile('partners.json', JSON.stringify(pt.partners||[],null,2), 'application/json');
-      log('traffic.export', 'Partners exported as JSON');
-    });
-  }
-}
-
-/* ---------- ProofLoop Video & Collect Feedback ---------- */
+// Video recording state
 let videoStream = null;
 let mediaRecorder = null;
 let recordedChunks = [];
 let videoBlob = null;
 
-function openProofCollect(){
+// Open Proof Collect Modal
+function openProofCollect() {
   const modal = $('#proofCollectModal');
-  if(!modal) return;
+  if (!modal) return;
 
   modal.classList.remove('hidden');
-  log('proofloop.collect_open', 'Collect feedback modal opened');
+  eventLog.log('proofloop.collect_open', 'Collect feedback modal opened');
 
   // Wire tab switching
-  $('#tab-quick-form')?.addEventListener('click', ()=>{
-    $('#quick-form-tab')?.classList.remove('hidden');
-    $('#video-review-tab')?.classList.add('hidden');
-    $('#tab-quick-form')?.classList.remove('btn-secondary');
-    $('#tab-quick-form')?.classList.add('btn-primary');
-    $('#tab-video-review')?.classList.remove('btn-primary');
-    $('#tab-video-review')?.classList.add('btn-secondary');
+  const quickTab = $('#tab-quick-form');
+  const videoTab = $('#tab-video-review');
+  const quickContent = $('#quick-form-tab');
+  const videoContent = $('#video-review-tab');
+
+  if (quickTab) {
+    quickTab.addEventListener('click', () => {
+      quickContent?.classList.remove('hidden');
+      videoContent?.classList.add('hidden');
+      quickTab.classList.remove('btn-secondary');
+      quickTab.classList.add('btn-primary');
+      videoTab?.classList.remove('btn-primary');
+      videoTab?.classList.add('btn-secondary');
+    });
+  }
+
+  if (videoTab) {
+    videoTab.addEventListener('click', () => {
+      videoContent?.classList.remove('hidden');
+      quickContent?.classList.add('hidden');
+      videoTab.classList.remove('btn-secondary');
+      videoTab.classList.add('btn-primary');
+      quickTab?.classList.remove('btn-primary');
+      quickTab?.classList.add('btn-secondary');
+    });
+  }
+
+  // Wire video recording buttons
+  $('#btnStartRecord')?.addEventListener('click', startVideoRecording);
+  $('#btnStopRecord')?.addEventListener('click', stopVideoRecording);
+  $('#btnUploadVideo')?.addEventListener('click', () => $('#videoFileInput')?.click());
+  $('#videoFileInput')?.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) handleVideoUpload(file);
   });
 
-  $('#tab-video-review')?.addEventListener('click', ()=>{
-    $('#video-review-tab')?.classList.remove('hidden');
-    $('#quick-form-tab')?.classList.add('hidden');
-    $('#tab-video-review')?.classList.remove('btn-secondary');
-    $('#tab-video-review')?.classList.add('btn-primary');
-    $('#tab-quick-form')?.classList.remove('btn-primary');
-    $('#tab-quick-form')?.classList.add('btn-secondary');
+  // Wire form submission
+  const form = $('#proofCollectForm');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const rating = parseInt($('#proof-rating')?.value || '0');
+      const takeaway = $('#proof-takeaway')?.value || '';
+      const name = $('#proof-name')?.value || 'Anonymous';
+      const role = $('#proof-role')?.value || '';
+      const consent = $('#proof-consent')?.checked || false;
+
+      if (rating < 1 || !takeaway) {
+        alert('Please provide rating and takeaway');
+        return;
+      }
+
+      saveProofEntry({ rating, takeaway, name, role, consent, watchPct: 0 });
+    });
+  }
+
+  // Wire rating buttons
+  document.querySelectorAll('.rating-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const rating = btn.dataset.rating;
+      $('#proof-rating').value = rating;
+      document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('bg-brand'));
+      btn.classList.add('bg-brand');
+    });
+  });
+
+  // Wire video submission
+  $('#btnSubmitVideo')?.addEventListener('click', () => {
+    if (!videoBlob) {
+      alert('No video recorded');
+      return;
+    }
+    saveProofEntry({
+      rating: 5,
+      takeaway: 'Video review submitted',
+      name: 'Video Reviewer',
+      role: '',
+      consent: true,
+      watchPct: 100,
+      videoBlobOrFile: videoBlob
+    });
   });
 }
 
-async function startVideoRecording(){
-  try{
+// Start video recording
+async function startVideoRecording() {
+  try {
     videoStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
     const preview = $('#video-preview');
-    if(preview) preview.srcObject = videoStream;
+    if (preview) preview.srcObject = videoStream;
 
     mediaRecorder = new MediaRecorder(videoStream, { mimeType: 'video/webm' });
     recordedChunks = [];
 
-    mediaRecorder.ondataavailable = (e)=>{ if(e.data.size>0) recordedChunks.push(e.data); };
-    mediaRecorder.onstop = ()=>{
+    mediaRecorder.ondataavailable = (e) => {
+      if (e.data.size > 0) recordedChunks.push(e.data);
+    };
+
+    mediaRecorder.onstop = () => {
       videoBlob = new Blob(recordedChunks, { type: 'video/webm' });
       $('#video-recorded-status')?.classList.remove('hidden');
       $('#btnSubmitVideo')?.classList.remove('hidden');
-      if(videoStream){
-        videoStream.getTracks().forEach(t=>t.stop());
+      if (videoStream) {
+        videoStream.getTracks().forEach(t => t.stop());
         videoStream = null;
       }
     };
@@ -2796,34 +2674,36 @@ async function startVideoRecording(){
     mediaRecorder.start();
     $('#btnStartRecord')?.classList.add('hidden');
     $('#btnStopRecord')?.classList.remove('hidden');
-    log('proofloop.video_start', 'Video recording started');
-  }catch(err){
+    eventLog.log('proofloop.video_start', 'Video recording started');
+  } catch (err) {
     console.error('Video recording failed:', err);
     alert('Camera access denied. Please upload a video file instead.');
   }
 }
 
-function stopVideoRecording(){
-  if(mediaRecorder && mediaRecorder.state !== 'inactive'){
+// Stop video recording
+function stopVideoRecording() {
+  if (mediaRecorder && mediaRecorder.state !== 'inactive') {
     mediaRecorder.stop();
     $('#btnStopRecord')?.classList.add('hidden');
     $('#btnStartRecord')?.classList.remove('hidden');
-    log('proofloop.video_stop', 'Video recording stopped');
+    eventLog.log('proofloop.video_stop', 'Video recording stopped');
   }
 }
 
-function handleVideoUpload(file){
-  if(file && file.type.startsWith('video/')){
+// Handle video file upload
+function handleVideoUpload(file) {
+  if (file && file.type.startsWith('video/')) {
     videoBlob = file;
     $('#video-recorded-status')?.classList.remove('hidden');
     $('#btnSubmitVideo')?.classList.remove('hidden');
-    log('proofloop.video_upload', 'Video file uploaded', {size: file.size});
+    eventLog.log('proofloop.video_upload', 'Video file uploaded', { size: file.size });
   }
 }
 
-function saveProofEntry(data){
-  const st = window.APP?.state || {};
-  const feedback = st.fixtures?.proofloop || [];
+// Save proof entry
+function saveProofEntry(data) {
+  const feedback = state.fixtures?.proofloop || [];
 
   const entry = {
     id: 'proof_' + Date.now(),
@@ -2832,7 +2712,7 @@ function saveProofEntry(data){
     rating: data.rating,
     takeaway: data.takeaway,
     consent_display: data.consent || false,
-    language: st.currentLanguage || 'hinglish',
+    language: state.currentLanguage || 'hinglish',
     watch_pct: data.watchPct || 0,
     badge: data.videoBlobOrFile ? '🎬 Video' : `Verified • ${data.watchPct || 0}% watched`,
     created_at: new Date().toISOString(),
@@ -2842,22 +2722,25 @@ function saveProofEntry(data){
   feedback.push(entry);
 
   // Run Bonus Engine
-  const niche = st.fixtures?.inputs?.niche || 'generic';
-  const pains = st.fixtures?.inputs?.pains || [];
-  const lang = st.currentLanguage || 'hinglish';
+  const niche = state.fixtures?.inputs?.niche || 'generic';
+  const pains = state.fixtures?.inputs?.pains || [];
+  const lang = state.currentLanguage || 'hinglish';
   const bonus = pickBonus(niche, pains, lang);
 
   // Generate signed bonus link
   const bonusLink = createSignedBonusLink(bonus.id, entry.name);
 
   showToast('Bonus delivered ✓');
-  log('proofloop.feedback_saved', 'Feedback entry saved', {id: entry.id, has_video: entry.has_video, bonus: bonus.id});
+  eventLog.log('proofloop.feedback_saved', 'Feedback entry saved', {
+    id: entry.id,
+    has_video: entry.has_video,
+    bonus: bonus.id
+  });
 
-  // Update acceptance counter
-  if(window.updateAcceptanceCounter){
-    window.updateAcceptanceCounter('proofloop');
-    window.updateAcceptanceCounter('proofwall');
-  }
+  // Mark acceptance checks
+  state.acceptanceChecks.proofloop = true;
+  state.acceptanceChecks.proofwall = true;
+  updateAcceptanceCounter();
 
   // Close modal
   $('#proofCollectModal')?.classList.add('hidden');
@@ -2866,227 +2749,201 @@ function saveProofEntry(data){
   alert(`Bonus delivered! Link (72h): ${bonusLink}\n\n${bonus.title_hinglish || bonus.title}`);
 }
 
-function openProofWallModal(){
-  const feedback = window.APP?.state?.fixtures?.proofloop || [];
+// Open Proof Wall Modal
+function openProofWallModal() {
+  const feedback = state.fixtures?.proofloop || [];
   const modal = $('#proofWallModal');
-  if(!modal) return;
+  if (!modal) return;
 
   const grid = $('#proofWallGrid');
-  if(grid){
-    grid.innerHTML = feedback.map(f=>`
+  if (grid) {
+    grid.innerHTML = feedback.map(f => `
       <div class="rounded-lg p-4 border border-gray-700 bg-ink-2/30">
         <div class="flex items-center justify-between mb-2">
           <strong class="text-white">${f.name}</strong>
-          <span class="text-xs text-brand">${'⭐'.repeat(f.rating)} ${f.badge||''}</span>
+          <span class="text-xs text-brand">${'⭐'.repeat(f.rating)} ${f.badge || ''}</span>
         </div>
         <p class="text-sm text-gray-300 mb-2">"${f.takeaway}"</p>
-        <div class="text-xs text-gray-500">${f.role||''} • ${(f.language||'').toUpperCase()}</div>
+        <div class="text-xs text-gray-500">${f.role || ''} • ${(f.language || '').toUpperCase()}</div>
       </div>
     `).join('');
   }
 
   modal.classList.remove('hidden');
-  log('proofwall.open', 'Proof Wall modal opened', {count: feedback.length});
+  eventLog.log('proofwall.open', 'Proof Wall modal opened', { count: feedback.length });
+
+  // Wire export buttons
+  $('#btnExportProofPNG')?.addEventListener('click', exportProofWallAsPNG);
+  $('#btnExportProofPDF')?.addEventListener('click', exportProofWallAsPDF);
+  $('#btnExportProofJSON')?.addEventListener('click', exportProofWallAsJSON);
+
+  // Mark proofwall acceptance check
+  state.acceptanceChecks.proofwall = true;
+  updateAcceptanceCounter();
 }
 
-/* ---------- Money Collector ---------- */
-function renderMoneyCollector(){
-  const payments = window.APP?.state?.fixtures?.payments || [];
-  const container = $('#collector-rows');
-  if(!container) return;
-
-  container.innerHTML = payments.map(p=>{
-    const stateLabel = {
-      'pending': 'Pending',
-      'token': `Token Paid (₹${(p.amount_paid/1000).toFixed(0)}K)`,
-      'partial': `Partial (₹${(p.amount_paid/1000).toFixed(0)}K / ₹${(p.amount_total/1000).toFixed(0)}K)`,
-      'paid': 'Full Paid ✓'
-    }[p.state] || p.state;
-
-    const dueAmount = p.amount_due > 0 ? `₹${(p.amount_due/1000).toFixed(0)}K` : '—';
-    const showNudge = ['pending','token','partial'].includes(p.state);
-
-    let nudgeBtn = '';
-    if(showNudge){
-      const reminderText = `Hi ${p.name}, gentle reminder about payment of ${dueAmount}. Due: ${p.due_date||'soon'}. Thanks!`;
-      const waLink = `https://wa.me/${p.phone}?text=${encodeURIComponent(reminderText)}`;
-      nudgeBtn = `<button class="btn-secondary text-xs" onclick="window.open('${waLink}','_blank'); window.APP.log('money.nudge','WA nudge sent',{id:'${p.id}',state:'${p.state}'});">📱 Nudge</button>`;
-    }
-
-    return `
-      <div class="flex items-center justify-between p-3 rounded-lg bg-ink/30 border border-gray-700">
-        <div class="flex-1">
-          <div class="font-semibold text-white">${p.name}</div>
-          <div class="text-xs text-gray-400">${stateLabel} • Due: ${dueAmount}</div>
-        </div>
-        <div class="text-xs text-gray-400">
-          Last ping: ${p.last_ping||'—'}<br>
-          Next: ${p.next_action||'—'}
-        </div>
-        <div>${nudgeBtn}</div>
-      </div>
-    `;
-  }).join('');
-
-  if(window.updateAcceptanceCounter) window.updateAcceptanceCounter('money');
-  log('money.rendered', 'Money collector rendered', {count: payments.length});
-}
-
-/* ---------- Update Acceptance Counter ---------- */
-function updateAcceptanceCounter(check){
-  if(!window.APP?.state?.acceptanceChecks) return;
-
-  if(check){
-    window.APP.state.acceptanceChecks[check] = true;
+// Export Proof Wall as PNG
+function exportProofWallAsPNG() {
+  const grid = $('#proofWallGrid');
+  if (!grid || !window.html2canvas) {
+    alert('html2canvas not loaded. Check CDN.');
+    return;
   }
-
-  const checks = window.APP.state.acceptanceChecks;
-  const total = Object.keys(checks).length;
-  const passed = Object.values(checks).filter(v=>v).length;
-  const counter = $('#checks-status');
-
-  if(counter){
-    counter.textContent = `${passed}/${total}`;
-    counter.className = passed === total ? 'text-green-400 font-semibold' : 'text-gray-600';
-  }
-}
-
-// Make it globally available
-window.updateAcceptanceCounter = updateAcceptanceCounter;
-
-/* ---------- Keyboard Shortcuts ---------- */
-document.addEventListener('keydown', (e)=>{
-  if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-
-  const key = e.key.toLowerCase();
-
-  if(key === 'd' && !e.ctrlKey && !e.metaKey){
-    e.preventDefault();
-    $('#btnScheduleDrip')?.scrollIntoView({ behavior: 'smooth' });
-    $('#btnScheduleDrip')?.focus();
-  }else if(key === 't' && !e.ctrlKey && !e.metaKey){
-    e.preventDefault();
-    const panel = $('#trafficPanel');
-    if(panel?.classList.contains('hidden')){
-      openTrafficPanel();
-    }else{
-      panel?.classList.add('hidden');
-    }
-  }else if(key === 'v' && !e.ctrlKey && !e.metaKey){
-    e.preventDefault();
-    openProofCollect();
-  }else if(key === 'enter' && document.activeElement?.id === 'btnScheduleDrip'){
-    e.preventDefault();
-    scheduleWhatsAppDrip();
-  }
-});
-
-/* ---------- Attach handlers on load ---------- */
-window.addEventListener('DOMContentLoaded', ()=>{
-  // Drip
-  $('#btnScheduleDrip')?.addEventListener('click', scheduleWhatsAppDrip);
-
-  // Traffic
-  $('#btnTrafficPlan')?.addEventListener('click', ()=> openTrafficPanel('search'));
-  $('#traffic-tab-search')?.addEventListener('click', ()=> switchTrafficTab('search'));
-  $('#traffic-tab-piggyback')?.addEventListener('click', ()=> switchTrafficTab('piggyback'));
-  $('#traffic-tab-partners')?.addEventListener('click', ()=> switchTrafficTab('partners'));
-
-  // ProofLoop
-  $('#btnCollectFeedback')?.addEventListener('click', openProofCollect);
-  $('#btnViewProofWall')?.addEventListener('click', openProofWallModal);
-  $('#btn-view-proof-wall')?.addEventListener('click', openProofWallModal); // Alternative button
-
-  // ProofLoop Form
-  const ratingBtns = document.querySelectorAll('.rating-btn');
-  ratingBtns.forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      ratingBtns.forEach(b=>b.classList.remove('selected'));
-      btn.classList.add('selected');
-      $('#proof-rating').value = btn.dataset.rating;
+  html2canvas(grid).then(canvas => {
+    canvas.toBlob(blob => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'proofwall.png';
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('PNG exported ✓');
+      eventLog.log('export.png', 'ProofWall exported as PNG');
     });
   });
+}
 
-  $('#proofCollectForm')?.addEventListener('submit', (e)=>{
-    e.preventDefault();
-    const data = {
-      rating: parseInt($('#proof-rating')?.value || 0),
-      takeaway: $('#proof-takeaway')?.value || '',
-      name: $('#proof-name')?.value || '',
-      role: $('#proof-role')?.value || '',
-      consent: $('#proof-consent')?.checked || false,
-      watchPct: 75 + Math.floor(Math.random()*20) // Simulated watch percentage
-    };
-
-    if(!data.rating || !data.takeaway){
-      alert('Please provide rating and takeaway');
-      return;
-    }
-
-    saveProofEntry(data);
-  });
-
-  // Video recording
-  $('#btnStartRecord')?.addEventListener('click', startVideoRecording);
-  $('#btnStopRecord')?.addEventListener('click', stopVideoRecording);
-  $('#btnUploadVideo')?.addEventListener('click', ()=> $('#videoFileInput')?.click());
-  $('#videoFileInput')?.addEventListener('change', (e)=>{
-    const file = e.target.files?.[0];
-    if(file) handleVideoUpload(file);
-  });
-  $('#btnSubmitVideo')?.addEventListener('click', ()=>{
-    const data = {
-      rating: 5,
-      takeaway: 'Video review submitted',
-      name: 'Video Reviewer',
-      role: '',
-      consent: true,
-      watchPct: 100,
-      videoBlobOrFile: videoBlob
-    };
-    saveProofEntry(data);
-  });
-
-  // Proof Wall exports
-  $('#btnExportProofPNG')?.addEventListener('click', async ()=>{
-    if(typeof html2canvas === 'undefined'){ alert('html2canvas not loaded'); return; }
-    const grid = $('#proofWallGrid');
-    const canvas = await html2canvas(grid, {scale:2, backgroundColor:'#0B0F1A'});
-    canvas.toBlob(b=> saveFile('proofwall.png', b, 'image/png'));
-    log('proofwall.export', 'Exported as PNG');
-  });
-
-  $('#btnExportProofPDF')?.addEventListener('click', async ()=>{
-    if(typeof window.jspdf === 'undefined'){ alert('jsPDF not loaded'); return; }
-    const { jsPDF } = window.jspdf;
-    const grid = $('#proofWallGrid');
-    const canvas = await html2canvas(grid, {scale:2, backgroundColor:'#0B0F1A'});
-    const img = canvas.toDataURL('image/png');
-    const pdf = new jsPDF({orientation:'p',unit:'pt',format:'a4'});
-    const w=540, h=(canvas.height/canvas.width)*w;
-    pdf.addImage(img,'PNG',36,36,w,h);
+// Export Proof Wall as PDF
+function exportProofWallAsPDF() {
+  const grid = $('#proofWallGrid');
+  if (!grid || !window.html2canvas || !window.jspdf) {
+    alert('html2canvas or jsPDF not loaded. Check CDN.');
+    return;
+  }
+  html2canvas(grid).then(canvas => {
+    const imgData = canvas.toDataURL('image/png');
+    const pdf = new window.jspdf.jsPDF('p', 'mm', 'a4');
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
     pdf.save('proofwall.pdf');
-    log('proofwall.export', 'Exported as PDF');
+    showToast('PDF exported ✓');
+    eventLog.log('export.pdf', 'ProofWall exported as PDF');
+  });
+}
+
+// Export Proof Wall as JSON
+function exportProofWallAsJSON() {
+  const feedback = state.fixtures?.proofloop || [];
+  const json = JSON.stringify(feedback, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'proofwall.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('JSON exported ✓');
+  eventLog.log('export.json', 'ProofWall exported as JSON');
+}
+
+// Pick bonus based on niche, pains, language
+function pickBonus(niche, pains = [], language = 'hinglish') {
+  const all = state.fixtures?.bonuses || [];
+  let best = null;
+  let score = -1;
+
+  for (const b of all) {
+    let s = 0;
+    if (b.niche === niche) s += 2;
+    if ((b.pains || []).some(p => pains.some(x => (p + '').toLowerCase().includes(x.toLowerCase())))) s += 1;
+    if ((b.language || '').toLowerCase() === (language || '').toLowerCase()) s += 1;
+    if (s > score) {
+      best = b;
+      score = s;
+    }
+  }
+
+  return best || all[0] || { id: 'default', title: 'Default Bonus', title_hinglish: 'Default Bonus' };
+}
+
+// Create signed bonus link
+function createSignedBonusLink(bonusId, name = '') {
+  const exp = Date.now() + 72 * 60 * 60 * 1000;
+  const token = btoa(JSON.stringify({ bonusId, exp, name }));
+  const url = `${location.origin}${location.pathname}?bonus=${bonusId}&token=${token}`;
+  localStorage.setItem(`se_bonus_${bonusId}`, JSON.stringify({ exp }));
+  return url;
+}
+
+// Build Nurture Pack
+function buildNurturePack() {
+  const prospects = state.applicants?.filter(p => !p.qualified || p.no_show) || [];
+  const niche = state.fixtures?.inputs?.niche || 'generic';
+  const pains = state.fixtures?.inputs?.pains || [];
+  const lang = state.currentLanguage || 'hinglish';
+  const bonus = pickBonus(niche, pains, lang);
+
+  if (prospects.length === 0) {
+    alert('No disqualified or no-show prospects found. Run prospect filtering first.');
+    return;
+  }
+
+  const template = state.fixtures?.drip?.find(d => d.timing === 'T-24h') || {};
+  const msgTemplate = template.template?.[lang] || template.template?.hinglish || 'Quick value for you';
+
+  const pack = prospects.map(p => {
+    const link = createSignedBonusLink(bonus.id, p.name);
+    return {
+      name: p.name,
+      phone: p.phone || '',
+      message: `${msgTemplate}\n\n+ Bonus for you: ${bonus.title_hinglish || bonus.title}\nLink (72h): ${link}\n\nIf useful, reply with 1-line feedback 🙏`,
+      bonus: { id: bonus.id, title: bonus.title_hinglish || bonus.title, file: bonus.file }
+    };
   });
 
-  $('#btnExportProofJSON')?.addEventListener('click', ()=>{
-    const feedback = window.APP?.state?.fixtures?.proofloop || [];
-    saveFile('proofwall.json', JSON.stringify(feedback,null,2), 'application/json');
-    log('proofwall.export', 'Exported as JSON');
+  const json = JSON.stringify({
+    generatedAt: new Date().toISOString(),
+    count: pack.length,
+    pack
+  }, null, 2);
+
+  downloadFile('nurture_pack.json', json, 'application/json');
+  showToast(`Nurture pack generated: ${pack.length} prospects`);
+  eventLog.log('proofloop.nurture_pack', 'Nurture pack generated', {
+    count: pack.length,
+    bonus: bonus?.id
   });
 
-  // Nurture & Bonus
-  $('#btnBuildNurturePack')?.addEventListener('click', buildNurturePack);
-  $('#btnDeliverBonus')?.addEventListener('click', ()=> deliverBonusTo('Prospect'));
+  alert(`Nurture Pack built with ${pack.length} prospects.\nBonus: ${bonus.title_hinglish || bonus.title}\nFile downloaded as nurture_pack.json`);
+}
 
-  // Money Collector - render on load
-  renderMoneyCollector();
+// Deliver Bonus
+function deliverBonus() {
+  const name = prompt('Enter prospect name:', 'Prospect') || 'Prospect';
+  const niche = state.fixtures?.inputs?.niche || 'generic';
+  const pains = state.fixtures?.inputs?.pains || [];
+  const lang = state.currentLanguage || 'hinglish';
+  const bonus = pickBonus(niche, pains, lang);
 
-  // Modal close handlers
-  document.querySelectorAll('.modal-close').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const modalId = btn.dataset.modal || btn.closest('.modal')?.id;
-      if(modalId) $(`#${modalId}`)?.classList.add('hidden');
+  const link = createSignedBonusLink(bonus.id, name);
+  const message = `Hi ${name}, yeh bonus aapke liye:\n${bonus.title_hinglish || bonus.title}\nLink (72h): ${link}`;
+
+  // Copy to clipboard
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(message).then(() => {
+      showToast('Bonus link copied to clipboard ✓');
+    }).catch(() => {
+      alert('Clipboard access denied. Here\'s the message:\n\n' + message);
     });
+  } else {
+    alert('Clipboard not available. Here\'s the message:\n\n' + message);
+  }
+
+  eventLog.log('proofloop.bonus_delivered', 'Bonus delivered (preview)', {
+    to: name,
+    bonus: bonus.id
   });
+
+  alert(`Bonus delivered to ${name}!\n\n${message}\n\n(Message copied to clipboard)`);
+}
+
+// Cleanup
+window.addEventListener('beforeunload', () => {
+  if (state.setup.logoObjectURL) {
+    URL.revokeObjectURL(state.setup.logoObjectURL);
+  }
 });
+
+// Init
+document.addEventListener('DOMContentLoaded', loadData);
