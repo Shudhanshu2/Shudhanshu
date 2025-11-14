@@ -431,7 +431,10 @@ function initKeyboardShortcuts() {
         const trafficSection = document.getElementById('section-traffic');
         if (trafficSection) {
           trafficSection.classList.remove('hidden');
-          trafficSection.scrollIntoView({ behavior: 'smooth' });
+          setTimeout(() => {
+            trafficSection.scrollIntoView({ behavior: 'smooth' });
+            renderTrafficEngine();
+          }, 100);
         }
         eventLog.log('shortcut.traffic', 'Navigated to Traffic');
         break;
