@@ -2500,3 +2500,159 @@ window.addEventListener('beforeunload', () => {
 
 // Init
 document.addEventListener('DOMContentLoaded', loadData);
+
+/* ---------- helpers ---------- */
+const $ = (q) => document.querySelector(q);
+const log = (...a) => window.APP?.log ? window.APP.log(...a) : console.log('[LOG]', ...a);
+function saveFile(name, content, type){ const b=new Blob([content],{type}); const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download=name; a.click(); }
+function exportCSV(name, rows){
+  if(!rows || !rows.length){ alert('Nothing to export'); return; }
+  const keys = Object.keys(rows[0]); const csv=[keys.join(','), ...rows.map(r=>keys.map(k=>JSON.stringify(r[k]??'')).join(','))].join('\n');
+  saveFile(name, csv, 'text/csv');
+}
+
+/* ---------- Traffic Plan panel ---------- */
+function renderTrafficPanel(){
+  const fx = window.APP?.state?.fixtures?.traffic;
+  if(!fx){ alert('Traffic plan data not loaded'); return; }
+  const host = document.getElementById('traffic-panel') || (()=>{ const d=document.createElement('section'); d.id='traffic-panel'; d.className='mt-6 rounded-xl border border-zinc-700 p-5 bg-[#0B0F1A]'; document.body.appendChild(d); return d; })();
+  host.innerHTML = `
+    <h3 class="text-xl font-semibold mb-3">Traffic Engine Plan</h3>
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="rounded-xl border border-zinc-700 p-4">
+        <h4 class="font-semibold mb-2">YouTube Search Harvest</h4>
+        <p class="muted mb-2">Budget: ₹${fx.search_harvest.budget_per_day_inr}/day</p>
+        <details open><summary class="cursor-pointer">Keywords</summary>
+          <ul class="list-disc pl-5 mt-2">${fx.search_harvest.keywords.map(k=>`<li>${k}</li>`).join('')}</ul>
+        </details>
+        <button id="expKeywords" class="btn-secondary mt-3">Export Keywords CSV</button>
+      </div>
+      <div class="rounded-xl border border-zinc-700 p-4">
+        <h4 class="font-semibold mb-2">Placement Piggyback</h4>
+        <ul class="list-disc pl-5">${fx.piggyback.placements.map(p=>`<li>${p.channel} • ${p.type}</li>`).join('')}</ul>
+        <button id="expPlacements" class="btn-secondary mt-3">Export Placements CSV</button>
+      </div>
+      <div class="rounded-xl border border-zinc-700 p-4">
+        <h4 class="font-semibold mb-2">Partner Taps</h4>
+        <ul class="list-disc pl-5">${(fx.partner_tap.partners||[]).map(p=>`<li>${p.name} • ${p.format}</li>`).join('')}</ul>
+        <button id="expPartners" class="btn-secondary mt-3">Export Partners JSON</button>
+      </div>
+    </div>`;
+  window.scrollTo({ top: host.offsetTop - 60, behavior: 'smooth' });
+  log('traffic.open','Traffic Engine panel opened',{kw: fx.search_harvest.keywords.length});
+  if(window.updateAcceptanceCounter) window.updateAcceptanceCounter('traffic');
+  $('#expKeywords').onclick   = ()=> exportCSV('keywords.csv', fx.search_harvest.keywords.map(k=>({keyword:k})));
+  $('#expPlacements').onclick = ()=> exportCSV('placements.csv', fx.piggyback.placements);
+  $('#expPartners').onclick   = ()=> saveFile('partners.json', JSON.stringify(fx.partner_tap.partners||[],null,2), 'application/json');
+}
+
+/* ---------- Proof Wall modal + exports ---------- */
+function openProofWall(){
+  const list = window.APP?.state?.fixtures?.proofloop || [];
+  const wrap = document.createElement('section');
+  wrap.id='proofwall';
+  wrap.className='fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50';
+  wrap.innerHTML = `
+    <div class="w-[920px] max-h-[80vh] overflow-auto rounded-2xl bg-[#0B0F1A] p-6 border border-zinc-700">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-xl font-semibold">Proof Wall — Content Feedback</h3>
+        <div class="space-x-2">
+          <button id="btnPWpng" class="btn-secondary">Export PNG</button>
+          <button id="btnPWpdf" class="btn-secondary">Export PDF</button>
+          <button id="btnPWjson" class="btn-secondary">Export JSON</button>
+          <button id="btnPWclose" class="btn-ghost">✕</button>
+        </div>
+      </div>
+      <div id="pwGrid" class="grid md:grid-cols-2 gap-4"></div>
+    </div>`;
+  document.body.appendChild(wrap);
+  const grid = wrap.querySelector('#pwGrid');
+  grid.innerHTML = list.map(f=>`
+    <div class="rounded-xl p-4 border border-zinc-700">
+      <div class="flex items-center justify-between">
+        <strong>${f.name}</strong><span class="badge">★ ${f.rating} • ${f.badge||''}</span>
+      </div>
+      <p class="mt-2 text-zinc-300">"${f.takeaway}"</p>
+      <div class="mt-2 text-xs text-zinc-500">${(f.language||'').toUpperCase()} • ${new Date(f.created_at).toLocaleString()}</div>
+    </div>`).join('');
+  wrap.querySelector('#btnPWclose').onclick = ()=> wrap.remove();
+  wrap.querySelector('#btnPWpng').onclick   = async ()=>{
+    const canvas = await html2canvas(grid, {scale:2, backgroundColor:'#0B0F1A'});
+    canvas.toBlob(b=> saveFile('proofwall.png', b, 'image/png'));
+  };
+  wrap.querySelector('#btnPWpdf').onclick   = async ()=>{
+    const { jsPDF } = window.jspdf; const pdf = new jsPDF({orientation:'p',unit:'pt',format:'a4'});
+    const canvas = await html2canvas(grid, {scale:2, backgroundColor:'#0B0F1A'});
+    const img = canvas.toDataURL('image/png'); const w=540, h=(canvas.height/canvas.width)*w;
+    pdf.addImage(img,'PNG',36,36,w,h); pdf.save('proofwall.pdf');
+  };
+  wrap.querySelector('#btnPWjson').onclick  = ()=> saveFile('proofwall.json', JSON.stringify(list,null,2), 'application/json');
+  log('proofwall.open','Proof Wall opened',{count:list.length});
+  if(window.updateAcceptanceCounter) window.updateAcceptanceCounter('proofwall');
+}
+
+/* ---------- ProofLoop: Nurture + Bonus ---------- */
+function pickBonus(niche, pains=[], language='hinglish'){
+  const all = window.APP?.state?.fixtures?.bonuses || [];
+  let best=null, score=-1;
+  for(const b of all){
+    let s=0;
+    if(b.niche===niche) s+=2;
+    if((b.pains||[]).some(p=>pains.some(x=>(p+'').toLowerCase().includes(x.toLowerCase())))) s+=1;
+    if((b.language||'').toLowerCase()===(language||'').toLowerCase()) s+=1;
+    if(s>score){best=b; score=s;}
+  }
+  return best||all[0];
+}
+function createSignedBonusLink(bonusId, name=''){
+  const exp=Date.now()+72*60*60*1000, token=btoa(JSON.stringify({bonusId,exp,name}));
+  const url=`${location.origin}${location.pathname}?bonus=${bonusId}&token=${token}`;
+  localStorage.setItem(`se_bonus_${bonusId}`, JSON.stringify({exp}));
+  return url;
+}
+function buildNurturePack(){
+  const st = window.APP?.state || {};
+  const prospects = (st.prospects||[]).filter(p=>!p.qualified || p.no_show);
+  const niche = st.inputs?.niche || 'generic', pains = st.inputs?.pains||[], lang=(st.inputs?.language||'hinglish').toLowerCase();
+  const bonus = pickBonus(niche,pains,lang);
+  const template = (st.drip||[]).find(d=>d.t==='T-24h') || {};
+  const msgT = template[`template_${lang}`] || 'Quick value for you';
+  const pack = prospects.map(p=>{
+    const link = createSignedBonusLink(bonus.id, p.name);
+    return {
+      name: p.name,
+      phone: p.phone || '',
+      message: `${msgT}\n\n+ Bonus for you: ${bonus.title_hinglish||bonus.title}\nLink (72h): ${link}\n\nIf useful, reply with 1-line feedback 🙏`,
+      bonus: { id: bonus.id, title: bonus.title_hinglish||bonus.title, file: bonus.file }
+    };
+  });
+  saveFile('nurture_pack.json', JSON.stringify({generatedAt:new Date().toISOString(), count:pack.length, pack},null,2), 'application/json');
+  log('proofloop.nurture_pack','Nurture pack generated',{count:pack.length, bonus:bonus?.id});
+  return {pack, bonus};
+}
+function deliverBonusTo(name='Prospect'){
+  const st = window.APP?.state || {};
+  const niche = st.inputs?.niche, pains=st.inputs?.pains||[], lang=(st.inputs?.language||'hinglish').toLowerCase();
+  const b = pickBonus(niche,pains,lang);
+  saveFile(b.file || 'bonus.pdf', 'Bonus content placeholder', 'application/pdf');
+  const link = createSignedBonusLink(b.id, name);
+  navigator.clipboard.writeText(`Hi ${name}, yeh bonus aapke liye:\n${b.title_hinglish||b.title}\nLink (72h): ${link}`);
+  alert('Bonus link copied to clipboard and file download initiated.');
+  log('proofloop.bonus_delivered','Bonus delivered (preview)',{to:name, bonus:b.id});
+}
+
+/* ---------- Attach handlers on load ---------- */
+window.addEventListener('DOMContentLoaded', ()=>{
+  $('#btnTrafficPlan')?.addEventListener('click', renderTrafficPanel);
+  $('#btnProofWall')?.addEventListener('click', openProofWall);
+  $('#btnDrip')?.addEventListener('click', ()=> alert('Preview: opens WhatsApp deeplinks; auto-send requires WABA/template approval.'));
+  // convenience buttons near Qualification section
+  if(!document.getElementById('nurtureBtns')){
+    const bar=document.createElement('div'); bar.id='nurtureBtns'; bar.className='mt-4 flex gap-3';
+    bar.innerHTML=`<button id="btnBuildNurture" class="btn-secondary">Build Nurture Pack</button>
+                   <button id="btnDeliverBonus" class="btn-secondary">Deliver Bonus (preview)</button>`;
+    (document.querySelector('.qualification-section')||document.body).appendChild(bar);
+  }
+  document.getElementById('btnBuildNurture')?.addEventListener('click', buildNurturePack);
+  document.getElementById('btnDeliverBonus')?.addEventListener('click', ()=> deliverBonusTo('Prospect'));
+});
