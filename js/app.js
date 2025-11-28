@@ -54,12 +54,12 @@ const PRESET_DATA = {
     ticket: '₹1.2L',
     language: 'hinglish',
     tone: 'authoritative',
-    offerName: 'Pipeline Accelerator',
-    externalPromise: 'predictable pipeline',
-    internalWin: 'freedom/time',
-    pains: ['No predictable pipeline', 'Long sales cycles', 'Unqualified calls'],
+    offerName: 'Automated Sales System',
+    externalPromise: 'predictable revenue without selling',
+    internalWin: 'Stop being the Salesman',
+    pains: ['Selling nahi aati', 'Manual grinding (12hr/day)', 'Inconsistent revenue'],
     objections: ['Custom work needed', 'Budget concerns', 'Timeline unclear'],
-    ctaText: 'Book clarity call'
+    ctaText: 'Scaling GrowthMap Call (Refundable)'
 };
 
 // Utility Functions
@@ -317,11 +317,11 @@ function initFormHandlers() {
             appState.formData.ticket = ticket;
             appState.formData.pains = appState.selectedPains;
 
-            // Log instant bindings
-            console.log(`[niche] ICP=${appState.formData.persona || 'not set'} • geo=IN`);
-            console.log(`[match] pains=${appState.selectedPains.length} mapped → Hook block`);
-            console.log(`[style] theme=${appState.formData.brandColor} • logo=${appState.formData.logoFile ? 'ok' : 'none'}`);
-            console.log(`[pitch] ticket=₹${ticket} • model=${appState.formData.salesModel}`);
+            // Log AI Twin calibration
+            console.log(`[ai-twin] calibrating Indian market context • ICP=${appState.formData.persona || 'not set'}`);
+            console.log(`[asp] mapping ${appState.selectedPains.length} pain points → value framework`);
+            console.log(`[ai-twin] applying brand identity • theme=${appState.formData.brandColor} • logo=${appState.formData.logoFile ? 'ready' : 'none'}`);
+            console.log(`[asp] structuring pitch mechanics • ticket=₹${ticket} • model=${appState.formData.salesModel}`);
 
             generateHVSP();
         });
@@ -585,7 +585,7 @@ function generateOutline(nicheData) {
 }
 
 function startSlideTimer() {
-    console.log(`[slides] starting slide generation timer: ${appState.slideETA}s (${formatTime(appState.slideETA)})`);
+    console.log(`[asp] structuring 80/20 value block • ETA: ${appState.slideETA}s (${formatTime(appState.slideETA)})`);
 
     let elapsed = 0;
     const totalTime = appState.slideETA;
@@ -597,12 +597,12 @@ function startSlideTimer() {
         elapsed++;
         const remaining = totalTime - elapsed;
 
-        console.log(`[slides] generating... ${formatTime(remaining)} remaining`);
+        console.log(`[asp] weaving narrative framework... ${formatTime(remaining)} remaining`);
 
         if (elapsed >= totalTime) {
             clearInterval(appState.ui.slideTimer);
             appState.ui.slideTimerComplete = true;
-            console.log('[slides] generation complete • 12 slides ready');
+            console.log('[asp] slide structure complete • 12 slides ready for preview');
         }
     }, 1000);
 }
@@ -610,7 +610,7 @@ function startSlideTimer() {
 function showSkeletonSlides() {
     // This would show a loading state for slides
     // For now, we'll just log it
-    console.log('[slides] rendering skeleton UI (12 placeholder slides)');
+    console.log('[asp] initializing 16:9 preview grid • 12 placeholder slots');
 }
 
 // Slides Generation & Preview
@@ -704,7 +704,7 @@ function generateSlides() {
     // Use new realistic slide engine
     const slides = buildRealisticSlides(appState);
     appState.generatedSlides = slides;
-    console.log(`[slides] generated ${slides.length} slides • seed=${appState.slideSeed} • layouts mixed`);
+    console.log(`[asp] rendered ${slides.length} realistic slides • seed=${appState.slideSeed} • layouts: TITLE/BULLETS/DIAGRAM/PROOF/CTA`);
     renderSlidesGrid(slides);
 }
 
@@ -1522,7 +1522,7 @@ function initCleanupHandlers() {
 // ==============
 
 async function init() {
-    console.log('ScaleEdge AI Twin Engine starting...');
+    console.log('[ai-twin] initializing Engine 1: ASP Generator...');
 
     await loadData();
 
@@ -1537,7 +1537,7 @@ async function init() {
     initCleanupHandlers();
     initAutoMode();
 
-    console.log('Application ready');
+    console.log('[ai-twin] all systems ready • Engine 1 online');
 }
 
 document.addEventListener('DOMContentLoaded', init);

@@ -33,21 +33,57 @@ function buildRealisticSlides(appState) {
         // Generate content based on layout
         switch (layout) {
             case 'TITLE':
-                slide.title = humanize(appState.formData.offerName || 'HVSP', i);
+                slide.title = humanize(`${appState.formData.offerName || 'Automated Sales System'} — Automated Sales Presentation (ASP)`, i);
                 slide.bullets = [
                     'Camera-off, slide-based',
                     '80% value / 20% pitch',
                     'India market tuned'
                 ];
-                slide.notes = `Title slide. ${humanize('Emphasize HVSP format and India-first approach', i)}.`;
+                slide.notes = `Title slide. ${humanize('Emphasize ASP format and India-first approach', i)}.`;
                 break;
 
             case 'BULLETS':
-                slide.title = humanize(pains[i % pains.length] || `Key Point ${i}`, i);
-                slide.bullets = (examples.slice(0, 3) || ['Point 1', 'Point 2', 'Point 3']).map((ex, idx) =>
-                    humanize(ex, i + idx)
-                );
-                slide.notes = `Bullet slide ${i}. ${humanize('Keep points concise', i)}.`;
+                // Slide-specific content for key narrative points
+                if (i === 2) {
+                    slide.title = humanize('The Shift', i);
+                    slide.bullets = [
+                        'No Live Webinars',
+                        'No 3-Day Events',
+                        'No Manual VSLs'
+                    ];
+                    slide.notes = `The shift slide. ${humanize('Emphasize automation over manual effort', i)}.`;
+                } else if (i === 3) {
+                    slide.title = humanize('The Mechanism', i);
+                    slide.bullets = [
+                        humanize('AI Twin Engine', i),
+                        humanize('India-First Optimization', i),
+                        humanize('Proven framework', i + 1)
+                    ];
+                    slide.notes = `Mechanism slide. ${humanize('Explain AI Twin technology', i)}.`;
+                } else if (i === 5) {
+                    slide.title = humanize('The 3-Engine System', i);
+                    slide.bullets = [
+                        'Engine 1 (ASP)',
+                        'Engine 2 (Traffic)',
+                        'Engine 3 (ICE)'
+                    ];
+                    slide.notes = `System overview. ${humanize('Introduce all three engines', i)}.`;
+                } else if (i === 9) {
+                    slide.title = humanize('Data-Backed Results', i);
+                    slide.bullets = [
+                        '₹53Cr+ influenced sales data',
+                        'Trained on 44+ Niches',
+                        humanize('India market validated', i)
+                    ];
+                    slide.notes = `Proof slide. ${humanize('Emphasize data and training', i)}.`;
+                } else {
+                    // Default BULLETS behavior for other slides
+                    slide.title = humanize(pains[i % pains.length] || `Key Point ${i}`, i);
+                    slide.bullets = (examples.slice(0, 3) || ['Point 1', 'Point 2', 'Point 3']).map((ex, idx) =>
+                        humanize(ex, i + idx)
+                    );
+                    slide.notes = `Bullet slide ${i}. ${humanize('Keep points concise', i)}.`;
+                }
                 break;
 
             case 'TWOCOL':
