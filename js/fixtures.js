@@ -169,6 +169,116 @@ function applyFixtures(state, fixtures) {
     }
 }
 
+/**
+ * Load all fixtures (simplified version for direct use)
+ * @returns {Promise<object>} All fixture data
+ */
+async function loadFixtures() {
+    const fixtureFiles = [
+        'inputs',
+        'pains',
+        'drip',
+        'prospects',
+        'payments',
+        'bonuses',
+        'proofloop',
+        'traffic'
+    ];
+
+    const results = {};
+
+    for (const name of fixtureFiles) {
+        try {
+            const res = await fetch(`fixtures/${name}.json`);
+            if (!res.ok) throw new Error(res.statusText);
+            results[name] = await res.json();
+        } catch (error) {
+            console.error(`[Fixtures] Failed to load ${name}.json:`, error);
+            results[name] = (name === 'inputs' ? {} : []);
+        }
+    }
+
+    return results;
+}
+
+/**
+ * Create empty state object
+ * @returns {object} Empty state structure
+ */
+function createEmptyState() {
+    return {
+        niches: [],
+        questions: [],
+        scoringRules: {},
+        applicants: [],
+        messages: {},
+        closingSnippets: {},
+        proof: [],
+        knowledgeBase: {},
+
+        setup: {
+            icp: '',
+            niche: null,
+            offer: '',
+            ticket: '',
+            salesModel: 'retainer',
+            pains: [],
+            brandColor: '#DC2626',
+            logo: null,
+            logoObjectURL: null,
+            proofTiles: []
+        },
+
+        formQuestions: [],
+        scoredApplicants: [],
+        topPicks: [],
+        rejects: [],
+
+        presellMessages: [],
+        closingScript: {},
+
+        timers: {
+            slidesProgress: 0,
+            slidesComplete: false,
+            videoProgress: 0,
+            videoGated: true,
+            videoComplete: false
+        },
+
+        proofloop: {
+            config: null,
+            feedback: [],
+            bonusLibrary: [],
+            dripMessages: [],
+            copy: {},
+            selectedBonus: null,
+            voiceBlob: null
+        },
+
+        fixtures: {},
+        currentLanguage: 'hinglish',
+        gateScore: null,
+        gateUnlocked: false,
+        dripStatuses: ['queued', 'sent', 'read', 'queued'],
+
+        proofloopEnabled: true,
+        trafficActiveTab: 'search_harvest',
+
+        acceptanceChecks: {
+            fixtures: false,
+            gate: false,
+            drip: false,
+            ics: false,
+            handoff: false,
+            money: false,
+            proofloop: false,
+            proofwall: false,
+            traffic: false,
+            copy: false
+        }
+    };
+}
+
 // Export functions
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
@@ -176,6 +286,8 @@ if (typeof module !== 'undefined' && module.exports) {
         loadData,
         loadAllFixtures,
         loadAllData,
-        applyFixtures
+        applyFixtures,
+        loadFixtures,
+        createEmptyState
     };
 }
