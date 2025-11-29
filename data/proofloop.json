@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Rajesh K.",
+    "niche": "B2B SaaS Consultant",
+    "rating": 5,
+    "feedback": "AI Twin ne presentation ka kaam bilkul transform kar diya. Pehle 10 demos karne padte the unqualified leads ko, ab sirf 2-3 qualified calls. Time saved = ₹2L+ in billable hours.",
+    "timestamp": "2024-10-15",
+    "verified": true
+  },
+  {
+    "name": "Priya S.",
+    "niche": "Agency Owner",
+    "rating": 5,
+    "feedback": "ICE system se pipeline predictable ho gayi. WhatsApp automation alone saved 15 hours/week. ROI dikha 6 weeks mein. Highly recommend for agency owners!",
+    "timestamp": "2024-10-20",
+    "verified": true
+  },
+  {
+    "name": "Amit D.",
+    "niche": "Executive Coach",
+    "rating": 4,
+    "feedback": "Skeptical tha initially kyunki bahut saare 'automation' tools flop hote hain. But results speak - 3 months mein ₹12L ki pipeline just from AI Twin + ICE nurturing. Game changer for solo coaches.",
+    "timestamp": "2024-09-28",
+    "verified": true
+  },
+  {
+    "name": "Sneha M.",
+    "niche": "Marketing Consultant",
+    "rating": 5,
+    "feedback": "ProofLoop is genius! Unqualified leads se bhi value nikal liya - social proof automatically build ho raha hai. Aur bonus delivery system bhi bahut smooth. Loved it.",
+    "timestamp": "2024-11-01",
+    "verified": true
+  },
+  {
+    "name": "Vikram R.",
+    "niche": "B2B Growth Advisor",
+    "rating": 5,
+    "feedback": "Doctor-frame approach bilkul alag hai from typical Indian sales tactics. No pushy calls, no spam. System genuine hai aur results bhi. Worth every rupee. 5/5 from me.",
+    "timestamp": "2024-10-10",
+    "verified": true
+  },
+  {
+    "name": "Kavya T.",
+    "niche": "Business Coach",
+    "rating": 4,
+    "feedback": "AI Twin slides bahut well-structured hain. 80/20 value-pitch balance perfect hai. Clients ko value mila even before selling. Closing conversations easy ho gayi. Minus 1 star for initial setup time.",
+    "timestamp": "2024-09-15",
+    "verified": true
+  },
+  {
+    "name": "Arjun M.",
+    "niche": "SaaS Founder",
+    "rating": 5,
+    "feedback": "Demo-to-close rate doubled. Unqualified trials kam ho gaye. Sales cycle 45 days se 20 days. Team pe pressure kam, revenue badh gayi. No-brainer investment.",
+    "timestamp": "2024-10-25",
+    "verified": true
+  },
+  {
+    "name": "Divya N.",
+    "niche": "HR Consultant",
+    "rating": 4,
+    "feedback": "Project-based se retainer shift karna tha. ICE helped with positioning and nurturing. 4 retainer clients in 2 months. System works but needs patience initially.",
+    "timestamp": "2024-09-05",
+    "verified": true
+  },
+  {
+    "name": "Rohan G.",
+    "niche": "Real Estate Consultant",
+    "rating": 5,
+    "feedback": "Luxury property sales mein trust building slow hoti hai. AI Twin + WhatsApp drip ne process speed up kar diya. HNI clients bhi comfortable feel karte hain. Brilliant system.",
+    "timestamp": "2024-11-05",
+    "verified": true
+  },
+  {
+    "name": "Meera L.",
+    "niche": "Financial Advisor",
+    "rating": 5,
+    "feedback": "Compliance-heavy industry mein automation mushkil lagti thi. But ICE ne selling ko consultative bana diya. Trust factor improved. Referrals bhi increase hui. Very happy!",
+    "timestamp": "2024-10-18",
+    "verified": true
+  },
+  {
+    "name": "Karan J.",
+    "niche": "Tech Consultant",
+    "rating": 4,
+    "feedback": "CTO-as-service selling karna tough tha. AI Twin ne authority positioning solid kiya. Enterprise deals easier ho gayi. Proposal fatigue kam. 4/5 (setup thoda time-consuming).",
+    "timestamp": "2024-09-22",
+    "verified": true
+  },
+  {
+    "name": "Pooja C.",
+    "niche": "Interior Designer",
+    "rating": 5,
+    "feedback": "Budget mismatch waale inquiries bilkul kam ho gayi. Pre-qualified leads mil rahe hain. Virtual consultation to booking rate 60%+. Time bachta hai for actual design work. Love it!",
+    "timestamp": "2024-10-30",
+    "verified": true
+  }
+]

@@ -1,194 +1,182 @@
 [
   {
-    "id": "fitness_b2c",
-    "label": "Fitness Coach (B2C)",
-    "model": "Coaching",
-    "pains": ["Weight drop nahi ho raha", "Diet follow mushkil", "No consistency"],
-    "objections": ["Time nahi", "Pehle try kiya, kaam nahi kiya", "Budget tight"],
-    "examples": ["3-phase habit stack", "Meal prep basics", "Form correction"]
+    "name": "B2B Consulting",
+    "pains": ["Pipeline unpredictable hai", "Selling nahi aati", "Manual grinding daily"],
+    "hooks": [
+      "High-ticket B2B without cold outreach kaise?",
+      "₹10L/month predictable pipeline in 90 days",
+      "AI Twin selling kare, aap sirf delivery karo"
+    ]
   },
   {
-    "id": "b2b_consulting",
-    "label": "B2B Growth Consultant",
-    "model": "Consulting",
-    "pains": ["No predictable pipeline", "Long sales cycles", "Unqualified demos"],
-    "objections": ["Custom work chahiye", "Case studies kahan", "Price high"],
-    "examples": ["ICP focus", "Discovery template", "Value ladder"]
+    "name": "Agency Owner",
+    "pains": ["Client acquisition expensive hai", "Retention low hai", "Scaling mushkil hai"],
+    "hooks": [
+      "Agency scaling without hiring army?",
+      "Client acquisition cost 70% kam kaise karein",
+      "Predictable MRR automation se"
+    ]
   },
   {
-    "id": "digital_marketing_agency",
-    "label": "Digital Marketing Agency",
-    "model": "Agency",
-    "pains": ["Client churn high", "Delivery scalability", "ROI proof mushkil"],
-    "objections": ["In-house team hai", "Previous agency fail", "Retainer commitment"],
-    "examples": ["Performance reporting", "Ad account audit", "Funnel optimization"]
+    "name": "Coach/Course Creator",
+    "pains": ["Launch fatigue hai", "Evergreen nahi bann raha", "Ads costly hain"],
+    "hooks": [
+      "Launch fatigue se kaise bachein?",
+      "Evergreen funnel that actually works",
+      "High-ticket coaching bina webinar fatigue"
+    ]
   },
   {
-    "id": "web_dev_freelance",
-    "label": "Web Developer (Freelancer)",
-    "model": "Freelancing",
-    "pains": ["Project milte nahi consistently", "Rate negotiation difficult", "Scope creep"],
-    "objections": ["Portfolio kam hai", "Timeline long", "Maintenance kya hoga"],
-    "examples": ["Tech stack clarity", "Milestone-based payment", "Maintenance package"]
+    "name": "SaaS Founder",
+    "pains": ["Demo-to-close slow hai", "Unqualified trials bahut", "Sales team expensive"],
+    "hooks": [
+      "SaaS sales automation (Indian market)",
+      "Demo-to-close 60% faster kaise?",
+      "AI-powered qualification system"
+    ]
   },
   {
-    "id": "business_coach",
-    "label": "Business Coach",
-    "model": "Coaching",
-    "pains": ["Client results inconsistent", "Accountability maintain nahi ho raha", "Premium positioning mushkil"],
-    "objections": ["Self-help books se kya fark", "Time investment zyada", "Already tried coaching"],
-    "examples": ["90-day intensive", "Weekly accountability", "Resource library"]
+    "name": "Freelancer (Scaling)",
+    "pains": ["Time-for-money trap", "Client pipeline inconsistent", "Premium pricing struggle"],
+    "hooks": [
+      "Freelancer se business owner transition",
+      "₹50K to ₹5L/client kaise jump karein",
+      "Productized service automation"
+    ]
   },
   {
-    "id": "saas_consultant",
-    "label": "SaaS Growth Consultant",
-    "model": "Consulting",
-    "pains": ["Churn rate high", "CAC vs LTV imbalance", "Onboarding dropout"],
-    "objections": ["Product issues pehle", "Budget tight for consulting", "Timeline urgency"],
-    "examples": ["Retention audit", "Onboarding flow redesign", "Pricing strategy"]
+    "name": "Real Estate Consultant",
+    "pains": ["Referrals pe dependent", "Follow-ups manual", "High-value deals slow"],
+    "hooks": [
+      "Luxury real estate without broker dependency",
+      "High-net-worth client automation",
+      "WhatsApp-based nurturing system"
+    ]
   },
   {
-    "id": "content_agency",
-    "label": "Content Marketing Agency",
-    "model": "Agency",
-    "pains": ["Quality vs quantity balance", "SEO results slow", "Client education tough"],
-    "objections": ["In-house writer hai", "ROI track nahi hota", "Niche expertise"],
-    "examples": ["Content calendar", "SEO blueprint", "Thought leadership plan"]
+    "name": "EdTech Founder",
+    "pains": ["Parent-student dual selling", "Trial-to-paid low", "Retention mushkil"],
+    "hooks": [
+      "EdTech sales without pushy calls",
+      "Parent trust-building automation",
+      "Trial-to-paid 3X improvement"
+    ]
   },
   {
-    "id": "graphic_designer",
-    "label": "Graphic Designer",
-    "model": "Freelancing",
-    "pains": ["Revisions unlimited hote hain", "Pricing race to bottom", "Brand clients nahi milte"],
-    "objections": ["Fiverr pe sasta milta", "Portfolio style match nahi", "Turnaround time"],
-    "examples": ["Brand identity package", "Revision policy clear", "Case study showcase"]
+    "name": "Health/Wellness Coach",
+    "pains": ["Credibility building hard", "Low ticket to high ticket shift", "Client commitment low"],
+    "hooks": [
+      "Wellness coaching ₹1L+ ticket pe kaise?",
+      "Trust-building automation (India context)",
+      "Long-term commitment system"
+    ]
   },
   {
-    "id": "health_coach",
-    "label": "Health & Wellness Coach",
-    "model": "Coaching",
-    "pains": ["Client motivation drop", "Medical concerns overlap", "Certification credibility"],
-    "objections": ["Doctor se consult better", "Costly supplements", "Time commitment"],
-    "examples": ["Habit tracking system", "Nutrition basics", "Mindset shifts"]
+    "name": "Financial Advisor",
+    "pains": ["Trust factor slow hai", "Referrals unpredictable", "Compliance-heavy selling"],
+    "hooks": [
+      "Financial advisory without pushy tactics",
+      "Trust automation (video + content)",
+      "HNI client acquisition system"
+    ]
   },
   {
-    "id": "ecommerce_consultant",
-    "label": "E-commerce Consultant",
-    "model": "Consulting",
-    "pains": ["Platform migration risky", "Inventory issues", "Ad ROAS declining"],
-    "objections": ["DIY kar sakte hain", "Platform lock-in fear", "Implementation support"],
-    "examples": ["Store audit", "Conversion rate optimization", "Ad creative framework"]
+    "name": "Tech Consultant (CTO-as-Service)",
+    "pains": ["Finding CXO buyers hard", "Sales cycle 6+ months", "Proposal fatigue"],
+    "hooks": [
+      "CTO-as-service sales automation",
+      "Enterprise deals without RFP grind",
+      "Authority positioning system"
+    ]
   },
   {
-    "id": "video_production",
-    "label": "Video Production Agency",
-    "model": "Agency",
-    "pains": ["Project timeline delays", "Client feedback loops long", "Equipment costs high"],
-    "objections": ["Budget constraints", "Creative control", "Delivery timeline"],
-    "examples": ["Pre-production checklist", "Revision rounds defined", "Stock footage library"]
+    "name": "Product Designer (B2B)",
+    "pains": ["Portfolio se inquiry but no close", "Pricing conversation awkward", "Project pipeline gaps"],
+    "hooks": [
+      "Design studio without feast-famine",
+      "₹5L+ project automation",
+      "Case study to client system"
+    ]
   },
   {
-    "id": "copywriter",
-    "label": "Copywriter (Freelance)",
-    "model": "Freelancing",
-    "pains": ["Niche specialization dilemma", "Client ghosting post-delivery", "Rate perception low"],
-    "objections": ["AI se kar lenge", "ROI direct nahi dikhta", "Turnaround expectation"],
-    "examples": ["Sales page framework", "Email sequence", "Ad copy testing"]
+    "name": "Event Planner (Premium)",
+    "pains": ["Seasonal revenue roller-coaster", "Low deposits, high churn", "Last-minute inquiries"],
+    "hooks": [
+      "Premium event planning automation",
+      "Year-round pipeline system",
+      "Deposit collection automation"
+    ]
   },
   {
-    "id": "career_coach",
-    "label": "Career Coach",
-    "model": "Coaching",
-    "pains": ["Job market volatility", "Resume services commoditized", "Interview prep repetitive"],
-    "objections": ["Placement guarantee", "Industry connections", "Success rate proof"],
-    "examples": ["LinkedIn optimization", "Interview simulation", "Salary negotiation"]
+    "name": "Interior Designer",
+    "pains": ["Site visits waste time", "Budget mismatch frequent", "Follow-ups manual"],
+    "hooks": [
+      "Interior design leads pre-qualified kaise?",
+      "Virtual consultation to booking",
+      "Premium client filtering system"
+    ]
   },
   {
-    "id": "hr_consultant",
-    "label": "HR Consultant",
-    "model": "Consulting",
-    "pains": ["Compliance constantly changing", "Culture fit assessment", "Remote hiring challenges"],
-    "objections": ["In-house HR sufficient", "Legal liability concerns", "Implementation bandwidth"],
-    "examples": ["Hiring playbook", "Performance review system", "Culture audit"]
+    "name": "HR Consultant",
+    "pains": ["Project-based revenue hai", "Retainer clients kam", "Scaling without hiring"],
+    "hooks": [
+      "HR consulting retainer model kaise?",
+      "Project to retainer shift automation",
+      "SME client acquisition"
+    ]
   },
   {
-    "id": "social_media_agency",
-    "label": "Social Media Management Agency",
-    "model": "Agency",
-    "pains": ["Content approval bottleneck", "Algorithm changes impact", "Engagement to conversion gap"],
-    "objections": ["Intern se ho jayega", "Organic reach dead", "ROI metrics unclear"],
-    "examples": ["Content batching system", "Platform-specific strategy", "Community management"]
+    "name": "Legal Consultant",
+    "pains": ["Referrals pe dependent", "Billing time-consuming", "Client education needed"],
+    "hooks": [
+      "Legal practice automation (client acquisition)",
+      "Retainer clients systematically",
+      "Consultation-to-retainer automation"
+    ]
   },
   {
-    "id": "seo_freelancer",
-    "label": "SEO Specialist",
-    "model": "Freelancing",
-    "pains": ["Results time lagta hai", "Client expectations unrealistic", "Black-hat perception"],
-    "objections": ["Google Ads faster", "Previous SEO waste", "Ongoing cost"],
-    "examples": ["Technical SEO audit", "Content cluster strategy", "Link building plan"]
+    "name": "Management Consultant",
+    "pains": ["Proposal writing fatigue", "Long sales cycles", "Authority positioning struggle"],
+    "hooks": [
+      "Management consulting without RFP grind",
+      "Thought leadership to client pipeline",
+      "90-day authority positioning"
+    ]
   },
   {
-    "id": "leadership_coach",
-    "label": "Leadership Coach",
-    "model": "Coaching",
-    "pains": ["Executive access difficult", "ROI measurement soft", "Competition from big firms"],
-    "objections": ["MBA better investment", "Time constraints", "Privacy concerns"],
-    "examples": ["360 feedback", "Executive presence", "Decision frameworks"]
+    "name": "Digital Marketing Agency",
+    "pains": ["Price competition brutal", "Client churn high", "Performance pressure constant"],
+    "hooks": [
+      "Marketing agency without bidding wars",
+      "Retainer stability system",
+      "High-LTV client attraction"
+    ]
   },
   {
-    "id": "finance_consultant",
-    "label": "Financial Consultant",
-    "model": "Consulting",
-    "pains": ["Regulation compliance heavy", "Trust building slow", "Market volatility affects perception"],
-    "objections": ["DIY apps available", "Commission model doubt", "Risk disclosure scary"],
-    "examples": ["Cash flow optimization", "Tax planning basics", "Investment education"]
+    "name": "Video Production House",
+    "pains": ["One-off projects only", "Payment delays frequent", "Scalability limited"],
+    "hooks": [
+      "Video production retainer model",
+      "Brand partnerships automation",
+      "Predictable project pipeline"
+    ]
   },
   {
-    "id": "branding_agency",
-    "label": "Branding Agency",
-    "model": "Agency",
-    "pains": ["Subjective feedback loops", "Strategy to execution gap", "Premium pricing justification"],
-    "objections": ["Logo se kya hoga", "Implementation support", "Timeline long"],
-    "examples": ["Brand strategy workshop", "Visual identity system", "Brand guidelines"]
+    "name": "Recruitment Consultant",
+    "pains": ["Client acquisition slow", "Candidate-client mismatch", "Payment on placement only"],
+    "hooks": [
+      "Recruitment firm retainer model",
+      "Client acquisition automation",
+      "Niche specialization positioning"
+    ]
   },
   {
-    "id": "tech_consultant",
-    "label": "Technology Consultant",
-    "model": "Consulting",
-    "pains": ["Vendor neutrality questioned", "Implementation risks high", "Post-project support expectations"],
-    "objections": ["In-house IT team", "Budget approval layers", "Migration downtime"],
-    "examples": ["Tech stack audit", "Digital transformation roadmap", "Cloud migration plan"]
-  },
-  {
-    "id": "sales_coach",
-    "label": "Sales Coach",
-    "model": "Coaching",
-    "pains": ["Script resistance", "Personality vs system", "Follow-up discipline"],
-    "objections": ["Experience better teacher", "Industry-specific doubt", "Practice time nahi"],
-    "examples": ["Discovery framework", "Objection handling library", "Pipeline management"]
-  },
-  {
-    "id": "pr_agency",
-    "label": "PR & Communications Agency",
-    "model": "Agency",
-    "pains": ["Media coverage unpredictable", "Crisis management reactive", "Retainer value perception"],
-    "objections": ["Press release DIY", "Connections matter more", "Measurement difficult"],
-    "examples": ["Media kit", "Crisis playbook", "Thought leadership positioning"]
-  },
-  {
-    "id": "data_analyst",
-    "label": "Data Analyst (Freelance)",
-    "model": "Freelancing",
-    "pains": ["Business context missing", "Dashboard maintenance overhead", "Non-technical stakeholder communication"],
-    "objections": ["Tools costly", "One-time need", "In-house resources"],
-    "examples": ["Analytics setup", "Custom dashboard", "Insight report template"]
-  },
-  {
-    "id": "nutrition_coach",
-    "label": "Nutrition Coach",
-    "model": "Coaching",
-    "pains": ["Fad diet confusion", "Compliance tracking hard", "Medical overlap boundaries"],
-    "objections": ["Diet apps free", "Customization doubt", "Results timeline"],
-    "examples": ["Macro tracking simplified", "Meal prep guide", "Supplement basics"]
+    "name": "Business Broker",
+    "pains": ["Deal flow inconsistent", "Buyer-seller matching hard", "Commission-only pressure"],
+    "hooks": [
+      "Business brokerage deal flow system",
+      "Seller pipeline automation",
+      "Qualified buyer attraction"
+    ]
   }
 ]

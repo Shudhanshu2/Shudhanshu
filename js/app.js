@@ -1,783 +1,650 @@
-// HVSP AI Twin Engine - Main Application Logic
-// ============================================
+// ScaleEdge ICE - Main Application Logic
+// ========================================
 
-// Global State
-let appState = {
-    currentStep: 1,
-    formData: {},
+import { loadFixtures } from './fixtures.js';
+import { EventLog } from './eventlog.js';
+import { SlideEngine } from './slideEngine.js';
+
+// Application State
+const state = {
     niches: [],
-    frameworks: {},
-    testimonials: [],
-    generatedHVSP: null,
-    generatedSlides: []
-};
-
-// Demo Preset Data
-const DEMO_PRESET = {
-    businessModel: 'Consulting',
-    niche: 'B2B Growth Consultant',
-    customNiche: '',
-    targetPersona: 'Founders 5-50 CR ARR',
-    ticketValue: '₹1.2L',
-    language: 'Hinglish',
-    tone: 'Doctor-frame',
-    offerName: 'Growth Accelerator Program',
-    corePromise: '10L/month predictable pipeline',
-    internalOutcome: 'Freedom from daily firefighting',
-    topPains: 'Unpredictable pipeline, Long sales cycles, Unqualified demos',
-    ctaType: 'GrowthMap (₹499) • refundable screen',
-    calendarLink: 'https://cal.example.com/growthmap'
-};
-
-// Utility Functions
-// =================
-
-function showToast(message, duration = 3000) {
-    const toast = document.getElementById('toast');
-    const toastMessage = document.getElementById('toastMessage');
-    toastMessage.textContent = message;
-    toast.classList.remove('hidden');
-    setTimeout(() => {
-        toast.classList.add('hidden');
-    }, duration);
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-async function typeText(element, text, speed = 30) {
-    element.textContent = '';
-    for (let char of text) {
-        element.textContent += char;
-        await sleep(speed);
+    questions: [],
+    scoring: {},
+    drip: [],
+    proofloop: [],
+    traffic: {},
+    currentSlides: [],
+    applicants: [],
+    acceptanceCount: 0,
+    stats: {
+        asp: 0,
+        qualified: 0,
+        nurture: 0,
+        proof: 0
     }
-}
+};
 
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+// Initialize EventLog
+const eventLog = new EventLog();
 
-// Data Loading
-// ============
+// Initialize on DOM load
+document.addEventListener('DOMContentLoaded', async () => {
+    eventLog.log('SYSTEM', 'ICE Engine initializing...');
 
-async function loadData() {
+    // Load all data fixtures
     try {
-        const [nichesRes, frameworksRes, testimonialsRes] = await Promise.all([
-            fetch('data/niches.json'),
-            fetch('data/frameworks.json'),
-            fetch('data/testimonials.json')
-        ]);
+        const data = await loadFixtures();
+        state.niches = data.niches;
+        state.questions = data.questions;
+        state.scoring = data.scoring;
+        state.drip = data.drip;
+        state.proofloop = data.proofloop;
+        state.traffic = data.traffic;
 
-        appState.niches = await nichesRes.json();
-        appState.frameworks = await frameworksRes.json();
-        appState.testimonials = await testimonialsRes.json();
-
-        populateNicheDropdown();
+        eventLog.log('SYSTEM', 'All fixtures loaded successfully');
+        initializeApp();
     } catch (error) {
-        console.error('Error loading data:', error);
-        showToast('Error loading data files. Please check console.');
+        eventLog.log('ERROR', `Failed to load fixtures: ${error.message}`);
+        console.error(error);
     }
+});
+
+function initializeApp() {
+    // Populate niche dropdown
+    populateNicheDropdown();
+
+    // Load traffic data
+    loadTrafficData();
+
+    // Load proof wall
+    loadProofWall();
+
+    // Load drip timeline
+    loadDripTimeline();
+
+    // Setup event listeners
+    setupEventListeners();
+
+    // Setup modal handlers
+    setupModals();
+
+    // Load initial stats
+    updateStats();
+
+    // Setup payment table
+    setTimeout(setupPaymentActions, 500);
+
+    eventLog.log('SYSTEM', 'ICE Engine ready');
 }
 
 function populateNicheDropdown() {
-    const dropdown = document.getElementById('nicheDropdown');
-    appState.niches.forEach(niche => {
+    const select = document.getElementById('nicheSelect');
+    state.niches.forEach(niche => {
         const option = document.createElement('option');
-        option.value = niche.id;
-        option.textContent = niche.label;
-        dropdown.appendChild(option);
-    });
-}
-
-// Form & Stepper Logic
-// ====================
-
-function initStepperHandlers() {
-    // Step 1
-    document.getElementById('btnNext1').addEventListener('click', () => {
-        const selected = document.querySelector('input[name="businessModel"]:checked');
-        if (!selected) {
-            showToast('Please select a business model');
-            return;
-        }
-        appState.formData.businessModel = selected.value;
-        goToStep(2);
+        option.value = niche.name;
+        option.textContent = niche.name;
+        select.appendChild(option);
     });
 
-    // Step 2
-    document.getElementById('btnBack2').addEventListener('click', () => goToStep(1));
-    document.getElementById('btnNext2').addEventListener('click', () => {
-        const nicheId = document.getElementById('nicheDropdown').value;
-        const customNiche = document.getElementById('customNiche').value;
-        const targetPersona = document.getElementById('targetPersona').value;
-        const ticketValue = document.getElementById('ticketValue').value;
+    // Set default to B2B Consulting
+    select.value = 'B2B Consulting';
 
-        if (!nicheId && !customNiche) {
-            showToast('Please select or enter a niche');
-            return;
-        }
-
-        if (!targetPersona) {
-            showToast('Please enter target persona');
-            return;
-        }
-
-        appState.formData.nicheId = nicheId;
-        appState.formData.customNiche = customNiche;
-        appState.formData.targetPersona = targetPersona;
-        appState.formData.ticketValue = ticketValue;
-        appState.formData.language = document.getElementById('language').value;
-        appState.formData.tone = document.getElementById('tone').value;
-
-        goToStep(3);
-    });
-
-    // Step 3
-    document.getElementById('btnBack3').addEventListener('click', () => goToStep(2));
-    document.getElementById('btnGenerate').addEventListener('click', () => {
-        const offerName = document.getElementById('offerName').value;
-        const corePromise = document.getElementById('corePromise').value;
-        const internalOutcome = document.getElementById('internalOutcome').value;
-        const topPains = document.getElementById('topPains').value;
-
-        if (!offerName || !corePromise || !topPains) {
-            showToast('Please fill in all required fields');
-            return;
-        }
-
-        appState.formData.offerName = offerName;
-        appState.formData.corePromise = corePromise;
-        appState.formData.internalOutcome = internalOutcome;
-        appState.formData.topPains = topPains;
-        appState.formData.ctaType = document.getElementById('ctaType').value;
-        appState.formData.calendarLink = document.getElementById('calendarLink').value;
-
-        generateHVSP();
-    });
+    // Prefill form with default
+    prefillDefaultNiche();
 }
 
-function goToStep(stepNum) {
-    // Hide all steps
-    document.querySelectorAll('.step-content').forEach(el => el.classList.add('hidden'));
-
-    // Show target step
-    document.getElementById(`step${stepNum}`).classList.remove('hidden');
-
-    // Update progress indicators
-    document.querySelectorAll('.step-indicator').forEach((el, idx) => {
-        if (idx < stepNum - 1) {
-            el.classList.add('active');
-            el.querySelector('div').classList.remove('bg-gray-200', 'text-gray-600');
-            el.querySelector('div').classList.add('bg-blue-600', 'text-white');
-        } else if (idx === stepNum - 1) {
-            el.classList.add('active');
-            el.querySelector('div').classList.remove('bg-gray-200', 'text-gray-600');
-            el.querySelector('div').classList.add('bg-blue-600', 'text-white');
-        } else {
-            el.classList.remove('active');
-            el.querySelector('div').classList.remove('bg-blue-600', 'text-white');
-            el.querySelector('div').classList.add('bg-gray-200', 'text-gray-600');
-        }
-    });
-
-    // Update progress bars
-    document.getElementById('progress1').style.width = stepNum >= 2 ? '100%' : '0%';
-    document.getElementById('progress2').style.width = stepNum >= 3 ? '100%' : '0%';
-
-    appState.currentStep = stepNum;
-
-    // Scroll to top of stepper
-    document.getElementById('stepperCard').scrollIntoView({ behavior: 'smooth' });
-}
-
-// HVSP Generation Logic
-// =====================
-
-async function generateHVSP() {
-    // Hide form, show progress
-    document.getElementById('stepperCard').classList.add('hidden');
-    document.getElementById('progressSection').classList.remove('hidden');
-    document.getElementById('progressSection').scrollIntoView({ behavior: 'smooth' });
-
-    // Get niche data
-    const nicheData = appState.niches.find(n => n.id === appState.formData.nicheId) || {
-        id: 'custom',
-        label: appState.formData.customNiche || 'Custom Niche',
-        pains: appState.formData.topPains.split(',').map(p => p.trim()),
-        objections: [],
-        examples: ['Strategic approach', 'Implementation framework', 'Metrics tracking']
-    };
-
-    // Populate matched data chips
-    populateMatchedChips(nicheData);
-
-    // Run pipeline
-    await runPipeline(nicheData);
-
-    // Generate HVSP outline
-    generateOutline(nicheData);
-
-    // Show outline section
-    document.getElementById('hvspOutline').classList.remove('hidden');
-    document.getElementById('hvspOutline').scrollIntoView({ behavior: 'smooth' });
-
-    // Show bottom CTA
-    document.getElementById('bottomCTA').classList.remove('hidden');
-}
-
-function populateMatchedChips(nicheData) {
-    const container = document.getElementById('matchedChips');
-    const chips = [
-        { label: 'Framework: HVSP-Core (Hook/Value/Story/Pitch)', color: 'blue' },
-        { label: 'Balance: 80/20', color: 'green' },
-        { label: `Linguistics: ${appState.formData.language} (India)`, color: 'purple' },
-        { label: `Tone: ${appState.formData.tone}`, color: 'pink' },
-        { label: `Cluster hits: ${getRandomInt(8, 15)} assets`, color: 'yellow' },
-        { label: 'Source scope: ₹53Cr+ sales / 44+ niches', color: 'indigo' }
-    ];
-
-    container.innerHTML = chips.map(chip => `
-        <span class="px-3 py-1 bg-${chip.color}-100 text-${chip.color}-700 rounded-full text-xs font-medium border border-${chip.color}-200">
-            ${chip.label}
-        </span>
-    `).join('');
-}
-
-async function runPipeline(nicheData) {
-    const stages = [
-        { name: 'Parsing intake & normalizing…', duration: 1200 },
-        { name: 'Framework selection (HVSP-Core + Niche-Adapt)…', duration: 2000 },
-        { name: 'Value block synthesis (India market psych)…', duration: 2400 },
-        { name: 'Slides layout pass (contrast, clarity)…', duration: 2200 },
-        { name: 'Pitch graft (CTA + Doctor-frame)…', duration: 1800 }
-    ];
-
-    const pipelineContainer = document.getElementById('pipelineStages');
-    pipelineContainer.innerHTML = stages.map((stage, idx) => `
-        <div class="pipeline-stage">
-            <div class="flex items-center justify-between mb-1">
-                <span class="text-sm text-gray-700">${stage.name}</span>
-                <span id="stagePercent${idx}" class="text-xs font-semibold text-blue-600">0%</span>
-            </div>
-            <div class="w-full bg-gray-200 rounded-full h-2">
-                <div id="stageBar${idx}" class="bg-blue-600 h-2 rounded-full transition-all" style="width: 0%"></div>
-            </div>
-        </div>
-    `).join('');
-
-    // Prepare log lines
-    const logLines = generateLogLines(nicheData);
-    const logContainer = document.getElementById('typingLog');
-
-    let logIdx = 0;
-    const logInterval = setInterval(() => {
-        if (logIdx < logLines.length) {
-            const line = document.createElement('div');
-            line.textContent = logLines[logIdx];
-            line.className = 'opacity-0 transition-opacity';
-            logContainer.appendChild(line);
-            setTimeout(() => line.classList.remove('opacity-0'), 10);
-            logContainer.scrollTop = logContainer.scrollHeight;
-            logIdx++;
-        }
-    }, 350);
-
-    // Run stages
-    for (let i = 0; i < stages.length; i++) {
-        await animateStage(i, stages[i].duration);
-    }
-
-    clearInterval(logInterval);
-
-    // Add final log
-    const finalLine = document.createElement('div');
-    finalLine.textContent = '[final] HVSP outline ready • slide deck compiled • video render queued';
-    finalLine.className = 'text-green-400 font-bold';
-    logContainer.appendChild(finalLine);
-}
-
-function generateLogLines(nicheData) {
-    const pains = nicheData.pains || [];
-    const examples = nicheData.examples || [];
-
-    return [
-        `[init] session_start • timestamp=${new Date().toISOString()}`,
-        `[match] niche=${nicheData.id} • language=${appState.formData.language} • tone=${appState.formData.tone}`,
-        `[cluster] ${getRandomInt(8, 15)} assets matched from ${nicheData.label} pool`,
-        `[apply] balance=80/20 • pitch=${appState.formData.ctaType}`,
-        `[linguistics] ${appState.formData.language} mode • India-market psychology layer active`,
-        `[framework] HVSP-Core selected • Hook/Value/Story/Pitch structure`,
-        `[proof] attaching ${appState.testimonials.length} micro-tiles • disclaimer on`,
-        `[pains] identified: ${pains.slice(0, 3).join(' / ')}`,
-        `[value] synthesizing 3 modules from ${examples.join(', ')}`,
-        `[slides] generating 12 frames • optimizing contrast/legibility`,
-        `[tone] ${appState.formData.tone} microcopy injected`,
-        `[cta] doc-frame copy injected • refund note added`,
-        `[story] personal angle: ${nicheData.label} journey`,
-        `[objections] pre-handled: pricing, timeline, fit`,
-        `[quality] checking India-market relevance score: 94.2%`,
-        `[export] preparing slide deck assets • video render queue`
-    ];
-}
-
-async function animateStage(idx, duration) {
-    const bar = document.getElementById(`stageBar${idx}`);
-    const percent = document.getElementById(`stagePercent${idx}`);
-
-    const steps = 20;
-    const stepDuration = duration / steps;
-
-    for (let i = 0; i <= steps; i++) {
-        const progress = (i / steps) * 100;
-        bar.style.width = `${progress}%`;
-        percent.textContent = `${Math.round(progress)}%`;
-        await sleep(stepDuration);
+function prefillDefaultNiche() {
+    const niche = state.niches.find(n => n.name === 'B2B Consulting');
+    if (niche) {
+        document.getElementById('offerInput').value = 'High-Ticket B2B Consulting Program';
+        document.getElementById('ticketInput').value = '₹3-10L';
+        document.getElementById('painsInput').value = niche.pains.join(', ');
+        document.getElementById('brandingInput').value = 'ScaleEdge Systems';
     }
 }
 
-function generateOutline(nicheData) {
-    const framework = appState.frameworks.hvsp_core;
-    const pains = nicheData.pains || appState.formData.topPains.split(',').map(p => p.trim());
-    const examples = nicheData.examples || ['Strategic approach', 'Implementation framework', 'Results tracking'];
+function loadTrafficData() {
+    // Search Keywords
+    const searchContainer = document.getElementById('searchKeywords');
+    state.traffic.search.forEach(keyword => {
+        const div = document.createElement('div');
+        div.className = 'flex items-center justify-between p-3 bg-gray-900 rounded-lg';
+        div.innerHTML = `
+            <div class="flex items-center space-x-3">
+                <span class="text-sm text-gray-300">"${keyword.query}"</span>
+                <span class="px-2 py-1 bg-primary text-xs rounded">${keyword.intent}</span>
+            </div>
+            <span class="text-sm text-gray-500">~${keyword.volume}/mo</span>
+        `;
+        searchContainer.appendChild(div);
+    });
 
-    // Hook
-    const hookContent = document.getElementById('hookContent');
-    hookContent.innerHTML = `
-        <p class="font-semibold">Agar aap ${nicheData.label} ho aur yeh challenges face kar rahe ho:</p>
-        <ul class="list-disc list-inside space-y-1 ml-4">
-            ${pains.slice(0, 3).map(pain => `<li>${pain}</li>`).join('')}
-        </ul>
-        <p class="mt-2">Camera-off, slide-based HVSP jo India market ke liye tuned hai — 80/20 value-pitch balance.</p>
-    `;
+    // Piggyback Channels
+    const piggybacking Container = document.getElementById('piggybacking');
+    state.traffic.piggyback.forEach(channel => {
+        const div = document.createElement('div');
+        div.className = 'flex items-center justify-between p-3 bg-gray-900 rounded-lg';
+        div.innerHTML = `
+            <div>
+                <div class="text-sm font-medium text-white">${channel.name}</div>
+                <div class="text-xs text-gray-500">${channel.audience} subscribers</div>
+            </div>
+            <span class="text-xs px-2 py-1 bg-gray-700 rounded">${channel.type}</span>
+        `;
+        piggybacking Container.appendChild(div);
+    });
 
-    // Value
-    const valueContent = document.getElementById('valueContent');
-    valueContent.innerHTML = examples.slice(0, 3).map((example, idx) => `
-        <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
-            <h5 class="font-bold text-green-800 mb-2">Module ${idx + 1}: ${example}</h5>
-            <ul class="list-disc list-inside text-sm text-gray-700 space-y-1">
-                <li>Kyu kaam karta hai (psychology + India market context)</li>
-                <li>Kaise apply karein (actionable framework)</li>
-                <li>Common mistake jo avoid karna hai</li>
-            </ul>
-        </div>
-    `).join('');
-
-    // Story
-    const storyContent = document.getElementById('storyContent');
-    storyContent.innerHTML = `
-        <p>Main bhi ${nicheData.label.toLowerCase()} ki tarah <strong>${pains[0] || 'challenges'}</strong> se guzra hoon — issi liye HVSP ko India ke liye 80/20 balance ke saath banaya. Camera-off presentation, slide-based delivery, aur high-value conversion focus. Yeh system ₹53Cr+ sales data se trained hai across 44+ niches.</p>
-    `;
-
-    // Pitch
-    const pitchContent = document.getElementById('pitchContent');
-    pitchContent.innerHTML = `
-        <p class="font-semibold mb-2">Next step simple hai — ${appState.formData.ctaType}</p>
-        <p class="text-sm">60-min deep-dive session jahaan hum <strong>${appState.formData.corePromise}</strong> ka roadmap banate hain aur fit check karte hain.</p>
-        <p class="mt-2 text-sm"><strong>Doctor-frame:</strong> Hum pehle screen karte hain — fit hue to aage chalte hain, warna clear path batate hain. No hard sell.</p>
-        <div class="mt-4 p-4 bg-orange-50 border border-orange-200 rounded-lg">
-            <p class="text-sm font-semibold text-orange-800">Bonus on call:</p>
-            <ul class="list-disc list-inside text-sm text-gray-700 mt-2">
-                <li>Templates & frameworks</li>
-                <li>AI Agents System overview</li>
-                <li>Custom roadmap to ${appState.formData.corePromise}</li>
-            </ul>
-        </div>
-    `;
-
-    // Store for slides
-    appState.generatedHVSP = {
-        nicheData,
-        pains,
-        examples
-    };
+    // Partners
+    const partnersContainer = document.getElementById('partners');
+    state.traffic.partners.forEach(partner => {
+        const div = document.createElement('div');
+        div.className = 'flex items-center justify-between p-3 bg-gray-900 rounded-lg';
+        div.innerHTML = `
+            <div>
+                <div class="text-sm font-medium text-white">${partner.name}</div>
+                <div class="text-xs text-gray-500">${partner.network}</div>
+            </div>
+            <span class="text-xs px-2 py-1 bg-gray-700 rounded">${partner.reach}</span>
+        `;
+        partnersContainer.appendChild(div);
+    });
 }
 
-// Slides Generation
-// =================
+function loadProofWall() {
+    const container = document.getElementById('proofWall');
+    container.innerHTML = '';
 
-function initSlidesHandler() {
-    document.getElementById('btnPreviewSlides').addEventListener('click', () => {
+    state.proofloop.slice(0, 6).forEach(proof => {
+        const card = document.createElement('div');
+        card.className = 'proof-card';
+        card.innerHTML = `
+            <div class="flex items-start justify-between mb-3">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-semibold">
+                        ${proof.name.charAt(0)}
+                    </div>
+                    <div>
+                        <div class="text-sm font-medium text-white">${proof.name}</div>
+                        <div class="text-xs text-gray-500">${proof.niche}</div>
+                    </div>
+                </div>
+                <div class="verified-badge">
+                    ✓ Verified
+                </div>
+            </div>
+            <div class="flex items-center mb-2">
+                ${'⭐'.repeat(proof.rating)}
+            </div>
+            <p class="text-sm text-gray-400">${proof.feedback}</p>
+        `;
+        container.appendChild(card);
+    });
+
+    updateStats();
+}
+
+function loadDripTimeline() {
+    const container = document.getElementById('dripTimeline');
+    container.innerHTML = '';
+
+    state.drip.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'drip-item';
+        div.innerHTML = `
+            <div class="drip-time">${item.timing}</div>
+            <div class="drip-content">
+                <div class="text-sm font-medium text-white mb-1">${item.title}</div>
+                <div class="text-xs text-gray-400 mb-2">${item.message}</div>
+                <div class="text-xs text-gray-600">Type: ${item.type}</div>
+            </div>
+        `;
+        container.appendChild(div);
+    });
+}
+
+function setupEventListeners() {
+    // ASP Form Submit
+    document.getElementById('aspForm').addEventListener('submit', (e) => {
+        e.preventDefault();
         generateSlides();
-        document.getElementById('slidesPreview').classList.remove('hidden');
-        document.getElementById('slidesPreview').scrollIntoView({ behavior: 'smooth' });
     });
+
+    // Niche selection change
+    document.getElementById('nicheSelect').addEventListener('change', (e) => {
+        const niche = state.niches.find(n => n.name === e.target.value);
+        if (niche) {
+            document.getElementById('painsInput').value = niche.pains.join(', ');
+        }
+    });
+
+    // Download PDF
+    document.getElementById('downloadPdfBtn').addEventListener('click', () => {
+        eventLog.log('ASP', 'PDF download initiated (simulated)');
+        incrementAcceptance();
+        alert('PDF download simulated. In production, this would generate a PDF of all slides.');
+    });
+
+    // Trigger ProofLoop
+    document.getElementById('triggerProofLoopBtn').addEventListener('click', () => {
+        openProofFeedbackModal();
+        eventLog.log('PROOFLOOP', 'Feedback modal opened for cohort');
+        incrementAcceptance();
+    });
+
+    // Export Proof Wall
+    document.getElementById('exportProofBtn').addEventListener('click', () => {
+        eventLog.log('PROOFLOOP', 'Proof wall export initiated (simulated)');
+        incrementAcceptance();
+        alert('Proof wall export simulated. In production, this would generate a PNG image.');
+    });
+
+    // Simulate Applicants
+    document.getElementById('simulateApplicantsBtn').addEventListener('click', () => {
+        simulateApplicants();
+    });
+
+    // Test Drip
+    document.getElementById('testDripBtn').addEventListener('click', () => {
+        sendTestDrip();
+    });
+
+    // Generate Script
+    document.getElementById('generateScriptBtn').addEventListener('click', () => {
+        generateClosingScript();
+    });
+
+    // Tab switching
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const tab = e.target.dataset.tab;
+            switchTab(tab);
+        });
+    });
+
+    // Header buttons
+    document.getElementById('knowledgeBtn').addEventListener('click', () => {
+        openModal('knowledgeModal');
+    });
+
+    document.getElementById('eventLogBtn').addEventListener('click', () => {
+        openModal('eventLogModal');
+        renderEventLog();
+    });
+
+    document.getElementById('connectionsBtn').addEventListener('click', () => {
+        openModal('connectionsModal');
+        incrementAcceptance();
+    });
+
+    // Clear log
+    document.getElementById('clearLogBtn').addEventListener('click', () => {
+        eventLog.clear();
+        renderEventLog();
+    });
+
+    // ProofLoop feedback
+    setupProofLoopHandlers();
 }
 
 function generateSlides() {
-    const { nicheData, pains, examples } = appState.generatedHVSP;
-    const slides = [];
+    const formData = {
+        niche: document.getElementById('nicheSelect').value,
+        offer: document.getElementById('offerInput').value,
+        ticket: document.getElementById('ticketInput').value,
+        pains: document.getElementById('painsInput').value.split(',').map(p => p.trim()),
+        branding: document.getElementById('brandingInput').value
+    };
 
-    // Slide 1: Title
-    slides.push({
-        num: 1,
-        title: `${appState.formData.offerName} — ${nicheData.label} ke liye HVSP`,
-        content: ['Camera-off • Slide-based', '80/20 value-pitch', 'India-first AI Engine'],
-        notes: 'Start with offer name and positioning. Emphasize camera-off, slide-based format.'
+    eventLog.log('ASP', `Generating slides for ${formData.niche}`);
+
+    // Generate slides using SlideEngine
+    const slideEngine = new SlideEngine(formData);
+    state.currentSlides = slideEngine.generate();
+
+    // Render thumbnails
+    renderSlideThumbnails();
+
+    // Show preview container
+    document.getElementById('slidePreviewContainer').classList.remove('hidden');
+
+    // Update stats
+    state.stats.asp++;
+    updateStats();
+
+    eventLog.log('ASP', '12 slides generated successfully');
+    incrementAcceptance();
+}
+
+function renderSlideThumbnails() {
+    const container = document.getElementById('slideThumbnails');
+    container.innerHTML = '';
+
+    state.currentSlides.forEach((slide, index) => {
+        const div = document.createElement('div');
+        div.className = 'slide-thumbnail';
+        div.innerHTML = `
+            <div class="slide-number">${index + 1}</div>
+            <div class="slide-content">
+                <div class="font-semibold mb-2">${slide.title}</div>
+                <div class="text-xs text-gray-500">${slide.type}</div>
+            </div>
+        `;
+        div.addEventListener('click', () => openSlidePreview(index));
+        container.appendChild(div);
+    });
+}
+
+function openSlidePreview(index) {
+    const slide = state.currentSlides[index];
+    const modal = document.getElementById('slideModal');
+    const title = document.getElementById('slideModalTitle');
+    const body = document.getElementById('slideModalBody');
+    const notes = document.getElementById('slideModalNotes');
+
+    title.textContent = `Slide ${index + 1}: ${slide.title}`;
+    body.innerHTML = `
+        <div class="p-8 text-center">
+            <h2 class="text-2xl font-bold text-white mb-4">${slide.title}</h2>
+            <div class="text-gray-400">${slide.content}</div>
+        </div>
+    `;
+    notes.textContent = slide.notes;
+
+    modal.classList.add('active');
+    eventLog.log('ASP', `Slide ${index + 1} previewed`);
+}
+
+function simulateApplicants() {
+    eventLog.log('ICE', 'Simulating 20 applicants...');
+
+    const container = document.getElementById('applicantsList');
+    container.innerHTML = '';
+
+    const names = ['Rahul S.', 'Priya M.', 'Amit K.', 'Sneha P.', 'Vikram R.', 'Anjali D.', 'Rohan G.', 'Kavya T.', 'Sanjay B.', 'Divya N.', 'Arjun W.', 'Meera L.', 'Karan J.', 'Pooja C.', 'Varun E.', 'Nisha F.', 'Aditya H.', 'Riya S.', 'Harsh M.', 'Tanvi P.'];
+
+    state.applicants = [];
+    let qualified = 0;
+    let unqualified = 0;
+
+    names.forEach((name, i) => {
+        const score = Math.floor(Math.random() * 100);
+        const isQualified = score >= 60;
+
+        const applicant = {
+            name,
+            score,
+            qualified: isQualified
+        };
+
+        state.applicants.push(applicant);
+
+        if (isQualified) qualified++;
+        else unqualified++;
+
+        const div = document.createElement('div');
+        div.className = `applicant-item ${isQualified ? 'applicant-qualified' : 'applicant-unqualified'}`;
+        div.innerHTML = `
+            <div class="flex-1">
+                <div class="text-sm font-medium text-white">${name}</div>
+                <div class="text-xs text-gray-500">Score: ${score}/100</div>
+            </div>
+            <div class="px-3 py-1 rounded text-xs font-medium ${isQualified ? 'bg-green-900 text-green-300' : 'bg-red-900 text-red-300'}">
+                ${isQualified ? 'Qualified → ICE Nurture' : 'Unqualified → ProofLoop'}
+            </div>
+        `;
+        container.appendChild(div);
+
+        eventLog.log('ICE', `${name} scored ${score} - ${isQualified ? 'QUALIFIED' : 'UNQUALIFIED'}`);
     });
 
-    // Slide 2: Pain
-    slides.push({
-        num: 2,
-        title: 'Agar yeh problems familiar lage…',
-        content: pains.slice(0, 3),
-        notes: 'Address top 3 pains directly. Make it relatable and specific to niche.'
+    state.stats.qualified = qualified;
+    state.stats.nurture = qualified;
+    state.stats.proof += unqualified;
+    updateStats();
+
+    incrementAcceptance();
+
+    // Update journey
+    updateJourneyStep(2);
+    setTimeout(() => updateJourneyStep(3), 1000);
+}
+
+function sendTestDrip() {
+    const testMessage = encodeURIComponent(state.drip[0].message);
+    const whatsappUrl = `https://wa.me/?text=${testMessage}`;
+
+    eventLog.log('ICE', 'Opening WhatsApp with test drip message');
+    window.open(whatsappUrl, '_blank');
+    incrementAcceptance();
+}
+
+function generateClosingScript() {
+    const script = `
+CLOSING SCRIPT (Generated by ICE)
+==================================
+
+Prospect: [Name from applicant]
+Pain Points: Pipeline unpredictable hai, Selling nahi aati, Manual grinding
+Offer: High-Ticket B2B Consulting Program
+Ticket: ₹3-10L
+
+OPENING:
+"Bahut accha laga aapke application ko dekhke. Aapki situation bilkul clear hai - aapko ek predictable system chahiye, not just another strategy."
+
+DIAGNOSIS (Doctor-Frame):
+"Maine dekha aapke forms mein - pipeline inconsistent hai, daily grind se pareshan ho, aur selling mein struggle hai. Sahi samjha na?"
+
+PRESCRIPTION:
+"Dekhiye, humara system 3 engines pe kaam karta hai:
+1. ASP (AI Twin) - Selling aapke liye handle karega
+2. Traffic Engine - High-intent leads automatically
+3. ICE - Nurturing se lekar payment tak, system sambhal lega
+
+Aapko sirf show up karna hai for closing calls. Baaki sab automated."
+
+CLOSE:
+"Ab main aapko force nahi karunga. Agar aapko lagta hai ki ye fit hai, we move forward. Nahi toh no hard feelings. Aap decide karo."
+
+[PAUSE - Let them decide]
+
+NEXT STEPS:
+"Perfect. Token payment ₹X leke hum aapka system setup shuru karte hain. Balance call se pehle clear kar dena. Sound good?"
+    `;
+
+    document.getElementById('closingScript').textContent = script.trim();
+    eventLog.log('ICE', 'Closing script generated');
+    incrementAcceptance();
+}
+
+function switchTab(tabName) {
+    // Remove active from all tabs
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
     });
 
-    // Slide 3: Reframe
-    slides.push({
-        num: 3,
-        title: 'Problem yeh nahi ki aap koshish nahi kar rahe…',
-        content: ['Structure, balance, aur India-market psychology ki zaroorat hai.', 'Generic AI ≠ Our Engine'],
-        notes: 'Reframe the problem. It\'s not about effort, it\'s about approach.'
-    });
+    // Add active to selected
+    document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+    document.getElementById(`tab-${tabName}`).classList.add('active');
+}
 
-    // Slide 4: Proof
-    slides.push({
-        num: 4,
-        title: 'Real Results (Illustrative; results vary)',
-        content: appState.testimonials.slice(0, 3).map(t => `${t.name}: ${t.blurb}`),
-        notes: 'Show proof but ALWAYS include disclaimer. These are examples, not guarantees.'
-    });
-
-    // Slides 5-7: Value Modules
-    examples.slice(0, 3).forEach((example, idx) => {
-        slides.push({
-            num: 5 + idx,
-            title: `Module ${idx + 1}: ${example}`,
-            content: [
-                'Kyu kaam karta hai (psychology + India context)',
-                'Kaise apply karein (actionable framework)',
-                'Common mistake jo avoid karna hai'
-            ],
-            notes: `Deep dive into ${example}. Provide actionable value, not just theory.`
+function setupModals() {
+    // Close buttons
+    document.querySelectorAll('.modal-close').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const modal = e.target.closest('.modal');
+            modal.classList.remove('active');
         });
     });
 
-    // Slide 8: Diagram
-    slides.push({
-        num: 8,
-        title: 'AI Agents Funnel — System Overview',
-        content: ['[Visual: Funnel diagram with 9 AI Agents]', 'Lead → Qualify → Nurture → Convert → Deliver', 'Up to 90% automation'],
-        notes: 'Show the system architecture. Visual representation of AI Agents Funnel.'
+    // Click outside to close
+    document.querySelectorAll('.modal').forEach(modal => {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
     });
-
-    // Slide 9: Differentiation
-    slides.push({
-        num: 9,
-        title: 'Generic AI ≠ Our Engine',
-        content: [
-            'Structure: HVSP-Core framework (Hook/Value/Story/Pitch)',
-            'Balance: 80/20 optimized for India market trust-building',
-            'Data: Trained on ₹53Cr+ sales across 44+ niches'
-        ],
-        notes: 'Critical differentiation slide. Explain why our engine is different from ChatGPT.'
-    });
-
-    // Slide 10: Doctor Frame
-    slides.push({
-        num: 10,
-        title: 'Doctor-frame • Accept/Reject',
-        content: [
-            'Hum pehle screen karte hain',
-            'Fit hue to aage, warna clear path',
-            'No hard sell — mutual decision'
-        ],
-        notes: 'Establish authority and selectivity. We choose clients, not just sell to anyone.'
-    });
-
-    // Slide 11: CTA
-    slides.push({
-        num: 11,
-        title: `${appState.formData.ctaType}`,
-        content: [
-            'Deep-dive roadmap session (60 min)',
-            'Deposit screens for seriousness',
-            'Bonus: templates & frameworks on call',
-            appState.formData.calendarLink
-        ],
-        notes: 'Clear CTA with deposit barrier. Emphasize refundable and screening purpose.'
-    });
-
-    // Slide 12: Final
-    slides.push({
-        num: 12,
-        title: 'Not a course — 3-Month Consulting + 9 AI Agents System',
-        content: [
-            'Up to 90% automation',
-            'Done-with-you implementation',
-            'India-first, high-ticket focused'
-        ],
-        notes: 'Final positioning. Emphasize it\'s consulting, not a course. Implementation support.'
-    });
-
-    appState.generatedSlides = slides;
-    renderSlidesGrid(slides);
 }
 
-function renderSlidesGrid(slides) {
-    const grid = document.getElementById('slidesGrid');
-    grid.innerHTML = slides.map(slide => `
-        <div class="slide-card bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-200 rounded-lg p-4 cursor-pointer hover:shadow-lg transition-all hover:scale-105" data-slide="${slide.num}">
-            <div class="text-xs font-bold text-gray-500 mb-2">SLIDE ${slide.num}</div>
-            <h4 class="font-bold text-sm mb-3 text-gray-900 line-clamp-2">${slide.title}</h4>
-            <div class="text-xs text-gray-600 space-y-1">
-                ${slide.content.slice(0, 3).map(c => `<div class="line-clamp-1">• ${c}</div>`).join('')}
-            </div>
-            <div class="mt-3 pt-3 border-t border-gray-300">
-                <p class="text-xs text-gray-500 italic">Illustrative; results vary.</p>
-            </div>
+function openModal(modalId) {
+    document.getElementById(modalId).classList.add('active');
+}
+
+function renderEventLog() {
+    const container = document.getElementById('eventLogContent');
+    const logs = eventLog.getLogs();
+
+    container.innerHTML = logs.map(log => `
+        <div class="log-entry">
+            <span class="log-timestamp">${log.timestamp}</span>
+            <span class="log-engine">[${log.engine}]</span>
+            <span class="log-message">${log.message}</span>
         </div>
     `).join('');
 
-    // Add click handlers
-    document.querySelectorAll('.slide-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const slideNum = parseInt(card.dataset.slide);
-            openSlideModal(slides.find(s => s.num === slideNum));
+    // Scroll to bottom
+    container.scrollTop = container.scrollHeight;
+}
+
+function setupProofLoopHandlers() {
+    // Star rating
+    let selectedRating = 0;
+    document.querySelectorAll('#starRating .star').forEach((star, index) => {
+        star.addEventListener('click', () => {
+            selectedRating = index + 1;
+            document.querySelectorAll('#starRating .star').forEach((s, i) => {
+                if (i < selectedRating) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
         });
     });
-}
 
-function openSlideModal(slide) {
-    const modal = document.getElementById('slideModal');
-    document.getElementById('modalSlideTitle').textContent = `Slide ${slide.num}: ${slide.title}`;
-    document.getElementById('modalSlideContent').innerHTML = `
-        <div class="space-y-2">
-            ${slide.content.map(c => `<p class="text-gray-700">• ${c}</p>`).join('')}
-        </div>
-    `;
-    document.getElementById('modalSlideNotes').textContent = slide.notes;
-    modal.classList.remove('hidden');
-}
-
-// Video Rendering
-// ===============
-
-function initVideoHandler() {
-    document.getElementById('btnRenderVideo').addEventListener('click', async () => {
-        document.getElementById('videoRenderer').classList.remove('hidden');
-        document.getElementById('videoRenderer').scrollIntoView({ behavior: 'smooth' });
-        await renderVideo();
-    });
-}
-
-async function renderVideo() {
-    const renderBar = document.getElementById('renderBar');
-    const renderStatus = document.getElementById('renderStatus');
-    const renderLogs = document.getElementById('renderLogs');
-
-    const stages = [
-        'Compiling slides into frames…',
-        'Generating narration template…',
-        'Applying transitions & animations…',
-        'Rendering captions (India-market style)…',
-        'Muxing audio tracks (optional)…',
-        'Final packaging & optimization…',
-        'Quality check: contrast, legibility…',
-        'Exporting video file…'
-    ];
-
-    renderLogs.innerHTML = '';
-
-    for (let i = 0; i < stages.length; i++) {
-        renderStatus.textContent = stages[i];
-        const log = document.createElement('div');
-        log.textContent = `[${new Date().toLocaleTimeString()}] ${stages[i]}`;
-        renderLogs.appendChild(log);
-
-        const progress = ((i + 1) / stages.length) * 100;
-        renderBar.style.width = `${progress}%`;
-
-        await sleep(getRandomInt(800, 1400));
-    }
-
-    renderStatus.textContent = 'Video ready! 🎉';
-    await sleep(500);
-
-    // Show video card
-    document.getElementById('renderProgress').classList.add('hidden');
-    document.getElementById('videoCard').classList.remove('hidden');
-
-    // Add confetti effect (optional)
-    showToast('🎉 Video rendered successfully!');
-}
-
-// Modal & Interaction Handlers
-// =============================
-
-function initModalHandlers() {
-    // Slide modal
-    document.getElementById('closeModal').addEventListener('click', () => {
-        document.getElementById('slideModal').classList.add('hidden');
-    });
-
-    document.getElementById('slideModal').addEventListener('click', (e) => {
-        if (e.target.id === 'slideModal') {
-            document.getElementById('slideModal').classList.add('hidden');
-        }
-    });
-
-    // GrowthMap modal
-    document.getElementById('btnBookGrowthMap').addEventListener('click', () => {
-        document.getElementById('growthMapModal').classList.remove('hidden');
-        document.getElementById('growthMapCalendar').value = appState.formData.calendarLink || 'https://cal.example.com/growthmap';
-    });
-
-    document.getElementById('closeGrowthMapModal').addEventListener('click', () => {
-        document.getElementById('growthMapModal').classList.add('hidden');
-    });
-
-    // Presenter notes
-    document.getElementById('closeNotes').addEventListener('click', () => {
-        document.getElementById('presenterNotes').classList.add('hidden');
-    });
-
-    // Video interactions
-    document.getElementById('playOverlay')?.addEventListener('click', () => {
-        const video = document.getElementById('renderedVideo');
-        if (video) {
-            video.play();
-            document.getElementById('playOverlay').style.display = 'none';
-        }
-    });
-
-    document.getElementById('btnDownloadVideo')?.addEventListener('click', () => {
-        // In real implementation, this would trigger download
-        showToast('Downloading HVSP_Ready.mp4...');
-        // Simulate download
-        const link = document.createElement('a');
-        link.href = 'assets/hvsp_ready.mp4';
-        link.download = 'HVSP_Ready.mp4';
-        link.click();
-    });
-
-    document.getElementById('btnCopyLink')?.addEventListener('click', () => {
-        // Copy placeholder link
-        navigator.clipboard.writeText(window.location.href + '#video-ready').then(() => {
-            showToast('Link copied to clipboard!');
-        });
-    });
-}
-
-// Demo Mode & Keyboard Shortcuts
-// ===============================
-
-function initDemoMode() {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('demo') === '1') {
+    // Recording buttons
+    document.getElementById('recordVideoBtn').addEventListener('click', () => {
+        document.getElementById('recordingStatus').textContent = '📹 Video recording simulated (requires MediaRecorder API)';
         setTimeout(() => {
-            prefillDemoPreset();
-            setTimeout(() => {
-                goToStep(3);
-                setTimeout(() => {
-                    document.getElementById('btnGenerate').click();
-                }, 1000);
-            }, 600);
-        }, 600);
-    }
-}
+            document.getElementById('recordingStatus').textContent = '';
+        }, 3000);
+    });
 
-function prefillDemoPreset() {
-    // Business model
-    document.querySelector(`input[name="businessModel"][value="${DEMO_PRESET.businessModel}"]`).checked = true;
+    document.getElementById('recordVoiceBtn').addEventListener('click', () => {
+        document.getElementById('recordingStatus').textContent = '🎤 Voice recording simulated (requires MediaRecorder API)';
+        setTimeout(() => {
+            document.getElementById('recordingStatus').textContent = '';
+        }, 3000);
+    });
 
-    // Niche
-    const nicheOption = Array.from(document.getElementById('nicheDropdown').options)
-        .find(opt => opt.textContent === DEMO_PRESET.niche);
-    if (nicheOption) {
-        document.getElementById('nicheDropdown').value = nicheOption.value;
-    }
-
-    document.getElementById('customNiche').value = DEMO_PRESET.customNiche;
-    document.getElementById('targetPersona').value = DEMO_PRESET.targetPersona;
-    document.getElementById('ticketValue').value = DEMO_PRESET.ticketValue;
-    document.getElementById('language').value = DEMO_PRESET.language;
-    document.getElementById('tone').value = DEMO_PRESET.tone;
-
-    // Business specifics
-    document.getElementById('offerName').value = DEMO_PRESET.offerName;
-    document.getElementById('corePromise').value = DEMO_PRESET.corePromise;
-    document.getElementById('internalOutcome').value = DEMO_PRESET.internalOutcome;
-    document.getElementById('topPains').value = DEMO_PRESET.topPains;
-    document.getElementById('ctaType').value = DEMO_PRESET.ctaType;
-    document.getElementById('calendarLink').value = DEMO_PRESET.calendarLink;
-
-    // Update form data
-    appState.formData = { ...DEMO_PRESET };
-
-    showToast('Demo preset loaded!');
-}
-
-function initKeyboardShortcuts() {
-    document.addEventListener('keydown', (e) => {
-        // Ignore if typing in input
-        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
+    // Submit feedback
+    document.getElementById('submitFeedbackBtn').addEventListener('click', () => {
+        const feedback = document.getElementById('feedbackText').value;
+        if (!feedback) {
+            alert('Please provide written feedback');
             return;
         }
 
-        switch (e.key) {
-            case '1':
-                prefillDemoPreset();
-                break;
-            case '2':
-                if (appState.currentStep === 3) {
-                    document.getElementById('btnGenerate').click();
-                }
-                break;
-            case '3':
-                if (document.getElementById('hvspOutline').classList.contains('hidden') === false) {
-                    document.getElementById('btnPreviewSlides').click();
-                }
-                break;
-            case '4':
-                if (document.getElementById('slidesPreview').classList.contains('hidden') === false) {
-                    document.getElementById('btnRenderVideo').click();
-                }
-                break;
-            case 'h':
-            case 'H':
-                const notes = document.getElementById('presenterNotes');
-                notes.classList.toggle('hidden');
-                break;
-        }
+        eventLog.log('PROOFLOOP', `Feedback submitted: ${selectedRating} stars`);
+
+        // Close modal
+        document.getElementById('proofFeedbackModal').classList.remove('active');
+
+        // Show bonus
+        alert('Thank you! Your bonus has been generated:\n\n🎁 Exclusive: "10 High-Intent Keywords for Your Niche"\n\nValid for 72 hours. Check your email.');
+
+        // Add to proof wall
+        const newProof = {
+            name: 'You',
+            niche: document.getElementById('nicheSelect').value,
+            rating: selectedRating,
+            feedback: feedback
+        };
+        state.proofloop.unshift(newProof);
+        state.stats.proof++;
+        loadProofWall();
+
+        // Reset form
+        document.getElementById('feedbackText').value = '';
+        selectedRating = 0;
+        document.querySelectorAll('#starRating .star').forEach(s => s.classList.remove('active'));
+
+        incrementAcceptance();
     });
 }
 
-// Hero Button Handlers
-// ====================
+function openProofFeedbackModal() {
+    document.getElementById('proofFeedbackModal').classList.add('active');
+}
 
-function initHeroHandlers() {
-    document.getElementById('btnStartDemo').addEventListener('click', () => {
-        document.getElementById('stepperCard').scrollIntoView({ behavior: 'smooth' });
+function updateStats() {
+    document.getElementById('stat-asp').textContent = state.stats.asp;
+    document.getElementById('stat-qualified').textContent = state.stats.qualified;
+    document.getElementById('stat-nurture').textContent = state.stats.nurture;
+    document.getElementById('stat-proof').textContent = state.stats.proof;
+}
+
+function updateJourneyStep(step) {
+    document.querySelectorAll('.journey-step').forEach(s => {
+        s.classList.remove('active');
     });
+    document.querySelector(`.journey-step[data-step="${step}"]`).classList.add('active');
+}
 
-    document.getElementById('btnDemoPreset').addEventListener('click', () => {
-        prefillDemoPreset();
-        goToStep(1);
-        document.getElementById('stepperCard').scrollIntoView({ behavior: 'smooth' });
+function incrementAcceptance() {
+    state.acceptanceCount++;
+    document.getElementById('acceptanceCounter').textContent = state.acceptanceCount;
+
+    if (state.acceptanceCount >= 10) {
+        eventLog.log('SYSTEM', '🎉 Full system acceptance achieved!');
+    }
+}
+
+// Simulate payment actions
+function setupPaymentActions() {
+    const paymentData = [
+        { name: 'Rahul S.', stage: 'Token Paid', amount: '₹50,000', balance: '₹2,50,000' },
+        { name: 'Priya M.', stage: 'Balance Due', amount: '₹3,00,000', balance: '₹3,00,000' },
+        { name: 'Amit K.', stage: 'Fully Paid', amount: '₹5,00,000', balance: '₹0' }
+    ];
+
+    const tbody = document.getElementById('paymentTable');
+    tbody.innerHTML = paymentData.map(p => `
+        <tr class="border-b border-gray-800">
+            <td class="py-3 text-white">${p.name}</td>
+            <td class="py-3">
+                <span class="px-2 py-1 rounded text-xs ${p.stage === 'Fully Paid' ? 'bg-green-900 text-green-300' : 'bg-yellow-900 text-yellow-300'}">
+                    ${p.stage}
+                </span>
+            </td>
+            <td class="py-3 text-gray-400">${p.amount}</td>
+            <td class="py-3">
+                ${p.balance !== '₹0' ? `
+                    <button class="text-xs px-3 py-1 bg-primary hover:bg-red-700 rounded nudge-payment" data-name="${p.name}" data-amount="${p.balance}">
+                        Nudge Payment
+                    </button>
+                ` : '<span class="text-xs text-green-500">✓ Complete</span>'}
+            </td>
+        </tr>
+    `).join('');
+
+    // Add click handlers
+    document.querySelectorAll('.nudge-payment').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const name = e.target.dataset.name;
+            const amount = e.target.dataset.amount;
+            const message = encodeURIComponent(`Hi ${name}, reminder: Balance payment of ${amount} pending. Please complete by EOD tomorrow. Payment link: [simulated]`);
+            const whatsappUrl = `https://wa.me/?text=${message}`;
+
+            eventLog.log('ICE', `Payment nudge sent to ${name}`);
+            window.open(whatsappUrl, '_blank');
+            incrementAcceptance();
+            updateJourneyStep(5);
+        });
     });
 }
 
-// Initialization
-// ==============
-
-async function init() {
-    console.log('🚀 HVSP AI Twin Engine initializing...');
-
-    await loadData();
-
-    initStepperHandlers();
-    initSlidesHandler();
-    initVideoHandler();
-    initModalHandlers();
-    initKeyboardShortcuts();
-    initHeroHandlers();
-    initDemoMode();
-
-    console.log('✅ Application ready!');
-}
-
-// Start the app
-document.addEventListener('DOMContentLoaded', init);
+export { state, eventLog };

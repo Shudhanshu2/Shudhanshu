@@ -1,45 +1,421 @@
-/* HVSP AI Twin Engine - Custom Styles */
-/* ==================================== */
+/* ScaleEdge ICE - Custom Styles */
+/* Red Dark Mode Theme */
+/* ================================ */
 
-/* Smooth scrolling for entire page */
+/* Base styles */
 html {
     scroll-behavior: smooth;
 }
 
-/* Custom scrollbar for log container */
-#typingLog::-webkit-scrollbar {
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    overflow-x: hidden;
+}
+
+/* Journey Bar Styles */
+.journey-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.5;
+    transition: opacity 0.3s;
+}
+
+.journey-step.active {
+    opacity: 1;
+}
+
+.journey-dot {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background-color: #374151;
+    color: #9CA3AF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.journey-step.active .journey-dot {
+    background-color: #DC2626;
+    color: white;
+    box-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+}
+
+.journey-label {
+    font-size: 0.75rem;
+    color: #9CA3AF;
+    font-weight: 500;
+}
+
+.journey-step.active .journey-label {
+    color: white;
+}
+
+.journey-line {
+    flex: 1;
+    height: 2px;
+    background-color: #374151;
+    margin: 0 1rem;
+}
+
+/* Section Headers */
+.section-header {
+    margin-bottom: 1.5rem;
+}
+
+.section-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+    color: #9CA3AF;
+    font-size: 0.875rem;
+}
+
+/* Cards */
+.card {
+    background-color: #111827;
+    border: 1px solid #1F2937;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+}
+
+/* Input Fields */
+.input-field {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: #0B0F1A;
+    border: 1px solid #374151;
+    border-radius: 0.5rem;
+    color: white;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: #DC2626;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.input-field::placeholder {
+    color: #6B7280;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #DC2626;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background-color: #B91C1C;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+}
+
+.btn-secondary {
+    background-color: #374151;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background-color: #4B5563;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 0.5rem;
+    border-bottom: 1px solid #374151;
+}
+
+.tab-btn {
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: none;
+    color: #9CA3AF;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.tab-btn.active {
+    color: white;
+    border-bottom-color: #DC2626;
+}
+
+.tab-btn:hover {
+    color: white;
+}
+
+.tab-content {
+    display: none;
+    padding-top: 1rem;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s;
+}
+
+/* Stat Cards */
+.stat-card {
+    background: linear-gradient(135deg, #1F2937 0%, #111827 100%);
+    border: 1px solid #374151;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: #9CA3AF;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #DC2626;
+}
+
+/* Slide Thumbnails */
+.slide-thumbnail {
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, #1F2937 0%, #0B0F1A 100%);
+    border: 2px solid #374151;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.slide-thumbnail:hover {
+    border-color: #DC2626;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+    transform: translateY(-2px);
+}
+
+.slide-thumbnail .slide-number {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background-color: rgba(220, 38, 38, 0.9);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.slide-thumbnail .slide-content {
+    text-align: center;
+    color: white;
+    font-size: 0.875rem;
+}
+
+/* Modals */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.modal.active {
+    display: flex;
+    animation: fadeIn 0.3s;
+}
+
+.modal-content {
+    background-color: #111827;
+    border: 1px solid #374151;
+    border-radius: 1rem;
+    padding: 2rem;
+    max-height: 90vh;
+    overflow-y: auto;
+    width: 100%;
+    animation: slideUp 0.3s;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: #9CA3AF;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.2s;
+    line-height: 1;
+}
+
+.modal-close:hover {
+    color: white;
+}
+
+/* EventLog Styles */
+#eventLogContent {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.75rem;
+}
+
+#eventLogContent::-webkit-scrollbar {
     width: 6px;
 }
 
-#typingLog::-webkit-scrollbar-track {
-    background: #1a1a2e;
+#eventLogContent::-webkit-scrollbar-track {
+    background: #0B0F1A;
 }
 
-#typingLog::-webkit-scrollbar-thumb {
-    background: #22c55e;
+#eventLogContent::-webkit-scrollbar-thumb {
+    background: #374151;
     border-radius: 3px;
+}
+
+.log-entry {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.log-entry:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.log-timestamp {
+    color: #6B7280;
+    white-space: nowrap;
+}
+
+.log-engine {
+    color: #DC2626;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.log-message {
+    color: #D1D5DB;
+}
+
+/* Proof Wall Cards */
+.proof-card {
+    background-color: #1F2937;
+    border: 1px solid #374151;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    transition: all 0.3s;
+}
+
+.proof-card:hover {
+    border-color: #DC2626;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+}
+
+.verified-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    background-color: rgba(34, 197, 94, 0.1);
+    color: #22C55E;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Applicant List Items */
+.applicant-item {
+    display: flex;
+    justify-content: between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background-color: #1F2937;
+    border: 1px solid #374151;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+}
+
+.applicant-item:hover {
+    border-color: #4B5563;
+}
+
+.applicant-qualified {
+    border-left: 3px solid #22C55E;
+}
+
+.applicant-unqualified {
+    border-left: 3px solid #EF4444;
+}
+
+/* Drip Timeline */
+.drip-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #1F2937;
+    border: 1px solid #374151;
+    border-radius: 0.5rem;
+    position: relative;
+}
+
+.drip-time {
+    font-weight: 600;
+    color: #DC2626;
+    white-space: nowrap;
+}
+
+.drip-content {
+    flex: 1;
 }
 
 /* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
     }
     to {
         opacity: 1;
         transform: translateY(0);
-    }
-}
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
     }
 }
 
@@ -48,243 +424,78 @@ html {
         opacity: 1;
     }
     50% {
-        opacity: 0.5;
+        opacity: 0.6;
     }
 }
 
-/* Fade in sections */
-section {
-    animation: fadeIn 0.5s ease-out;
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
 }
 
-/* Stepper active state */
-.step-indicator.active {
-    animation: slideIn 0.3s ease-out;
+::-webkit-scrollbar-track {
+    background: #0B0F1A;
 }
 
-/* Progress bar smooth transitions */
-#progress1, #progress2 {
-    transition: width 0.5s ease-out;
+::-webkit-scrollbar-thumb {
+    background: #374151;
+    border-radius: 4px;
 }
 
-/* Typing log cursor effect */
-#typingLog::after {
-    content: '▋';
-    color: #22c55e;
-    animation: pulse 1s infinite;
-    margin-left: 4px;
+::-webkit-scrollbar-thumb:hover {
+    background: #4B5563;
 }
 
-/* Slide card hover effects */
-.slide-card {
-    transition: all 0.3s ease;
+/* Star Rating */
+.star {
+    background: none;
+    border: none;
+    cursor: pointer;
+    filter: grayscale(100%);
+    transition: all 0.2s;
 }
 
-.slide-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+.star:hover,
+.star.active {
+    filter: grayscale(0%);
 }
 
-/* Modal backdrop animation */
-#slideModal, #growthMapModal {
-    animation: fadeIn 0.2s ease-out;
-}
-
-/* Toast notification animation */
-#toast {
-    animation: slideIn 0.3s ease-out;
-}
-
-/* Video play overlay */
-#playOverlay {
-    transition: all 0.3s ease;
-}
-
-#renderedVideo:not([paused]) ~ #playOverlay {
-    display: none !important;
-}
-
-/* Presenter notes slide-in */
-#presenterNotes {
-    animation: slideIn 0.3s ease-out;
-}
-
-/* Keyboard shortcut kbd styling */
-kbd {
-    font-family: monospace;
-    font-size: 0.875rem;
-}
-
-/* Pipeline stage animations */
-.pipeline-stage {
-    animation: fadeIn 0.3s ease-out;
-}
-
-/* Bottom CTA entrance */
-#bottomCTA {
-    animation: slideIn 0.5s ease-out;
-}
-
-/* Chip colors (Tailwind doesn't support dynamic classes) */
-.chip-blue {
-    background-color: #dbeafe;
-    color: #1e40af;
-    border-color: #93c5fd;
-}
-
-.chip-green {
-    background-color: #dcfce7;
-    color: #15803d;
-    border-color: #86efac;
-}
-
-.chip-purple {
-    background-color: #f3e8ff;
-    color: #7e22ce;
-    border-color: #d8b4fe;
-}
-
-.chip-pink {
-    background-color: #fce7f3;
-    color: #be185d;
-    border-color: #f9a8d4;
-}
-
-.chip-yellow {
-    background-color: #fef3c7;
-    color: #92400e;
-    border-color: #fcd34d;
-}
-
-.chip-indigo {
-    background-color: #e0e7ff;
-    color: #3730a3;
-    border-color: #a5b4fc;
-}
-
-/* Loading spinner for pipeline */
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.animate-spin {
-    animation: spin 1s linear infinite;
-}
-
-/* Gradient text effect */
-.gradient-text {
-    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    #presenterNotes {
-        right: 0;
-        left: 0;
-        margin: 1rem;
-        width: auto;
-    }
-
-    .slide-card {
-        transform: none !important;
-    }
-
-    .slide-card:hover {
-        transform: translateY(-2px) !important;
-    }
-}
-
-/* Focus states for accessibility */
-button:focus,
-input:focus,
-select:focus {
-    outline: 2px solid #3b82f6;
-    outline-offset: 2px;
-}
-
-/* Line clamp utilities (if not available in Tailwind) */
-.line-clamp-1 {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-}
-
-.line-clamp-2 {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-}
-
-/* Smooth transitions for all interactive elements */
-button,
-a,
-.cursor-pointer {
-    transition: all 0.2s ease;
-}
-
-/* Disabled button state */
-button:disabled {
+/* Loading States */
+.loading {
     opacity: 0.5;
-    cursor: not-allowed;
+    pointer-events: none;
 }
 
-/* Custom checkbox/radio styling improvement */
-input[type="radio"]:checked ~ div {
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-}
-
-/* Skeleton loader for future use */
-.skeleton {
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: loading 1.5s infinite;
-}
-
-@keyframes loading {
-    0% {
-        background-position: 200% 0;
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .journey-bar {
+        overflow-x: auto;
     }
-    100% {
-        background-position: -200% 0;
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .stat-value {
+        font-size: 2rem;
+    }
+
+    .modal-content {
+        padding: 1.5rem;
     }
 }
 
-/* Print styles */
+/* Print Styles */
 @media print {
     header,
-    #bottomCTA,
     footer,
-    #presenterNotes {
+    .modal {
         display: none !important;
     }
-
-    section {
-        page-break-inside: avoid;
-    }
 }
 
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-    .bg-gray-50 {
-        background-color: #ffffff;
-    }
-
-    .border-gray-200 {
-        border-color: #000000;
-    }
-}
-
-/* Reduced motion support */
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -295,113 +506,15 @@ input[type="radio"]:checked ~ div {
     }
 }
 
-/* Custom utility classes */
-.bg-gradient-primary {
-    background: linear-gradient(135deg, #3b82f6, #06b6d4);
+/* Utility Classes */
+.text-hinglish {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-.bg-gradient-secondary {
-    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+.cursor-pointer {
+    cursor: pointer;
 }
 
-.text-shadow-sm {
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-/* Video card styling */
-#videoCard {
-    animation: fadeIn 0.5s ease-out;
-}
-
-#videoCard video {
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-}
-
-/* Matched chips container scroll */
-#matchedChips {
-    max-height: 200px;
-    overflow-y: auto;
-}
-
-#matchedChips::-webkit-scrollbar {
-    height: 4px;
-}
-
-#matchedChips::-webkit-scrollbar-track {
-    background: #f3f4f6;
-}
-
-#matchedChips::-webkit-scrollbar-thumb {
-    background: #9ca3af;
-    border-radius: 2px;
-}
-
-/* Slide modal content styling */
-#slideModal .bg-white {
-    animation: fadeIn 0.3s ease-out;
-}
-
-/* Render progress bar glow effect */
-#renderBar {
-    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
-}
-
-/* CTA button glow effect */
-#btnGenerate,
-#btnPreviewSlides,
-#btnRenderVideo {
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-}
-
-#btnGenerate:hover,
-#btnPreviewSlides:hover,
-#btnRenderVideo:hover {
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-/* Dark mode terminal look for logs */
-#typingLog {
-    font-family: 'Courier New', Courier, monospace;
-    letter-spacing: 0.5px;
-}
-
-/* Badge styling */
-header span[class*="bg-"] {
-    white-space: nowrap;
-}
-
-/* Responsive grid adjustments */
-@media (min-width: 1280px) {
-    #slidesGrid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-}
-
-@media (min-width: 1024px) and (max-width: 1279px) {
-    #slidesGrid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-}
-
-@media (min-width: 640px) and (max-width: 1023px) {
-    #slidesGrid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-@media (max-width: 639px) {
-    #slidesGrid {
-        grid-template-columns: repeat(1, minmax(0, 1fr));
-    }
-}
-
-/* Ensure footer is always at bottom */
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-footer {
-    margin-top: auto;
+.hidden {
+    display: none !important;
 }

@@ -1,0 +1,126 @@
+{
+  "search": [
+    {
+      "query": "B2B client acquisition system",
+      "intent": "High",
+      "volume": "1.2K",
+      "cpc": "₹180"
+    },
+    {
+      "query": "automated sales funnel India",
+      "intent": "High",
+      "volume": "890",
+      "cpc": "₹165"
+    },
+    {
+      "query": "high ticket coaching system",
+      "intent": "High",
+      "volume": "720",
+      "cpc": "₹210"
+    },
+    {
+      "query": "AI sales automation for consultants",
+      "intent": "Medium",
+      "volume": "650",
+      "cpc": "₹145"
+    },
+    {
+      "query": "predictable pipeline system",
+      "intent": "High",
+      "volume": "580",
+      "cpc": "₹190"
+    },
+    {
+      "query": "WhatsApp lead nurturing automation",
+      "intent": "Medium",
+      "volume": "490",
+      "cpc": "₹125"
+    },
+    {
+      "query": "agency client acquisition automation",
+      "intent": "High",
+      "volume": "410",
+      "cpc": "₹155"
+    },
+    {
+      "query": "SaaS demo automation India",
+      "intent": "Medium",
+      "volume": "380",
+      "cpc": "₹135"
+    }
+  ],
+  "piggyback": [
+    {
+      "name": "Growth Talks India",
+      "audience": "45K",
+      "type": "Business Podcast",
+      "niche": "Startups & Growth",
+      "format": "Pre-roll Ad"
+    },
+    {
+      "name": "Scale Podcast",
+      "audience": "32K",
+      "type": "Startup Stories",
+      "niche": "B2B SaaS",
+      "format": "Sponsorship"
+    },
+    {
+      "name": "Founder's Cafe",
+      "audience": "28K",
+      "type": "YouTube Channel",
+      "niche": "Indian Founders",
+      "format": "Integration"
+    },
+    {
+      "name": "B2B Mastermind Show",
+      "audience": "19K",
+      "type": "YouTube Series",
+      "niche": "B2B Sales",
+      "format": "Guest Spot"
+    },
+    {
+      "name": "Agency Insider",
+      "audience": "15K",
+      "type": "Newsletter",
+      "niche": "Agency Owners",
+      "format": "Sponsored Section"
+    }
+  ],
+  "partners": [
+    {
+      "name": "B2B Leaders Community",
+      "network": "Slack",
+      "reach": "2.5K members",
+      "activity": "High",
+      "niche": "B2B SaaS"
+    },
+    {
+      "name": "Founder Circle India",
+      "network": "WhatsApp",
+      "reach": "1.8K members",
+      "activity": "Very High",
+      "niche": "Tech Founders"
+    },
+    {
+      "name": "Growth Hackers India",
+      "network": "Telegram",
+      "reach": "3.2K members",
+      "activity": "Medium",
+      "niche": "Marketing & Growth"
+    },
+    {
+      "name": "Agency Owners Club",
+      "network": "Discord",
+      "reach": "980 members",
+      "activity": "High",
+      "niche": "Agency Leaders"
+    },
+    {
+      "name": "Coach Connect India",
+      "network": "Facebook",
+      "reach": "5.5K members",
+      "activity": "Medium",
+      "niche": "Coaches & Trainers"
+    }
+  ]
+}

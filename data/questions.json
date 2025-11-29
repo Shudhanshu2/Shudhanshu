@@ -1,0 +1,91 @@
+[
+  {
+    "id": "q1",
+    "question": "Current monthly revenue (approx)?",
+    "type": "number",
+    "weight": 20,
+    "scoring": {
+      "0-50000": 0,
+      "50000-200000": 10,
+      "200000-500000": 15,
+      "500000+": 20
+    }
+  },
+  {
+    "id": "q2",
+    "question": "Average ticket size of your offer?",
+    "type": "number",
+    "weight": 25,
+    "scoring": {
+      "0-50000": 5,
+      "50000-100000": 15,
+      "100000-300000": 20,
+      "300000+": 25
+    }
+  },
+  {
+    "id": "q3",
+    "question": "How predictable is your pipeline?",
+    "type": "scale",
+    "weight": 15,
+    "options": [
+      "Very unpredictable",
+      "Somewhat predictable",
+      "Mostly predictable",
+      "Fully predictable"
+    ],
+    "scoring": {
+      "Very unpredictable": 15,
+      "Somewhat predictable": 10,
+      "Mostly predictable": 5,
+      "Fully predictable": 0
+    }
+  },
+  {
+    "id": "q4",
+    "question": "Biggest pain point right now?",
+    "type": "multiple_choice",
+    "weight": 20,
+    "options": [
+      "Getting qualified leads",
+      "Converting leads to clients",
+      "Scaling delivery",
+      "Pricing/Positioning"
+    ],
+    "scoring": {
+      "Getting qualified leads": 20,
+      "Converting leads to clients": 15,
+      "Scaling delivery": 5,
+      "Pricing/Positioning": 10
+    }
+  },
+  {
+    "id": "q5",
+    "question": "Aapka time weekly sales mein kitna lagta hai?",
+    "type": "scale",
+    "weight": 10,
+    "options": [
+      "0-5 hours",
+      "5-15 hours",
+      "15-30 hours",
+      "30+ hours"
+    ],
+    "scoring": {
+      "0-5 hours": 0,
+      "5-15 hours": 5,
+      "15-30 hours": 8,
+      "30+ hours": 10
+    }
+  },
+  {
+    "id": "q6",
+    "question": "Investment capacity for systemization?",
+    "type": "range",
+    "weight": 10,
+    "scoring": {
+      "low": 0,
+      "medium": 5,
+      "high": 10
+    }
+  }
+]

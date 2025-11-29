@@ -1,0 +1,35 @@
+{
+  "thresholds": {
+    "qualified": 60,
+    "nurture": 40,
+    "proofloop": 0
+  },
+  "rules": [
+    {
+      "condition": "score >= 60",
+      "action": "ice_nurture",
+      "priority": "high",
+      "message": "Qualified for ICE Nurturing"
+    },
+    {
+      "condition": "score >= 40 && score < 60",
+      "action": "follow_up",
+      "priority": "medium",
+      "message": "Potential - Follow up in 30 days"
+    },
+    {
+      "condition": "score < 40",
+      "action": "proofloop",
+      "priority": "low",
+      "message": "Trigger ProofLoop for social proof"
+    }
+  ],
+  "weights": {
+    "revenue": 20,
+    "ticket_size": 25,
+    "pipeline_predictability": 15,
+    "pain_point": 20,
+    "time_spent_selling": 10,
+    "investment_capacity": 10
+  }
+}

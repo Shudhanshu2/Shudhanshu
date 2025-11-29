@@ -1,530 +1,508 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HVSP AI Twin Engine • Edges</title>
+    <title>ScaleEdge Integrated Client Engine (ICE)</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/styles.css">
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        primary: '#0ea5e9',
-                        dark: '#0f172a',
-                        'dark-light': '#1e293b',
+                        primary: '#DC2626',
+                        bgdark: '#0B0F1A',
+                        panel: '#111827',
+                        accent: '#EF4444'
                     }
                 }
             }
         }
     </script>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-bgdark text-gray-100 font-sans">
 
     <!-- Header -->
-    <header class="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex items-center justify-between flex-wrap gap-4">
-                <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center">
-                        <span class="text-white font-bold text-sm">E</span>
+    <header class="bg-panel border-b border-gray-800 sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
                     </div>
-                    <h1 class="text-xl font-bold text-gray-900">Edges <span class="text-gray-400">•</span> <span class="text-gray-600">AI Agents System</span></h1>
+                    <div>
+                        <h1 class="text-2xl font-bold text-white">ScaleEdge ICE</h1>
+                        <p class="text-xs text-gray-400">Integrated Client Engine</p>
+                    </div>
                 </div>
-                <div class="flex items-center gap-2 flex-wrap">
-                    <span class="px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-medium border border-blue-200">
-                        Not a course — 3-Month Consulting + 9 AI Agents System
-                    </span>
-                    <span class="px-3 py-1 bg-green-50 text-green-700 rounded-full text-xs font-medium border border-green-200">
-                        Doctor-frame: Accept/Reject
-                    </span>
-                    <span class="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-xs font-medium border border-purple-200">
-                        Up to 90% automation
-                    </span>
+                <div class="flex items-center space-x-3">
+                    <button id="knowledgeBtn" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm transition">
+                        <span class="mr-2">📚</span> Knowledge Base
+                    </button>
+                    <button id="eventLogBtn" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm transition">
+                        <span class="mr-2">📊</span> EventLog
+                    </button>
+                    <button id="connectionsBtn" class="px-4 py-2 bg-primary hover:bg-red-700 rounded-lg text-sm transition">
+                        <span class="mr-2">🔌</span> Connections
+                    </button>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Container -->
-    <div class="container mx-auto px-4 py-8 max-w-7xl">
-
-        <!-- Hero Section -->
-        <section id="hero" class="text-center mb-12">
-            <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                HVSP + AI Twin Engine <span class="text-blue-600">(India-First)</span>
-            </h2>
-            <p class="text-lg text-gray-600 mb-6 max-w-3xl mx-auto">
-                Slide-based, camera-off, 80% value / 20% pitch. Trained on ₹53Cr+ sales data across 44+ niches.
-            </p>
-            <div class="flex items-center justify-center gap-4">
-                <button id="btnStartDemo" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold shadow-lg transition-all">
-                    Start Demo
-                </button>
-                <button id="btnDemoPreset" class="px-6 py-3 bg-gray-700 hover:bg-gray-800 text-white rounded-lg font-semibold shadow-lg transition-all">
-                    Use Demo Preset
-                </button>
-            </div>
-            <p class="text-xs text-gray-500 mt-4">Keyboard shortcuts: <kbd class="px-2 py-1 bg-gray-200 rounded">1</kbd> Prefill • <kbd class="px-2 py-1 bg-gray-200 rounded">2</kbd> Generate • <kbd class="px-2 py-1 bg-gray-200 rounded">3</kbd> Slides • <kbd class="px-2 py-1 bg-gray-200 rounded">4</kbd> Video • <kbd class="px-2 py-1 bg-gray-200 rounded">H</kbd> Notes</p>
-        </section>
-
-        <!-- Stepper Form Card -->
-        <section id="stepperCard" class="bg-white rounded-xl shadow-lg p-8 mb-8">
-
-            <!-- Progress Indicator -->
-            <div class="flex items-center justify-between mb-8">
-                <div class="flex items-center gap-4 w-full">
-                    <div class="step-indicator active flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-semibold">1</div>
-                        <span class="text-sm font-medium hidden sm:inline">Business Model</span>
-                    </div>
-                    <div class="flex-1 h-1 bg-gray-200">
-                        <div id="progress1" class="h-full bg-blue-600 transition-all" style="width: 0%"></div>
-                    </div>
-                    <div class="step-indicator flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-semibold">2</div>
-                        <span class="text-sm font-medium hidden sm:inline">Niche</span>
-                    </div>
-                    <div class="flex-1 h-1 bg-gray-200">
-                        <div id="progress2" class="h-full bg-blue-600 transition-all" style="width: 0%"></div>
-                    </div>
-                    <div class="step-indicator flex items-center gap-2">
-                        <div class="w-8 h-8 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-semibold">3</div>
-                        <span class="text-sm font-medium hidden sm:inline">Business Specifics</span>
-                    </div>
+    <!-- Journey Bar -->
+    <div class="bg-panel border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between" id="journeyBar">
+                <div class="journey-step active" data-step="1">
+                    <div class="journey-dot">1</div>
+                    <span class="journey-label">Application</span>
+                </div>
+                <div class="journey-line"></div>
+                <div class="journey-step" data-step="2">
+                    <div class="journey-dot">2</div>
+                    <span class="journey-label">Qualify</span>
+                </div>
+                <div class="journey-line"></div>
+                <div class="journey-step" data-step="3">
+                    <div class="journey-dot">3</div>
+                    <span class="journey-label">ICE Nurture</span>
+                </div>
+                <div class="journey-line"></div>
+                <div class="journey-step" data-step="4">
+                    <div class="journey-dot">4</div>
+                    <span class="journey-label">Call</span>
+                </div>
+                <div class="journey-line"></div>
+                <div class="journey-step" data-step="5">
+                    <div class="journey-dot">5</div>
+                    <span class="journey-label">Collect</span>
                 </div>
             </div>
-
-            <!-- Step 1: Business Model -->
-            <div id="step1" class="step-content">
-                <h3 class="text-2xl font-bold mb-4">Step 1: Business Model</h3>
-                <p class="text-gray-600 mb-6">Apka current business model kya hai?</p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <label class="cursor-pointer">
-                        <input type="radio" name="businessModel" value="Agency" class="peer sr-only">
-                        <div class="p-6 border-2 border-gray-200 rounded-lg peer-checked:border-blue-600 peer-checked:bg-blue-50 transition-all hover:border-gray-300">
-                            <div class="text-3xl mb-2">🏢</div>
-                            <div class="font-semibold">Agency</div>
-                        </div>
-                    </label>
-                    <label class="cursor-pointer">
-                        <input type="radio" name="businessModel" value="Coaching" class="peer sr-only">
-                        <div class="p-6 border-2 border-gray-200 rounded-lg peer-checked:border-blue-600 peer-checked:bg-blue-50 transition-all hover:border-gray-300">
-                            <div class="text-3xl mb-2">🎓</div>
-                            <div class="font-semibold">Coaching</div>
-                        </div>
-                    </label>
-                    <label class="cursor-pointer">
-                        <input type="radio" name="businessModel" value="Consulting" class="peer sr-only">
-                        <div class="p-6 border-2 border-gray-200 rounded-lg peer-checked:border-blue-600 peer-checked:bg-blue-50 transition-all hover:border-gray-300">
-                            <div class="text-3xl mb-2">💼</div>
-                            <div class="font-semibold">Consulting</div>
-                        </div>
-                    </label>
-                    <label class="cursor-pointer">
-                        <input type="radio" name="businessModel" value="Freelancing" class="peer sr-only">
-                        <div class="p-6 border-2 border-gray-200 rounded-lg peer-checked:border-blue-600 peer-checked:bg-blue-50 transition-all hover:border-gray-300">
-                            <div class="text-3xl mb-2">💻</div>
-                            <div class="font-semibold">Freelancing</div>
-                        </div>
-                    </label>
-                </div>
-                <div class="mt-6 flex justify-end">
-                    <button id="btnNext1" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all">
-                        Next →
-                    </button>
-                </div>
-            </div>
-
-            <!-- Step 2: Niche -->
-            <div id="step2" class="step-content hidden">
-                <h3 class="text-2xl font-bold mb-4">Step 2: Niche & Target Market</h3>
-                <p class="text-gray-600 mb-6">Apki expertise aur target market define karein</p>
-
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Select Niche (or enter custom)</label>
-                        <select id="nicheDropdown" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                            <option value="">Choose a niche...</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Or enter custom niche</label>
-                        <input type="text" id="customNiche" placeholder="e.g., SaaS Product Manager" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Target Market Persona</label>
-                            <input type="text" id="targetPersona" placeholder="e.g., Founders 5-50 CR ARR" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Typical Ticket (₹)</label>
-                            <input type="text" id="ticketValue" placeholder="e.g., ₹1.2L" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Language</label>
-                            <select id="language" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                <option value="Hinglish">Hinglish</option>
-                                <option value="Hindi">Hindi</option>
-                                <option value="English">English</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Tone</label>
-                            <select id="tone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                                <option value="Doctor-frame">Doctor-frame</option>
-                                <option value="Authoritative">Authoritative</option>
-                                <option value="Friendly">Friendly</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-6 flex justify-between">
-                    <button id="btnBack2" class="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-semibold transition-all">
-                        ← Back
-                    </button>
-                    <button id="btnNext2" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all">
-                        Next →
-                    </button>
-                </div>
-            </div>
-
-            <!-- Step 3: Business Specifics -->
-            <div id="step3" class="step-content hidden">
-                <h3 class="text-2xl font-bold mb-4">Step 3: Business Specifics</h3>
-                <p class="text-gray-600 mb-6">Offer details aur positioning define karein</p>
-
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Offer Name</label>
-                        <input type="text" id="offerName" placeholder="e.g., Growth Accelerator Program" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Core Promise (External Outcome)</label>
-                        <input type="text" id="corePromise" placeholder="e.g., 10L/month predictable pipeline" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Internal Outcome</label>
-                        <input type="text" id="internalOutcome" placeholder="e.g., Freedom from daily firefighting" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Top 3 Pains (comma-separated)</label>
-                        <input type="text" id="topPains" placeholder="e.g., Unpredictable pipeline, Long sales cycles, Unqualified demos" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">CTA Type</label>
-                        <input type="text" id="ctaType" value="GrowthMap (₹499) • refundable screen" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Calendar Link</label>
-                        <input type="text" id="calendarLink" placeholder="https://cal.example.com/growthmap" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                </div>
-
-                <div class="mt-6 flex justify-between">
-                    <button id="btnBack3" class="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-semibold transition-all">
-                        ← Back
-                    </button>
-                    <button id="btnGenerate" class="px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white rounded-lg font-semibold shadow-lg transition-all">
-                        Generate HVSP ✨
-                    </button>
-                </div>
-            </div>
-
-        </section>
-
-        <!-- Progress & Matching Section -->
-        <section id="progressSection" class="hidden mb-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-                <!-- Matched Data Panel -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
-                        <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                        </svg>
-                        Matched Data
-                    </h3>
-                    <div id="matchedChips" class="flex flex-wrap gap-2">
-                        <!-- Chips will be populated here -->
-                    </div>
-                </div>
-
-                <!-- Pipeline Panel -->
-                <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
-                        <svg class="w-5 h-5 text-blue-500 animate-spin" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
-                        </svg>
-                        Processing Pipeline
-                    </h3>
-                    <div id="pipelineStages" class="space-y-3">
-                        <!-- Pipeline stages will be populated here -->
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Typing Log -->
-            <div class="bg-gray-900 rounded-xl shadow-lg p-6 mt-6">
-                <h3 class="text-lg font-bold mb-3 text-green-400 font-mono">System Log</h3>
-                <div id="typingLog" class="font-mono text-xs text-green-300 space-y-1 max-h-64 overflow-y-auto">
-                    <!-- Log lines will be typed here -->
-                </div>
-            </div>
-        </section>
-
-        <!-- HVSP Outline Section -->
-        <section id="hvspOutline" class="hidden bg-white rounded-xl shadow-lg p-8 mb-8">
-            <h3 class="text-3xl font-bold mb-6 text-center">Generated HVSP Outline</h3>
-
-            <div class="space-y-6">
-                <!-- Hook -->
-                <div class="border-l-4 border-blue-500 pl-6">
-                    <h4 class="text-xl font-bold mb-3 text-blue-600">🎯 Hook</h4>
-                    <div id="hookContent" class="text-gray-700 space-y-2">
-                        <!-- Hook bullets will be populated here -->
-                    </div>
-                </div>
-
-                <!-- Value -->
-                <div class="border-l-4 border-green-500 pl-6">
-                    <h4 class="text-xl font-bold mb-3 text-green-600">💎 Value (80%)</h4>
-                    <div id="valueContent" class="space-y-4">
-                        <!-- Value modules will be populated here -->
-                    </div>
-                </div>
-
-                <!-- Story -->
-                <div class="border-l-4 border-purple-500 pl-6">
-                    <h4 class="text-xl font-bold mb-3 text-purple-600">📖 Story</h4>
-                    <div id="storyContent" class="text-gray-700">
-                        <!-- Story will be populated here -->
-                    </div>
-                </div>
-
-                <!-- Pitch -->
-                <div class="border-l-4 border-orange-500 pl-6">
-                    <h4 class="text-xl font-bold mb-3 text-orange-600">🎁 Pitch (20%)</h4>
-                    <div id="pitchContent" class="text-gray-700">
-                        <!-- Pitch will be populated here -->
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-8 text-center">
-                <button id="btnPreviewSlides" class="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-lg font-semibold shadow-lg transition-all text-lg">
-                    Preview Slides (12) →
-                </button>
-            </div>
-        </section>
-
-        <!-- Slides Preview Section -->
-        <section id="slidesPreview" class="hidden bg-white rounded-xl shadow-lg p-8 mb-8">
-            <h3 class="text-3xl font-bold mb-6 text-center">Slide Deck Preview</h3>
-            <p class="text-center text-gray-600 mb-8">Auto-generated from your inputs • Click to view details</p>
-
-            <div id="slidesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
-                <!-- Slide thumbnails will be populated here -->
-            </div>
-
-            <div class="text-center">
-                <button id="btnRenderVideo" class="px-8 py-4 bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white rounded-lg font-semibold shadow-lg transition-all text-lg">
-                    Render Video 🎬
-                </button>
-            </div>
-        </section>
-
-        <!-- Video Renderer Section -->
-        <section id="videoRenderer" class="hidden bg-white rounded-xl shadow-lg p-8 mb-8">
-            <h3 class="text-3xl font-bold mb-6 text-center">Video Renderer</h3>
-
-            <div id="renderProgress" class="mb-6">
-                <div class="space-y-4">
-                    <div id="renderStatus" class="text-center text-gray-600 mb-4">
-                        Initializing render pipeline...
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-4">
-                        <div id="renderBar" class="bg-gradient-to-r from-blue-500 to-purple-500 h-4 rounded-full transition-all" style="width: 0%"></div>
-                    </div>
-                    <div id="renderLogs" class="font-mono text-xs text-gray-600 space-y-1">
-                        <!-- Render logs will appear here -->
-                    </div>
-                </div>
-            </div>
-
-            <div id="videoCard" class="hidden">
-                <div class="max-w-3xl mx-auto">
-                    <div class="aspect-video bg-gray-900 rounded-lg overflow-hidden mb-4 relative">
-                        <video id="renderedVideo" class="w-full h-full" controls loop muted>
-                            <source src="assets/hvsp_ready.mp4" type="video/mp4">
-                            Your browser does not support video playback.
-                        </video>
-                        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 hover:bg-opacity-30 transition-all cursor-pointer" id="playOverlay">
-                            <svg class="w-20 h-20 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <p class="text-sm text-gray-600 mb-4 text-center">
-                        Auto-generated from your inputs. Voiceover optional in webinar. <span class="font-semibold">(Illustrative; results vary.)</span>
-                    </p>
-                    <div class="flex justify-center gap-4">
-                        <button id="btnDownloadVideo" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                            </svg>
-                            Download
-                        </button>
-                        <button id="btnCopyLink" class="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-semibold transition-all flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"/>
-                                <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"/>
-                            </svg>
-                            Copy Link
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </div>
-
-    <!-- Bottom Sticky CTA -->
-    <div id="bottomCTA" class="hidden fixed bottom-0 left-0 right-0 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 shadow-2xl z-40">
-        <div class="container mx-auto px-4 flex items-center justify-between flex-wrap gap-4">
-            <div>
-                <p class="font-semibold text-lg">First step: GrowthMap (₹499, refundable)</p>
-                <p class="text-sm text-blue-100">Screens for seriousness • bonus items on call</p>
-            </div>
-            <button id="btnBookGrowthMap" class="px-6 py-3 bg-white text-blue-600 hover:bg-blue-50 rounded-lg font-bold transition-all shadow-lg">
-                Book GrowthMap →
-            </button>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-300 py-8 mt-16">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div class="text-sm">
-                    <p class="text-gray-400">Proof shown is illustrative; results vary. Roadmap ≠ guarantee.</p>
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8 pb-24">
+
+        <!-- Section: Engine 1 - ASP via AI Twin -->
+        <section id="engine1" class="mb-12">
+            <div class="section-header">
+                <h2 class="section-title">Engine 1: ASP via AI Twin</h2>
+                <p class="section-subtitle">The "Vehicle" — 80/20 Value-Pitch Sales Presentation Generator</p>
+            </div>
+
+            <div class="card">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-4 text-white">Presentation Inputs</h3>
+                        <form id="aspForm" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Niche/ICP</label>
+                                <select id="nicheSelect" class="input-field">
+                                    <option value="">Select niche...</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Your Offer</label>
+                                <input type="text" id="offerInput" class="input-field" placeholder="e.g., High-Ticket B2B Consulting Program">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Ticket Size</label>
+                                <input type="text" id="ticketInput" class="input-field" placeholder="e.g., ₹3-10L">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Top 3 Pains (comma separated)</label>
+                                <textarea id="painsInput" class="input-field" rows="3" placeholder="Pipeline unpredictable hai, Selling nahi aati, Manual grinding"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Branding (Your Name/Brand)</label>
+                                <input type="text" id="brandingInput" class="input-field" placeholder="e.g., ScaleEdge Systems">
+                            </div>
+                            <button type="submit" class="btn-primary w-full">
+                                Generate AI Twin Presentation
+                            </button>
+                        </form>
+                    </div>
+
+                    <div id="slidePreviewContainer" class="hidden">
+                        <h3 class="text-lg font-semibold mb-4 text-white flex items-center justify-between">
+                            <span>Generated Slides (12)</span>
+                            <button id="downloadPdfBtn" class="text-sm px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded">
+                                📥 Download PDF
+                            </button>
+                        </h3>
+                        <div id="slideThumbnails" class="grid grid-cols-3 gap-3 mb-4">
+                            <!-- Thumbnails will be inserted here -->
+                        </div>
+                        <div class="text-xs text-gray-500 text-center">
+                            Click any slide to preview • Hover for notes
+                        </div>
+                    </div>
                 </div>
-                <div class="text-sm text-right">
-                    <p class="text-gray-300 font-semibold">₹13Cr+ ad spend (₹10Cr+ YouTube)</p>
-                    <p class="text-gray-400">₹53Cr+ high-ticket sales attributed • ~3.8x ROAS • CPL ₹179–₹210</p>
+            </div>
+        </section>
+
+        <!-- Section: Engine 2 - Traffic & Trust -->
+        <section id="engine2" class="mb-12">
+            <div class="section-header">
+                <h2 class="section-title">Engine 2: Traffic & Trust</h2>
+                <p class="section-subtitle">3 Traffic Sources + ProofLoop System</p>
+            </div>
+
+            <!-- Traffic Planning -->
+            <div class="card mb-6">
+                <h3 class="text-lg font-semibold mb-4 text-white">Traffic Planning</h3>
+                <div class="tabs mb-4">
+                    <button class="tab-btn active" data-tab="search">🔍 Search Harvest</button>
+                    <button class="tab-btn" data-tab="piggyback">📺 Piggyback</button>
+                    <button class="tab-btn" data-tab="partners">🤝 Partners</button>
+                </div>
+
+                <div id="tab-search" class="tab-content active">
+                    <p class="text-sm text-gray-400 mb-4">YouTube Search (High Intent Keywords)</p>
+                    <div id="searchKeywords" class="space-y-2">
+                        <!-- Keywords loaded from traffic.json -->
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium mb-2">Daily Budget</label>
+                        <input type="text" class="input-field" placeholder="₹5,000 - ₹25,000" value="₹10,000">
+                    </div>
+                </div>
+
+                <div id="tab-piggyback" class="tab-content">
+                    <p class="text-sm text-gray-400 mb-4">Channel Placements (Established Audiences)</p>
+                    <div id="piggybacking" class="space-y-2">
+                        <!-- Channels loaded from traffic.json -->
+                    </div>
+                </div>
+
+                <div id="tab-partners" class="tab-content">
+                    <p class="text-sm text-gray-400 mb-4">Community Taps (Partner Networks)</p>
+                    <div id="partners" class="space-y-2">
+                        <!-- Partners loaded from traffic.json -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- ProofLoop -->
+            <div class="card">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h3 class="text-lg font-semibold text-white">ProofLoop System</h3>
+                        <p class="text-sm text-gray-400">Convert Unqualified → Social Proof</p>
+                    </div>
+                    <button id="triggerProofLoopBtn" class="btn-primary">
+                        Trigger ProofLoop for Cohort
+                    </button>
+                </div>
+
+                <div id="proofWall" class="grid md:grid-cols-3 gap-4 mt-6">
+                    <!-- Testimonials loaded from proofloop.json -->
+                </div>
+
+                <div class="mt-4 text-center">
+                    <button id="exportProofBtn" class="text-sm px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded">
+                        Export Proof Wall (PNG)
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Engine 3 - ICE -->
+        <section id="engine3" class="mb-12">
+            <div class="section-header">
+                <h2 class="section-title">Engine 3: ICE (Integrated Client Engine)</h2>
+                <p class="section-subtitle">The "Machine" — Auto-Qualify, Nurture, Close, Collect</p>
+            </div>
+
+            <!-- Auto-Qualification -->
+            <div class="card mb-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-white">Auto-Qualification</h3>
+                    <button id="simulateApplicantsBtn" class="btn-primary">
+                        Simulate 20 Applicants
+                    </button>
+                </div>
+                <div id="applicantsList" class="space-y-2">
+                    <!-- Applicants will appear here -->
+                </div>
+            </div>
+
+            <!-- ICE Nurturing -->
+            <div class="card mb-6">
+                <h3 class="text-lg font-semibold mb-4 text-white">ICE Nurturing (Pre-Sold Pipeline)</h3>
+                <p class="text-sm text-gray-400 mb-4">Automated WhatsApp Drip Sequence</p>
+
+                <div id="dripTimeline" class="space-y-3">
+                    <!-- Timeline loaded from drip.json -->
+                </div>
+
+                <div class="mt-4">
+                    <button id="testDripBtn" class="btn-secondary">
+                        Send Test Drip to Me (WhatsApp)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Closing & Handoff -->
+            <div class="card mb-6">
+                <h3 class="text-lg font-semibold mb-4 text-white">Closing & Handoff</h3>
+                <p class="text-sm text-gray-400 mb-4">Generated Custom Scripts for Remote Closers</p>
+
+                <div class="bg-gray-900 border border-gray-700 rounded-lg p-4">
+                    <div class="flex items-start justify-between mb-2">
+                        <div class="text-xs text-gray-500">Generated by ICE for Remote Closer</div>
+                        <button class="text-xs px-2 py-1 bg-primary rounded" id="generateScriptBtn">
+                            Generate Script
+                        </button>
+                    </div>
+                    <div id="closingScript" class="text-sm text-gray-300 whitespace-pre-wrap">
+                        Click "Generate Script" to create personalized closing script...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Automation -->
+            <div class="card">
+                <h3 class="text-lg font-semibold mb-4 text-white">ICE Payment Automation</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="border-b border-gray-700">
+                            <tr class="text-left text-gray-400">
+                                <th class="pb-2">Candidate</th>
+                                <th class="pb-2">Stage</th>
+                                <th class="pb-2">Amount</th>
+                                <th class="pb-2">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paymentTable">
+                            <!-- Payment rows will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: System Dashboard -->
+        <section id="dashboard" class="mb-12">
+            <div class="section-header">
+                <h2 class="section-title">System Dashboard</h2>
+                <p class="section-subtitle">Real-time metrics across all engines</p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-4">
+                <div class="stat-card">
+                    <div class="stat-label">ASP Generated</div>
+                    <div class="stat-value" id="stat-asp">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Qualified Leads</div>
+                    <div class="stat-value" id="stat-qualified">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">In Nurture</div>
+                    <div class="stat-value" id="stat-nurture">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Proof Collected</div>
+                    <div class="stat-value" id="stat-proof">0</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer with Acceptance Counter -->
+    <footer class="fixed bottom-0 left-0 right-0 bg-panel border-t border-gray-800 py-3">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-between text-sm">
+                <div class="text-gray-400">
+                    <span class="inline-block w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                    Local Preview Mode
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-400">Acceptance Progress:</span>
+                    <div class="px-3 py-1 bg-gray-800 rounded-lg font-mono">
+                        <span id="acceptanceCounter">0</span>/10
+                    </div>
+                </div>
+                <div class="text-gray-500 text-xs">
+                    ScaleEdge ICE v1.0 • No external calls
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Presenter Notes Panel (Toggle with H) -->
-    <div id="presenterNotes" class="hidden fixed right-4 top-20 w-96 max-h-[80vh] bg-white rounded-xl shadow-2xl border-2 border-blue-500 overflow-hidden z-50">
-        <div class="bg-blue-600 text-white px-4 py-3 flex items-center justify-between">
-            <h4 class="font-bold">Presenter Notes (5 min)</h4>
-            <button id="closeNotes" class="text-white hover:text-gray-200">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                </svg>
-            </button>
-        </div>
-        <div class="p-4 overflow-y-auto max-h-[calc(80vh-60px)]">
-            <div class="space-y-4 text-sm">
-                <div>
-                    <p class="font-semibold text-blue-600">0:00–0:40 • Set the Scene</p>
-                    <p class="text-gray-700">Camera-off HVSP, 80/20 value-pitch, India-tuned, ₹53Cr dataset. Not generic AI — structured for high-value conversions.</p>
-                </div>
-                <div>
-                    <p class="font-semibold text-blue-600">0:40–1:40 • Fill Form</p>
-                    <p class="text-gray-700">Pick model/niche, language=tone, pains, CTA ₹499 refundable. Or use demo preset for quick flow.</p>
-                </div>
-                <div>
-                    <p class="font-semibold text-blue-600">1:40–3:00 • Generate</p>
-                    <p class="text-gray-700">Call out logs: cluster match, 80/20, doctor-frame, micro-proof chips with disclaimer. Watch the believability engine.</p>
-                </div>
-                <div>
-                    <p class="font-semibold text-blue-600">3:00–4:10 • Slides Preview</p>
-                    <p class="text-gray-700">Show 12 slides; point at "Generic AI ≠ Our Engine" (Structure/Balance/Data). Emphasize India-first training.</p>
-                </div>
-                <div>
-                    <p class="font-semibold text-blue-600">4:10–4:40 • Render Video</p>
-                    <p class="text-gray-700">Progress → ready card; mention "voiceover optional for webinar." Download available.</p>
-                </div>
-                <div>
-                    <p class="font-semibold text-blue-600">4:40–5:00 • CTA</p>
-                    <p class="text-gray-700">GrowthMap ₹499 refundable, "Not a course — 3-Month Consulting + 9 AI Agents System," up to 90% automation.</p>
-                </div>
+    <!-- Modal: Slide Preview -->
+    <div id="slideModal" class="modal">
+        <div class="modal-content max-w-4xl">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xl font-semibold" id="slideModalTitle">Slide Preview</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div id="slideModalBody" class="bg-gray-900 rounded-lg aspect-video flex items-center justify-center">
+                <!-- Slide content here -->
+            </div>
+            <div id="slideModalNotes" class="mt-4 p-4 bg-gray-900 rounded-lg text-sm text-gray-400">
+                <!-- Speaker notes here -->
             </div>
         </div>
     </div>
 
-    <!-- Slide Modal -->
-    <div id="slideModal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div class="sticky top-0 bg-white border-b px-6 py-4 flex items-center justify-between">
-                <h3 id="modalSlideTitle" class="text-xl font-bold">Slide Title</h3>
-                <button id="closeModal" class="text-gray-500 hover:text-gray-700">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                    </svg>
-                </button>
-            </div>
-            <div class="p-6">
-                <div id="modalSlideContent" class="mb-6">
-                    <!-- Slide content will be shown here -->
-                </div>
-                <div class="bg-blue-50 border-l-4 border-blue-500 p-4">
-                    <p class="text-sm font-semibold text-blue-700 mb-2">Presenter Notes:</p>
-                    <p id="modalSlideNotes" class="text-sm text-gray-700">
-                        <!-- Presenter notes will be shown here -->
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Toast Notification -->
-    <div id="toast" class="hidden fixed bottom-24 right-4 bg-gray-900 text-white px-6 py-3 rounded-lg shadow-xl z-50 transition-all">
-        <p id="toastMessage"></p>
-    </div>
-
-    <!-- GrowthMap Modal -->
-    <div id="growthMapModal" class="hidden fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4">
-        <div class="bg-white rounded-xl max-w-2xl w-full p-8">
-            <h3 class="text-2xl font-bold mb-4">GrowthMap Session (₹499)</h3>
-            <p class="text-gray-700 mb-4">60-minute deep-dive roadmap session • Refundable deposit screens for seriousness</p>
-            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
-                <p class="text-sm text-blue-800">
-                    <strong>Doctor-frame:</strong> Hum pehle screen karte hain — fit hue to aage chalte hain, warna clear path batate hain. No hard sell.
-                </p>
+    <!-- Modal: Knowledge Base -->
+    <div id="knowledgeModal" class="modal">
+        <div class="modal-content max-w-3xl">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xl font-semibold">Knowledge Base</h3>
+                <button class="modal-close">&times;</button>
             </div>
             <div class="space-y-4">
-                <p class="text-sm text-gray-600">In the actual app, this would link to your calendar. For demo purposes, this is a placeholder.</p>
-                <input type="text" id="growthMapCalendar" placeholder="https://cal.example.com/growthmap" class="w-full px-4 py-2 border border-gray-300 rounded-lg" readonly>
+                <div class="bg-gray-900 rounded-lg p-4">
+                    <h4 class="font-semibold mb-2 text-primary">What is ICE?</h4>
+                    <p class="text-sm text-gray-400">Integrated Client Engine — A complete system to acquire high-ticket clients without manual grinding. Three engines work together: ASP (Vehicle), Traffic+Trust (Fuel), ICE (Machine).</p>
+                </div>
+                <div class="bg-gray-900 rounded-lg p-4">
+                    <h4 class="font-semibold mb-2 text-primary">Engine Flow</h4>
+                    <p class="text-sm text-gray-400">
+                        1. Traffic → Watch AI Twin (ASP)<br>
+                        2. High-Intent → Apply<br>
+                        3. Auto-Qualify → ICE Nurture (Qualified) or ProofLoop (Unqualified)<br>
+                        4. Pre-Sold → Call → Close<br>
+                        5. Automated Payment Collection
+                    </p>
+                </div>
+                <div class="bg-gray-900 rounded-lg p-4">
+                    <h4 class="font-semibold mb-2 text-primary">Why Hinglish?</h4>
+                    <p class="text-sm text-gray-400">India-first approach. Natural language for ICP who thinks: "Pipeline unpredictable hai", "Selling nahi aati". Creates instant relatability and trust.</p>
+                </div>
             </div>
-            <div class="mt-6 flex justify-end gap-4">
-                <button id="closeGrowthMapModal" class="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-semibold transition-all">
-                    Close
-                </button>
-                <button class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all">
-                    Open Calendar →
+        </div>
+    </div>
+
+    <!-- Modal: EventLog -->
+    <div id="eventLogModal" class="modal">
+        <div class="modal-content max-w-4xl">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xl font-semibold">EventLog</h3>
+                <div class="flex items-center space-x-2">
+                    <button id="clearLogBtn" class="text-sm px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded">Clear</button>
+                    <button class="modal-close">&times;</button>
+                </div>
+            </div>
+            <div id="eventLogContent" class="bg-gray-900 rounded-lg p-4 max-h-96 overflow-y-auto font-mono text-xs space-y-1">
+                <!-- Log entries here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Connections -->
+    <div id="connectionsModal" class="modal">
+        <div class="modal-content max-w-2xl">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xl font-semibold">Connections</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="space-y-4">
+                <div class="bg-yellow-900/20 border border-yellow-700 rounded-lg p-4">
+                    <div class="flex items-start space-x-3">
+                        <span class="text-2xl">⚠️</span>
+                        <div>
+                            <h4 class="font-semibold text-yellow-500 mb-1">Local Preview Mode</h4>
+                            <p class="text-sm text-gray-400">You are viewing simulated data. Real WhatsApp messages, payment gateway integration, and AI API calls require proper setup.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-3 bg-gray-900 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center">💬</div>
+                            <div>
+                                <div class="text-sm font-medium">WhatsApp Business API</div>
+                                <div class="text-xs text-gray-500">Simulated Connection</div>
+                            </div>
+                        </div>
+                        <span class="px-2 py-1 bg-gray-700 text-xs rounded">Preview</span>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 bg-gray-900 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center">💳</div>
+                            <div>
+                                <div class="text-sm font-medium">Payment Gateway</div>
+                                <div class="text-xs text-gray-500">Simulated Connection</div>
+                            </div>
+                        </div>
+                        <span class="px-2 py-1 bg-gray-700 text-xs rounded">Preview</span>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 bg-gray-900 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center">🤖</div>
+                            <div>
+                                <div class="text-sm font-medium">AI API (Slide Generation)</div>
+                                <div class="text-xs text-gray-500">Simulated Connection</div>
+                            </div>
+                        </div>
+                        <span class="px-2 py-1 bg-gray-700 text-xs rounded">Preview</span>
+                    </div>
+                </div>
+
+                <div class="text-xs text-gray-500 text-center pt-4 border-t border-gray-800">
+                    All features are functional in preview mode with local data only.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: ProofLoop Feedback -->
+    <div id="proofFeedbackModal" class="modal">
+        <div class="modal-content max-w-2xl">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-xl font-semibold">Genuine Content Feedback</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="space-y-4">
+                <p class="text-sm text-gray-400">Help us improve and get your exclusive bonus! Rate your experience:</p>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2">Rating</label>
+                    <div class="flex space-x-2" id="starRating">
+                        <button class="star text-2xl hover:text-yellow-500 transition" data-rating="1">⭐</button>
+                        <button class="star text-2xl hover:text-yellow-500 transition" data-rating="2">⭐</button>
+                        <button class="star text-2xl hover:text-yellow-500 transition" data-rating="3">⭐</button>
+                        <button class="star text-2xl hover:text-yellow-500 transition" data-rating="4">⭐</button>
+                        <button class="star text-2xl hover:text-yellow-500 transition" data-rating="5">⭐</button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2">Written Feedback</label>
+                    <textarea id="feedbackText" class="input-field" rows="4" placeholder="What did you find most valuable?"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium mb-2">Video/Voice Note (Optional)</label>
+                    <div class="flex space-x-2">
+                        <button id="recordVideoBtn" class="btn-secondary flex-1">📹 Record Video</button>
+                        <button id="recordVoiceBtn" class="btn-secondary flex-1">🎤 Record Voice</button>
+                    </div>
+                    <div id="recordingStatus" class="text-xs text-gray-500 mt-2"></div>
+                </div>
+
+                <button id="submitFeedbackBtn" class="btn-primary w-full">
+                    Submit & Get Bonus
                 </button>
             </div>
         </div>
     </div>
 
+    <!-- Scripts -->
     <script type="module" src="js/app.js"></script>
 </body>
 </html>

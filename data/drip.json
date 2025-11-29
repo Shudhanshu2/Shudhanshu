@@ -1,0 +1,72 @@
+[
+  {
+    "timing": "T-72h",
+    "title": "Confirmation & What to Expect",
+    "message": "Hey [Name]! 👋\n\nCall confirmed for [Date] at [Time].\n\nQuick heads-up on agenda:\n1️⃣ Your current situation deep-dive\n2️⃣ Fit check (honest both ways)\n3️⃣ Clear next steps\n\nNo pressure selling. Doctor-frame approach.\n\nQuestions before the call? Reply here.",
+    "type": "WhatsApp",
+    "trigger": "application_accepted"
+  },
+  {
+    "timing": "T-48h",
+    "title": "Pre-Call Resource",
+    "message": "Quick value drop before our call:\n\n📎 Attached: \"3 Pipeline Mistakes costing you ₹5L+/month\"\n\nRead this before we talk. Will reference these in our conversation.\n\n- [Your Name]",
+    "type": "WhatsApp",
+    "trigger": "time_based"
+  },
+  {
+    "timing": "T-24h",
+    "title": "Preparation Reminder",
+    "message": "Reminder: Call tomorrow at [Time] ⏰\n\nQuick prep (5 min):\n✅ Revenue target for next 90 days?\n✅ Current biggest bottleneck?\n✅ Ideal scenario (dream outcome)?\n\nCome prepared. Let's make it count. 💪",
+    "type": "WhatsApp",
+    "trigger": "time_based"
+  },
+  {
+    "timing": "T-12h",
+    "title": "Case Study Share",
+    "message": "Since you're in [Niche], thought you'd find this relevant:\n\n📹 Video: How [Similar Client] went from [Before] to [After] in 60 days\n\n[Link]\n\nSee you on the call tomorrow!",
+    "type": "WhatsApp",
+    "trigger": "time_based"
+  },
+  {
+    "timing": "T-2h",
+    "title": "Final Reminder",
+    "message": "Final reminder: Call in 2 hours ⏰\n\n📅 Calendar: [Link]\n📞 Join: [Link]\n\nOn time aana - I value your time and mine both.\n\nSee you soon! 👍",
+    "type": "WhatsApp",
+    "trigger": "time_based"
+  },
+  {
+    "timing": "T-10m",
+    "title": "Call Starting Soon",
+    "message": "Starting in 10 minutes! 🚀\n\nJoin link: [Link]\n\nSee you there.",
+    "type": "WhatsApp",
+    "trigger": "time_based"
+  },
+  {
+    "timing": "T+2h (No Show)",
+    "title": "Missed Call Follow-up",
+    "message": "Hey [Name],\n\nMissed you on the call today. No worries - life happens.\n\nStill interested? Reply \"YES\" and I'll send a reschedule link.\n\nIf not a fit right now, all good. No hard feelings. 🙏",
+    "type": "WhatsApp",
+    "trigger": "no_show"
+  },
+  {
+    "timing": "T+1h (Post Call - Interested)",
+    "title": "Post-Call Next Steps",
+    "message": "Great talking to you today! 💯\n\nNext steps:\n1️⃣ Review proposal (attached)\n2️⃣ Token payment link: [Link]\n3️⃣ Setup call within 48h of payment\n\nQuestions? Reply here.\n\nLet's build this! 🚀",
+    "type": "WhatsApp",
+    "trigger": "call_completed_interested"
+  },
+  {
+    "timing": "T+24h (Token Paid)",
+    "title": "Welcome & Onboarding",
+    "message": "Token received! Welcome aboard. 🎉\n\nOnboarding starts [Date].\n\nIn the meantime:\n📎 Access onboarding doc: [Link]\n📅 Book setup call: [Link]\n\nExcited to work together!",
+    "type": "WhatsApp",
+    "trigger": "token_payment_received"
+  },
+  {
+    "timing": "T+48h (Balance Due Reminder)",
+    "title": "Balance Payment Reminder",
+    "message": "Quick reminder:\n\nBalance payment due: ₹[Amount]\nDue by: [Date]\n\nPayment link: [Link]\n\nOnce cleared, we kick off immediately. Let me know if any questions!",
+    "type": "WhatsApp",
+    "trigger": "balance_payment_pending"
+  }
+]
