@@ -1,0 +1,24 @@
+{
+  "setup": {
+    "icp": "B2B consultants & coaches struggling with unpredictable pipeline",
+    "niche": "b2b_growth_consultant",
+    "offer": "90-Day Predictable Pipeline System",
+    "ticket": "125000",
+    "salesModel": "retainer",
+    "pains": [
+      "Pipeline unpredictable",
+      "Lead qualify nahi hote",
+      "Long sales cycles",
+      "Can't scale beyond referrals"
+    ],
+    "brandColor": "#DC2626",
+    "logo": null,
+    "logoObjectURL": null,
+    "language": "hinglish",
+    "tone": "Doctor-frame: Accept/Reject",
+    "corePromise": "Predictable ₹5-7L/month pipeline in 90 days",
+    "internalOutcome": "Freedom from daily firefighting, systemized client acquisition",
+    "ctaType": "GrowthMap (₹499 refundable) - Seriousness screen",
+    "calendarLink": "https://cal.scaleedge.io/growthmap"
+  }
+}

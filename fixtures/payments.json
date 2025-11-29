@@ -1,0 +1,58 @@
+{
+  "messages": [
+    {
+      "id": "pay_1",
+      "timing": "T+5min",
+      "label": "Immediate Follow-up",
+      "template": "Hey {name}, great call just now! 🎉\n\nAs discussed, here's your payment link:\n{payment_link}\n\nAmount: ₹{amount} (incl GST)\n\nOnce done, we kick off Monday. First milestone: ICE Gate setup in 7 days.\n\nAny Qs, just ping.\n\n- {your_name}",
+      "status": "pending"
+    },
+    {
+      "id": "pay_2",
+      "timing": "T+2hours",
+      "label": "Gentle Reminder",
+      "template": "{name}, just bumping this up in case it got buried:\n\nPayment link: {payment_link}\nAmount: ₹{amount}\n\nOnce cleared, I'll send onboarding calendar + Slack invite.\n\nLet me know if anything's unclear!\n\n- {your_name}",
+      "status": "pending"
+    },
+    {
+      "id": "pay_3",
+      "timing": "T+24hours",
+      "label": "Urgency Nudge",
+      "template": "{name}, checking in.\n\nStill interested? Your slot is reserved till EOD tomorrow.\n\nAfter that, I'll need to roll it to the waitlist (3 people already waiting).\n\nIf you're in, lock it now: {payment_link}\n\nIf timing's off, no worries - let me know and we can reconnect later.\n\nYour call.\n\n- {your_name}",
+      "status": "pending"
+    }
+  ],
+  "states": [
+    {
+      "state": "pending",
+      "label": "Payment Pending",
+      "color": "yellow"
+    },
+    {
+      "state": "token",
+      "label": "Token Received",
+      "color": "blue"
+    },
+    {
+      "state": "partial",
+      "label": "Partial Payment",
+      "color": "orange"
+    },
+    {
+      "state": "paid",
+      "label": "Paid in Full",
+      "color": "green"
+    },
+    {
+      "state": "lost",
+      "label": "Lost/No Response",
+      "color": "red"
+    }
+  ],
+  "personalization_vars": {
+    "{name}": "Client first name",
+    "{amount}": "Total amount with GST",
+    "{payment_link}": "Razorpay/Stripe payment link",
+    "{your_name}": "Your name"
+  }
+}

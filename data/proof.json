@@ -1,0 +1,90 @@
+[
+  {
+    "id": "proof_rohit",
+    "name": "Rohit K.",
+    "company": "GrowthLabs Consulting",
+    "avatar_initials": "RK",
+    "avatar_color": "#3B82F6",
+    "headline": "₹2Cr → ₹8Cr in 18 months",
+    "blurb": "Pipeline unpredictable se predictable. ICE Nurturing automated pre-selling. Now closing 6-8 clients/month vs 2-3 pehle.",
+    "metric": "4x revenue growth",
+    "disclaimer": true
+  },
+  {
+    "id": "proof_priya",
+    "name": "Priya M.",
+    "company": "CareerPath Coaching",
+    "avatar_initials": "PM",
+    "avatar_color": "#8B5CF6",
+    "headline": "₹50k/month → ₹3L/month consistent",
+    "blurb": "Premium positioning fix ho gaya. Gate filters tire-kickers. Drip pre-sells. Calendar consistently full with pre-sold calls.",
+    "metric": "6x revenue in 90 days",
+    "disclaimer": true
+  },
+  {
+    "id": "proof_vikram",
+    "name": "Vikram S.",
+    "company": "TechAdvise Solutions",
+    "avatar_initials": "VS",
+    "avatar_color": "#F97316",
+    "headline": "CAC ₹80k → ₹35k",
+    "blurb": "Inbound engine built with Search Harvest + Piggyback. ProofWall converting cold traffic. Close rate doubled.",
+    "metric": "2.3x CAC reduction",
+    "disclaimer": true
+  },
+  {
+    "id": "proof_arun",
+    "name": "Arun P.",
+    "company": "BizGrowth Pro",
+    "avatar_initials": "AP",
+    "avatar_color": "#10B981",
+    "headline": "One-off projects → 12-month retainers",
+    "blurb": "Model shift to retainer. ICE Payment Automation handles follow-ups. LTV increased 5x. Retention 80%+.",
+    "metric": "5x LTV increase",
+    "disclaimer": true
+  },
+  {
+    "id": "proof_meera",
+    "name": "Meera D.",
+    "company": "FinPlan Advisors",
+    "avatar_initials": "MD",
+    "avatar_color": "#EC4899",
+    "headline": "₹1.2Cr AUM added in 6 months",
+    "blurb": "Trust barrier broken with ProofLoop. Automated testimonial collection + wall. Traffic Engine brought qualified HNI leads.",
+    "metric": "₹1.2Cr AUM added",
+    "disclaimer": true
+  },
+  {
+    "id": "proof_karan",
+    "name": "Karan J.",
+    "company": "FitPro Coaching",
+    "avatar_initials": "KJ",
+    "avatar_color": "#EF4444",
+    "headline": "₹15k packages → ₹75k programs",
+    "blurb": "Premium positioning with doctor-frame. Gate filters serious clients. Drip builds belief. Now selling 3-month programs vs 1-month pehle.",
+    "metric": "5x avg deal size",
+    "disclaimer": true
+  },
+  {
+    "id": "proof_anjali",
+    "name": "Anjali R.",
+    "company": "EduPath Consultants",
+    "avatar_initials": "AR",
+    "avatar_color": "#6366F1",
+    "headline": "Seasonal → Year-round revenue",
+    "blurb": "Traffic Engine diversified lead sources. Partner Taps with schools. ProofLoop automated referrals. No more seasonal panic.",
+    "metric": "12-month consistent revenue",
+    "disclaimer": true
+  },
+  {
+    "id": "proof_sameer",
+    "name": "Sameer T.",
+    "company": "PropertyWise Consulting",
+    "avatar_initials": "ST",
+    "avatar_color": "#14B8A6",
+    "headline": "Commission → Consulting fees",
+    "blurb": "Model shift from commission to upfront consulting fees. ICE setup positioned as premium service. Revenue predictable now.",
+    "metric": "Predictable revenue model",
+    "disclaimer": true
+  }
+]

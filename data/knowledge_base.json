@@ -1,0 +1,149 @@
+{
+  "note": "Internal ACE/ICE knowledge base for closing script generation",
+  "folders": [
+    {
+      "id": "scripts",
+      "name": "Scripts & Templates",
+      "items": [
+        {
+          "id": "script_opener_001",
+          "title": "Diagnostic Frame Opener",
+          "content": "Before we start, quick expectation-set: this isn't a pitch call. It's diagnostic. I'll ask questions, you share context, and we'll both know if this is a fit or not. Sound good?",
+          "tags": ["opener", "expectation-setting"]
+        },
+        {
+          "id": "script_pain_001",
+          "title": "Pipeline Unpredictable - Dig",
+          "content": "Walk me through your current client acquisition. Where does it start, where does it break? And what's the real cost of this unpredictability - not just money, but stress, team morale?",
+          "tags": ["pain", "pipeline", "discovery"]
+        },
+        {
+          "id": "script_budget_001",
+          "title": "Budget Anchor - ROI Math",
+          "content": "Let's math it out: if we add even 2-3 clients at your ticket size of ₹{ticket}, ROI is {roi_multiple}x. So the question isn't 'can I afford this?' - it's 'can I afford NOT to fix the pipeline?'",
+          "tags": ["budget", "roi", "objection-handling"]
+        }
+      ]
+    },
+    {
+      "id": "objections",
+      "name": "Objection Handlers",
+      "items": [
+        {
+          "id": "obj_budget_tight",
+          "title": "Budget Tight",
+          "content": "I hear you. Let me ask: is it *tight*, or is it *not a priority*? Because if pipeline is the bottleneck, this should be priority #1, no?",
+          "tags": ["budget", "objection"]
+        },
+        {
+          "id": "obj_need_to_think",
+          "title": "Need to Think",
+          "content": "Totally fair. What specifically do you need to think about? Budget, timing, fit? And if you think for 2 weeks, what will have changed?",
+          "tags": ["delay", "objection"]
+        },
+        {
+          "id": "obj_already_tried",
+          "title": "Already Tried Coaching",
+          "content": "Got it. What didn't work last time? Strategy or execution? Here's the difference: most coaches give you a plan. We give you plan + AI Agents System to execute it.",
+          "tags": ["prior-experience", "objection"]
+        },
+        {
+          "id": "obj_guarantee",
+          "title": "Results Guarantee",
+          "content": "I can't guarantee results - no ethical consultant can. What I *can* guarantee: you'll have working ICE setup, funnel live, qualified leads. Closing them is on you. Fair?",
+          "tags": ["guarantee", "objection"]
+        }
+      ]
+    },
+    {
+      "id": "closes",
+      "name": "Closing Techniques",
+      "items": [
+        {
+          "id": "close_assumptive",
+          "title": "Assumptive Close",
+          "content": "Alright, so here's next step: I'll send you the agreement. Review, sign, and we kick off next week. First milestone: ICE gate setup in 7 days. You in?",
+          "tags": ["close", "assumptive"]
+        },
+        {
+          "id": "close_choice",
+          "title": "Choice Close",
+          "content": "Two ways forward: (1) Full ICE setup (₹{full_price}), or (2) Just gate + drip (₹{lower_price}), you handle rest. Which makes more sense?",
+          "tags": ["close", "choice"]
+        },
+        {
+          "id": "close_urgency",
+          "title": "Urgency Close",
+          "content": "I'm holding your slot till EOD Friday. After that, it rolls to next prospect. If you're serious, now's the time. If not, we can reconnect later. Your call.",
+          "tags": ["close", "urgency"]
+        }
+      ]
+    },
+    {
+      "id": "ice_specific",
+      "name": "ICE-Specific Knowledge",
+      "items": [
+        {
+          "id": "ice_nurturing_explainer",
+          "title": "ICE Nurturing Explained",
+          "content": "ICE Nurturing is WhatsApp drip that pre-sells before the call. By the time they book, they're 70% convinced. It's not 'follow-up' - it's strategic value delivery + belief building.",
+          "tags": ["ice", "nurturing", "drip"]
+        },
+        {
+          "id": "ice_qualification_explainer",
+          "title": "ICE Auto-Qualification",
+          "content": "ICE scores applicants on PAIN/BUDGET/TIMELINE/FIT. Threshold is 70. Above that = qualified. Below = nurture or reject. It's doctor-frame: we accept/reject, not chase everyone.",
+          "tags": ["ice", "qualification", "scoring"]
+        },
+        {
+          "id": "ice_payment_automation",
+          "title": "ICE Payment Automation",
+          "content": "Post-call payment follow-ups: (1) Immediate (5 min), (2) Reminder (2 hours), (3) Urgency (24 hours). Automated, personalized, includes payment link. Closes deals while you sleep.",
+          "tags": ["ice", "payment", "automation"]
+        }
+      ]
+    },
+    {
+      "id": "proofloop",
+      "name": "ProofLoop Knowledge",
+      "items": [
+        {
+          "id": "proofloop_explainer",
+          "title": "ProofLoop System",
+          "content": "ProofLoop turns every client into proof asset: Feedback → Bonus → Wall → Ads. Drip automates collection. Bonus incentivizes quality. Wall compounds trust. Part of Traffic & Trust Engine.",
+          "tags": ["proofloop", "proof", "traffic"]
+        },
+        {
+          "id": "proofloop_bonus_strategy",
+          "title": "Bonus Strategy",
+          "content": "Offer high-value bonus (₹2-5k perceived value) for 5-star testimonial. Instant delivery. Makes asking easy, receiving exciting. Testimonial = social proof asset worth 10x bonus cost.",
+          "tags": ["proofloop", "bonus", "incentive"]
+        }
+      ]
+    },
+    {
+      "id": "traffic_engine",
+      "name": "Traffic Engine Knowledge",
+      "items": [
+        {
+          "id": "traffic_search_harvest",
+          "title": "Search Harvest",
+          "content": "Capture high-intent searches on Google/YouTube/LinkedIn. Keyword: '[problem] solution', '[niche] consultant', etc. Gate = HVCO (₹499 GrowthMap). Pre-qualified traffic.",
+          "tags": ["traffic", "search", "intent"]
+        },
+        {
+          "id": "traffic_piggyback",
+          "title": "Piggyback Strategy",
+          "content": "Target competitor audiences. Example: 'If you tried [competitor] and it didn't work, here's why...' Differentiation messaging. Retargeting on proof content.",
+          "tags": ["traffic", "piggyback", "competitor"]
+        },
+        {
+          "id": "traffic_partner_taps",
+          "title": "Partner Taps",
+          "content": "Collaborate with adjacent service providers. Example: CAs refer clients to business coaches, get 10% commission. Warm intros, pre-qualified, high trust.",
+          "tags": ["traffic", "partnership", "referral"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,183 @@
+[
+  {
+    "id": "q_pain_1",
+    "question": "Aapki sabse badi pipeline problem kya hai? (Your biggest pipeline problem?)",
+    "type": "textarea",
+    "weight": 3,
+    "category": "pain",
+    "niches": ["b2b_growth_consultant", "business_coach", "marketing_consultant"],
+    "scoring_map": {
+      "keywords": ["pipeline", "leads", "unpredictable", "inconsistent", "struggle"],
+      "high_pain": ["bahut struggle", "0-3L", "no system", "completely stuck"],
+      "low_pain": ["already stable", "10L+", "working fine", "just optimizing"]
+    }
+  },
+  {
+    "id": "q_pain_2",
+    "question": "Premium clients milne mein kya dikkat aa rahi hai? (What's blocking premium clients?)",
+    "type": "textarea",
+    "weight": 3,
+    "category": "pain",
+    "niches": ["career_coach", "health_wellness_coach", "relationship_coach"],
+    "scoring_map": {
+      "keywords": ["tire-kickers", "price pushback", "low quality", "bargaining"],
+      "high_pain": ["sirf cheap clients", "discount maangte", "serious nahi"],
+      "low_pain": ["clients good hai", "premium already", "no issue"]
+    }
+  },
+  {
+    "id": "q_pain_3",
+    "question": "Abhi revenue kitna predictable hai? (How predictable is revenue?)",
+    "type": "select",
+    "weight": 2,
+    "category": "pain",
+    "niches": ["*"],
+    "options": [
+      "Bilkul unpredictable - har month guessing",
+      "Thoda predictable - referrals se",
+      "Mostly predictable - repeat clients",
+      "Fully predictable - retainers/subscriptions"
+    ],
+    "scoring_map": {
+      "Bilkul unpredictable - har month guessing": 10,
+      "Thoda predictable - referrals se": 7,
+      "Mostly predictable - repeat clients": 4,
+      "Fully predictable - retainers/subscriptions": 1
+    }
+  },
+  {
+    "id": "q_budget_1",
+    "question": "Apna monthly revenue range kya hai? (Monthly revenue range?)",
+    "type": "select",
+    "weight": 3,
+    "category": "budget",
+    "niches": ["*"],
+    "options": [
+      "₹0 - ₹50k",
+      "₹50k - ₹1.5L",
+      "₹1.5L - ₹5L",
+      "₹5L - ₹15L",
+      "₹15L+"
+    ],
+    "scoring_map": {
+      "₹0 - ₹50k": 2,
+      "₹50k - ₹1.5L": 5,
+      "₹1.5L - ₹5L": 10,
+      "₹5L - ₹15L": 9,
+      "₹15L+": 8
+    }
+  },
+  {
+    "id": "q_budget_2",
+    "question": "Investment capacity for growth solutions? (6-12 month horizon)",
+    "type": "select",
+    "weight": 3,
+    "category": "budget",
+    "niches": ["*"],
+    "options": [
+      "₹0 - ₹50k (testing phase)",
+      "₹50k - ₹1.5L (moderate commitment)",
+      "₹1.5L - ₹5L (serious investment)",
+      "₹5L+ (aggressive growth mode)"
+    ],
+    "scoring_map": {
+      "₹0 - ₹50k (testing phase)": 3,
+      "₹50k - ₹1.5L (moderate commitment)": 6,
+      "₹1.5L - ₹5L (serious investment)": 10,
+      "₹5L+ (aggressive growth mode)": 10
+    }
+  },
+  {
+    "id": "q_timeline_1",
+    "question": "Aapko solution kab chahiye? (When do you need a solution?)",
+    "type": "select",
+    "weight": 2,
+    "category": "timeline",
+    "niches": ["*"],
+    "options": [
+      "This month (urgent)",
+      "Next 2-3 months",
+      "Next quarter (exploring)",
+      "No rush - just researching"
+    ],
+    "scoring_map": {
+      "This month (urgent)": 10,
+      "Next 2-3 months": 8,
+      "Next quarter (exploring)": 5,
+      "No rush - just researching": 2
+    }
+  },
+  {
+    "id": "q_timeline_2",
+    "question": "Kya aap abhi active implementation kar sakte ho? (Can you implement now?)",
+    "type": "select",
+    "weight": 2,
+    "category": "timeline",
+    "niches": ["*"],
+    "options": [
+      "Yes - time block ready",
+      "Yes - will make time",
+      "Maybe - other priorities bhi hain",
+      "No - just exploring options"
+    ],
+    "scoring_map": {
+      "Yes - time block ready": 10,
+      "Yes - will make time": 8,
+      "Maybe - other priorities bhi hain": 4,
+      "No - just exploring options": 1
+    }
+  },
+  {
+    "id": "q_fit_1",
+    "question": "Aap decision maker ho? (Are you the decision maker?)",
+    "type": "select",
+    "weight": 2,
+    "category": "fit",
+    "niches": ["*"],
+    "options": [
+      "Yes - I decide",
+      "Yes - but will discuss with partner/spouse",
+      "No - need approval from someone else",
+      "Not sure - exploring first"
+    ],
+    "scoring_map": {
+      "Yes - I decide": 10,
+      "Yes - but will discuss with partner/spouse": 7,
+      "No - need approval from someone else": 3,
+      "Not sure - exploring first": 2
+    }
+  },
+  {
+    "id": "q_fit_2",
+    "question": "Pehle koi coach/consultant try kiya? (Tried coaches before?)",
+    "type": "select",
+    "weight": 1,
+    "category": "fit",
+    "niches": ["*"],
+    "options": [
+      "No - first time",
+      "Yes - didn't work out",
+      "Yes - worked well, want more",
+      "Currently working with someone"
+    ],
+    "scoring_map": {
+      "No - first time": 6,
+      "Yes - didn't work out": 8,
+      "Yes - worked well, want more": 10,
+      "Currently working with someone": 2
+    }
+  },
+  {
+    "id": "q_fit_3",
+    "question": "Agar system mil jaye toh kya outcome chahiye? (Desired outcome if we solve this?)",
+    "type": "textarea",
+    "weight": 2,
+    "category": "fit",
+    "niches": ["*"],
+    "scoring_map": {
+      "keywords": ["predictable", "scale", "freedom", "automated", "consistent", "systemized"],
+      "high_intent": ["pipeline predictable", "scale beyond me", "client acquisition system"],
+      "low_intent": ["just trying", "dekhte hain", "not sure"]
+    }
+  }
+]

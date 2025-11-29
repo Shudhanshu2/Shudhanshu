@@ -1,0 +1,74 @@
+{
+  "library": [
+    {
+      "id": "bonus_001",
+      "title": "Advanced Closing Scripts Pack",
+      "value": "4997",
+      "displayValue": "₹4,997",
+      "description": "10 battle-tested closing scripts for high-ticket offers. Includes: Diagnostic openers, objection handlers (budget/timing/guarantee), assumptive closes, urgency closes, and follow-up templates.",
+      "trigger": "5_star_testimonial",
+      "deliveryMethod": "instant_download",
+      "fileUrl": "/bonuses/closing-scripts-pack.pdf",
+      "fileSize": "2.4 MB",
+      "pages": 24,
+      "format": "PDF"
+    },
+    {
+      "id": "bonus_002",
+      "title": "ICE Automation Templates",
+      "value": "2997",
+      "displayValue": "₹2,997",
+      "description": "Ready-to-use Zapier & Make.com templates for ICE automation. Includes: Gate to CRM sync, Drip sequencing, Payment follow-ups, ProofLoop triggers, EventLog to Sheets.",
+      "trigger": "5_star_video_testimonial",
+      "deliveryMethod": "email_link",
+      "fileUrl": "/bonuses/ice-automation-templates.zip",
+      "fileSize": "1.8 MB",
+      "includes": "5 Zapier zaps + 3 Make scenarios",
+      "format": "ZIP"
+    },
+    {
+      "id": "bonus_003",
+      "title": "Traffic Engine Playbook",
+      "value": "1997",
+      "displayValue": "₹1,997",
+      "description": "Complete guide to Search Harvest, Piggyback, Partner Taps. Includes: Keyword lists per niche, ad copy templates, competitor analysis framework, partnership scripts.",
+      "trigger": "any_testimonial",
+      "deliveryMethod": "instant_download",
+      "fileUrl": "/bonuses/traffic-engine-playbook.pdf",
+      "fileSize": "3.2 MB",
+      "pages": 42,
+      "format": "PDF"
+    },
+    {
+      "id": "bonus_004",
+      "title": "ProofWall Design Kit",
+      "value": "1497",
+      "displayValue": "₹1,497",
+      "description": "Canva templates for ProofWall exports. Includes: 5 testimonial card designs, 3 proof page layouts, social media templates, PDF export templates.",
+      "trigger": "5_star_testimonial",
+      "deliveryMethod": "canva_link",
+      "fileUrl": "https://canva.com/design/proofwall-kit",
+      "includes": "8 Canva templates",
+      "format": "Canva"
+    },
+    {
+      "id": "bonus_005",
+      "title": "ICE Setup Checklist",
+      "value": "497",
+      "displayValue": "₹497",
+      "description": "Step-by-step implementation checklist for ICE. Includes: Setup phase tasks, Gate builder checklist, Drip configuration steps, ProofLoop setup, Traffic Engine launch plan.",
+      "trigger": "any_testimonial",
+      "deliveryMethod": "instant_download",
+      "fileUrl": "/bonuses/ice-setup-checklist.pdf",
+      "fileSize": "0.8 MB",
+      "pages": 12,
+      "format": "PDF"
+    }
+  ],
+  "triggers": {
+    "any_testimonial": "Any testimonial (written or video, any rating)",
+    "5_star_testimonial": "5-star written testimonial",
+    "video_testimonial": "Video testimonial (any rating)",
+    "5_star_video_testimonial": "5-star video testimonial (highest value)"
+  }
+}

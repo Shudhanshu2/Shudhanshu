@@ -1,0 +1,50 @@
+{
+  "messages": [
+    {
+      "id": "drip_1",
+      "t": "T+5min",
+      "label": "Instant Confirmation",
+      "template_hi": "नमस्ते {name}! आपका application मिल गया। अगले 24 घंटे में review करेंगे। अगर qualify करते हो, तो slides + video भेजेंगे। - Team ScaleEdge",
+      "template_hinglish": "Hey {name}! Application mil gaya. Next 24 hours mein review karenge. Agar qualify karte ho, toh slides + video bhejenge. - Team ScaleEdge",
+      "template_en": "Hey {name}! Got your application. We'll review in next 24 hours. If you qualify, you'll get slides + video access. - Team ScaleEdge",
+      "provenance": "Auto-confirmation to set expectation",
+      "status": "queued"
+    },
+    {
+      "id": "drip_2",
+      "t": "T+1day",
+      "label": "Value Tip #1",
+      "template_hi": "{name}, quick tip: 'Discovery call' मत करो। 'Roadmap Session' करो। Frame shift = positioning shift। Accept/Reject power तुम्हारे पास, client ke nahi। - ScaleEdge",
+      "template_hinglish": "{name}, quick tip: 'Discovery call' mat karo. 'Roadmap Session' karo. Frame shift = positioning shift. Accept/Reject power tumhare paas, client ke nahi. Doctor-frame. - ScaleEdge",
+      "template_en": "{name}, quick tip: Don't do 'Discovery calls.' Do 'Roadmap Sessions.' Frame shift = positioning shift. You hold Accept/Reject power, not the client. Doctor-frame. - ScaleEdge",
+      "provenance": "Value delivery - positioning mindset",
+      "status": "queued"
+    },
+    {
+      "id": "drip_3",
+      "t": "T+2days",
+      "label": "Slides Access",
+      "template_hi": "{name}, आप qualify हो गए! यहाँ देखो ICE system कैसे काम करता है:\n\n📊 Slides: {slides_link}\n\nये camera-off presentation है। 12 slides, 80% value / 20% pitch। देखने के बाद बताओ thoughts। - ScaleEdge",
+      "template_hinglish": "{name}, you're qualified! Dekho ICE system kaise kaam karta:\n\n📊 Slides: {slides_link}\n\nYe camera-off presentation hai. 12 slides, 80% value / 20% pitch. Dekhne ke baad batao thoughts. - ScaleEdge",
+      "template_en": "{name}, you're qualified! Here's how the ICE system works:\n\n📊 Slides: {slides_link}\n\nThis is a camera-off presentation. 12 slides, 80% value / 20% pitch. Watch and let me know your thoughts. - ScaleEdge",
+      "provenance": "Slides delivery - AI Twin presentation",
+      "status": "sent"
+    },
+    {
+      "id": "drip_4",
+      "t": "T+4days",
+      "label": "Video Unlock",
+      "template_hi": "{name}, slides dekhe? Ab video unlocked:\n\n🎥 Video: {video_link}\n\nYe detailed walkthrough hai - Gate, Drip, ICE Nurturing, ProofLoop, Traffic Engine sab covered। Dekhke agar serious ho toh calendar link neeche hai। - ScaleEdge\n\n📅 {calendar_link}",
+      "template_hinglish": "{name}, slides dekhe? Video unlocked:\n\n🎥 Video: {video_link}\n\nDetailed walkthrough - Gate, Drip, ICE Nurturing, ProofLoop, Traffic Engine sab. Dekhke agar serious ho toh book karo:\n\n📅 {calendar_link}\n\n- ScaleEdge",
+      "template_en": "{name}, watched the slides? Video unlocked:\n\n🎥 Video: {video_link}\n\nDetailed walkthrough covering Gate, Drip, ICE Nurturing, ProofLoop, Traffic Engine. If you're serious, book here:\n\n📅 {calendar_link}\n\n- ScaleEdge",
+      "provenance": "Video unlock + booking CTA",
+      "status": "read"
+    }
+  ],
+  "personalization_vars": {
+    "{name}": "Applicant first name",
+    "{slides_link}": "Link to slide deck",
+    "{video_link}": "Link to AI Twin video",
+    "{calendar_link}": "Booking calendar URL"
+  }
+}

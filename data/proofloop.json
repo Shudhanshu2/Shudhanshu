@@ -1,0 +1,113 @@
+{
+  "config": {
+    "enabled": true,
+    "triggerDelay": 7,
+    "bonusTriggerRating": 5,
+    "wallConfig": {
+      "title": "Client Success Stories",
+      "subtitle": "Real results from the ScaleEdge ICE system",
+      "layout": "grid",
+      "cardsPerRow": 3,
+      "showRatings": true,
+      "showDates": true,
+      "showCompany": true
+    }
+  },
+  "feedback": [
+    {
+      "id": "feedback_001",
+      "name": "Rohit Kumar",
+      "company": "GrowthLabs Consulting",
+      "rating": 5,
+      "testimonial": "Pipeline completely transform ho gaya. Pehle har month guessing thi, ab predictable hai. ICE Nurturing ne pre-selling automate kar di.",
+      "program": "90-Day Scale System",
+      "dateReceived": "2024-01-15",
+      "bonusUnlocked": true,
+      "voiceNote": null
+    },
+    {
+      "id": "feedback_002",
+      "name": "Priya Sharma",
+      "company": "CareerPath Coaching",
+      "rating": 5,
+      "testimonial": "Best investment I made. ProofLoop alone is worth the price - now every client becomes a proof asset. Traffic Engine strategies working great.",
+      "program": "ICE + Traffic & Trust Bundle",
+      "dateReceived": "2024-01-22",
+      "bonusUnlocked": true,
+      "voiceNote": null
+    },
+    {
+      "id": "feedback_003",
+      "name": "Ankit Verma",
+      "company": "TechConsult Pro",
+      "rating": 4,
+      "testimonial": "Gate builder saved me weeks of work. Application form auto-generates, scoring happens automatically. Only thing I wish - more customization options.",
+      "program": "90-Day Scale System",
+      "dateReceived": "2024-02-03",
+      "bonusUnlocked": false,
+      "voiceNote": null
+    }
+  ],
+  "bonusLibrary": [
+    {
+      "id": "bonus_001",
+      "title": "Advanced Closing Scripts Pack",
+      "value": "₹4,997",
+      "description": "10 battle-tested closing scripts for high-ticket offers",
+      "trigger": "5_star_testimonial",
+      "deliveryMethod": "instant_download",
+      "fileUrl": "/bonuses/closing-scripts-pack.pdf"
+    },
+    {
+      "id": "bonus_002",
+      "title": "ICE Automation Templates",
+      "value": "₹2,997",
+      "description": "Ready-to-use Zapier/Make templates for ICE automation",
+      "trigger": "5_star_video_testimonial",
+      "deliveryMethod": "email_link",
+      "fileUrl": "/bonuses/ice-automation-templates.zip"
+    },
+    {
+      "id": "bonus_003",
+      "title": "Traffic Engine Playbook",
+      "value": "₹1,997",
+      "description": "Complete guide to Search Harvest, Piggyback, Partner Taps",
+      "trigger": "any_testimonial",
+      "deliveryMethod": "instant_download",
+      "fileUrl": "/bonuses/traffic-engine-playbook.pdf"
+    }
+  ],
+  "dripMessages": [
+    {
+      "id": "drip_1",
+      "day": 7,
+      "subject": "Quick win check 🎉",
+      "template": "Hey {name}! Quick win check - how's {program_name} treating you so far?\n\nWould love to hear what's working. Takes 60 seconds:\n{feedback_link}\n\n- Team ScaleEdge",
+      "status": "active"
+    },
+    {
+      "id": "drip_2",
+      "day": 14,
+      "subject": "Bonus unlock offer 💪",
+      "template": "{name}, saw great results from you!\n\nIf you drop a quick testimonial (written or video), I'll send you {bonus_title} ({bonus_value}) as a thank you.\n\nJust hit 'record' here:\n{feedback_link}\n\nDeal?",
+      "status": "active"
+    },
+    {
+      "id": "drip_3",
+      "day": 21,
+      "subject": "Your testimonial is LIVE 🔥",
+      "template": "{name}! Your testimonial is LIVE on our ProofWall 🔥\n\nCheck it out: {proofwall_link}\n\nYou're helping others make the decision to transform their business. Thank you!\n\nP.S. Your {bonus_title} is on the way 📬",
+      "status": "active"
+    }
+  ],
+  "copy": {
+    "feedbackButton": "Collect Feedback",
+    "wallTitle": "ProofWall",
+    "exportPNG": "Export PNG",
+    "exportPDF": "Export PDF",
+    "exportJSON": "Export JSON",
+    "addBonus": "Add Bonus Offer",
+    "previewDrip": "Preview Drip",
+    "sendDrip": "Send Drip Sequence"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "config": {
+    "enabled": true,
+    "triggerDelay": 7,
+    "bonusTriggerRating": 5,
+    "dripSchedule": [7, 14, 21],
+    "wallConfig": {
+      "title": "Client Success Stories - ScaleEdge ICE",
+      "subtitle": "Real results from coaches & consultants who implemented the Integrated Client Engine",
+      "layout": "grid",
+      "cardsPerRow": 3,
+      "showRatings": true,
+      "showDates": true,
+      "showCompany": true,
+      "disclaimer": "Results are illustrative and not typical. Individual results vary. Roadmap ≠ guarantee."
+    }
+  },
+  "sampleFeedback": [
+    {
+      "id": "feedback_demo_001",
+      "name": "Rohit Kumar",
+      "company": "GrowthLabs Consulting",
+      "rating": 5,
+      "testimonial": "Pipeline completely transform ho gaya. Pehle har month guessing thi, ab predictable hai. ICE Nurturing ne pre-selling automate kar di. Close rate doubled.",
+      "program": "90-Day Scale System",
+      "dateReceived": "2024-01-15",
+      "bonusUnlocked": true,
+      "bonusGiven": "Advanced Closing Scripts Pack",
+      "voiceNote": null
+    },
+    {
+      "id": "feedback_demo_002",
+      "name": "Priya Sharma",
+      "company": "CareerPath Coaching",
+      "rating": 5,
+      "testimonial": "Best investment I made this year. ProofLoop alone is worth the price - now every client becomes a proof asset. Traffic Engine strategies working great. Premium positioning finally fixed.",
+      "program": "ICE + Traffic & Trust Bundle",
+      "dateReceived": "2024-01-22",
+      "bonusUnlocked": true,
+      "bonusGiven": "Traffic Engine Playbook",
+      "voiceNote": null
+    },
+    {
+      "id": "feedback_demo_003",
+      "name": "Ankit Verma",
+      "company": "TechConsult Pro",
+      "rating": 4,
+      "testimonial": "Gate builder saved me weeks of work. Application form auto-generates, scoring happens automatically. Only thing I wish - more customization options in the question library.",
+      "program": "90-Day Scale System",
+      "dateReceived": "2024-02-03",
+      "bonusUnlocked": false,
+      "bonusGiven": null,
+      "voiceNote": null
+    }
+  ],
+  "dripMessages": [
+    {
+      "id": "proofloop_drip_1",
+      "day": 7,
+      "subject": "Quick win check 🎉",
+      "template": "Hey {name}! Quick win check - how's {program_name} treating you so far?\n\nWould love to hear what's working. Takes 60 seconds:\n{feedback_link}\n\n- Team ScaleEdge",
+      "status": "active",
+      "openRate": "68%",
+      "responseRate": "42%"
+    },
+    {
+      "id": "proofloop_drip_2",
+      "day": 14,
+      "subject": "Bonus unlock offer 💪",
+      "template": "{name}, saw great results from you!\n\nIf you drop a quick testimonial (written or video), I'll send you {bonus_title} ({bonus_value}) as a thank you.\n\nJust hit 'record' here:\n{feedback_link}\n\nDeal?",
+      "status": "active",
+      "openRate": "74%",
+      "responseRate": "56%"
+    },
+    {
+      "id": "proofloop_drip_3",
+      "day": 21,
+      "subject": "Your testimonial is LIVE 🔥",
+      "template": "{name}! Your testimonial is LIVE on our ProofWall 🔥\n\nCheck it out: {proofwall_link}\n\nYou're helping others make the decision to transform their business. Thank you!\n\nP.S. Your {bonus_title} is on the way 📬",
+      "status": "active",
+      "openRate": "82%",
+      "responseRate": "38%"
+    }
+  ],
+  "copyTemplates": {
+    "feedbackFormTitle": "Share Your Experience",
+    "feedbackFormSubtitle": "Help others decide - tell us about your ICE journey",
+    "nameLabel": "Your Name",
+    "companyLabel": "Company Name (optional)",
+    "ratingLabel": "How would you rate your experience?",
+    "testimonialLabel": "What changed for you?",
+    "voiceNoteLabel": "Record a voice note (optional)",
+    "submitButton": "Submit Feedback",
+    "thankYouMessage": "Thank you! Your bonus is on the way 🎉"
+  }
+}

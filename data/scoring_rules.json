@@ -1,0 +1,45 @@
+{
+  "weights": {
+    "pain": 0.4,
+    "budget": 0.3,
+    "timeline": 0.2,
+    "fit": 0.1
+  },
+  "pain_keywords": [
+    "pipeline",
+    "unpredictable",
+    "inconsistent",
+    "struggle",
+    "tire-kickers",
+    "no system",
+    "referrals only",
+    "stuck",
+    "plateau"
+  ],
+  "budget_ranges": {
+    "low": "₹0-₹50k",
+    "mid": "₹50k-₹1.5L",
+    "high": "₹1.5L+"
+  },
+  "disqualify_rules": {
+    "no_decision_maker": true,
+    "no_budget": true,
+    "no_timeline": false,
+    "already_working_with_competitor": false
+  },
+  "qualification_threshold": 70,
+  "top_picks_threshold": 75,
+  "auto_reject_threshold": 40,
+  "scoring_notes": {
+    "pain_multiplier": "If pain keywords match 3+, multiply pain score by 1.2",
+    "budget_floor": "If budget < ₹50k, cap total score at 60",
+    "urgency_bonus": "If timeline = 'This month', add +5 bonus points",
+    "decision_maker_required": "If not decision maker, cap score at 65"
+  },
+  "segment_labels": {
+    "hot": "Top Picks (Score ≥75)",
+    "warm": "Qualified (Score 60-74)",
+    "cold": "Nurture (Score 40-59)",
+    "reject": "Reject (Score <40)"
+  }
+}

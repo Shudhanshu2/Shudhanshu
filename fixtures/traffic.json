@@ -1,0 +1,153 @@
+{
+  "strategies": {
+    "search_harvest": {
+      "name": "Search Harvest",
+      "description": "Capture high-intent searches on Google, YouTube, LinkedIn",
+      "platforms": ["Google Ads", "YouTube Ads", "LinkedIn Ads"],
+      "keywords": {
+        "b2b_growth_consultant": [
+          "b2b lead generation consultant",
+          "pipeline management system",
+          "predictable revenue consultant",
+          "sales funnel consultant india",
+          "b2b sales consultant",
+          "how to get consistent clients consulting"
+        ],
+        "career_coach": [
+          "premium career coaching",
+          "executive career transition",
+          "career coach for professionals",
+          "how to attract premium coaching clients",
+          "career positioning consultant"
+        ],
+        "business_coach": [
+          "business growth consultant",
+          "how to scale coaching business",
+          "retainer model for coaches",
+          "business coach certification",
+          "coaching business automation"
+        ]
+      },
+      "adCopyTemplates": [
+        {
+          "headline": "Predictable Pipeline in 90 Days",
+          "description": "ICE system for coaches & consultants. Gate + Drip + Traffic. Doctor-frame positioning. ₹499 GrowthMap (refundable).",
+          "cta": "Book GrowthMap →"
+        },
+        {
+          "headline": "Stop Chasing Clients",
+          "description": "Pre-sell before the call with ICE Nurturing. WhatsApp drip that builds belief. Calendar full with qualified leads.",
+          "cta": "See How It Works →"
+        },
+        {
+          "headline": "From Referrals to Inbound",
+          "description": "Traffic Engine: Search Harvest + Piggyback + Partner Taps. Systemize client acquisition. Stop depending on referrals.",
+          "cta": "Get the System →"
+        }
+      ],
+      "budgetAllocation": {
+        "google": "40%",
+        "youtube": "50%",
+        "linkedin": "10%"
+      },
+      "targetCPL": "₹179-₹210",
+      "notes": "Focus on problem-aware keywords. HVCO (₹499 GrowthMap) as gate. Pre-qualify hard."
+    },
+    "piggyback": {
+      "name": "Piggyback",
+      "description": "Target competitor audiences with differentiation messaging",
+      "competitors": [
+        "Generic business coaches",
+        "Marketing agencies",
+        "Course creators",
+        "Mastermind programs"
+      ],
+      "differentiationMessages": [
+        "If you tried [competitor] and it didn't work, here's why: They gave you strategy. We give you strategy + AI Agents System to execute it.",
+        "Tired of courses that don't get implemented? ICE is consulting + automation. We do it WITH you.",
+        "Most coaches teach 'what to do.' We build the system FOR you. Gate, Drip, Traffic - all set up in 90 days.",
+        "Mastermind fatigue? Try doctor-frame: We accept/reject based on fit. No convincing, no chasing."
+      ],
+      "platforms": ["Facebook Retargeting", "YouTube Retargeting", "LinkedIn Retargeting"],
+      "audience": {
+        "interests": [
+          "Business coaching",
+          "Online courses",
+          "Digital marketing",
+          "Lead generation",
+          "Sales funnels"
+        ],
+        "behaviors": [
+          "Engaged with competitor content",
+          "Purchased similar programs",
+          "Searched for coaching/consulting"
+        ]
+      },
+      "adFormats": [
+        "Carousel: 'Why [Generic Approach] Doesn't Work' → ICE differentiation",
+        "Video: Client testimonial → 'Here's what they tried before'",
+        "Static: ProofWall screenshot → 'Real results, not just promises'"
+      ],
+      "notes": "Empathy first, then differentiate. Acknowledge their previous attempts. Position ICE as 'what works now.'"
+    },
+    "partner_taps": {
+      "name": "Partner Taps",
+      "description": "Collaborate with adjacent service providers for warm referrals",
+      "partnerTypes": {
+        "b2b_growth_consultant": [
+          "CAs & Tax Advisors → Refer clients scaling revenue",
+          "Web developers → Refer clients needing lead gen",
+          "CRM consultants → Refer clients needing pipeline systems",
+          "LinkedIn coaches → Refer clients needing end-to-end funnel"
+        ],
+        "career_coach": [
+          "HR consultants → Refer corporate clients exiting",
+          "Executive search firms → Refer candidates in transition",
+          "Leadership coaches → Refer clients needing career pivot",
+          "Resume writers → Refer clients needing full repositioning"
+        ],
+        "business_coach": [
+          "Accountants → Refer profitable clients wanting to scale",
+          "Lawyers → Refer business owners needing ops systems",
+          "Commercial real estate agents → Refer growing businesses",
+          "Insurance advisors → Refer high-revenue clients"
+        ]
+      },
+      "commissionStructure": {
+        "standard": "10% of first year revenue",
+        "premium": "15% if client closes within 30 days",
+        "recurring": "5% of all renewals (lifetime)"
+      },
+      "partnerScripts": [
+        {
+          "title": "Initial Outreach",
+          "script": "Hey {partner_name}, I work with {your_niche} who often need {partner_service}. I'm thinking we could refer clients to each other. You send me clients needing {your_solution}, I send you clients needing {partner_solution}. Commission optional, or just reciprocal referrals. Interested?"
+        },
+        {
+          "title": "Value Prop",
+          "script": "Here's how it works: When you have a client who's {pain_point}, send them my way. I'll give them a GrowthMap session (₹499, refundable). If they sign up, you get {commission}%. I'll do the same for you when my clients need {partner_service}."
+        },
+        {
+          "title": "Referral Handoff",
+          "script": "Hey {client_name}, {partner_name} mentioned you're looking for {solution}. I specialize in exactly that - {your_offer}. Let's do a quick GrowthMap session (60 min, ₹499 refundable). I'll map out what's possible. Book here: {calendar_link}"
+        }
+      ],
+      "trackingSystem": {
+        "referralCode": "UTM parameters per partner",
+        "payoutSchedule": "Monthly, within 7 days of client payment",
+        "dashboardAccess": "Partner portal showing referrals, commissions, status"
+      },
+      "notes": "Focus on non-competing, adjacent services. Make it easy for partners to refer (scripts, links, collateral)."
+    }
+  },
+  "meta": {
+    "priority": "Search Harvest (60%) → Partner Taps (25%) → Piggyback (15%)",
+    "timeline": "Month 1: Search Harvest setup | Month 2: Partner outreach | Month 3: Piggyback retargeting",
+    "kpis": {
+      "cpl": "₹179-₹210",
+      "qualification_rate": "70%+",
+      "close_rate": "30-40%",
+      "cac": "₹30k-₹40k"
+    }
+  }
+}

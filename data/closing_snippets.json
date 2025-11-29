@@ -1,0 +1,81 @@
+{
+  "open": [
+    "Hey {name}, good to finally connect. I've reviewed your application - {pain_summary}. Let's see if we can map this out.",
+    "{name}, thanks for carving out time. Before we start, quick expectation-set: this isn't a pitch call. It's diagnostic. I'll ask questions, you share context, and we'll both know if this is a fit or not. Sound good?",
+    "Alright {name}, let's dive in. I saw your form - '{pain_quote}'. Tell me more about that. What's the real cost of this problem right now?"
+  ],
+  "diagnose": [
+    "Walk me through your current client acquisition process. Where does it start, where does it break?",
+    "If I gave you 10 qualified leads tomorrow, could you close them? Or is closing also a gap?",
+    "What have you already tried? Coaches, courses, agencies - what worked, what didn't?",
+    "Let's talk numbers: what's your average deal size? How many deals per month? What would '2x revenue' actually look like in rupees?",
+    "Scale question: if we solve pipeline, can you deliver? Or will delivery become the new bottleneck?"
+  ],
+  "align_outcome": [
+    "So if we nail this, what changes for you personally? More revenue is obvious, but what does that unlock?",
+    "Got it. So predictable pipeline = {outcome}. That's the real win, not just the money. Fair?",
+    "Let me reflect back: you want {specific_outcome}, and the blocker is {pain}. We solve {pain}, you get {outcome}. Aligned?",
+    "Perfect. That's the outcome. Now let's talk about what it takes to get there."
+  ],
+  "budget_anchor": [
+    "Here's how this works: 3-month engagement. ₹{ticket_price} + GST. Includes ICE setup, funnel build, and live support. Not a course - this is consulting + AI Agents System doing 90% of ops.",
+    "Investment-wise, we're looking at ₹{ticket_price}. Now, I know that's not pocket change. But let's math it out: if we add even 2-3 clients at your ticket size, ROI is {roi_multiple}x. Make sense?",
+    "Two ways to think about this: (1) Cost = ₹{ticket_price}, or (2) Cost of NOT solving this = ₹{opportunity_cost} per month in lost deals. Which lens feels right?",
+    "Before we talk price, let me ask: if this works - pipeline becomes predictable, you're closing {target_clients} clients/month - what's that worth to you annually?"
+  ],
+  "objection_handlers": {
+    "budget_tight": [
+      "I hear you. Budget's tight. Let me ask: is it *tight*, or is it *not a priority*? Because if pipeline is actually the bottleneck, this should be priority #1, no?",
+      "Fair. Here's the thing: you're losing ₹{lost_revenue} every month with unpredictable pipeline. So it's not whether you can afford this - it's whether you can afford NOT to fix it.",
+      "Okay, let's strip it down. What if we just did ICE setup - gate + drip - for ₹{lower_ticket}? You handle the rest. Interested?"
+    ],
+    "need_to_think": [
+      "Totally fair. What specifically do you need to think about? Budget, timing, fit, or something else?",
+      "No rush. But let me ask: if you think for 2 weeks and come back, what will have changed? Will the problem be easier, or just 2 weeks older?",
+      "I respect that. Here's what I'd suggest: don't think about whether to do *this*. Think about whether fixing pipeline is urgent. If yes, let's move. If no, let's reconnect in Q3."
+    ],
+    "already_tried_coaching": [
+      "Got it. What didn't work last time? Was it the strategy, or the execution, or the fit?",
+      "Fair. Here's the difference: most coaches give you a plan. We give you a plan + the AI Agents System to execute it. You're not doing this alone.",
+      "I hear you. And look, if you don't trust that this will work, we shouldn't do it. But if the strategy makes sense and the gap was execution, this is literally built to solve that."
+    ],
+    "results_guarantee": [
+      "I can't guarantee results - no ethical consultant can. What I *can* guarantee: you'll have a working ICE setup, your funnel will be live, and you'll have qualified leads coming in. Closing them is on you.",
+      "Here's my version of a guarantee: if you execute and it doesn't work, I'll personally audit what broke and fix it. But I can't guarantee results if you don't execute. Fair?",
+      "Let me flip this: what would a 'guarantee' even look like for you? Because if it's 'you do nothing and money appears,' that's not real. But if it's 'you execute, I support, we hit milestones,' I'm in."
+    ],
+    "need_partner_approval": [
+      "Makes sense. What does your partner need to see to say yes? Numbers, case studies, or just understanding the plan?",
+      "Got it. Do you want to bring them on a call, or would you rather I send you a doc you can share?",
+      "Totally fair. Here's what I'll do: I'll send you a breakdown - investment, timeline, deliverables, ROI math. You discuss, and we'll reconnect. Sound good?"
+    ]
+  },
+  "risk_reversal": [
+    "Here's how we de-risk this: Month 1 is setup. If you're not seeing traction by end of Month 1, we pause and diagnose. I don't want your money if this isn't working.",
+    "Look, I only win if you win. If your pipeline doesn't improve in 90 days, either we didn't execute right, or it's not a fit. Either way, we'll know fast.",
+    "I'm not interested in taking your money and disappearing. This is consulting, not a course. You have my number, my email, my Slack. I'm in this with you."
+  ],
+  "next_step": [
+    "Alright, so here's next step: I'll send you the agreement. Review it, sign it, and we kick off next week. I'll also send onboarding calendar invite. First milestone: ICE gate setup in 7 days. You in?",
+    "Cool. Let's lock this in. I'll send the proposal tonight. Once you're in, we start with intake form build (Gate), then drip setup (ICE Nurturing), then traffic. 90-day sprint. Ready?",
+    "Perfect. Here's what happens next: (1) Agreement + invoice, (2) Onboarding call (90 min), (3) Week 1 deliverable: Gate live. You'll see progress immediately. Let's go."
+  ],
+  "follow_up_templates": [
+    {
+      "timing": "5 minutes post-call",
+      "message": "Hey {name}, great chatting just now. As discussed, here's the agreement: {link}. Review and let me know if any Qs. Ready to start when you are. - {your_name}"
+    },
+    {
+      "timing": "2 hours post-call (if no response)",
+      "message": "{name}, just bumping this up. Agreement attached. If anything's unclear, happy to hop on a quick call. Otherwise, sign & we kick off Monday. 🚀"
+    },
+    {
+      "timing": "24 hours post-call (if no response)",
+      "message": "Hey {name}, checking in. Still interested? If timing's off or budget shifted, no worries - just let me know. If you're in, let's move. Slot closes Friday."
+    },
+    {
+      "timing": "3 days post-call (final nudge)",
+      "message": "{name}, last check-in. I'm holding your spot till EOD Friday. After that, I'm rolling it to the next prospect. If you're serious, now's the time. If not, all good - we can reconnect later. Your call."
+    }
+  ]
+}

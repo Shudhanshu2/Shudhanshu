@@ -1,0 +1,81 @@
+{
+  "applicants": [
+    {
+      "id": 1,
+      "name": "Rohit Sharma",
+      "email": "rohit@growthlabs.co",
+      "phone": "+91 98765 43210",
+      "company": "GrowthLabs Consulting",
+      "score": 85,
+      "painScore": 36,
+      "budgetScore": 30,
+      "timelineScore": 16,
+      "fitScore": 8,
+      "segment": "hot",
+      "status": "qualified",
+      "notes": "High pain, good budget, urgent timeline. Decision maker. Top pick."
+    },
+    {
+      "id": 2,
+      "name": "Priya Mehta",
+      "email": "priya@careerpath.in",
+      "phone": "+91 98234 56789",
+      "company": "CareerPath Coaching",
+      "score": 72,
+      "painScore": 28,
+      "budgetScore": 18,
+      "timelineScore": 16,
+      "fitScore": 7,
+      "segment": "warm",
+      "status": "qualified",
+      "notes": "Moderate pain, mid budget, good timeline. Qualified."
+    },
+    {
+      "id": 3,
+      "name": "Vikram Singh",
+      "email": "vikram@techadvise.com",
+      "phone": "+91 98111 22333",
+      "company": "TechAdvise Solutions",
+      "score": 78,
+      "painScore": 30,
+      "budgetScore": 30,
+      "timelineScore": 10,
+      "fitScore": 8,
+      "segment": "warm",
+      "status": "qualified",
+      "notes": "Good budget, lower urgency. Exploring phase. Warm lead."
+    },
+    {
+      "id": 4,
+      "name": "Neha Gupta",
+      "email": "neha@wellnessco.in",
+      "phone": "+91 98555 67890",
+      "company": "Wellness Co",
+      "score": 35,
+      "painScore": 20,
+      "budgetScore": 6,
+      "timelineScore": 4,
+      "fitScore": 2,
+      "segment": "reject",
+      "status": "rejected",
+      "notes": "Low budget, no urgency, exploring only. Reject."
+    },
+    {
+      "id": 5,
+      "name": "Arun Patel",
+      "email": "arun@bizgrowth.pro",
+      "phone": "+91 98444 55666",
+      "company": "BizGrowth Pro",
+      "score": 82,
+      "painScore": 32,
+      "budgetScore": 24,
+      "timelineScore": 20,
+      "fitScore": 8,
+      "segment": "hot",
+      "status": "qualified",
+      "notes": "High pain, good budget, urgent. Decision maker. Top pick."
+    }
+  ],
+  "topPicks": [1, 5],
+  "rejects": [4]
+}

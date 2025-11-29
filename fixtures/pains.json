@@ -1,0 +1,41 @@
+{
+  "b2b_growth_consultant": [
+    "Pipeline unpredictable - kuch months 10L, kuch months 2L",
+    "Lead qualify nahi hote - demos book hote but close nahi",
+    "Long sales cycles - 60-90 days average",
+    "Can't scale beyond referrals - inbound system nahi hai",
+    "Pricing pushback - 'bahut costly hai' sunta rehta",
+    "Competitor se compare - 'woh cheaper hai'",
+    "Decision maker tak pahunchna mushkil"
+  ],
+  "career_coach": [
+    "Too many tire-kickers - free discovery calls waste time",
+    "Premium clients nahi milte - sirf ₹10-15k ticket",
+    "One-off sessions only - retention nahi",
+    "Referrals inconsistent - kuch months 3, kuch months 0",
+    "Positioning clarity nahi - 'aap kya karte ho exactly?'",
+    "Social media busy but sales nahi"
+  ],
+  "business_coach": [
+    "Clients expect instant results - 'ek month mein kya hoga?'",
+    "Hard to differentiate - 'aur coaches se alag kya hai?'",
+    "Implementation gap - clients execute nahi karte",
+    "Retention low - 3 months ke baad drop off",
+    "Referrals inconsistent",
+    "Premium pricing justify karna mushkil"
+  ],
+  "health_wellness_coach": [
+    "Clients results ke baad drop off - maintenance phase nahi",
+    "Premium packages sell nahi - '₹50k bahut hai'",
+    "Social media pe engagement but sales nahi",
+    "Compliance issues - fitness claims pe legal risk",
+    "Retention challenge - 2-3 months se zyada nahi",
+    "Group programs scale nahi karte - individual attention expect"
+  ],
+  "selected": [
+    "Pipeline unpredictable",
+    "Lead qualify nahi hote",
+    "Long sales cycles",
+    "Can't scale beyond referrals"
+  ]
+}
