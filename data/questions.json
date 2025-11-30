@@ -1,91 +1,142 @@
 [
   {
-    "id": "q1",
-    "question": "Current monthly revenue (approx)?",
-    "type": "number",
-    "weight": 20,
-    "scoring": {
-      "0-50000": 0,
-      "50000-200000": 10,
-      "200000-500000": 15,
-      "500000+": 20
+    "id": "q_pain_1",
+    "question": "Aapki sabse badi pipeline problem kya hai?",
+    "text": "Aapki sabse badi pipeline problem kya hai?",
+    "type": "textarea",
+    "weight": 3,
+    "category": "pain",
+    "niches": ["b2b_growth_consultant", "b2b_saas", "agency_owner", "consultant"],
+    "scoring_map": {
+      "keywords": ["pipeline", "leads", "unpredictable", "inconsistent", "clients nahi mil rahe"],
+      "high_pain": ["bahut struggle", "0-3L revenue", "completely unpredictable", "no system"],
+      "low_pain": ["already stable", "10L+ revenue", "predictable hai", "system working"]
     }
   },
   {
-    "id": "q2",
-    "question": "Average ticket size of your offer?",
-    "type": "number",
-    "weight": 25,
-    "scoring": {
-      "0-50000": 5,
-      "50000-100000": 15,
-      "100000-300000": 20,
-      "300000+": 25
+    "id": "q_pain_2",
+    "question": "Sales cycle kitne din ka hai aapka (inquiry to close)?",
+    "text": "Sales cycle kitne din ka hai aapka (inquiry to close)?",
+    "type": "select",
+    "weight": 2,
+    "category": "pain",
+    "niches": ["b2b_growth_consultant", "b2b_saas", "consultant", "agency_owner"],
+    "scoring_map": {
+      "keywords": ["60+ days", "45-60 days", "30-45 days", "0-30 days"],
+      "high_pain": ["60+ days", "3 months", "bahut lamba"],
+      "low_pain": ["0-30 days", "quick", "fast close"]
     }
   },
   {
-    "id": "q3",
-    "question": "How predictable is your pipeline?",
-    "type": "scale",
-    "weight": 15,
-    "options": [
-      "Very unpredictable",
-      "Somewhat predictable",
-      "Mostly predictable",
-      "Fully predictable"
-    ],
-    "scoring": {
-      "Very unpredictable": 15,
-      "Somewhat predictable": 10,
-      "Mostly predictable": 5,
-      "Fully predictable": 0
+    "id": "q_budget_1",
+    "question": "Current monthly revenue kya hai (approx)?",
+    "text": "Current monthly revenue kya hai (approx)?",
+    "type": "select",
+    "weight": 3,
+    "category": "budget",
+    "niches": ["all"],
+    "scoring_map": {
+      "keywords": ["₹0-₹2L", "₹2L-₹5L", "₹5L-₹10L", "₹10L+"],
+      "high_pain": ["₹0-₹2L", "just started", "inconsistent"],
+      "low_pain": ["₹10L+", "stable", "predictable"]
     }
   },
   {
-    "id": "q4",
-    "question": "Biggest pain point right now?",
-    "type": "multiple_choice",
-    "weight": 20,
-    "options": [
-      "Getting qualified leads",
-      "Converting leads to clients",
-      "Scaling delivery",
-      "Pricing/Positioning"
-    ],
-    "scoring": {
-      "Getting qualified leads": 20,
-      "Converting leads to clients": 15,
-      "Scaling delivery": 5,
-      "Pricing/Positioning": 10
+    "id": "q_budget_2",
+    "question": "Investment capacity systemization ke liye?",
+    "text": "Investment capacity systemization ke liye?",
+    "type": "select",
+    "weight": 3,
+    "category": "budget",
+    "niches": ["all"],
+    "scoring_map": {
+      "keywords": ["₹0-₹50K", "₹50K-₹1.5L", "₹1.5L-₹5L", "₹5L+"],
+      "high_pain": ["₹1.5L-₹5L", "₹5L+", "ready to invest"],
+      "low_pain": ["₹0-₹50K", "budget nahi", "just exploring"]
     }
   },
   {
-    "id": "q5",
-    "question": "Aapka time weekly sales mein kitna lagta hai?",
-    "type": "scale",
-    "weight": 10,
-    "options": [
-      "0-5 hours",
-      "5-15 hours",
-      "15-30 hours",
-      "30+ hours"
-    ],
-    "scoring": {
-      "0-5 hours": 0,
-      "5-15 hours": 5,
-      "15-30 hours": 8,
-      "30+ hours": 10
+    "id": "q_timeline_1",
+    "question": "Kab tak system chahiye (urgency)?",
+    "text": "Kab tak system chahiye (urgency)?",
+    "type": "select",
+    "weight": 2,
+    "category": "timeline",
+    "niches": ["all"],
+    "scoring_map": {
+      "keywords": ["ASAP", "This month", "Next 60 days", "3-6 months", "Just exploring"],
+      "high_pain": ["ASAP", "This month", "urgent hai"],
+      "low_pain": ["Just exploring", "6+ months", "no rush"]
     }
   },
   {
-    "id": "q6",
-    "question": "Investment capacity for systemization?",
-    "type": "range",
-    "weight": 10,
-    "scoring": {
-      "low": 0,
-      "medium": 5,
-      "high": 10
+    "id": "q_timeline_2",
+    "question": "Team ready hai implementation ke liye?",
+    "text": "Team ready hai implementation ke liye?",
+    "type": "select",
+    "weight": 1,
+    "category": "timeline",
+    "niches": ["all"],
+    "scoring_map": {
+      "keywords": ["Yes, fully ready", "Mostly ready", "Need help", "No team"],
+      "high_pain": ["Yes, fully ready", "Mostly ready"],
+      "low_pain": ["No team", "Team nahi hai", "hiring first"]
+    }
+  },
+  {
+    "id": "q_fit_1",
+    "question": "Aap decision maker ho ya recommend karte ho?",
+    "text": "Aap decision maker ho ya recommend karte ho?",
+    "type": "select",
+    "weight": 1,
+    "category": "fit",
+    "niches": ["all"],
+    "scoring_map": {
+      "keywords": ["I decide", "I recommend", "Team decides", "Just exploring"],
+      "high_pain": ["I decide", "Founder", "CEO", "final authority"],
+      "low_pain": ["Just exploring", "Team decides", "not sure"]
+    }
+  },
+  {
+    "id": "q_fit_2",
+    "question": "Kya aapne pehle koi automation/system try kiya?",
+    "text": "Kya aapne pehle koi automation/system try kiya?",
+    "type": "select",
+    "weight": 1,
+    "category": "fit",
+    "niches": ["all"],
+    "scoring_map": {
+      "keywords": ["Yes, didn't work", "Yes, worked partially", "No, first time", "Multiple times"],
+      "high_pain": ["Yes, didn't work", "Multiple times tried", "bahut tools try kiye"],
+      "low_pain": ["No, first time", "skeptical", "just started thinking"]
+    }
+  },
+  {
+    "id": "q_pain_3",
+    "question": "Demo/calls mein kitna time weekly lagta hai?",
+    "text": "Demo/calls mein kitna time weekly lagta hai?",
+    "type": "select",
+    "weight": 2,
+    "category": "pain",
+    "niches": ["b2b_saas", "b2b_growth_consultant", "coach_creator"],
+    "scoring_map": {
+      "keywords": ["0-5 hours", "5-15 hours", "15-30 hours", "30+ hours"],
+      "high_pain": ["15-30 hours", "30+ hours", "bahut time waste"],
+      "low_pain": ["0-5 hours", "selective calls"]
+    }
+  },
+  {
+    "id": "q_pain_4",
+    "question": "Unqualified leads ka percentage kitna hai?",
+    "text": "Unqualified leads ka percentage kitna hai?",
+    "type": "select",
+    "weight": 2,
+    "category": "pain",
+    "niches": ["b2b_saas", "b2b_growth_consultant", "agency_owner"],
+    "scoring_map": {
+      "keywords": ["70%+", "40-70%", "20-40%", "0-20%"],
+      "high_pain": ["70%+", "bahut zyada waste", "mostly unqualified"],
+      "low_pain": ["0-20%", "well qualified", "good filtering"]
     }
   }
 ]

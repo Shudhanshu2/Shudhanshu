@@ -457,14 +457,319 @@ function setupEventListeners() {
 
 function setupKeyboardShortcuts() {
     document.addEventListener('keydown', (e) => {
+        const activeElement = document.activeElement;
+        const isInputFocused = activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA';
+
+        // Skip shortcuts if input/textarea is focused (except for Escape and ?)
+        if (isInputFocused && e.key !== 'Escape' && e.key !== '?') {
+            return;
+        }
+
+        // Section navigation shortcuts
+        if (e.key === 'g' || e.key === 'G') {
+            scrollToSection('applicants-section', 'Gate/Intake');
+            eventLog.log('shortcut.gate', 'Keyboard shortcut: Gate/Intake', { key: 'g' });
+            showToast('📋 Jumped to Gate/Intake');
+            e.preventDefault();
+        } else if (e.key === 'd' || e.key === 'D') {
+            scrollToSection('nurture-section', 'ICE Nurturing');
+            eventLog.log('shortcut.drip', 'Keyboard shortcut: Drip/Nurturing', { key: 'd' });
+            showToast('💧 Jumped to ICE Nurturing');
+            e.preventDefault();
+        } else if (e.key === 'c' || e.key === 'C') {
+            scrollToSection('closing-section', 'Booking/Closing');
+            eventLog.log('shortcut.calendar', 'Keyboard shortcut: Booking', { key: 'c' });
+            showToast('📅 Jumped to Booking');
+            e.preventDefault();
+        } else if (e.key === 'f' || e.key === 'F') {
+            scrollToSection('payment-section', 'Payment Automation');
+            eventLog.log('shortcut.money', 'Keyboard shortcut: Money/Payment', { key: 'f' });
+            showToast('💰 Jumped to Payment Automation');
+            e.preventDefault();
+        } else if (e.key === 'p' || e.key === 'P') {
+            scrollToSection('proofloop-section', 'ProofLoop');
+            eventLog.log('shortcut.proofloop', 'Keyboard shortcut: ProofLoop', { key: 'p' });
+            showToast('🔄 Jumped to ProofLoop');
+            e.preventDefault();
+        } else if (e.key === 't' || e.key === 'T') {
+            scrollToSection('traffic-section', 'Traffic Engine');
+            eventLog.log('shortcut.traffic', 'Keyboard shortcut: Traffic Engine', { key: 't' });
+            showToast('🚦 Jumped to Traffic Engine');
+            e.preventDefault();
+        }
+
         // E/L - Toggle EventLog
-        if ((e.key === 'e' || e.key === 'E' || e.key === 'l' || e.key === 'L') && !e.ctrlKey && !e.metaKey) {
-            const activeElement = document.activeElement;
-            if (activeElement.tagName !== 'INPUT' && activeElement.tagName !== 'TEXTAREA') {
+        else if ((e.key === 'e' || e.key === 'E' || e.key === 'l' || e.key === 'L') && !e.ctrlKey && !e.metaKey) {
+            if (!isInputFocused) {
                 eventLog.toggle();
+                eventLog.log('shortcut.eventlog', 'EventLog toggled via keyboard', { key: e.key });
+                showToast(eventLog.isOpen ? '📊 EventLog opened' : '📊 EventLog closed');
                 e.preventDefault();
             }
         }
+
+        // ? - Show keyboard shortcuts modal
+        else if (e.key === '?' && !isInputFocused) {
+            showShortcutsModal();
+            e.preventDefault();
+        }
+
+        // Escape - Close shortcuts modal
+        else if (e.key === 'Escape') {
+            closeShortcutsModal();
+            e.preventDefault();
+        }
+
+        // Numeric shortcuts for demo actions (1-5)
+        if (!isInputFocused) {
+            if (e.key === '1') {
+                prefillDemoSetup();
+                showToast('🎯 Demo Setup Prefilled');
+                e.preventDefault();
+            } else if (e.key === '2') {
+                buildApplicationForm();
+                showToast('📝 Application Form Built');
+                e.preventDefault();
+            } else if (e.key === '3') {
+                simulateApplicants();
+                showToast('🔒 Intake Started');
+                e.preventDefault();
+            } else if (e.key === '4') {
+                assembleDripSequence();
+                showToast('💧 ICE Nurturing Assembled');
+                e.preventDefault();
+            } else if (e.key === '5') {
+                startTimers();
+                showToast('⏱️ Parallel Timers Started');
+                e.preventDefault();
+            }
+        }
+    });
+}
+
+function scrollToSection(sectionId, sectionName) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        section.classList.remove('hidden');
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
+function showToast(message) {
+    // Remove existing toasts
+    const existingToast = document.getElementById('global-toast');
+    if (existingToast) {
+        existingToast.remove();
+    }
+
+    // Create toast element
+    const toast = document.createElement('div');
+    toast.id = 'global-toast';
+    toast.className = 'fixed bottom-24 right-6 bg-gray-900 border border-primary text-white px-6 py-3 rounded-lg shadow-xl z-50 animate-slide-up';
+    toast.innerHTML = `
+        <div class="flex items-center gap-2">
+            <span>${message}</span>
+        </div>
+    `;
+
+    document.body.appendChild(toast);
+
+    // Auto-remove after 2 seconds
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+    }, 2000);
+}
+
+function showShortcutsModal() {
+    const existingModal = document.getElementById('shortcuts-modal');
+    if (existingModal) {
+        existingModal.classList.remove('hidden');
+        return;
+    }
+
+    const modal = document.createElement('div');
+    modal.id = 'shortcuts-modal';
+    modal.className = 'fixed inset-0 bg-black bg-opacity-80 z-[200] flex items-center justify-center p-4';
+    modal.innerHTML = `
+        <div class="bg-panel border border-gray-700 rounded-xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-white">⌨️ Keyboard Shortcuts</h2>
+                <button onclick="closeShortcutsModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+            </div>
+
+            <div class="space-y-6">
+                <div>
+                    <h3 class="text-lg font-semibold text-primary mb-3">Navigation</h3>
+                    <div class="grid gap-2">
+                        <div class="flex justify-between items-center p-2 bg-gray-800 rounded">
+                            <span class="text-gray-300">Jump to Gate/Intake</span>
+                            <kbd class="px-3 py-1 bg-gray-900 border border-gray-700 rounded text-sm">G</kbd>
+                        </div>
+                        <div class="flex justify-between items-center p-2 bg-gray-800 rounded">
+                            <span class="text-gray-300">Jump to ICE Nurturing</span>
+                            <kbd class="px-3 py-1 bg-gray-900 border border-gray-700 rounded text-sm">D</kbd>
+                        </div>
+                        <div class="flex justify-between items-center p-2 bg-gray-800 rounded">
+                            <span class="text-gray-300">Jump to Booking</span>
+                            <kbd class="px-3 py-1 bg-gray-900 border border-gray-700 rounded text-sm">C</kbd>
+                        </div>
+                        <div class="flex justify-between items-center p-2 bg-gray-800 rounded">
+                            <span class="text-gray-300">Jump to Payment Automation</span>
+                            <kbd class="px-3 py-1 bg-gray-900 border border-gray-700 rounded text-sm">F</kbd>
+                        </div>
+                        <div class="flex justify-between items-center p-2 bg-gray-800 rounded">
+                            <span class="text-gray-300">Jump to ProofLoop</span>
+                            <kbd class="px-3 py-1 bg-gray-900 border border-gray-700 rounded text-sm">P</kbd>
+                        </div>
+                        <div class="flex justify-between items-center p-2 bg-gray-800 rounded">
+                            <span class="text-gray-300">Jump to Traffic Engine</span>
+                            <kbd class="px-3 py-1 bg-gray-900 border border-gray-700 rounded text-sm">T</kbd>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-primary mb-3">Actions</h3>
+                    <div class="grid gap-2">
+                        <div class="flex justify-between items-center p-2 bg-gray-800 rounded">
+                            <span class="text-gray-300">Toggle EventLog</span>
+                            <div class="flex gap-2">
+                                <kbd class="px-3 py-1 bg-gray-900 border border-gray-700 rounded text-sm">E</kbd>
+                                <span class="text-gray-500">or</span>
+                                <kbd class="px-3 py-1 bg-gray-900 border border-gray-700 rounded text-sm">L</kbd>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center p-2 bg-gray-800 rounded">
+                            <span class="text-gray-300">Show Shortcuts</span>
+                            <kbd class="px-3 py-1 bg-gray-900 border border-gray-700 rounded text-sm">?</kbd>
+                        </div>
+                        <div class="flex justify-between items-center p-2 bg-gray-800 rounded">
+                            <span class="text-gray-300">Close Modal</span>
+                            <kbd class="px-3 py-1 bg-gray-900 border border-gray-700 rounded text-sm">Esc</kbd>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold text-primary mb-3">Demo Actions</h3>
+                    <div class="grid gap-2">
+                        <div class="flex justify-between items-center p-2 bg-gray-800 rounded">
+                            <span class="text-gray-300">Prefill Demo Setup</span>
+                            <kbd class="px-3 py-1 bg-gray-900 border border-gray-700 rounded text-sm">1</kbd>
+                        </div>
+                        <div class="flex justify-between items-center p-2 bg-gray-800 rounded">
+                            <span class="text-gray-300">Build Application Form</span>
+                            <kbd class="px-3 py-1 bg-gray-900 border border-gray-700 rounded text-sm">2</kbd>
+                        </div>
+                        <div class="flex justify-between items-center p-2 bg-gray-800 rounded">
+                            <span class="text-gray-300">Simulate Applicants</span>
+                            <kbd class="px-3 py-1 bg-gray-900 border border-gray-700 rounded text-sm">3</kbd>
+                        </div>
+                        <div class="flex justify-between items-center p-2 bg-gray-800 rounded">
+                            <span class="text-gray-300">Assemble ICE Nurturing</span>
+                            <kbd class="px-3 py-1 bg-gray-900 border border-gray-700 rounded text-sm">4</kbd>
+                        </div>
+                        <div class="flex justify-between items-center p-2 bg-gray-800 rounded">
+                            <span class="text-gray-300">Start Parallel Timers</span>
+                            <kbd class="px-3 py-1 bg-gray-900 border border-gray-700 rounded text-sm">5</kbd>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-6 border-t border-gray-700">
+                <p class="text-sm text-gray-400 text-center">
+                    💡 Shortcuts work globally except when typing in input fields
+                </p>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    // Close on background click
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeShortcutsModal();
+        }
+    });
+}
+
+function closeShortcutsModal() {
+    const modal = document.getElementById('shortcuts-modal');
+    if (modal) {
+        modal.classList.add('hidden');
+    }
+}
+
+function prefillDemoSetup() {
+    const setupForm = document.getElementById('setup-form');
+    if (!setupForm) return;
+
+    setupForm.icp.value = 'B2B SaaS Founders';
+    setupForm.niche.value = 'b2b_saas';
+    setupForm.offer.value = 'Revenue Acceleration Program';
+    setupForm.ticket.value = '₹5-15L';
+    setupForm.salesModel.value = 'retainer';
+
+    const painsField = setupForm.querySelector('[name="pains"]');
+    if (painsField) {
+        painsField.value = 'Pipeline unpredictable hai, Demo-to-close bahut slow, Unqualified trials waste time';
+    }
+
+    eventLog.log('demo.prefill', 'Demo setup prefilled', { action: '1' });
+    state.acceptanceChecks.fixtures = true;
+}
+
+function assembleDripSequence() {
+    if (state.presellMessages.length === 0) {
+        state.presellMessages = [
+            { t: 'T-72h', label: 'Confirmation', status: 'queued' },
+            { t: 'T-24h', label: 'Reminder + Value', status: 'queued' },
+            { t: 'T-2h', label: 'Final Reminder', status: 'queued' },
+            { t: 'T-15m', label: 'Starting Soon', status: 'queued' }
+        ];
+    }
+
+    eventLog.log('ice.drip', '[ICE] Nurturing sequence assembled', {
+        messages: state.presellMessages.length
+    });
+    state.acceptanceChecks.drip = true;
+}
+
+function startTimers() {
+    state.timers.slidesProgress = 0;
+    state.timers.videoProgress = 0;
+
+    // Simulate slide progress
+    const slidesInterval = setInterval(() => {
+        state.timers.slidesProgress += 5;
+        if (state.timers.slidesProgress >= 100) {
+            state.timers.slidesProgress = 100;
+            state.timers.slidesComplete = true;
+            clearInterval(slidesInterval);
+        }
+    }, 500);
+
+    // Simulate video progress (unlocks after slides 70%)
+    setTimeout(() => {
+        state.timers.videoGated = false;
+        const videoInterval = setInterval(() => {
+            state.timers.videoProgress += 5;
+            if (state.timers.videoProgress >= 100) {
+                state.timers.videoProgress = 100;
+                state.timers.videoComplete = true;
+                clearInterval(videoInterval);
+            }
+        }, 700);
+    }, 3000);
+
+    eventLog.log('timers.start', 'AI Twin timers started', {
+        slides: true,
+        video: true
     });
 }
 
@@ -906,3 +1211,6 @@ function renderAll() {
 
 window.APP.state = state;
 window.APP.eventLog = eventLog;
+
+// Expose global functions for modal onclick handlers
+window.closeShortcutsModal = closeShortcutsModal;

@@ -1,1 +1,66 @@
-[]
+[
+  {
+    "id": 1,
+    "name": "Rohit Sharma",
+    "company": "GrowthLabs Consulting",
+    "role": "Founder & CEO",
+    "team_size": "6-15",
+    "revenue": "₹2Cr-₹10Cr",
+    "pain": "Pipeline bahut unpredictable hai. Ek mahine 5 calls, next month 0. Leads aate hain but mostly unqualified. Demo-to-close 60+ days lag jata hai.",
+    "timeline": "This month - urgent hai",
+    "budget": "₹1.5L-₹5L ready hai",
+    "prior_experience": "Yes - Tried HubSpot, didn't work for us",
+    "decision_maker": "I decide - I'm the founder",
+    "phone": "+91 98765 43210",
+    "email": "rohit@growthlabs.in",
+    "outcome": "If pipeline becomes predictable, I can scale team confidently and hit ₹25Cr this year."
+  },
+  {
+    "id": 2,
+    "name": "Priya Menon",
+    "company": "DesignStudio.in",
+    "role": "Creative Director & Owner",
+    "team_size": "3-5",
+    "revenue": "₹50L-₹2Cr",
+    "pain": "Client acquisition bahut expensive hai. Ads pe ₹1L+ monthly but ROI nahi dikh raha. Retainer clients nahi ban rahe, sab one-off projects.",
+    "timeline": "Next 60 days",
+    "budget": "₹50K-₹1.5L (depends on ROI proof)",
+    "prior_experience": "No, first time trying automation",
+    "decision_maker": "I decide with partner consultation",
+    "phone": "+91 98765 43211",
+    "email": "priya@designstudio.in",
+    "outcome": "Agar 5 retainer clients aa jaayein predictable, toh hiring kar sakti hoon and agency scale kar sakti hoon."
+  },
+  {
+    "id": 3,
+    "name": "Karthik Iyer",
+    "company": "SaaS Booster",
+    "role": "CEO",
+    "team_size": "15-50",
+    "revenue": "₹10Cr+",
+    "pain": "Unqualified trials bahut hain. 100 trials me se 5 hi convert hote. Sales team expensive hai but efficiency low. Demo calls pe bahut time waste.",
+    "timeline": "ASAP - board pressure hai",
+    "budget": "₹5L+ - not an issue if ROI clear",
+    "prior_experience": "Yes - Multiple tools tried, partial success",
+    "decision_maker": "I decide - final authority",
+    "phone": "+91 98765 43212",
+    "email": "karthik@saasbooster.com",
+    "outcome": "If trial-to-paid doubles, we hit Series A targets 6 months early."
+  },
+  {
+    "id": 4,
+    "name": "Anjali Gupta",
+    "company": "Career Unlock (Coaching)",
+    "role": "Founder & Head Coach",
+    "team_size": "1-2 (Solo + VA)",
+    "revenue": "₹10L-₹50L",
+    "pain": "Launch fatigue hai. Har month webinar karke thak gayi. Evergreen funnel nahi ban raha. Ads costly, organic slow.",
+    "timeline": "3-6 months - exploring options",
+    "budget": "₹50K-₹1.5L (but ROI dekhna hai pehle)",
+    "prior_experience": "Yes - Tried funnels, didn't work well",
+    "decision_maker": "I recommend - husband decides finances",
+    "phone": "+91 98765 43213",
+    "email": "anjali@careerunlock.in",
+    "outcome": "Agar evergreen system ban jaye, toh I can focus on delivery instead of selling every month."
+  }
+]

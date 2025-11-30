@@ -1,0 +1,74 @@
+{
+  "weights": {
+    "pain": 0.4,
+    "budget": 0.3,
+    "timeline": 0.2,
+    "fit": 0.1
+  },
+  "pain_keywords": [
+    "pipeline",
+    "consistent clients nahi",
+    "high ticket nahi ban raha",
+    "unqualified leads",
+    "demo waste",
+    "sales cycle lamba",
+    "manual grinding",
+    "unpredictable revenue"
+  ],
+  "budget_ranges": {
+    "low": "₹0-₹50k",
+    "mid": "₹50k-₹1.5L",
+    "high": "₹1.5L+"
+  },
+  "disqualify_rules": {
+    "no_decision_maker": true,
+    "no_budget": true,
+    "just_exploring": true,
+    "competitor": true
+  },
+  "qualification_threshold": 70,
+  "nurture_threshold": 40,
+  "proofloop_threshold": 0,
+  "scoring_multipliers": {
+    "high_urgency": 1.2,
+    "previous_failed_attempts": 1.15,
+    "decision_maker": 1.1,
+    "low_urgency": 0.8,
+    "no_team": 0.7
+  },
+  "auto_actions": {
+    "score_70_plus": {
+      "action": "ice_nurture",
+      "priority": "high",
+      "message": "[ICE] Auto-Qualified - Starting Nurturing Sequence"
+    },
+    "score_40_to_69": {
+      "action": "follow_up",
+      "priority": "medium",
+      "message": "Potential - Manual Review Required"
+    },
+    "score_below_40": {
+      "action": "proofloop",
+      "priority": "low",
+      "message": "Unqualified - Trigger ProofLoop™"
+    }
+  },
+  "pain_severity_weights": {
+    "critical": 10,
+    "high": 7,
+    "medium": 4,
+    "low": 2
+  },
+  "budget_tier_scores": {
+    "high": 30,
+    "mid": 20,
+    "low": 5
+  },
+  "timeline_urgency_scores": {
+    "asap": 20,
+    "this_month": 18,
+    "next_60_days": 15,
+    "3_to_6_months": 8,
+    "exploring": 2
+  }
+}

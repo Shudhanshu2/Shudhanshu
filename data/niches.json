@@ -1,182 +1,82 @@
 [
   {
-    "name": "B2B Consulting",
-    "pains": ["Pipeline unpredictable hai", "Selling nahi aati", "Manual grinding daily"],
-    "hooks": [
-      "High-ticket B2B without cold outreach kaise?",
-      "₹10L/month predictable pipeline in 90 days",
-      "AI Twin selling kare, aap sirf delivery karo"
-    ]
+    "id": "b2b_growth_consultant",
+    "name": "B2B Growth Consultant",
+    "pains": ["Pipeline unpredictable hai", "Lead qualify nahi hote", "Demo-to-close bahut slow"],
+    "objections": ["Abhi budget tight hai", "Already agency hai", "Team nahi handle karega"],
+    "examples": ["B2B SaaS growth coach", "Demand gen consultant", "Revenue acceleration advisor"],
+    "industry_terms": ["pipeline", "deal cycle", "LTV", "MRR", "qualified lead"]
   },
   {
+    "id": "agency_owner",
     "name": "Agency Owner",
     "pains": ["Client acquisition expensive hai", "Retention low hai", "Scaling mushkil hai"],
-    "hooks": [
-      "Agency scaling without hiring army?",
-      "Client acquisition cost 70% kam kaise karein",
-      "Predictable MRR automation se"
-    ]
+    "objections": ["Already tools bahut hain", "Team training kaun karega", "ROI dikhaao pehle"],
+    "examples": ["Digital marketing agency", "Creative agency", "Performance marketing shop"],
+    "industry_terms": ["retainer", "churn", "LTV", "CAC", "project pipeline"]
   },
   {
+    "id": "coach_creator",
     "name": "Coach/Course Creator",
     "pains": ["Launch fatigue hai", "Evergreen nahi bann raha", "Ads costly hain"],
-    "hooks": [
-      "Launch fatigue se kaise bachein?",
-      "Evergreen funnel that actually works",
-      "High-ticket coaching bina webinar fatigue"
-    ]
+    "objections": ["Webinar toh kar hi rahe", "Funnel already hai", "Students budget nahi"],
+    "examples": ["Business coach", "Career coach", "Life transformation coach"],
+    "industry_terms": ["launch", "evergreen", "cohort", "close rate", "show-up rate"]
   },
   {
-    "name": "SaaS Founder",
+    "id": "b2b_saas",
+    "name": "B2B SaaS Founder",
     "pains": ["Demo-to-close slow hai", "Unqualified trials bahut", "Sales team expensive"],
-    "hooks": [
-      "SaaS sales automation (Indian market)",
-      "Demo-to-close 60% faster kaise?",
-      "AI-powered qualification system"
-    ]
+    "objections": ["Product-led growth kar rahe", "Inside sales already hai", "Automation nahi chahiye personal touch"],
+    "examples": ["CRM platform", "Marketing automation", "HR tech SaaS"],
+    "industry_terms": ["demo", "trial", "MRR", "churn", "activation", "PLG"]
   },
   {
+    "id": "freelancer_scaling",
     "name": "Freelancer (Scaling)",
     "pains": ["Time-for-money trap", "Client pipeline inconsistent", "Premium pricing struggle"],
-    "hooks": [
-      "Freelancer se business owner transition",
-      "₹50K to ₹5L/client kaise jump karein",
-      "Productized service automation"
-    ]
+    "objections": ["Freelance hi thik hai", "Agency nahi banna", "Clients nahi milenge high-ticket"],
+    "examples": ["Copywriter scaling up", "Designer to studio", "Developer to dev shop"],
+    "industry_terms": ["retainer", "productized service", "value-based pricing", "pipeline"]
   },
   {
-    "name": "Real Estate Consultant",
-    "pains": ["Referrals pe dependent", "Follow-ups manual", "High-value deals slow"],
-    "hooks": [
-      "Luxury real estate without broker dependency",
-      "High-net-worth client automation",
-      "WhatsApp-based nurturing system"
-    ]
-  },
-  {
-    "name": "EdTech Founder",
-    "pains": ["Parent-student dual selling", "Trial-to-paid low", "Retention mushkil"],
-    "hooks": [
-      "EdTech sales without pushy calls",
-      "Parent trust-building automation",
-      "Trial-to-paid 3X improvement"
-    ]
-  },
-  {
-    "name": "Health/Wellness Coach",
-    "pains": ["Credibility building hard", "Low ticket to high ticket shift", "Client commitment low"],
-    "hooks": [
-      "Wellness coaching ₹1L+ ticket pe kaise?",
-      "Trust-building automation (India context)",
-      "Long-term commitment system"
-    ]
-  },
-  {
-    "name": "Financial Advisor",
-    "pains": ["Trust factor slow hai", "Referrals unpredictable", "Compliance-heavy selling"],
-    "hooks": [
-      "Financial advisory without pushy tactics",
-      "Trust automation (video + content)",
-      "HNI client acquisition system"
-    ]
-  },
-  {
-    "name": "Tech Consultant (CTO-as-Service)",
-    "pains": ["Finding CXO buyers hard", "Sales cycle 6+ months", "Proposal fatigue"],
-    "hooks": [
-      "CTO-as-service sales automation",
-      "Enterprise deals without RFP grind",
-      "Authority positioning system"
-    ]
-  },
-  {
-    "name": "Product Designer (B2B)",
-    "pains": ["Portfolio se inquiry but no close", "Pricing conversation awkward", "Project pipeline gaps"],
-    "hooks": [
-      "Design studio without feast-famine",
-      "₹5L+ project automation",
-      "Case study to client system"
-    ]
-  },
-  {
-    "name": "Event Planner (Premium)",
-    "pains": ["Seasonal revenue roller-coaster", "Low deposits, high churn", "Last-minute inquiries"],
-    "hooks": [
-      "Premium event planning automation",
-      "Year-round pipeline system",
-      "Deposit collection automation"
-    ]
-  },
-  {
-    "name": "Interior Designer",
-    "pains": ["Site visits waste time", "Budget mismatch frequent", "Follow-ups manual"],
-    "hooks": [
-      "Interior design leads pre-qualified kaise?",
-      "Virtual consultation to booking",
-      "Premium client filtering system"
-    ]
-  },
-  {
-    "name": "HR Consultant",
-    "pains": ["Project-based revenue hai", "Retainer clients kam", "Scaling without hiring"],
-    "hooks": [
-      "HR consulting retainer model kaise?",
-      "Project to retainer shift automation",
-      "SME client acquisition"
-    ]
-  },
-  {
-    "name": "Legal Consultant",
-    "pains": ["Referrals pe dependent", "Billing time-consuming", "Client education needed"],
-    "hooks": [
-      "Legal practice automation (client acquisition)",
-      "Retainer clients systematically",
-      "Consultation-to-retainer automation"
-    ]
-  },
-  {
+    "id": "consultant",
     "name": "Management Consultant",
     "pains": ["Proposal writing fatigue", "Long sales cycles", "Authority positioning struggle"],
-    "hooks": [
-      "Management consulting without RFP grind",
-      "Thought leadership to client pipeline",
-      "90-day authority positioning"
-    ]
+    "objections": ["Referrals se chal raha", "Brand building costly", "Content nahi bana paayenge"],
+    "examples": ["Strategy consultant", "Operations consultant", "Change management advisor"],
+    "industry_terms": ["proposal", "engagement", "retainer", "RFP", "thought leadership"]
   },
   {
-    "name": "Digital Marketing Agency",
-    "pains": ["Price competition brutal", "Client churn high", "Performance pressure constant"],
-    "hooks": [
-      "Marketing agency without bidding wars",
-      "Retainer stability system",
-      "High-LTV client attraction"
-    ]
+    "id": "real_estate_consultant",
+    "name": "Real Estate Consultant",
+    "pains": ["Referrals pe dependent", "Follow-ups manual", "High-value deals slow"],
+    "objections": ["Market slow hai", "Buyers serious nahi", "Budget nahi batate"],
+    "examples": ["Luxury property consultant", "Commercial real estate advisor", "Investment property specialist"],
+    "industry_terms": ["site visit", "token", "registration", "broker", "referral"]
   },
   {
-    "name": "Video Production House",
-    "pains": ["One-off projects only", "Payment delays frequent", "Scalability limited"],
-    "hooks": [
-      "Video production retainer model",
-      "Brand partnerships automation",
-      "Predictable project pipeline"
-    ]
+    "id": "financial_advisor",
+    "name": "Financial Advisor",
+    "pains": ["Trust factor slow hai", "Referrals unpredictable", "Compliance-heavy selling"],
+    "objections": ["Mutual fund direct le lete hain", "Commission high lagta", "Trust nahi banta online"],
+    "examples": ["Wealth manager", "Investment advisor", "Tax planning consultant"],
+    "industry_terms": ["AUM", "portfolio", "SIP", "HNI", "referral", "compliance"]
   },
   {
-    "name": "Recruitment Consultant",
-    "pains": ["Client acquisition slow", "Candidate-client mismatch", "Payment on placement only"],
-    "hooks": [
-      "Recruitment firm retainer model",
-      "Client acquisition automation",
-      "Niche specialization positioning"
-    ]
+    "id": "health_wellness_coach",
+    "name": "Health/Wellness Coach",
+    "pains": ["Credibility building hard", "Low ticket to high ticket shift", "Client commitment low"],
+    "objections": ["YouTube pe free mil jata", "Results guarantee nahi", "Time nahi hai"],
+    "examples": ["Fitness coach", "Nutrition consultant", "Transformation coach"],
+    "industry_terms": ["transformation", "commitment", "accountability", "results", "before-after"]
   },
   {
-    "name": "Business Broker",
-    "pains": ["Deal flow inconsistent", "Buyer-seller matching hard", "Commission-only pressure"],
-    "hooks": [
-      "Business brokerage deal flow system",
-      "Seller pipeline automation",
-      "Qualified buyer attraction"
-    ]
+    "id": "tech_consultant_cto",
+    "name": "Tech Consultant (CTO-as-Service)",
+    "pains": ["Finding CXO buyers hard", "Sales cycle 6+ months", "Proposal fatigue"],
+    "objections": ["Already CTO hai", "In-house hi build karenge", "Budget nahi hai consultant ke liye"],
+    "examples": ["Fractional CTO", "Tech advisory", "Cloud migration consultant"],
+    "industry_terms": ["architecture", "tech stack", "migration", "roadmap", "fractional"]
   }
 ]

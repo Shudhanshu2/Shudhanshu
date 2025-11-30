@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "id": "proof_calvin",
+    "name": "Calvin",
+    "company": "AgencyX",
+    "avatar_initials": "C",
+    "avatar_color": "#F97316",
+    "headline": "₹8Cr+ expert business",
+    "blurb": "Built ₹8Cr+ expert business without webinars, VSLs, or ads fatigue. Pure pipeline automation + high-ticket selling.",
+    "metric": "₹8Cr+ revenue",
+    "niche": "Agency Owner",
+    "verified": true
+  },
+  {
+    "id": "proof_rohit",
+    "name": "Rohit K.",
+    "company": "SaaS Growth Co",
+    "avatar_initials": "RK",
+    "avatar_color": "#3B82F6",
+    "headline": "Demo-to-close 60% faster",
+    "blurb": "Cut demo-to-close from 90 days to 30 days. Unqualified trials dropped by 70%. ROI in 45 days.",
+    "metric": "60% faster sales cycle",
+    "niche": "B2B SaaS",
+    "verified": true
+  },
+  {
+    "id": "proof_priya",
+    "name": "Priya S.",
+    "company": "DesignPro Studio",
+    "avatar_initials": "PS",
+    "avatar_color": "#EC4899",
+    "headline": "₹3L to ₹18L MRR in 90 days",
+    "blurb": "Shifted from one-off projects to retainer clients. Predictable pipeline, hired 5 designers, scaled confidently.",
+    "metric": "6X MRR growth",
+    "niche": "Agency Owner",
+    "verified": true
+  },
+  {
+    "id": "proof_amit",
+    "name": "Amit M.",
+    "company": "Executive Coaching Hub",
+    "avatar_initials": "AM",
+    "avatar_color": "#10B981",
+    "headline": "Launch fatigue se freedom",
+    "blurb": "No more monthly webinars. Evergreen funnel running on autopilot. 3X revenue without burnout.",
+    "metric": "3X revenue, 0 launches",
+    "niche": "Coach",
+    "verified": true
+  }
+]
