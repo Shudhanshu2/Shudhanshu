@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ScaleEdge Integrated Client Engine (ICE)</title>
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -20,489 +22,369 @@
             }
         }
     </script>
+
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Custom Styles -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body class="bg-bgdark text-gray-100 font-sans">
+<body class="bg-bgdark text-gray-100 min-h-screen">
 
     <!-- Header -->
     <header class="bg-panel border-b border-gray-800 sticky top-0 z-50">
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-4">
-                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
+                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                         </svg>
                     </div>
                     <div>
                         <h1 class="text-2xl font-bold text-white">ScaleEdge ICE</h1>
-                        <p class="text-xs text-gray-400">Integrated Client Engine</p>
+                        <p class="text-xs text-gray-400">Integrated Client Engine - Funnel Orchestration</p>
                     </div>
                 </div>
-                <div class="flex items-center space-x-3">
-                    <button id="knowledgeBtn" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm transition">
-                        <span class="mr-2">📚</span> Knowledge Base
-                    </button>
-                    <button id="eventLogBtn" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm transition">
-                        <span class="mr-2">📊</span> EventLog
-                    </button>
-                    <button id="connectionsBtn" class="px-4 py-2 bg-primary hover:bg-red-700 rounded-lg text-sm transition">
-                        <span class="mr-2">🔌</span> Connections
+                <div class="flex items-center space-x-2">
+                    <button id="btn-eventlog" class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg text-sm transition border border-gray-700">
+                        <span class="mr-1">📊</span> EventLog (E/L)
                     </button>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Journey Bar -->
-    <div class="bg-panel border-b border-gray-800">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between" id="journeyBar">
-                <div class="journey-step active" data-step="1">
-                    <div class="journey-dot">1</div>
-                    <span class="journey-label">Application</span>
-                </div>
-                <div class="journey-line"></div>
-                <div class="journey-step" data-step="2">
-                    <div class="journey-dot">2</div>
-                    <span class="journey-label">Qualify</span>
-                </div>
-                <div class="journey-line"></div>
-                <div class="journey-step" data-step="3">
-                    <div class="journey-dot">3</div>
-                    <span class="journey-label">ICE Nurture</span>
-                </div>
-                <div class="journey-line"></div>
-                <div class="journey-step" data-step="4">
-                    <div class="journey-dot">4</div>
-                    <span class="journey-label">Call</span>
-                </div>
-                <div class="journey-line"></div>
-                <div class="journey-step" data-step="5">
-                    <div class="journey-dot">5</div>
-                    <span class="journey-label">Collect</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Main Content Container -->
+    <main class="container mx-auto px-6 py-8 max-w-7xl">
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-6 py-8 pb-24">
+        <!-- ==================== SECTION: SETUP ==================== -->
+        <section id="setup-section" class="app-section mb-12">
+            <div class="bg-panel border border-gray-800 rounded-xl p-8">
+                <h2 class="text-3xl font-bold mb-2">Setup Your ICE System</h2>
+                <p class="text-gray-400 mb-8">Configure your client acquisition engine</p>
 
-        <!-- Section: Engine 1 - ASP via AI Twin -->
-        <section id="engine1" class="mb-12">
-            <div class="section-header">
-                <h2 class="section-title">Engine 1: ASP via AI Twin</h2>
-                <p class="section-subtitle">The "Vehicle" — 80/20 Value-Pitch Sales Presentation Generator</p>
-            </div>
-
-            <div class="card">
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <h3 class="text-lg font-semibold mb-4 text-white">Presentation Inputs</h3>
-                        <form id="aspForm" class="space-y-4">
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Niche/ICP</label>
-                                <select id="nicheSelect" class="input-field">
-                                    <option value="">Select niche...</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Your Offer</label>
-                                <input type="text" id="offerInput" class="input-field" placeholder="e.g., High-Ticket B2B Consulting Program">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Ticket Size</label>
-                                <input type="text" id="ticketInput" class="input-field" placeholder="e.g., ₹3-10L">
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Top 3 Pains (comma separated)</label>
-                                <textarea id="painsInput" class="input-field" rows="3" placeholder="Pipeline unpredictable hai, Selling nahi aati, Manual grinding"></textarea>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Branding (Your Name/Brand)</label>
-                                <input type="text" id="brandingInput" class="input-field" placeholder="e.g., ScaleEdge Systems">
-                            </div>
-                            <button type="submit" class="btn-primary w-full">
-                                Generate AI Twin Presentation
-                            </button>
-                        </form>
-                    </div>
-
-                    <div id="slidePreviewContainer" class="hidden">
-                        <h3 class="text-lg font-semibold mb-4 text-white flex items-center justify-between">
-                            <span>Generated Slides (12)</span>
-                            <button id="downloadPdfBtn" class="text-sm px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded">
-                                📥 Download PDF
-                            </button>
-                        </h3>
-                        <div id="slideThumbnails" class="grid grid-cols-3 gap-3 mb-4">
-                            <!-- Thumbnails will be inserted here -->
+                <form id="setup-form" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">ICP (Ideal Client Profile)</label>
+                            <input type="text" name="icp" class="input-field" placeholder="e.g., B2B SaaS Founders" required>
                         </div>
-                        <div class="text-xs text-gray-500 text-center">
-                            Click any slide to preview • Hover for notes
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Niche</label>
+                            <select name="niche" class="input-field" required>
+                                <option value="">Select niche...</option>
+                                <option value="b2b_saas">B2B SaaS</option>
+                                <option value="agency">Agency Owner</option>
+                                <option value="consulting">Consulting</option>
+                                <option value="coaching">Coaching</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Your Offer</label>
+                            <input type="text" name="offer" class="input-field" placeholder="e.g., Revenue Acceleration Program" required>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Ticket Size</label>
+                            <input type="text" name="ticket" class="input-field" placeholder="e.g., ₹5-15L" required>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Sales Model</label>
+                            <select name="salesModel" class="input-field">
+                                <option value="retainer">Retainer</option>
+                                <option value="one_off">One-off Project</option>
+                                <option value="hybrid">Hybrid</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Top 3 Pains (comma-separated)</label>
+                            <input type="text" name="pains" class="input-field" placeholder="Pipeline unpredictable, Long cycles, Unqualified demos">
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Section: Engine 2 - Traffic & Trust -->
-        <section id="engine2" class="mb-12">
-            <div class="section-header">
-                <h2 class="section-title">Engine 2: Traffic & Trust</h2>
-                <p class="section-subtitle">3 Traffic Sources + ProofLoop System</p>
-            </div>
-
-            <!-- Traffic Planning -->
-            <div class="card mb-6">
-                <h3 class="text-lg font-semibold mb-4 text-white">Traffic Planning</h3>
-                <div class="tabs mb-4">
-                    <button class="tab-btn active" data-tab="search">🔍 Search Harvest</button>
-                    <button class="tab-btn" data-tab="piggyback">📺 Piggyback</button>
-                    <button class="tab-btn" data-tab="partners">🤝 Partners</button>
-                </div>
-
-                <div id="tab-search" class="tab-content active">
-                    <p class="text-sm text-gray-400 mb-4">YouTube Search (High Intent Keywords)</p>
-                    <div id="searchKeywords" class="space-y-2">
-                        <!-- Keywords loaded from traffic.json -->
-                    </div>
-                    <div class="mt-4">
-                        <label class="block text-sm font-medium mb-2">Daily Budget</label>
-                        <input type="text" class="input-field" placeholder="₹5,000 - ₹25,000" value="₹10,000">
-                    </div>
-                </div>
-
-                <div id="tab-piggyback" class="tab-content">
-                    <p class="text-sm text-gray-400 mb-4">Channel Placements (Established Audiences)</p>
-                    <div id="piggybacking" class="space-y-2">
-                        <!-- Channels loaded from traffic.json -->
-                    </div>
-                </div>
-
-                <div id="tab-partners" class="tab-content">
-                    <p class="text-sm text-gray-400 mb-4">Community Taps (Partner Networks)</p>
-                    <div id="partners" class="space-y-2">
-                        <!-- Partners loaded from traffic.json -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- ProofLoop -->
-            <div class="card">
-                <div class="flex items-center justify-between mb-4">
                     <div>
-                        <h3 class="text-lg font-semibold text-white">ProofLoop System</h3>
-                        <p class="text-sm text-gray-400">Convert Unqualified → Social Proof</p>
+                        <label class="block text-sm font-medium mb-2">Logo (optional)</label>
+                        <input type="file" id="logo-upload" accept="image/*" class="input-field">
+                        <img id="logo-preview" class="hidden mt-2 max-w-xs rounded" alt="Logo preview">
                     </div>
-                    <button id="triggerProofLoopBtn" class="btn-primary">
-                        Trigger ProofLoop for Cohort
+
+                    <button type="submit" class="btn-primary w-full">
+                        Save Setup & Continue →
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION: APPLICATION BUILDER ==================== -->
+        <section id="application-builder" class="app-section hidden mb-12">
+            <div class="bg-panel border border-gray-800 rounded-xl p-8">
+                <h2 class="text-3xl font-bold mb-2">[ICE] Application Form Builder</h2>
+                <p class="text-gray-400 mb-8">Auto-generate qualification questions based on your niche</p>
+
+                <div class="mb-8">
+                    <button id="btn-build-form" class="btn-primary">
+                        Build Application Form
                     </button>
                 </div>
 
-                <div id="proofWall" class="grid md:grid-cols-3 gap-4 mt-6">
-                    <!-- Testimonials loaded from proofloop.json -->
+                <div id="application-form-preview" class="space-y-4">
+                    <!-- Form questions will be rendered here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION: APPLICANTS & SCORING ==================== -->
+        <section id="applicants-section" class="app-section hidden mb-12">
+            <div class="bg-panel border border-gray-800 rounded-xl p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-2">[ICE] Auto-Qualification</h2>
+                        <p class="text-gray-400">Simulate inbound applications and auto-score them</p>
+                    </div>
+                    <button id="btn-simulate-applicants" class="btn-primary">
+                        Simulate 8 Applicants
+                    </button>
                 </div>
 
-                <div class="mt-4 text-center">
-                    <button id="exportProofBtn" class="text-sm px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded">
-                        Export Proof Wall (PNG)
+                <div id="applicants-list" class="space-y-3">
+                    <!-- Applicants will be rendered here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION: ICE NURTURING ==================== -->
+        <section id="nurture-section" class="app-section hidden mb-12">
+            <div class="bg-panel border border-gray-800 rounded-xl p-8">
+                <h2 class="text-3xl font-bold mb-2">[ICE] Nurturing - WhatsApp Drip</h2>
+                <p class="text-gray-400 mb-8">Pre-sell sequence for qualified applicants</p>
+
+                <div class="grid md:grid-cols-3 gap-4 mb-6">
+                    <button class="btn-preview-drip px-4 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg border border-gray-700 text-left">
+                        <div class="text-xs text-gray-500">T-72h</div>
+                        <div class="text-sm font-semibold">Call Confirmed</div>
+                    </button>
+                    <button class="btn-preview-drip px-4 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg border border-gray-700 text-left">
+                        <div class="text-xs text-gray-500">T-24h</div>
+                        <div class="text-sm font-semibold">Tomorrow Reminder</div>
+                    </button>
+                    <button class="btn-preview-drip px-4 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg border border-gray-700 text-left">
+                        <div class="text-xs text-gray-500">T-2h</div>
+                        <div class="text-sm font-semibold">Final Reminder</div>
+                    </button>
+                </div>
+
+                <div class="flex gap-4">
+                    <button id="btn-test-ice-nurture" class="btn-secondary">
+                        Test ICE Nurture (WhatsApp)
+                    </button>
+                    <button id="btn-generate-ics" class="btn-secondary">
+                        Generate Calendar Invite (.ics)
                     </button>
                 </div>
             </div>
         </section>
 
-        <!-- Section: Engine 3 - ICE -->
-        <section id="engine3" class="mb-12">
-            <div class="section-header">
-                <h2 class="section-title">Engine 3: ICE (Integrated Client Engine)</h2>
-                <p class="section-subtitle">The "Machine" — Auto-Qualify, Nurture, Close, Collect</p>
-            </div>
-
-            <!-- Auto-Qualification -->
-            <div class="card mb-6">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-lg font-semibold text-white">Auto-Qualification</h3>
-                    <button id="simulateApplicantsBtn" class="btn-primary">
-                        Simulate 20 Applicants
+        <!-- ==================== SECTION: CLOSING SCRIPT ==================== -->
+        <section id="closing-section" class="app-section hidden mb-12">
+            <div class="bg-panel border border-gray-800 rounded-xl p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-2">[ICE] Closing & Handoff</h2>
+                        <p class="text-gray-400">Generate personalized closing scripts for remote closers</p>
+                    </div>
+                    <button id="btn-generate-closing" class="btn-primary">
+                        Generate Closing Script
                     </button>
                 </div>
-                <div id="applicantsList" class="space-y-2">
-                    <!-- Applicants will appear here -->
-                </div>
-            </div>
 
-            <!-- ICE Nurturing -->
-            <div class="card mb-6">
-                <h3 class="text-lg font-semibold mb-4 text-white">ICE Nurturing (Pre-Sold Pipeline)</h3>
-                <p class="text-sm text-gray-400 mb-4">Automated WhatsApp Drip Sequence</p>
-
-                <div id="dripTimeline" class="space-y-3">
-                    <!-- Timeline loaded from drip.json -->
-                </div>
-
-                <div class="mt-4">
-                    <button id="testDripBtn" class="btn-secondary">
-                        Send Test Drip to Me (WhatsApp)
-                    </button>
-                </div>
-            </div>
-
-            <!-- Closing & Handoff -->
-            <div class="card mb-6">
-                <h3 class="text-lg font-semibold mb-4 text-white">Closing & Handoff</h3>
-                <p class="text-sm text-gray-400 mb-4">Generated Custom Scripts for Remote Closers</p>
-
-                <div class="bg-gray-900 border border-gray-700 rounded-lg p-4">
-                    <div class="flex items-start justify-between mb-2">
-                        <div class="text-xs text-gray-500">Generated by ICE for Remote Closer</div>
-                        <button class="text-xs px-2 py-1 bg-primary rounded" id="generateScriptBtn">
-                            Generate Script
-                        </button>
-                    </div>
-                    <div id="closingScript" class="text-sm text-gray-300 whitespace-pre-wrap">
-                        Click "Generate Script" to create personalized closing script...
-                    </div>
-                </div>
-            </div>
-
-            <!-- Payment Automation -->
-            <div class="card">
-                <h3 class="text-lg font-semibold mb-4 text-white">ICE Payment Automation</h3>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-sm">
-                        <thead class="border-b border-gray-700">
-                            <tr class="text-left text-gray-400">
-                                <th class="pb-2">Candidate</th>
-                                <th class="pb-2">Stage</th>
-                                <th class="pb-2">Amount</th>
-                                <th class="pb-2">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="paymentTable">
-                            <!-- Payment rows will be inserted here -->
-                        </tbody>
-                    </table>
+                <div id="closing-script-display">
+                    <!-- Script will be rendered here -->
                 </div>
             </div>
         </section>
 
-        <!-- Section: System Dashboard -->
-        <section id="dashboard" class="mb-12">
-            <div class="section-header">
-                <h2 class="section-title">System Dashboard</h2>
-                <p class="section-subtitle">Real-time metrics across all engines</p>
-            </div>
+        <!-- ==================== SECTION: PAYMENT AUTOMATION ==================== -->
+        <section id="payment-section" class="app-section hidden mb-12">
+            <div class="bg-panel border border-gray-800 rounded-xl p-8">
+                <h2 class="text-3xl font-bold mb-2">[ICE] Payment Automation</h2>
+                <p class="text-gray-400 mb-8">Automated payment reminders via WhatsApp</p>
 
-            <div class="grid md:grid-cols-4 gap-4">
-                <div class="stat-card">
-                    <div class="stat-label">ASP Generated</div>
-                    <div class="stat-value" id="stat-asp">0</div>
+                <div class="bg-gray-900 border border-gray-700 rounded-lg p-6 mb-6">
+                    <div class="grid md:grid-cols-3 gap-4 text-center">
+                        <div>
+                            <div class="text-sm text-gray-500">Stage</div>
+                            <div class="text-xl font-bold text-yellow-500">Token Paid</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-500">Amount Due</div>
+                            <div class="text-xl font-bold">₹4,50,000</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-gray-500">Action</div>
+                            <button id="btn-payment-nudge" class="btn-primary mt-2">
+                                Send Payment Nudge
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-label">Qualified Leads</div>
-                    <div class="stat-value" id="stat-qualified">0</div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION: PROOFLOOP ==================== -->
+        <section id="proofloop-section" class="app-section hidden mb-12">
+            <div class="bg-panel border border-gray-800 rounded-xl p-8">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-2">ProofLoop™ System</h2>
+                        <p class="text-gray-400">Convert unqualified leads into social proof</p>
+                    </div>
+                    <button id="btn-collect-proof" class="btn-primary">
+                        Collect Feedback
+                    </button>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-label">In Nurture</div>
-                    <div class="stat-value" id="stat-nurture">0</div>
+
+                <div id="proofwall" class="grid md:grid-cols-3 gap-4">
+                    <!-- Proof tiles will be rendered here -->
                 </div>
-                <div class="stat-card">
-                    <div class="stat-label">Proof Collected</div>
-                    <div class="stat-value" id="stat-proof">0</div>
+
+                <div class="mt-6 flex gap-4 justify-center">
+                    <button id="btn-export-proof-png" class="btn-secondary">
+                        Export as PNG
+                    </button>
+                    <button id="btn-export-proof-pdf" class="btn-secondary">
+                        Export as PDF
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION: TRAFFIC ENGINE ==================== -->
+        <section id="traffic-section" class="app-section hidden mb-12">
+            <div class="bg-panel border border-gray-800 rounded-xl p-8">
+                <h2 class="text-3xl font-bold mb-2">Traffic Engine</h2>
+                <p class="text-gray-400 mb-8">3 Traffic Sources + Trust Building</p>
+
+                <div class="flex gap-2 mb-6 border-b border-gray-800">
+                    <button class="traffic-tab px-6 py-3 border-b-2 border-transparent hover:border-primary transition" data-tab="search_harvest">
+                        Search Harvest
+                    </button>
+                    <button class="traffic-tab px-6 py-3 border-b-2 border-transparent hover:border-primary transition" data-tab="piggyback">
+                        Piggyback
+                    </button>
+                    <button class="traffic-tab px-6 py-3 border-b-2 border-transparent hover:border-primary transition" data-tab="partner_taps">
+                        Partner Taps
+                    </button>
+                </div>
+
+                <div class="traffic-content" data-tab="search_harvest">
+                    <div class="bg-gray-900 border border-gray-700 rounded-lg p-6">
+                        <h3 class="font-semibold mb-4">YouTube Search (High Intent Keywords)</h3>
+                        <p class="text-sm text-gray-400">Target people actively searching for solutions</p>
+                    </div>
+                </div>
+
+                <div class="traffic-content hidden" data-tab="piggyback">
+                    <div class="bg-gray-900 border border-gray-700 rounded-lg p-6">
+                        <h3 class="font-semibold mb-4">Channel Placements</h3>
+                        <p class="text-sm text-gray-400">Advertise on established channels in your niche</p>
+                    </div>
+                </div>
+
+                <div class="traffic-content hidden" data-tab="partner_taps">
+                    <div class="bg-gray-900 border border-gray-700 rounded-lg p-6">
+                        <h3 class="font-semibold mb-4">Community Partnerships</h3>
+                        <p class="text-sm text-gray-400">Tap into existing communities and networks</p>
+                    </div>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- Footer with Acceptance Counter -->
-    <footer class="fixed bottom-0 left-0 right-0 bg-panel border-t border-gray-800 py-3">
-        <div class="container mx-auto px-6">
-            <div class="flex items-center justify-between text-sm">
-                <div class="text-gray-400">
-                    <span class="inline-block w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                    Local Preview Mode
-                </div>
-                <div class="flex items-center space-x-4">
-                    <span class="text-gray-400">Acceptance Progress:</span>
-                    <div class="px-3 py-1 bg-gray-800 rounded-lg font-mono">
-                        <span id="acceptanceCounter">0</span>/10
-                    </div>
-                </div>
-                <div class="text-gray-500 text-xs">
-                    ScaleEdge ICE v1.0 • No external calls
-                </div>
+    <!-- ==================== EVENTLOG DRAWER ==================== -->
+    <div id="eventlog-drawer" class="hidden fixed bottom-0 right-0 w-full md:w-2/3 lg:w-1/2 h-2/3 bg-panel border-t border-l border-gray-800 shadow-2xl z-50 flex flex-col">
+        <div class="flex items-center justify-between p-4 border-b border-gray-800">
+            <h3 class="text-lg font-bold">EventLog</h3>
+            <div class="flex gap-2">
+                <button id="btn-clear-log" class="px-3 py-1 bg-gray-800 hover:bg-gray-700 rounded text-xs">Clear</button>
+                <button id="btn-copy-log" class="px-3 py-1 bg-gray-800 hover:bg-gray-700 rounded text-xs">Copy</button>
+                <button id="btn-export-json" class="px-3 py-1 bg-gray-800 hover:bg-gray-700 rounded text-xs">JSON</button>
+                <button id="btn-export-csv" class="px-3 py-1 bg-gray-800 hover:bg-gray-700 rounded text-xs">CSV</button>
+                <button onclick="document.getElementById('eventlog-drawer').classList.add('hidden')" class="px-3 py-1 bg-gray-800 hover:bg-gray-700 rounded text-xs">✕</button>
             </div>
         </div>
-    </footer>
-
-    <!-- Modal: Slide Preview -->
-    <div id="slideModal" class="modal">
-        <div class="modal-content max-w-4xl">
-            <div class="flex items-center justify-between mb-4">
-                <h3 class="text-xl font-semibold" id="slideModalTitle">Slide Preview</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <div id="slideModalBody" class="bg-gray-900 rounded-lg aspect-video flex items-center justify-center">
-                <!-- Slide content here -->
-            </div>
-            <div id="slideModalNotes" class="mt-4 p-4 bg-gray-900 rounded-lg text-sm text-gray-400">
-                <!-- Speaker notes here -->
-            </div>
+        <div id="eventlog-entries" class="flex-1 overflow-y-auto p-4">
+            <!-- Log entries will be rendered here -->
         </div>
     </div>
 
-    <!-- Modal: Knowledge Base -->
-    <div id="knowledgeModal" class="modal">
-        <div class="modal-content max-w-3xl">
-            <div class="flex items-center justify-between mb-4">
-                <h3 class="text-xl font-semibold">Knowledge Base</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <div class="space-y-4">
-                <div class="bg-gray-900 rounded-lg p-4">
-                    <h4 class="font-semibold mb-2 text-primary">What is ICE?</h4>
-                    <p class="text-sm text-gray-400">Integrated Client Engine — A complete system to acquire high-ticket clients without manual grinding. Three engines work together: ASP (Vehicle), Traffic+Trust (Fuel), ICE (Machine).</p>
-                </div>
-                <div class="bg-gray-900 rounded-lg p-4">
-                    <h4 class="font-semibold mb-2 text-primary">Engine Flow</h4>
-                    <p class="text-sm text-gray-400">
-                        1. Traffic → Watch AI Twin (ASP)<br>
-                        2. High-Intent → Apply<br>
-                        3. Auto-Qualify → ICE Nurture (Qualified) or ProofLoop (Unqualified)<br>
-                        4. Pre-Sold → Call → Close<br>
-                        5. Automated Payment Collection
-                    </p>
-                </div>
-                <div class="bg-gray-900 rounded-lg p-4">
-                    <h4 class="font-semibold mb-2 text-primary">Why Hinglish?</h4>
-                    <p class="text-sm text-gray-400">India-first approach. Natural language for ICP who thinks: "Pipeline unpredictable hai", "Selling nahi aati". Creates instant relatability and trust.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- ==================== PROOFLOOP MODAL ==================== -->
+    <div id="proofloop-modal" class="hidden fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+        <div class="bg-panel border border-gray-800 rounded-xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <h3 class="text-2xl font-bold mb-4">Submit Your Feedback</h3>
+            <p class="text-gray-400 mb-6">Share your experience and get your bonus</p>
 
-    <!-- Modal: EventLog -->
-    <div id="eventLogModal" class="modal">
-        <div class="modal-content max-w-4xl">
-            <div class="flex items-center justify-between mb-4">
-                <h3 class="text-xl font-semibold">EventLog</h3>
-                <div class="flex items-center space-x-2">
-                    <button id="clearLogBtn" class="text-sm px-3 py-1 bg-gray-700 hover:bg-gray-600 rounded">Clear</button>
-                    <button class="modal-close">&times;</button>
-                </div>
-            </div>
-            <div id="eventLogContent" class="bg-gray-900 rounded-lg p-4 max-h-96 overflow-y-auto font-mono text-xs space-y-1">
-                <!-- Log entries here -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal: Connections -->
-    <div id="connectionsModal" class="modal">
-        <div class="modal-content max-w-2xl">
-            <div class="flex items-center justify-between mb-4">
-                <h3 class="text-xl font-semibold">Connections</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <div class="space-y-4">
-                <div class="bg-yellow-900/20 border border-yellow-700 rounded-lg p-4">
-                    <div class="flex items-start space-x-3">
-                        <span class="text-2xl">⚠️</span>
-                        <div>
-                            <h4 class="font-semibold text-yellow-500 mb-1">Local Preview Mode</h4>
-                            <p class="text-sm text-gray-400">You are viewing simulated data. Real WhatsApp messages, payment gateway integration, and AI API calls require proper setup.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="space-y-3">
-                    <div class="flex items-center justify-between p-3 bg-gray-900 rounded-lg">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center">💬</div>
-                            <div>
-                                <div class="text-sm font-medium">WhatsApp Business API</div>
-                                <div class="text-xs text-gray-500">Simulated Connection</div>
-                            </div>
-                        </div>
-                        <span class="px-2 py-1 bg-gray-700 text-xs rounded">Preview</span>
-                    </div>
-
-                    <div class="flex items-center justify-between p-3 bg-gray-900 rounded-lg">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center">💳</div>
-                            <div>
-                                <div class="text-sm font-medium">Payment Gateway</div>
-                                <div class="text-xs text-gray-500">Simulated Connection</div>
-                            </div>
-                        </div>
-                        <span class="px-2 py-1 bg-gray-700 text-xs rounded">Preview</span>
-                    </div>
-
-                    <div class="flex items-center justify-between p-3 bg-gray-900 rounded-lg">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-8 h-8 bg-gray-800 rounded-full flex items-center justify-center">🤖</div>
-                            <div>
-                                <div class="text-sm font-medium">AI API (Slide Generation)</div>
-                                <div class="text-xs text-gray-500">Simulated Connection</div>
-                            </div>
-                        </div>
-                        <span class="px-2 py-1 bg-gray-700 text-xs rounded">Preview</span>
-                    </div>
-                </div>
-
-                <div class="text-xs text-gray-500 text-center pt-4 border-t border-gray-800">
-                    All features are functional in preview mode with local data only.
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal: ProofLoop Feedback -->
-    <div id="proofFeedbackModal" class="modal">
-        <div class="modal-content max-w-2xl">
-            <div class="flex items-center justify-between mb-4">
-                <h3 class="text-xl font-semibold">Genuine Content Feedback</h3>
-                <button class="modal-close">&times;</button>
-            </div>
-            <div class="space-y-4">
-                <p class="text-sm text-gray-400">Help us improve and get your exclusive bonus! Rate your experience:</p>
-
+            <div class="space-y-6">
                 <div>
-                    <label class="block text-sm font-medium mb-2">Rating</label>
-                    <div class="flex space-x-2" id="starRating">
-                        <button class="star text-2xl hover:text-yellow-500 transition" data-rating="1">⭐</button>
-                        <button class="star text-2xl hover:text-yellow-500 transition" data-rating="2">⭐</button>
-                        <button class="star text-2xl hover:text-yellow-500 transition" data-rating="3">⭐</button>
-                        <button class="star text-2xl hover:text-yellow-500 transition" data-rating="4">⭐</button>
-                        <button class="star text-2xl hover:text-yellow-500 transition" data-rating="5">⭐</button>
+                    <label class="block text-sm font-medium mb-3">Rating</label>
+                    <div class="flex gap-2">
+                        <input type="radio" name="proof-rating" value="1" id="rating-1" class="hidden">
+                        <label for="rating-1" class="cursor-pointer text-3xl hover:text-yellow-500">⭐</label>
+
+                        <input type="radio" name="proof-rating" value="2" id="rating-2" class="hidden">
+                        <label for="rating-2" class="cursor-pointer text-3xl hover:text-yellow-500">⭐</label>
+
+                        <input type="radio" name="proof-rating" value="3" id="rating-3" class="hidden">
+                        <label for="rating-3" class="cursor-pointer text-3xl hover:text-yellow-500">⭐</label>
+
+                        <input type="radio" name="proof-rating" value="4" id="rating-4" class="hidden">
+                        <label for="rating-4" class="cursor-pointer text-3xl hover:text-yellow-500">⭐</label>
+
+                        <input type="radio" name="proof-rating" value="5" id="rating-5" class="hidden">
+                        <label for="rating-5" class="cursor-pointer text-3xl hover:text-yellow-500">⭐</label>
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium mb-2">Written Feedback</label>
-                    <textarea id="feedbackText" class="input-field" rows="4" placeholder="What did you find most valuable?"></textarea>
+                    <label class="block text-sm font-medium mb-2">Your Feedback</label>
+                    <textarea id="proof-feedback" rows="4" class="input-field" placeholder="What did you find most valuable?"></textarea>
                 </div>
 
-                <div>
-                    <label class="block text-sm font-medium mb-2">Video/Voice Note (Optional)</label>
-                    <div class="flex space-x-2">
-                        <button id="recordVideoBtn" class="btn-secondary flex-1">📹 Record Video</button>
-                        <button id="recordVoiceBtn" class="btn-secondary flex-1">🎤 Record Voice</button>
-                    </div>
-                    <div id="recordingStatus" class="text-xs text-gray-500 mt-2"></div>
+                <div class="flex gap-4">
+                    <button id="btn-submit-proof" class="btn-primary flex-1">
+                        Submit & Get Bonus
+                    </button>
+                    <button onclick="document.getElementById('proofloop-modal').classList.add('hidden')" class="btn-secondary">
+                        Cancel
+                    </button>
                 </div>
-
-                <button id="submitFeedbackBtn" class="btn-primary w-full">
-                    Submit & Get Bonus
-                </button>
             </div>
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script type="module" src="js/app.js"></script>
+    <!-- ==================== NAVIGATION HELPER ==================== -->
+    <nav class="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-auto bg-panel border border-gray-800 rounded-xl p-4 shadow-2xl z-40">
+        <div class="text-xs text-gray-500 mb-2 text-center md:text-left">Quick Navigation</div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+            <button onclick="document.getElementById('setup-section').classList.remove('hidden'); document.querySelectorAll('.app-section:not(#setup-section)').forEach(s => s.classList.add('hidden'))" class="px-3 py-2 bg-gray-800 hover:bg-gray-700 rounded">Setup</button>
+            <button onclick="document.getElementById('applicants-section').classList.remove('hidden'); document.querySelectorAll('.app-section:not(#applicants-section)').forEach(s => s.classList.add('hidden'))" class="px-3 py-2 bg-gray-800 hover:bg-gray-700 rounded">Applicants</button>
+            <button onclick="document.getElementById('nurture-section').classList.remove('hidden'); document.querySelectorAll('.app-section:not(#nurture-section)').forEach(s => s.classList.add('hidden'))" class="px-3 py-2 bg-gray-800 hover:bg-gray-700 rounded">Nurture</button>
+            <button onclick="document.getElementById('closing-section').classList.remove('hidden'); document.querySelectorAll('.app-section:not(#closing-section)').forEach(s => s.classList.add('hidden'))" class="px-3 py-2 bg-gray-800 hover:bg-gray-700 rounded">Closing</button>
+            <button onclick="document.getElementById('payment-section').classList.remove('hidden'); document.querySelectorAll('.app-section:not(#payment-section)').forEach(s => s.classList.add('hidden'))" class="px-3 py-2 bg-gray-800 hover:bg-gray-700 rounded">Payment</button>
+            <button onclick="document.getElementById('proofloop-section').classList.remove('hidden'); document.querySelectorAll('.app-section:not(#proofloop-section)').forEach(s => s.classList.add('hidden'))" class="px-3 py-2 bg-gray-800 hover:bg-gray-700 rounded">ProofLoop</button>
+            <button onclick="document.getElementById('traffic-section').classList.remove('hidden'); document.querySelectorAll('.app-section:not(#traffic-section)').forEach(s => s.classList.add('hidden'))" class="px-3 py-2 bg-gray-800 hover:bg-gray-700 rounded">Traffic</button>
+            <button onclick="window.APP.eventLog.toggle()" class="px-3 py-2 bg-primary hover:bg-accent rounded">EventLog</button>
+        </div>
+    </nav>
+
+    <!-- Application Script -->
+    <script src="js/app.js"></script>
+
 </body>
 </html>
