@@ -1,0 +1,194 @@
+{
+  "search_harvest": [
+    {
+      "keyword": "B2B client acquisition system",
+      "intent": "High",
+      "volume": "1.2K/mo",
+      "cpc": "₹180",
+      "difficulty": "Medium",
+      "contentType": "Blog post",
+      "status": "published",
+      "url": "/blog/b2b-client-acquisition"
+    },
+    {
+      "keyword": "automated sales funnel India",
+      "intent": "High",
+      "volume": "890/mo",
+      "cpc": "₹165",
+      "difficulty": "Medium",
+      "contentType": "Case study",
+      "status": "published",
+      "url": "/case-studies/automated-funnel"
+    },
+    {
+      "keyword": "high ticket coaching system",
+      "intent": "High",
+      "volume": "720/mo",
+      "cpc": "₹210",
+      "difficulty": "High",
+      "contentType": "Blog post",
+      "status": "draft",
+      "url": null
+    },
+    {
+      "keyword": "AI sales automation for consultants",
+      "intent": "Medium",
+      "volume": "650/mo",
+      "cpc": "₹145",
+      "difficulty": "Low",
+      "contentType": "Tool comparison",
+      "status": "planning",
+      "url": null
+    },
+    {
+      "keyword": "predictable pipeline system",
+      "intent": "High",
+      "volume": "580/mo",
+      "cpc": "₹190",
+      "difficulty": "Medium",
+      "contentType": "Guide",
+      "status": "published",
+      "url": "/guides/predictable-pipeline"
+    },
+    {
+      "keyword": "WhatsApp lead nurturing automation",
+      "intent": "Medium",
+      "volume": "490/mo",
+      "cpc": "₹125",
+      "difficulty": "Low",
+      "contentType": "Blog post",
+      "status": "published",
+      "url": "/blog/whatsapp-automation"
+    }
+  ],
+  "piggyback": [
+    {
+      "channel": "Growth Talks India",
+      "host": "Vaibhav Sisinty",
+      "audience": "45K",
+      "type": "Business Podcast",
+      "niche": "Startups & Growth",
+      "format": "Pre-roll Ad",
+      "status": "negotiating",
+      "cost": "₹25K/month",
+      "expectedLeads": "15-20/month",
+      "cpl": "₹1,250-1,600"
+    },
+    {
+      "channel": "Scale Podcast",
+      "host": "Arnav Gupta",
+      "audience": "32K",
+      "type": "Startup Stories",
+      "niche": "B2B SaaS",
+      "format": "Sponsorship",
+      "status": "active",
+      "cost": "₹18K/month",
+      "expectedLeads": "10-15/month",
+      "cpl": "₹1,200-1,800"
+    },
+    {
+      "channel": "Founder's Cafe",
+      "host": "Ankur Warikoo",
+      "audience": "28K",
+      "type": "YouTube Channel",
+      "niche": "Indian Founders",
+      "format": "Integration",
+      "status": "pending_outreach",
+      "cost": "TBD",
+      "expectedLeads": "TBD",
+      "cpl": "TBD"
+    },
+    {
+      "channel": "B2B Mastermind Show",
+      "host": "Dhruv Sharma",
+      "audience": "19K",
+      "type": "YouTube Series",
+      "niche": "B2B Sales",
+      "format": "Guest Spot",
+      "status": "scheduled",
+      "cost": "₹0 (guest)",
+      "recordingDate": "2024-12-15",
+      "expectedLeads": "25-30/month",
+      "cpl": "₹0"
+    },
+    {
+      "channel": "Agency Insider",
+      "host": "Prateek Shah",
+      "audience": "15K",
+      "type": "Newsletter",
+      "niche": "Agency Owners",
+      "format": "Sponsored Section",
+      "status": "active",
+      "cost": "₹12K/issue",
+      "frequency": "2x/month",
+      "expectedLeads": "8-12/month",
+      "cpl": "₹1,000-1,500"
+    }
+  ],
+  "partner_taps": [
+    {
+      "community": "B2B Leaders Community",
+      "platform": "Slack",
+      "members": "2.5K",
+      "activity": "High",
+      "niche": "B2B SaaS",
+      "partnership": "Co-host monthly webinar",
+      "status": "active",
+      "leadGen": "20-25/month",
+      "cost": "₹0 (value exchange)"
+    },
+    {
+      "community": "Founder Circle India",
+      "platform": "WhatsApp",
+      "members": "1.8K",
+      "activity": "Very High",
+      "niche": "Tech Founders",
+      "partnership": "Weekly tips + case studies",
+      "status": "active",
+      "leadGen": "15-20/month",
+      "cost": "₹0 (community contribution)"
+    },
+    {
+      "community": "Growth Hackers India",
+      "platform": "Telegram",
+      "members": "3.2K",
+      "activity": "Medium",
+      "niche": "Marketing & Growth",
+      "partnership": "Tool showcase",
+      "status": "pending_approval",
+      "leadGen": "TBD",
+      "cost": "₹0"
+    },
+    {
+      "community": "Agency Owners Club",
+      "platform": "Discord",
+      "members": "980",
+      "activity": "High",
+      "niche": "Agency Leaders",
+      "partnership": "AMA sessions",
+      "status": "active",
+      "leadGen": "10-12/month",
+      "cost": "₹0"
+    },
+    {
+      "community": "Coach Connect India",
+      "platform": "Facebook",
+      "members": "5.5K",
+      "activity": "Medium",
+      "niche": "Coaches & Trainers",
+      "partnership": "Guest expert posts",
+      "status": "negotiating",
+      "leadGen": "TBD",
+      "cost": "₹0"
+    }
+  ],
+  "summary": {
+    "totalChannels": 16,
+    "activeChannels": 6,
+    "estimatedMonthlyLeads": "103-139",
+    "totalMonthlyCost": "₹55K-79K",
+    "avgCostPerLead": "₹400-767",
+    "topPerformer": "B2B Mastermind Show (guest spot)",
+    "quickWin": "Partner Taps (zero cost, high activity)"
+  }
+}

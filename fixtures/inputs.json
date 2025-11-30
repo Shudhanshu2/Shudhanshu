@@ -1,0 +1,28 @@
+{
+  "icp": "B2B SaaS Founders",
+  "niche": "b2b_saas",
+  "offer": "Revenue Acceleration Program",
+  "ticket": "₹5-15L",
+  "salesModel": "retainer",
+  "pains": [
+    "Pipeline unpredictable hai",
+    "Demo-to-close bahut slow",
+    "Unqualified trials waste time"
+  ],
+  "brandColor": "#DC2626",
+  "logo": null,
+  "proofTiles": [
+    {
+      "name": "Rajesh K.",
+      "niche": "B2B SaaS",
+      "rating": 5,
+      "text": "Demo-to-close doubled in 60 days"
+    },
+    {
+      "name": "Priya S.",
+      "niche": "Agency",
+      "rating": 5,
+      "text": "Pipeline predictable, ROI in 6 weeks"
+    }
+  ]
+}

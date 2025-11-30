@@ -1,0 +1,62 @@
+[
+  {
+    "id": "p1",
+    "label": "Pipeline unpredictable hai",
+    "severity": "high",
+    "niches": ["b2b_saas", "agency", "consultant"]
+  },
+  {
+    "id": "p2",
+    "label": "Selling nahi aati",
+    "severity": "high",
+    "niches": ["consultant", "coach", "freelancer"]
+  },
+  {
+    "id": "p3",
+    "label": "Manual grinding daily",
+    "severity": "medium",
+    "niches": ["agency", "freelancer", "saas"]
+  },
+  {
+    "id": "p4",
+    "label": "Long sales cycles",
+    "severity": "high",
+    "niches": ["b2b_saas", "consultant", "enterprise"]
+  },
+  {
+    "id": "p5",
+    "label": "Unqualified demos waste time",
+    "severity": "high",
+    "niches": ["b2b_saas", "coach", "consultant"]
+  },
+  {
+    "id": "p6",
+    "label": "Revenue inconsistent",
+    "severity": "high",
+    "niches": ["agency", "freelancer", "coach"]
+  },
+  {
+    "id": "p7",
+    "label": "Client acquisition expensive",
+    "severity": "medium",
+    "niches": ["agency", "b2b_saas", "consultant"]
+  },
+  {
+    "id": "p8",
+    "label": "Retention low hai",
+    "severity": "medium",
+    "niches": ["agency", "saas", "coach"]
+  },
+  {
+    "id": "p9",
+    "label": "Scaling mushkil hai",
+    "severity": "high",
+    "niches": ["agency", "freelancer", "consultant"]
+  },
+  {
+    "id": "p10",
+    "label": "Launch fatigue",
+    "severity": "medium",
+    "niches": ["coach", "course_creator"]
+  }
+]

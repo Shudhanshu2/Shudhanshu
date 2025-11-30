@@ -1,0 +1,99 @@
+[
+  {
+    "id": "p001",
+    "name": "Rahul Sharma",
+    "email": "rahul.sharma@example.com",
+    "phone": "+91 98765 43210",
+    "niche": "B2B SaaS",
+    "pain": "Demo-to-close slow hai",
+    "score": 85,
+    "qualified": true,
+    "status": "ice_nurturing",
+    "appliedAt": "2024-11-25T10:30:00Z",
+    "callScheduled": "2024-11-28T14:00:00Z",
+    "responses": {
+      "q1_revenue": "₹8L/month",
+      "q2_pain": "Unqualified trials bahut",
+      "q3_timeline": "Next 30 days",
+      "q4_budget": "₹5-10L ready"
+    }
+  },
+  {
+    "id": "p002",
+    "name": "Priya Patel",
+    "email": "priya.patel@example.com",
+    "phone": "+91 98765 43211",
+    "niche": "Agency Owner",
+    "pain": "Client acquisition expensive",
+    "score": 72,
+    "qualified": true,
+    "status": "call_booked",
+    "appliedAt": "2024-11-26T09:15:00Z",
+    "callScheduled": "2024-11-29T11:00:00Z",
+    "responses": {
+      "q1_revenue": "₹12L/month",
+      "q2_pain": "Scaling mushkil",
+      "q3_timeline": "ASAP",
+      "q4_budget": "₹10L+"
+    }
+  },
+  {
+    "id": "p003",
+    "name": "Amit Kumar",
+    "email": "amit.kumar@example.com",
+    "phone": "+91 98765 43212",
+    "niche": "Coach",
+    "pain": "Launch fatigue",
+    "score": 45,
+    "qualified": false,
+    "status": "proofloop",
+    "appliedAt": "2024-11-24T16:45:00Z",
+    "callScheduled": null,
+    "responses": {
+      "q1_revenue": "₹2L/month",
+      "q2_pain": "Evergreen nahi ban raha",
+      "q3_timeline": "3-6 months",
+      "q4_budget": "₹2-3L max"
+    }
+  },
+  {
+    "id": "p004",
+    "name": "Sneha Desai",
+    "email": "sneha.desai@example.com",
+    "phone": "+91 98765 43213",
+    "niche": "B2B Consultant",
+    "pain": "Pipeline unpredictable",
+    "score": 68,
+    "qualified": true,
+    "status": "slides_viewed",
+    "appliedAt": "2024-11-27T11:20:00Z",
+    "callScheduled": null,
+    "responses": {
+      "q1_revenue": "₹6L/month",
+      "q2_pain": "Selling nahi aati",
+      "q3_timeline": "Next 60 days",
+      "q4_budget": "₹5-8L"
+    }
+  },
+  {
+    "id": "p005",
+    "name": "Vikram Singh",
+    "email": "vikram.singh@example.com",
+    "phone": "+91 98765 43214",
+    "niche": "SaaS Founder",
+    "pain": "Sales team expensive",
+    "score": 92,
+    "qualified": true,
+    "status": "closed_won",
+    "appliedAt": "2024-11-20T08:00:00Z",
+    "callScheduled": "2024-11-23T15:00:00Z",
+    "closedAt": "2024-11-24T10:30:00Z",
+    "paymentReceived": true,
+    "responses": {
+      "q1_revenue": "₹15L/month",
+      "q2_pain": "Demo-to-close 60+ days",
+      "q3_timeline": "Immediate",
+      "q4_budget": "₹15L+ ready"
+    }
+  }
+]

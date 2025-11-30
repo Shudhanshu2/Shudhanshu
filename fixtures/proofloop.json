@@ -1,0 +1,33 @@
+{
+  "enabled": true,
+  "config": {
+    "triggerScore": 40,
+    "collectAfter": "video_complete",
+    "bonusDelay": "immediate",
+    "feedbackTypes": ["text", "video", "audio"],
+    "minRating": 3,
+    "autoPublish": false
+  },
+  "copy": {
+    "title": "Quick Favor? 🙏",
+    "subtitle": "Get a free bonus for 2 minutes of feedback",
+    "intro": "Hey {name}! Thanks for checking out the slides/video.\n\nWhile this might not be a fit right now, I'd love your honest feedback to improve the content.",
+    "questions": [
+      "What did you find most valuable in the presentation?",
+      "What was unclear or could be improved?",
+      "Would you recommend this to someone facing {pain}?"
+    ],
+    "bonusPrompt": "As a thank you, choose one free bonus:",
+    "videoRequestOptional": "Want to share a quick video testimonial? (Optional but hugely appreciated!)",
+    "thanks": "Thank you, {name}! Your bonus will be sent to {email} within 24 hours. 🎁"
+  },
+  "feedback": [],
+  "bonuses": [
+    "bonus_001",
+    "bonus_002",
+    "bonus_003",
+    "bonus_004",
+    "bonus_005",
+    "bonus_006"
+  ]
+}

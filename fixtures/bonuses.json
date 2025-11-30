@@ -1,0 +1,70 @@
+[
+  {
+    "id": "bonus_001",
+    "title": "10 High-Intent Keywords for Your Niche",
+    "description": "Research-backed keywords that actually convert. Industry-specific, India-focused, with search volume and CPC data.",
+    "format": "PDF",
+    "pages": 5,
+    "deliveryMethod": "email",
+    "expiry": "72h",
+    "thumbnail": "https://via.placeholder.com/400x300/DC2626/FFFFFF?text=Keywords",
+    "previewText": "Includes:\n- Top 10 buyer-intent keywords\n- Monthly search volume\n- Competition analysis\n- Content angles for each",
+    "cta": "Get Your Keywords"
+  },
+  {
+    "id": "bonus_002",
+    "title": "Client Qualification Checklist",
+    "description": "The exact checklist we use to qualify high-ticket B2B leads. Notion template included.",
+    "format": "Notion Template",
+    "deliveryMethod": "link",
+    "expiry": "72h",
+    "thumbnail": "https://via.placeholder.com/400x300/DC2626/FFFFFF?text=Checklist",
+    "previewText": "Includes:\n- PAIN/BUDGET/TIMELINE/FIT framework\n- Scoring system\n- Automated workflows\n- Email templates",
+    "cta": "Get Checklist"
+  },
+  {
+    "id": "bonus_003",
+    "title": "WhatsApp Pre-Sell Script",
+    "description": "Copy-paste WhatsApp drip sequence (T-72h to T-15m) that gets 85%+ show-up rates.",
+    "format": "Google Doc",
+    "deliveryMethod": "link",
+    "expiry": "72h",
+    "thumbnail": "https://via.placeholder.com/400x300/DC2626/FFFFFF?text=Script",
+    "previewText": "Includes:\n- 5 message templates\n- Hinglish versions\n- Timing guidelines\n- Personalization variables",
+    "cta": "Get Script"
+  },
+  {
+    "id": "bonus_004",
+    "title": "Case Study Teardown (PDF)",
+    "description": "How [Redacted B2B SaaS] went from ₹3L to ₹18L MRR using ICE system. Full breakdown.",
+    "format": "PDF",
+    "pages": 12,
+    "deliveryMethod": "email",
+    "expiry": "72h",
+    "thumbnail": "https://via.placeholder.com/400x300/DC2626/FFFFFF?text=Case+Study",
+    "previewText": "Includes:\n- Before/after metrics\n- Exact funnel setup\n- Timeline breakdown\n- Lessons learned",
+    "cta": "Get Case Study"
+  },
+  {
+    "id": "bonus_005",
+    "title": "AI Twin Slide Template",
+    "description": "The exact 20-slide template we use for AI Twin presentations. Canva + PPT versions.",
+    "format": "Canva + PowerPoint",
+    "deliveryMethod": "link",
+    "expiry": "72h",
+    "thumbnail": "https://via.placeholder.com/400x300/DC2626/FFFFFF?text=Slides",
+    "previewText": "Includes:\n- 20-slide structure\n- 80/20 value-pitch ratio\n- Script for each slide\n- Design best practices",
+    "cta": "Get Template"
+  },
+  {
+    "id": "bonus_006",
+    "title": "Closing Script Generator",
+    "description": "Interactive Notion template that generates custom closing scripts based on your niche, offer, and pain points.",
+    "format": "Notion Template",
+    "deliveryMethod": "link",
+    "expiry": "unlimited",
+    "thumbnail": "https://via.placeholder.com/400x300/DC2626/FFFFFF?text=Generator",
+    "previewText": "Includes:\n- Diagnosis framework\n- Objection handling library\n- ROI calculator\n- Payment script",
+    "cta": "Get Generator"
+  }
+]

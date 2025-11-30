@@ -1,0 +1,56 @@
+[
+  {
+    "id": "pay001",
+    "prospectId": "p005",
+    "prospectName": "Vikram Singh",
+    "offer": "Revenue Acceleration Program",
+    "stage": "full_paid",
+    "tokenAmount": "₹50,000",
+    "totalAmount": "₹10,00,000",
+    "balanceAmount": "₹0",
+    "tokenPaidAt": "2024-11-24T11:00:00Z",
+    "fullPaidAt": "2024-11-24T11:00:00Z",
+    "paymentMethod": "razorpay",
+    "paymentLink": "https://razorpay.me/vikram001",
+    "status": "completed"
+  },
+  {
+    "id": "pay002",
+    "prospectId": "p001",
+    "prospectName": "Rahul Sharma",
+    "offer": "Revenue Acceleration Program",
+    "stage": "token_paid",
+    "tokenAmount": "₹50,000",
+    "totalAmount": "₹8,00,000",
+    "balanceAmount": "₹7,50,000",
+    "tokenPaidAt": "2024-11-26T14:30:00Z",
+    "fullPaidAt": null,
+    "paymentMethod": "razorpay",
+    "paymentLink": "https://razorpay.me/rahul001",
+    "status": "token_received",
+    "balancePaymentTerms": "60 days"
+  },
+  {
+    "id": "pay003",
+    "prospectId": "p002",
+    "prospectName": "Priya Patel",
+    "offer": "Revenue Acceleration Program",
+    "stage": "pending",
+    "tokenAmount": "₹50,000",
+    "totalAmount": "₹12,00,000",
+    "balanceAmount": "₹12,00,000",
+    "tokenPaidAt": null,
+    "fullPaidAt": null,
+    "paymentMethod": "razorpay",
+    "paymentLink": "https://razorpay.me/priya001",
+    "status": "link_sent",
+    "linkSentAt": "2024-11-27T16:00:00Z",
+    "followups": [
+      {
+        "sentAt": "2024-11-28T16:00:00Z",
+        "type": "t+24h",
+        "message": "Quick follow-up on payment link"
+      }
+    ]
+  }
+]

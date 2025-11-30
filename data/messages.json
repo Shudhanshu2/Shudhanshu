@@ -1,0 +1,46 @@
+{
+  "whatsapp": {
+    "t_minus_72h": {
+      "title": "Call Confirmed! 🎯",
+      "message": "Hey {name}! Your call is confirmed for {date} at {time}. Excited to chat about {pain}! 🚀"
+    },
+    "t_minus_24h": {
+      "title": "Tomorrow Reminder ⏰",
+      "message": "Reminder: We have our call tomorrow at {time}. Looking forward to helping you solve {pain}!"
+    },
+    "t_minus_2h": {
+      "title": "Today's Call 📞",
+      "message": "Our call is in 2 hours! Calendar link: {calendar_link}\n\nI've prepared some insights on {pain} specifically for you."
+    },
+    "t_minus_15m": {
+      "title": "Starting Soon ⚡",
+      "message": "Call starts in 15 minutes! Link: {meeting_link}\n\nSee you soon!"
+    },
+    "post_call_payment": {
+      "title": "Next Steps - Payment 💳",
+      "message": "Great call, {name}! As discussed, here's the payment link for {offer}:\n\n{payment_link}\n\nToken amount: {token_amount}\nTotal: {total_amount}\n\nLet me know once done!"
+    },
+    "payment_followup_24h": {
+      "title": "Payment Reminder",
+      "message": "Hi {name}, following up on the payment link I shared yesterday. Any questions?\n\n{payment_link}"
+    },
+    "payment_followup_48h": {
+      "title": "Quick Check-in",
+      "message": "Hey {name}, wanted to check if you had any questions about {offer} or the payment process. Here if you need anything!"
+    }
+  },
+  "email": {
+    "confirmation": {
+      "subject": "Call Confirmed - {offer}",
+      "body": "Hi {name},\n\nYour discovery call is confirmed for {date} at {time}.\n\nWe'll discuss:\n- {pain}\n- How {offer} can help\n- Next steps\n\nCalendar: {calendar_link}\nMeeting: {meeting_link}\n\nSee you soon!\n\nBest,\n{sender_name}"
+    },
+    "post_call": {
+      "subject": "Great talking with you, {name}!",
+      "body": "Hi {name},\n\nGreat call today! As discussed:\n\n✓ Your main challenge: {pain}\n✓ Solution: {offer}\n✓ Investment: {total_amount}\n✓ Token: {token_amount}\n\nPayment link: {payment_link}\n\nQuestions? Just reply to this email.\n\nBest,\n{sender_name}"
+    }
+  },
+  "sms": {
+    "reminder_2h": "Call in 2 hours! Link: {meeting_link}",
+    "payment_link": "Payment link: {payment_link} | Token: {token_amount}"
+  }
+}

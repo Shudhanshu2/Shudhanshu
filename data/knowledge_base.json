@@ -1,0 +1,127 @@
+{
+  "ice": {
+    "title": "What is ICE?",
+    "subtitle": "Integrated Client Engine",
+    "content": "ICE (Integrated Client Engine) is a complete funnel orchestration system that automates the entire client acquisition journey - from initial inquiry to payment confirmation.\n\nIt combines:\n- Auto-qualification (PAIN/BUDGET/TIMELINE/FIT scoring)\n- WhatsApp pre-sell drip sequences\n- AI Twin presentation automation\n- Closing script generation\n- Payment follow-up automation\n- ProofLoop™ for social proof collection",
+    "benefits": [
+      "Reduce unqualified demos by 70%",
+      "Shorten sales cycles from 45+ days to 20 days",
+      "Automate 80% of pre-call nurturing",
+      "Generate social proof from unqualified leads"
+    ],
+    "use_cases": [
+      "High-ticket B2B consulting",
+      "Agency client acquisition",
+      "Coaching & course creators",
+      "SaaS founder selling to SMBs"
+    ]
+  },
+  "proofloop": {
+    "title": "What is ProofLoop™?",
+    "subtitle": "Turn Unqualified Leads into Social Proof",
+    "content": "ProofLoop™ is a system to extract value from leads who don't qualify for your high-ticket offer.\n\nInstead of discarding them, you:\n1. Collect their feedback on your presentation\n2. Offer a bonus (playbook, checklist, template)\n3. Request a video testimonial\n4. Use that proof to convert future qualified leads\n\nResult: Every lead - qualified or not - contributes to your marketing assets.",
+    "triggers": [
+      "Score below qualification threshold (e.g., <60)",
+      "After video completion (even if unqualified)",
+      "After slides viewed but not booked"
+    ],
+    "bonuses": [
+      "10 High-Intent Keywords for Your Niche (PDF)",
+      "Client Qualification Checklist (Notion template)",
+      "WhatsApp Pre-Sell Script (Google Doc)"
+    ]
+  },
+  "traffic_engine": {
+    "title": "Traffic Engine",
+    "subtitle": "Three Pillars of High-Intent Traffic",
+    "content": "The Traffic Engine uses three complementary strategies to fill your pipeline with qualified leads:\n\n1. **Search Harvest**: SEO-optimized content targeting high-intent keywords\n2. **Piggyback**: Guest spots on podcasts, newsletters, and YouTube channels your ICP already follows\n3. **Partner Taps**: Strategic partnerships with communities and networks where your ICP hangs out",
+    "search_harvest": {
+      "description": "Capture buyers actively searching for solutions",
+      "keywords_examples": [
+        "B2B client acquisition system",
+        "automated sales funnel India",
+        "high ticket coaching system"
+      ],
+      "content_types": [
+        "Blog posts (2000+ words, SEO-optimized)",
+        "Case studies (social proof + keywords)",
+        "Tool comparisons (capture competitor traffic)"
+      ]
+    },
+    "piggyback": {
+      "description": "Leverage existing audiences via guest content",
+      "channels": [
+        "Business podcasts (pre-roll ads, guest spots)",
+        "YouTube channels (integrations, sponsored videos)",
+        "Newsletters (sponsored sections, contributor articles)"
+      ],
+      "pitch_template": "Hi {host}, I help {ICP} solve {pain}. Would love to share {topic} with your audience."
+    },
+    "partner_taps": {
+      "description": "Tap into communities where your ICP already congregates",
+      "networks": [
+        "Slack groups (B2B SaaS, Founders)",
+        "WhatsApp communities (Coaches, Consultants)",
+        "Discord servers (Agency Owners)",
+        "LinkedIn groups (Industry-specific)"
+      ],
+      "collaboration_types": [
+        "Co-host webinars",
+        "Cross-promote offers",
+        "Share case studies",
+        "Run joint challenges"
+      ]
+    }
+  },
+  "ai_twin": {
+    "title": "AI Twin Presentation",
+    "subtitle": "Automated Value-First Selling",
+    "content": "The AI Twin is a pre-recorded slide deck + video that educates prospects BEFORE the sales call.\n\nStructure:\n- Slides 1-16: Pure value (80%) - frameworks, insights, case studies\n- Slides 17-20: Pitch (20%) - offer, investment, booking\n\nWhy it works:\n1. Prospects self-qualify by watching\n2. You don't waste time on unqualified demos\n3. Qualified leads come pre-sold\n4. Scales infinitely (no marginal time cost)",
+    "slide_breakdown": {
+      "value_slides": "Slides 1-16 (80%)",
+      "pitch_slides": "Slides 17-20 (20%)",
+      "gating": "Video unlocks after 70% slide completion"
+    },
+    "metrics": {
+      "completion_rate": "60-70% for qualified leads",
+      "booking_rate": "40% of video completions book a call",
+      "time_saved": "15+ hours/week (no unqualified demos)"
+    }
+  },
+  "scoring_system": {
+    "title": "PAIN/BUDGET/TIMELINE/FIT Scoring",
+    "subtitle": "Auto-Qualify Leads Before You Talk",
+    "content": "Every applicant is scored on 4 dimensions:\n\n1. **PAIN (40%)**: How acute is their problem?\n2. **BUDGET (30%)**: Can they afford your offer?\n3. **TIMELINE (20%)**: When do they need a solution?\n4. **FIT (10%)**: Are they your ideal client profile?\n\nTotal score determines:\n- ≥60: Qualified → ICE Nurturing → Closing Call\n- <60: Rejected → ProofLoop™ → Social Proof",
+    "thresholds": {
+      "qualified": "≥60",
+      "ice_nurture": "≥60",
+      "proofloop": "<60"
+    },
+    "customization": "Adjust weights and thresholds based on your niche and offer."
+  },
+  "drip_sequences": {
+    "title": "WhatsApp Pre-Sell Drip",
+    "subtitle": "Nurture Leads to Show-Up Ready",
+    "content": "After a lead qualifies, they enter a timed WhatsApp drip sequence:\n\n- **T-72h**: Call confirmation + pain acknowledgment\n- **T-24h**: Reminder + case study snippet\n- **T-2h**: Final reminder + calendar link\n- **T-15m**: Meeting link + quick prep tip\n\nResult: 85%+ show-up rate (vs 50% industry average)",
+    "best_practices": [
+      "Use Hinglish for Indian audiences",
+      "Include emojis sparingly (1-2 per message)",
+      "Link to AI Twin slides in T-24h message",
+      "Personalize with {name}, {pain}, {offer} variables"
+    ]
+  },
+  "payment_automation": {
+    "title": "Payment Follow-Up Automation",
+    "subtitle": "Post-Call Payment Nudges",
+    "content": "After a successful closing call, automate payment collection:\n\n1. **Immediate**: Send payment link via WhatsApp\n2. **T+24h**: Friendly reminder\n3. **T+48h**: Check-in (address objections)\n4. **T+72h**: Last nudge (scarcity/urgency)\n\nConversion: 60-70% token collection within 72h",
+    "payment_options": [
+      "Razorpay (India)",
+      "Stripe (International)",
+      "Bank transfer (manual confirmation)"
+    ],
+    "token_vs_full": {
+      "token": "₹25K-50K (paid immediately to confirm commitment)",
+      "full": "Remaining balance (30-60 days payment plan)"
+    }
+  }
+}

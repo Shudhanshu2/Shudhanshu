@@ -1,0 +1,66 @@
+{
+  "opening": {
+    "greeting": "Great to connect, {name}! Thanks for taking the time.",
+    "agenda": "Let's spend the next {duration} minutes understanding your {pain} and see if {offer} is a good fit.",
+    "permission": "Sound good?"
+  },
+  "diagnosis": {
+    "empathy": "I hear you on {pain}. That's exactly what {niche} face when they're scaling.",
+    "framework": "Based on what you shared, the core issue is {diagnosis}.",
+    "amplify": "And if this continues, you'll likely see {consequence} in the next {timeframe}.",
+    "cost": "The real cost here isn't just {metric} - it's the opportunity cost of {opportunity}."
+  },
+  "prescription": {
+    "intro": "Here's what I recommend:",
+    "solution": "{offer} solves this by {mechanism}.",
+    "outcomes": "Realistically, you'll see:\n- {outcome_1} in {timeframe_1}\n- {outcome_2} in {timeframe_2}\n- {outcome_3} in {timeframe_3}",
+    "social_proof": "Similar to {case_study_name} - they had {pain} and saw {result}."
+  },
+  "investment": {
+    "positioning": "Investment-wise, {offer} is {ticket}.",
+    "breakdown": "That breaks down to:\n- Token: {token_amount} (today)\n- Balance: {balance} ({payment_terms})",
+    "roi": "Considering you're losing {current_loss} per month, ROI happens in {roi_timeframe}.",
+    "comparison": "Compare that to {alternative} which costs {alternative_cost} and doesn't solve {pain}."
+  },
+  "objection_handling": {
+    "budget": {
+      "acknowledge": "I get it - {ticket} is an investment.",
+      "reframe": "Question is: What's the cost of NOT solving {pain}?",
+      "proof": "{case_study} was in the same boat. They found the budget because {reason}."
+    },
+    "timing": {
+      "acknowledge": "Timing is important.",
+      "urgency": "But here's the thing: Every month you wait, you're leaving {monthly_loss} on the table.",
+      "deadline": "I can only take on {slots} more clients this quarter."
+    },
+    "need_to_think": {
+      "acknowledge": "Absolutely. This is a big decision.",
+      "clarify": "What specifically do you need to think about - the offer, the investment, or the timing?",
+      "timeline": "When would you have an answer by?"
+    },
+    "competitor": {
+      "acknowledge": "Smart to evaluate options.",
+      "differentiate": "Main difference: {competitor} focuses on {their_approach}, we focus on {our_approach}.",
+      "proof": "That's why {case_study} switched from {competitor} to us."
+    }
+  },
+  "close": {
+    "assumptive": "Does this sound like a fit?",
+    "choice": "Would you prefer to start with {option_a} or {option_b}?",
+    "urgency": "I have {slots} spots left. Want to lock one in?",
+    "trial": "Let's do this: Pay the token today, we'll start {first_deliverable}, and if you're not happy in {trial_period}, I'll refund the token.",
+    "payment": "Great! I'll send the payment link to {phone}. Token is {token_amount}, and we'll get started as soon as that's done."
+  },
+  "post_call_followup": {
+    "immediate": "Loved our call, {name}! Payment link sent to {phone}. Token: {token_amount}. Let me know once done!",
+    "24h": "Quick follow-up on the payment link. Any questions?",
+    "48h": "Hey {name}, wanted to make sure you didn't have any last questions before we start.",
+    "72h": "Last check-in! Still interested in {offer}? I have {slots} spots left this month."
+  },
+  "payment_received": {
+    "confirmation": "Token received! 🎉 Welcome aboard, {name}.",
+    "next_steps": "Next steps:\n1. {step_1}\n2. {step_2}\n3. {step_3}",
+    "onboarding": "I'll send the onboarding form to {email} within 24 hours.",
+    "kickoff": "Let's schedule our kickoff call. When works for you this week?"
+  }
+}
